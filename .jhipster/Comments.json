@@ -1,0 +1,31 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "email",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "userName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "content",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isHandle",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "subject",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20161130115224",
+    "entityTableName": "comments",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl"
+}

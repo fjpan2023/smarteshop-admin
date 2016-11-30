@@ -7,6 +7,18 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "数据",
+                "product": "Product",
+                "brand": "Brand",
+                "category": "Category",
+                "sku": "Sku",
+                "relatedProduct": "Related Product",
+                "emailSetting": "Email Setting",
+                "currency": "Currency",
+                "customer": "Customer",
+                "template": "Template",
+                "store": "Store",
+                "contactPerson": "Contact Person",
+                "comments": "Comments",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

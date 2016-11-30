@@ -1,0 +1,67 @@
+
+<div>
+    <h2><span data-translate="smarteshopApp.sku.detail.title">Sku</span> {{vm.sku.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smarteshopApp.sku.code">Code</span></dt>
+        <dd>
+            <span>{{vm.sku.code}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.sku.name">Name</span></dt>
+        <dd>
+            <span>{{vm.sku.name}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.sku.size">Size</span></dt>
+        <dd>
+            <span>{{vm.sku.size}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.sku.width">Width</span></dt>
+        <dd>
+            <span>{{vm.sku.width}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.sku.heigh">Heigh</span></dt>
+        <dd>
+            <span>{{vm.sku.heigh}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.sku.length">Length</span></dt>
+        <dd>
+            <span>{{vm.sku.length}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.sku.weight">Weight</span></dt>
+        <dd>
+            <span>{{vm.sku.weight}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.sku.standardPrice">Standard Price</span></dt>
+        <dd>
+            <span>{{vm.sku.standardPrice}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.sku.sellPrice">Sell Price</span></dt>
+        <dd>
+            <span>{{vm.sku.sellPrice}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.sku.defaultSku">Default Sku</span></dt>
+        <dd>
+            <span>{{vm.sku.defaultSku}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.sku.status">Status</span></dt>
+        <dd>
+            <span data-translate="{{'smarteshopApp.StatusEnum.' + vm.sku.status}}">{{vm.sku.status}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.sku.product">Product</span></dt>
+        <dd>
+            <a ui-sref="product-detail({id:vm.sku.product.id})">{{vm.sku.product.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="sku-detail.edit({id:vm.sku.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

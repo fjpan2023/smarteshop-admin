@@ -1,0 +1,9 @@
+{
+    "smarteshopApp": {
+        "TemplateTypeEnum" : {
+            "null": "",
+            "EMAIL": "EMAIL",
+            "LAYOUT": "LAYOUT"
+        }
+    }
+}

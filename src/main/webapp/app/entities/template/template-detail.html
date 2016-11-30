@@ -1,0 +1,35 @@
+
+<div>
+    <h2><span data-translate="smarteshopApp.template.detail.title">Template</span> {{vm.template.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smarteshopApp.template.type">Type</span></dt>
+        <dd>
+            <span data-translate="{{'smarteshopApp.TemplateTypeEnum.' + vm.template.type}}">{{vm.template.type}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.template.superId">Super Id</span></dt>
+        <dd>
+            <span>{{vm.template.superId}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.template.templateKey">Template Key</span></dt>
+        <dd>
+            <span>{{vm.template.templateKey}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.template.content">Content</span></dt>
+        <dd>
+            <span>{{vm.template.content}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="template-detail.edit({id:vm.template.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

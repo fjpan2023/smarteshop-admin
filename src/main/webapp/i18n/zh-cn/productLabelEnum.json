@@ -1,0 +1,10 @@
+{
+    "smarteshopApp": {
+        "ProductLabelEnum" : {
+            "null": "",
+            "CAMPAIGN": "CAMPAIGN",
+            "DISCOUNT": "DISCOUNT",
+            "RECOMMEND": "RECOMMEND"
+        }
+    }
+}

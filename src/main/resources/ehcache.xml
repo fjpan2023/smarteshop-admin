@@ -37,5 +37,65 @@
            timeToLiveSeconds="3600">
     </cache>
 
+    <cache name="com.smarteshop.domain.Product"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.smarteshop.domain.Product.skuses"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.smarteshop.domain.Product.relatedProducts"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.smarteshop.domain.Brand"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.smarteshop.domain.Category"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.smarteshop.domain.Category.products"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.smarteshop.domain.Sku"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.smarteshop.domain.RelatedProduct"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.smarteshop.domain.EmailSetting"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.smarteshop.domain.Currency"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.smarteshop.domain.Customer"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.smarteshop.domain.Template"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.smarteshop.domain.Store"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.smarteshop.domain.ContactPerson"
+        timeToLiveSeconds="3600">
+    </cache>
+
+    <cache name="com.smarteshop.domain.Comments"
+        timeToLiveSeconds="3600">
+    </cache>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </ehcache>

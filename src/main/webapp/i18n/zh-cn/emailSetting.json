@@ -1,0 +1,26 @@
+{
+    "smarteshopApp": {
+        "emailSetting" : {
+            "home": {
+                "title": "Email Settings",
+                "createLabel": "Create a new Email Setting",
+                "createOrEditLabel": "Create or edit a Email Setting",
+                "search": "Search for Email Setting"
+            },
+            "created": "A new Email Setting is created with identifier {{ param }}",
+            "updated": "A Email Setting is updated with identifier {{ param }}",
+            "deleted": "A Email Setting is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Email Setting {{ id }}?"
+            },
+            "detail": {
+                "title": "Email Setting"
+            },
+            "host": "Host",
+            "port": "Port",
+            "fromAddress": "From Address",
+            "userName": "User Name",
+            "password": "Password"
+        }
+    }
+}

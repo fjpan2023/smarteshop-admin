@@ -1,0 +1,270 @@
+package com.smarteshop.domain;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Document;
+
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Objects;
+
+import com.smarteshop.domain.enumeration.StatusEnum;
+
+/**
+ * A Sku.
+ */
+@Entity
+@Table(name = "sku")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Document(indexName = "sku")
+public class Sku implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(name = "code")
+    private String code;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "size")
+    private String size;
+
+    @Column(name = "width", precision=10, scale=2)
+    private BigDecimal width;
+
+    @Column(name = "heigh", precision=10, scale=2)
+    private BigDecimal heigh;
+
+    @Column(name = "length", precision=10, scale=2)
+    private BigDecimal length;
+
+    @Column(name = "weight", precision=10, scale=2)
+    private BigDecimal weight;
+
+    @NotNull
+    @Column(name = "standard_price", precision=10, scale=2, nullable = false)
+    private BigDecimal standardPrice;
+
+    @NotNull
+    @Column(name = "sell_price", precision=10, scale=2, nullable = false)
+    private BigDecimal sellPrice;
+
+    @Column(name = "default_sku")
+    private Boolean defaultSku;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private StatusEnum status;
+
+    @ManyToOne
+    private Product product;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public Sku code(String code) {
+        this.code = code;
+        return this;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Sku name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public Sku size(String size) {
+        this.size = size;
+        return this;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public BigDecimal getWidth() {
+        return width;
+    }
+
+    public Sku width(BigDecimal width) {
+        this.width = width;
+        return this;
+    }
+
+    public void setWidth(BigDecimal width) {
+        this.width = width;
+    }
+
+    public BigDecimal getHeigh() {
+        return heigh;
+    }
+
+    public Sku heigh(BigDecimal heigh) {
+        this.heigh = heigh;
+        return this;
+    }
+
+    public void setHeigh(BigDecimal heigh) {
+        this.heigh = heigh;
+    }
+
+    public BigDecimal getLength() {
+        return length;
+    }
+
+    public Sku length(BigDecimal length) {
+        this.length = length;
+        return this;
+    }
+
+    public void setLength(BigDecimal length) {
+        this.length = length;
+    }
+
+    public BigDecimal getWeight() {
+        return weight;
+    }
+
+    public Sku weight(BigDecimal weight) {
+        this.weight = weight;
+        return this;
+    }
+
+    public void setWeight(BigDecimal weight) {
+        this.weight = weight;
+    }
+
+    public BigDecimal getStandardPrice() {
+        return standardPrice;
+    }
+
+    public Sku standardPrice(BigDecimal standardPrice) {
+        this.standardPrice = standardPrice;
+        return this;
+    }
+
+    public void setStandardPrice(BigDecimal standardPrice) {
+        this.standardPrice = standardPrice;
+    }
+
+    public BigDecimal getSellPrice() {
+        return sellPrice;
+    }
+
+    public Sku sellPrice(BigDecimal sellPrice) {
+        this.sellPrice = sellPrice;
+        return this;
+    }
+
+    public void setSellPrice(BigDecimal sellPrice) {
+        this.sellPrice = sellPrice;
+    }
+
+    public Boolean isDefaultSku() {
+        return defaultSku;
+    }
+
+    public Sku defaultSku(Boolean defaultSku) {
+        this.defaultSku = defaultSku;
+        return this;
+    }
+
+    public void setDefaultSku(Boolean defaultSku) {
+        this.defaultSku = defaultSku;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public Sku status(StatusEnum status) {
+        this.status = status;
+        return this;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public Sku product(Product product) {
+        this.product = product;
+        return this;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Sku sku = (Sku) o;
+        if(sku.id == null || id == null) {
+            return false;
+        }
+        return Objects.equals(id, sku.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Sku{" +
+            "id=" + id +
+            ", code='" + code + "'" +
+            ", name='" + name + "'" +
+            ", size='" + size + "'" +
+            ", width='" + width + "'" +
+            ", heigh='" + heigh + "'" +
+            ", length='" + length + "'" +
+            ", weight='" + weight + "'" +
+            ", standardPrice='" + standardPrice + "'" +
+            ", sellPrice='" + sellPrice + "'" +
+            ", defaultSku='" + defaultSku + "'" +
+            ", status='" + status + "'" +
+            '}';
+    }
+}

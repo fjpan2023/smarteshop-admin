@@ -1,0 +1,33 @@
+{
+    "smarteshopApp": {
+        "sku" : {
+            "home": {
+                "title": "Skus",
+                "createLabel": "Create a new Sku",
+                "createOrEditLabel": "Create or edit a Sku",
+                "search": "Search for Sku"
+            },
+            "created": "A new Sku is created with identifier {{ param }}",
+            "updated": "A Sku is updated with identifier {{ param }}",
+            "deleted": "A Sku is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Sku {{ id }}?"
+            },
+            "detail": {
+                "title": "Sku"
+            },
+            "code": "Code",
+            "name": "Name",
+            "size": "Size",
+            "width": "Width",
+            "heigh": "Heigh",
+            "length": "Length",
+            "weight": "Weight",
+            "standardPrice": "Standard Price",
+            "sellPrice": "Sell Price",
+            "defaultSku": "Default Sku",
+            "status": "Status",
+            "product": "Product"
+        }
+    }
+}

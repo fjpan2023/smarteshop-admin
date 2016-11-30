@@ -1,0 +1,119 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySkuLabel" data-translate="smarteshopApp.sku.home.createOrEditLabel">Create or edit a Sku</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.sku.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.sku.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smarteshopApp.sku.code" for="field_code">Code</label>
+            <input type="text" class="form-control" name="code" id="field_code"
+                    ng-model="vm.sku.code"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smarteshopApp.sku.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.sku.name"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smarteshopApp.sku.size" for="field_size">Size</label>
+            <input type="text" class="form-control" name="size" id="field_size"
+                    ng-model="vm.sku.size"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smarteshopApp.sku.width" for="field_width">Width</label>
+            <input type="number" class="form-control" name="width" id="field_width"
+                    ng-model="vm.sku.width"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smarteshopApp.sku.heigh" for="field_heigh">Heigh</label>
+            <input type="number" class="form-control" name="heigh" id="field_heigh"
+                    ng-model="vm.sku.heigh"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smarteshopApp.sku.length" for="field_length">Length</label>
+            <input type="number" class="form-control" name="length" id="field_length"
+                    ng-model="vm.sku.length"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smarteshopApp.sku.weight" for="field_weight">Weight</label>
+            <input type="number" class="form-control" name="weight" id="field_weight"
+                    ng-model="vm.sku.weight"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smarteshopApp.sku.standardPrice" for="field_standardPrice">Standard Price</label>
+            <input type="number" class="form-control" name="standardPrice" id="field_standardPrice"
+                    ng-model="vm.sku.standardPrice"
+                    required />
+            <div ng-show="editForm.standardPrice.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.standardPrice.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.standardPrice.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smarteshopApp.sku.sellPrice" for="field_sellPrice">Sell Price</label>
+            <input type="number" class="form-control" name="sellPrice" id="field_sellPrice"
+                    ng-model="vm.sku.sellPrice"
+                    required />
+            <div ng-show="editForm.sellPrice.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.sellPrice.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.sellPrice.$error.number" data-translate="entity.validation.number">
+                    This field should be a number.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smarteshopApp.sku.defaultSku" for="field_defaultSku">Default Sku</label>
+            <input type="checkbox" class="form-control" name="defaultSku" id="field_defaultSku"
+                    ng-model="vm.sku.defaultSku"
+                     />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smarteshopApp.sku.status" for="field_status">Status</label>
+            <select class="form-control" name="status" ng-model="vm.sku.status" id="field_status">
+                <option value="ACTIVITY" data-translate="smarteshopApp.StatusEnum.ACTIVITY">ACTIVITY</option>
+                <option value="UNACTIVITY" data-translate="smarteshopApp.StatusEnum.UNACTIVITY">UNACTIVITY</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="smarteshopApp.sku.product" for="field_product">Product</label>
+            <select class="form-control" id="field_product" name="product" ng-model="vm.sku.product" ng-options="product as product.id for product in vm.products track by product.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
