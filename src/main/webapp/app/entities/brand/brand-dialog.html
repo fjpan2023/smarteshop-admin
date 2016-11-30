@@ -27,13 +27,8 @@
 				class="form-control" name="description" id="field_description"
 				ng-model="vm.brand.description" />
  -->
-			<div >
-				<summernote on-init="init()" on-enter="enter()"
-					on-focus="focus(evt)" on-blur="blur(evt)" on-paste="paste(evt)"
-					on-keyup="keyup(evt)" on-keydown="keydown(evt)"
-					on-change="change(contents)" on-image-upload="imageUpload(files)"
-					editable="editable" editor="editor"></summernote>
-			</div>
+			<summernote config="options" ng-model="vm.brand.description"
+				name="description" id="field_description">{{vm.brand.description}}</summernote>
 		</div>
 		<div class="form-group">
 			<label class="control-label"
@@ -54,13 +49,6 @@
 				<img
 					data-ng-src="{{'data:' + vm.brand.imageContentType + ';base64,' + vm.brand.image}}"
 					style="max-height: 100px;" ng-if="vm.brand.image" />
-				<!-- <div ng-if="vm.brand.image" class="help-block clearfix">
-                    <span class="pull-left">{{vm.brand.imageContentType}}, {{vm.byteSize(vm.brand.image)}}</span>
-                    <button type="button" ng-click="vm.brand.image=null;vm.brand.imageContentType=null;"
-                            class="btn btn-default btn-xs pull-right">
-                        <span class="glyphicon glyphicon-remove"></span>
-                    </button>
-                </div> -->
 				<button type="button" ngf-select class="btn btn-default btn-block"
 					ngf-change="vm.setImage($file, vm.brand)" accept="image/*"
 					data-translate="entity.action.addimage">Add image</button>
@@ -85,3 +73,5 @@
 		</button>
 	</div>
 </form>
+<p>summer note ...</p>
+<summernote config="options"></summernote>

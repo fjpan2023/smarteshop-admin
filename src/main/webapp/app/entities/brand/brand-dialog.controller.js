@@ -13,7 +13,21 @@
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         vm.save = save;
-
+        $scope.options = {
+				height: 300,
+				focus: true,
+				airMode: true,
+				toolbar: [
+				          // [groupName, [list of button]]
+				          ['style', ['bold', 'italic', 'underline', 'clear']],
+				          ['font', ['strikethrough', 'superscript', 'subscript']],
+				          ['fontsize', ['fontsize']],
+				          ['color', ['color']],
+				          ['para', ['ul', 'ol', 'paragraph']],
+				          ['height', ['height']]
+				        ],
+		};
+        
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
