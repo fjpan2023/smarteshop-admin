@@ -1,0 +1,121 @@
+entity Product {
+	code String,
+    name String,
+    description String,
+    status StatusEnum,
+    standardPrice BigDecimal,
+    label ProductLabelEnum,
+    mainImageId Long    
+}
+
+entity Brand {
+	name String,
+    description String,
+    status StatusEnum,
+}
+
+entity Category{
+
+name String,
+parentId Long,
+leaf Boolean,
+includeMenu Boolean,
+status StatusEnum,
+}
+
+entity Sku{
+	code String,
+    name String,
+    size String,
+    width BigDecimal,
+    heigh BigDecimal,
+    length BigDecimal,
+    weight BigDecimal,
+    standardPrice BigDecimal required,
+    sellPrice BigDecimal required,
+    defaultSKU Boolean,    
+    status StatusEnum,
+}
+entity RelatedProduct{
+	relatedProductId Long required,
+}
+
+entity EmailSetting{
+ 	host String required,
+ 	port Integer required,
+ 	fromAddress String required,
+ 	userName String required,
+ 	password String  required
+}
+entity Currency {
+	 title String,
+     symbolLeft String,
+     symbolRight String  
+}
+entity Customer {
+	firstName String,
+    lastName String,
+    email String,
+    phone String,
+    fax String,
+    remark String,
+}
+entity Template{
+	type TemplateTypeEnum,
+    superId Long,
+    templateKey String,
+    content String,   
+}
+
+enum TemplateTypeEnum{
+	EMAIL, LAYOUT
+}
+
+entity Store{
+	name String,
+    url String,
+    status StatusEnum,
+    }
+entity ContactPerson{
+	name String,
+    email String,
+    phone String
+}
+
+entity Comments{
+	 email String,
+     userName String,
+     content String,
+     isHandle Boolean,
+     subject String,
+     
+}
+
+
+enum SMTPSecurityEnum {
+	PLAIN,SSL,STARTTLS
+}
+enum ProductLabelEnum {
+    CAMPAIGN, DISCOUNT,RECOMMEND
+}
+
+enum StatusEnum {
+    ACTIVITY, UNACTIVITY
+}
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Category{product} to Product,
+    Product{skus} to Sku,
+    Product{relatedProducts} to RelatedProduct
+}
+
+relationship ManyToOne {
+	Product{brand} to Brand
+  }
+
+
+// Set pagination options
+paginate all with pagination
+
+// Set service options to all except few
+service all with serviceImpl
