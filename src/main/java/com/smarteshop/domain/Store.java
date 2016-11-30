@@ -1,12 +1,20 @@
 package com.smarteshop.domain;
 
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
 
 import com.smarteshop.domain.enumeration.StatusEnum;
 
@@ -17,7 +25,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 @Table(name = "store")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "store")
-public class Store implements Serializable {
+public class Store extends AbstractAuditingEntity  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

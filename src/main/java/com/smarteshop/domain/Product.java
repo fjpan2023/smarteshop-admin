@@ -1,20 +1,29 @@
 package com.smarteshop.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Objects;
-
-import com.smarteshop.domain.enumeration.StatusEnum;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smarteshop.domain.enumeration.ProductLabelEnum;
+import com.smarteshop.domain.enumeration.StatusEnum;
 
 /**
  * A Product.
@@ -23,7 +32,7 @@ import com.smarteshop.domain.enumeration.ProductLabelEnum;
 @Table(name = "product")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "product")
-public class Product implements Serializable {
+public class Product  extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
