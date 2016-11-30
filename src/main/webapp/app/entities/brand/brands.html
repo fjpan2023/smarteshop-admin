@@ -36,25 +36,24 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th><span data-translate="smarteshopApp.brand.image">Image</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    
                     <th jh-sort-by="name"><span data-translate="smarteshopApp.brand.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="description"><span data-translate="smarteshopApp.brand.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="status"><span data-translate="smarteshopApp.brand.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="image"><span data-translate="smarteshopApp.brand.image">Image</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="brand in vm.brands track by brand.id">
                     <td><a ui-sref="brand-detail({id:brand.id})">{{brand.id}}</a></td>
-                    <td>{{brand.name}}</td>
-                    <td>{{brand.description}}</td>
-                    <td data-translate="{{'smarteshopApp.StatusEnum.' + brand.status}}">{{brand.status}}</td>
-                    <td>
+                     <td>
                         <a ng-if="brand.image" ng-click="vm.openFile(brand.imageContentType, brand.image)">
                             <img data-ng-src="{{'data:' + brand.imageContentType + ';base64,' + brand.image}}" style="max-height: 30px;"/>
                         </a>
-<!--                         <span ng-if="brand.image">{{brand.imageContentType}}, {{vm.byteSize(brand.image)}}</span>
- -->                    </td>
+                    </td>
+                    <td>{{brand.name}}</td>
+                    <td data-translate="{{'smarteshopApp.StatusEnum.' + brand.status}}">{{brand.status}}</td>
+                   
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
