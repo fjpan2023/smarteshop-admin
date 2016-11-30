@@ -5,9 +5,9 @@
         .module('smarteshopApp')
         .controller('BrandController', BrandController);
 
-    BrandController.$inject = ['$scope', '$state', 'Brand', 'BrandSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants'];
+    BrandController.$inject = ['$scope', '$state', 'DataUtils', 'Brand', 'BrandSearch', 'ParseLinks', 'AlertService', 'pagingParams', 'paginationConstants'];
 
-    function BrandController ($scope, $state, Brand, BrandSearch, ParseLinks, AlertService, pagingParams, paginationConstants) {
+    function BrandController ($scope, $state, DataUtils, Brand, BrandSearch, ParseLinks, AlertService, pagingParams, paginationConstants) {
         var vm = this;
 
         vm.loadPage = loadPage;
@@ -20,6 +20,8 @@
         vm.loadAll = loadAll;
         vm.searchQuery = pagingParams.search;
         vm.currentSearch = pagingParams.search;
+        vm.openFile = DataUtils.openFile;
+        vm.byteSize = DataUtils.byteSize;
 
         loadAll();
 

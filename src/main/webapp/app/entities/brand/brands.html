@@ -11,7 +11,7 @@
                     </span>
                 </button>
             </div>
-            <div class="col-xs-8 no-padding-right">
+            <div class="col-xs-4 no-padding-right pull-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right" >
                         <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'smarteshopApp.brand.home.search' | translate }}">
@@ -39,6 +39,7 @@
                     <th jh-sort-by="name"><span data-translate="smarteshopApp.brand.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="description"><span data-translate="smarteshopApp.brand.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="status"><span data-translate="smarteshopApp.brand.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="image"><span data-translate="smarteshopApp.brand.image">Image</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -48,6 +49,12 @@
                     <td>{{brand.name}}</td>
                     <td>{{brand.description}}</td>
                     <td data-translate="{{'smarteshopApp.StatusEnum.' + brand.status}}">{{brand.status}}</td>
+                    <td>
+                        <a ng-if="brand.image" ng-click="vm.openFile(brand.imageContentType, brand.image)">
+                            <img data-ng-src="{{'data:' + brand.imageContentType + ';base64,' + brand.image}}" style="max-height: 30px;"/>
+                        </a>
+<!--                         <span ng-if="brand.image">{{brand.imageContentType}}, {{vm.byteSize(brand.image)}}</span>
+ -->                    </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"

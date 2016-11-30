@@ -21,6 +21,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -34,11 +35,11 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 /**
  * Test class for the BrandResource REST controller.
  *
- * @see BrandController
+ * @see BrandResource
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApp.class)
-public class BrandControllerIntTest {
+public class BrandResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
@@ -48,6 +49,11 @@ public class BrandControllerIntTest {
 
     private static final StatusEnum DEFAULT_STATUS = StatusEnum.ACTIVITY;
     private static final StatusEnum UPDATED_STATUS = StatusEnum.UNACTIVITY;
+
+    private static final byte[] DEFAULT_IMAGE = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_IMAGE = TestUtil.createByteArray(2, "1");
+    private static final String DEFAULT_IMAGE_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_IMAGE_CONTENT_TYPE = "image/png";
 
     @Inject
     private BrandRepository brandRepository;
@@ -74,7 +80,7 @@ public class BrandControllerIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        BrandController brandResource = new BrandController();
+        BrandResource brandResource = new BrandResource();
         ReflectionTestUtils.setField(brandResource, "brandService", brandService);
         this.restBrandMockMvc = MockMvcBuilders.standaloneSetup(brandResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
@@ -91,7 +97,9 @@ public class BrandControllerIntTest {
         Brand brand = new Brand()
                 .name(DEFAULT_NAME)
                 .description(DEFAULT_DESCRIPTION)
-                .status(DEFAULT_STATUS);
+                .status(DEFAULT_STATUS)
+                .image(DEFAULT_IMAGE)
+                .imageContentType(DEFAULT_IMAGE_CONTENT_TYPE);
         return brand;
     }
 
@@ -120,6 +128,8 @@ public class BrandControllerIntTest {
         assertThat(testBrand.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testBrand.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
         assertThat(testBrand.getStatus()).isEqualTo(DEFAULT_STATUS);
+        assertThat(testBrand.getImage()).isEqualTo(DEFAULT_IMAGE);
+        assertThat(testBrand.getImageContentType()).isEqualTo(DEFAULT_IMAGE_CONTENT_TYPE);
 
         // Validate the Brand in ElasticSearch
         Brand brandEs = brandSearchRepository.findOne(testBrand.getId());
@@ -139,7 +149,9 @@ public class BrandControllerIntTest {
                 .andExpect(jsonPath("$.[*].id").value(hasItem(brand.getId().intValue())))
                 .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
                 .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
-                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+                .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
+                .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))));
     }
 
     @Test
@@ -155,7 +167,9 @@ public class BrandControllerIntTest {
             .andExpect(jsonPath("$.id").value(brand.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
+            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
+            .andExpect(jsonPath("$.imageContentType").value(DEFAULT_IMAGE_CONTENT_TYPE))
+            .andExpect(jsonPath("$.image").value(Base64Utils.encodeToString(DEFAULT_IMAGE)));
     }
 
     @Test
@@ -179,7 +193,9 @@ public class BrandControllerIntTest {
         updatedBrand
                 .name(UPDATED_NAME)
                 .description(UPDATED_DESCRIPTION)
-                .status(UPDATED_STATUS);
+                .status(UPDATED_STATUS)
+                .image(UPDATED_IMAGE)
+                .imageContentType(UPDATED_IMAGE_CONTENT_TYPE);
 
         restBrandMockMvc.perform(put("/api/brands")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -193,6 +209,8 @@ public class BrandControllerIntTest {
         assertThat(testBrand.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testBrand.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
         assertThat(testBrand.getStatus()).isEqualTo(UPDATED_STATUS);
+        assertThat(testBrand.getImage()).isEqualTo(UPDATED_IMAGE);
+        assertThat(testBrand.getImageContentType()).isEqualTo(UPDATED_IMAGE_CONTENT_TYPE);
 
         // Validate the Brand in ElasticSearch
         Brand brandEs = brandSearchRepository.findOne(testBrand.getId());
@@ -234,6 +252,8 @@ public class BrandControllerIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(brand.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].imageContentType").value(hasItem(DEFAULT_IMAGE_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].image").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE))));
     }
 }

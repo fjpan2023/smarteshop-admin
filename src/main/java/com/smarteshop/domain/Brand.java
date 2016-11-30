@@ -1,12 +1,21 @@
 package com.smarteshop.domain;
 
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
 
 import com.smarteshop.domain.enumeration.StatusEnum;
 
@@ -17,7 +26,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 @Table(name = "brand")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "brand")
-public class Brand implements Serializable {
+public class Brand  extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,6 +43,13 @@ public class Brand implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private StatusEnum status;
+
+    @Lob
+    @Column(name = "image")
+    private byte[] image;
+
+    @Column(name = "image_content_type")
+    private String imageContentType;
 
     public Long getId() {
         return id;
@@ -82,6 +98,32 @@ public class Brand implements Serializable {
         this.status = status;
     }
 
+    public byte[] getImage() {
+        return image;
+    }
+
+    public Brand image(byte[] image) {
+        this.image = image;
+        return this;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getImageContentType() {
+        return imageContentType;
+    }
+
+    public Brand imageContentType(String imageContentType) {
+        this.imageContentType = imageContentType;
+        return this;
+    }
+
+    public void setImageContentType(String imageContentType) {
+        this.imageContentType = imageContentType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -109,6 +151,8 @@ public class Brand implements Serializable {
             ", name='" + name + "'" +
             ", description='" + description + "'" +
             ", status='" + status + "'" +
+            ", image='" + image + "'" +
+            ", imageContentType='" + imageContentType + "'" +
             '}';
     }
 }

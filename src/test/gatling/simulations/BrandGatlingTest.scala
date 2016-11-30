@@ -67,7 +67,7 @@ class BrandGatlingTest extends Simulation {
             .exec(http("Create new brand")
             .post("/api/brands")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "status":null}""")).asJSON
+            .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "description":"SAMPLE_TEXT", "status":null, "image":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_brand_url"))).exitHereIfFailed
             .pause(10)

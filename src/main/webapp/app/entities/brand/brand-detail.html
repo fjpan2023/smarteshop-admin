@@ -16,6 +16,15 @@
         <dd>
             <span data-translate="{{'smarteshopApp.StatusEnum.' + vm.brand.status}}">{{vm.brand.status}}</span>
         </dd>
+        <dt><span data-translate="smarteshopApp.brand.image">Image</span></dt>
+        <dd>
+            <div ng-if="vm.brand.image">
+                <a ng-click="vm.openFile(vm.brand.imageContentType, vm.brand.image)">
+                    <img data-ng-src="{{'data:' + vm.brand.imageContentType + ';base64,' + vm.brand.image}}" style="max-width: 100%;"/>
+                </a>
+                {{vm.brand.imageContentType}}, {{vm.byteSize(vm.brand.image)}}
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

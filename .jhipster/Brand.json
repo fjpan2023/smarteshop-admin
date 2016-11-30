@@ -14,11 +14,16 @@
             "fieldName": "status",
             "fieldType": "StatusEnum",
             "fieldValues": "ACTIVITY,UNACTIVITY"
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
         }
     ],
     "changelogDate": "20161130115214",
-    "entityTableName": "brand",
     "dto": "no",
-    "pagination": "pagination",
-    "service": "serviceImpl"
+    "service": "serviceImpl",
+    "entityTableName": "brand",
+    "pagination": "pagination"
 }
