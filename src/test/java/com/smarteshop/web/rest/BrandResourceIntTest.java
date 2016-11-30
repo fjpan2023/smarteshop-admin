@@ -1,21 +1,28 @@
 package com.smarteshop.web.rest;
 
-import com.smarteshop.SmarteshopApp;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.smarteshop.domain.Brand;
-import com.smarteshop.repository.BrandRepository;
-import com.smarteshop.service.BrandService;
-import com.smarteshop.repository.search.BrandSearchRepository;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -23,15 +30,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Base64Utils;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+import com.smarteshop.SmarteshopApp;
+import com.smarteshop.domain.Brand;
 import com.smarteshop.domain.enumeration.StatusEnum;
+import com.smarteshop.repository.BrandRepository;
+import com.smarteshop.repository.search.BrandSearchRepository;
+import com.smarteshop.service.BrandService;
 /**
  * Test class for the BrandResource REST controller.
  *
@@ -80,7 +84,7 @@ public class BrandResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        BrandResource brandResource = new BrandResource();
+        BrandController brandResource = new BrandController();
         ReflectionTestUtils.setField(brandResource, "brandService", brandService);
         this.restBrandMockMvc = MockMvcBuilders.standaloneSetup(brandResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
