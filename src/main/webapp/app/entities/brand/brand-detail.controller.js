@@ -5,9 +5,9 @@
         .module('smarteshopApp')
         .controller('BrandDetailController', BrandDetailController);
 
-    BrandDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Brand'];
+    BrandDetailController.$inject = ['$scope','$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Brand'];
 
-    function BrandDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Brand) {
+    function BrandDetailController($scope,$rootScope, $stateParams, previousState, DataUtils, entity, Brand) {
         var vm = this;
 
         vm.brand = entity;
