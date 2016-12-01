@@ -30,9 +30,9 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @RestController
 @RequestMapping("/api")
-public class EmailSettingResource {
+public class EmailSettingController {
 
-    private final Logger log = LoggerFactory.getLogger(EmailSettingResource.class);
+    private final Logger log = LoggerFactory.getLogger(EmailSettingController.class);
         
     @Inject
     private EmailSettingService emailSettingService;

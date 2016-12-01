@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the CustomerResource REST controller.
  *
- * @see CustomerResource
+ * @see CustomerController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApp.class)
@@ -82,7 +82,7 @@ public class CustomerResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        CustomerResource customerResource = new CustomerResource();
+        CustomerController customerResource = new CustomerController();
         ReflectionTestUtils.setField(customerResource, "customerService", customerService);
         this.restCustomerMockMvc = MockMvcBuilders.standaloneSetup(customerResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

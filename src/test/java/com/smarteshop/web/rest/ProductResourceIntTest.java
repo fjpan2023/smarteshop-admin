@@ -41,7 +41,7 @@ import com.smarteshop.domain.enumeration.ProductLabelEnum;
 /**
  * Test class for the ProductResource REST controller.
  *
- * @see ProductResource
+ * @see ProductController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApp.class)
@@ -101,7 +101,7 @@ public class ProductResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        ProductResource productResource = new ProductResource();
+        ProductController productResource = new ProductController();
         ReflectionTestUtils.setField(productResource, "productService", productService);
         this.restProductMockMvc = MockMvcBuilders.standaloneSetup(productResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

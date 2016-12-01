@@ -34,7 +34,7 @@ import com.smarteshop.domain.enumeration.TemplateTypeEnum;
 /**
  * Test class for the TemplateResource REST controller.
  *
- * @see TemplateResource
+ * @see TemplateController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApp.class)
@@ -77,7 +77,7 @@ public class TemplateResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        TemplateResource templateResource = new TemplateResource();
+        TemplateController templateResource = new TemplateController();
         ReflectionTestUtils.setField(templateResource, "templateService", templateService);
         this.restTemplateMockMvc = MockMvcBuilders.standaloneSetup(templateResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

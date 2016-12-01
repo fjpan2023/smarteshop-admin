@@ -29,9 +29,9 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @RestController
 @RequestMapping("/api")
-public class StoreResource {
+public class StoreController {
 
-    private final Logger log = LoggerFactory.getLogger(StoreResource.class);
+    private final Logger log = LoggerFactory.getLogger(StoreController.class);
         
     @Inject
     private StoreService storeService;

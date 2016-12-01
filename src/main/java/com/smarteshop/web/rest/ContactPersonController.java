@@ -29,9 +29,9 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @RestController
 @RequestMapping("/api")
-public class ContactPersonResource {
+public class ContactPersonController {
 
-    private final Logger log = LoggerFactory.getLogger(ContactPersonResource.class);
+    private final Logger log = LoggerFactory.getLogger(ContactPersonController.class);
         
     @Inject
     private ContactPersonService contactPersonService;

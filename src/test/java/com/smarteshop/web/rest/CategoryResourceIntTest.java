@@ -34,7 +34,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 /**
  * Test class for the CategoryResource REST controller.
  *
- * @see CategoryResource
+ * @see CategoryController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApp.class)
@@ -80,7 +80,7 @@ public class CategoryResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        CategoryResource categoryResource = new CategoryResource();
+        CategoryController categoryResource = new CategoryController();
         ReflectionTestUtils.setField(categoryResource, "categoryService", categoryService);
         this.restCategoryMockMvc = MockMvcBuilders.standaloneSetup(categoryResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

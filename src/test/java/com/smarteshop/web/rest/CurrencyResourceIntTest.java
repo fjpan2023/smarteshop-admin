@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the CurrencyResource REST controller.
  *
- * @see CurrencyResource
+ * @see CurrencyController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApp.class)
@@ -73,7 +73,7 @@ public class CurrencyResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        CurrencyResource currencyResource = new CurrencyResource();
+        CurrencyController currencyResource = new CurrencyController();
         ReflectionTestUtils.setField(currencyResource, "currencyService", currencyService);
         this.restCurrencyMockMvc = MockMvcBuilders.standaloneSetup(currencyResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

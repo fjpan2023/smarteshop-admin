@@ -24,7 +24,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smarteshop.domain.enumeration.ProductLabelEnum;
 import com.smarteshop.domain.enumeration.StatusEnum;
 
@@ -79,12 +78,10 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     private ZonedDateTime endDate = ZonedDateTime.now();
 
     @OneToMany(mappedBy = "product")
-    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Sku> skuses = new HashSet<>();
 
     @OneToMany(mappedBy = "product")
-    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<RelatedProduct> relatedProducts = new HashSet<>();
 

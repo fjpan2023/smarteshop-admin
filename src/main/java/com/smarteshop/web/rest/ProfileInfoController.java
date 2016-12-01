@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class ProfileInfoResource {
+public class ProfileInfoController {
 
     @Inject
     Environment env;

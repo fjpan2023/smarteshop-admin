@@ -29,9 +29,9 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @RestController
 @RequestMapping("/api")
-public class CommentsResource {
+public class CommentsController {
 
-    private final Logger log = LoggerFactory.getLogger(CommentsResource.class);
+    private final Logger log = LoggerFactory.getLogger(CommentsController.class);
         
     @Inject
     private CommentsService commentsService;

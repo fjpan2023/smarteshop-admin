@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the CommentsResource REST controller.
  *
- * @see CommentsResource
+ * @see CommentsController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApp.class)
@@ -79,7 +79,7 @@ public class CommentsResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        CommentsResource commentsResource = new CommentsResource();
+        CommentsController commentsResource = new CommentsController();
         ReflectionTestUtils.setField(commentsResource, "commentsService", commentsService);
         this.restCommentsMockMvc = MockMvcBuilders.standaloneSetup(commentsResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

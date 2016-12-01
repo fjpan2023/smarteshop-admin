@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the RelatedProductResource REST controller.
  *
- * @see RelatedProductResource
+ * @see RelatedProductController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApp.class)
@@ -67,7 +67,7 @@ public class RelatedProductResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        RelatedProductResource relatedProductResource = new RelatedProductResource();
+        RelatedProductController relatedProductResource = new RelatedProductController();
         ReflectionTestUtils.setField(relatedProductResource, "relatedProductService", relatedProductService);
         this.restRelatedProductMockMvc = MockMvcBuilders.standaloneSetup(relatedProductResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

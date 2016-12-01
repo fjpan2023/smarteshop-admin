@@ -29,9 +29,9 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @RestController
 @RequestMapping("/api")
-public class CategoryResource {
+public class CategoryController {
 
-    private final Logger log = LoggerFactory.getLogger(CategoryResource.class);
+    private final Logger log = LoggerFactory.getLogger(CategoryController.class);
         
     @Inject
     private CategoryService categoryService;

@@ -35,7 +35,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 /**
  * Test class for the SkuResource REST controller.
  *
- * @see SkuResource
+ * @see SKUController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApp.class)
@@ -99,7 +99,7 @@ public class SkuResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        SkuResource skuResource = new SkuResource();
+        SKUController skuResource = new SKUController();
         ReflectionTestUtils.setField(skuResource, "skuService", skuService);
         this.restSkuMockMvc = MockMvcBuilders.standaloneSetup(skuResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

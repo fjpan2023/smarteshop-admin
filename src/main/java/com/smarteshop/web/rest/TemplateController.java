@@ -29,9 +29,9 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @RestController
 @RequestMapping("/api")
-public class TemplateResource {
+public class TemplateController {
 
-    private final Logger log = LoggerFactory.getLogger(TemplateResource.class);
+    private final Logger log = LoggerFactory.getLogger(TemplateController.class);
         
     @Inject
     private TemplateService templateService;

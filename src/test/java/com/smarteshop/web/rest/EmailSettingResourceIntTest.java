@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the EmailSettingResource REST controller.
  *
- * @see EmailSettingResource
+ * @see EmailSettingController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApp.class)
@@ -79,7 +79,7 @@ public class EmailSettingResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        EmailSettingResource emailSettingResource = new EmailSettingResource();
+        EmailSettingController emailSettingResource = new EmailSettingController();
         ReflectionTestUtils.setField(emailSettingResource, "emailSettingService", emailSettingService);
         this.restEmailSettingMockMvc = MockMvcBuilders.standaloneSetup(emailSettingResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

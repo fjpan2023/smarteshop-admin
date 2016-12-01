@@ -29,9 +29,9 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @RestController
 @RequestMapping("/api")
-public class CurrencyResource {
+public class CurrencyController {
 
-    private final Logger log = LoggerFactory.getLogger(CurrencyResource.class);
+    private final Logger log = LoggerFactory.getLogger(CurrencyController.class);
         
     @Inject
     private CurrencyService currencyService;

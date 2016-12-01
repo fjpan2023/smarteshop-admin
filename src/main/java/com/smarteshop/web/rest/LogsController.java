@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/management/jhipster")
-public class LogsResource {
+public class LogsController {
 
     @GetMapping("/logs")
     @Timed
