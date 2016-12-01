@@ -24,6 +24,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.time.ZoneId;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -62,6 +67,14 @@ public class ProductResourceIntTest {
 
     private static final Long DEFAULT_MAIN_IMAGE_ID = 1L;
     private static final Long UPDATED_MAIN_IMAGE_ID = 2L;
+
+    private static final ZonedDateTime DEFAULT_FROM_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_FROM_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_FROM_DATE_STR = DateTimeFormatter.ISO_INSTANT.format(DEFAULT_FROM_DATE);
+
+    private static final ZonedDateTime DEFAULT_END_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_END_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final String DEFAULT_END_DATE_STR = DateTimeFormatter.ISO_INSTANT.format(DEFAULT_END_DATE);
 
     @Inject
     private ProductRepository productRepository;
@@ -109,7 +122,9 @@ public class ProductResourceIntTest {
                 .status(DEFAULT_STATUS)
                 .standardPrice(DEFAULT_STANDARD_PRICE)
                 .label(DEFAULT_LABEL)
-                .mainImageId(DEFAULT_MAIN_IMAGE_ID);
+                .mainImageId(DEFAULT_MAIN_IMAGE_ID)
+                .fromDate(DEFAULT_FROM_DATE)
+                .endDate(DEFAULT_END_DATE);
         return product;
     }
 
@@ -142,10 +157,48 @@ public class ProductResourceIntTest {
         assertThat(testProduct.getStandardPrice()).isEqualTo(DEFAULT_STANDARD_PRICE);
         assertThat(testProduct.getLabel()).isEqualTo(DEFAULT_LABEL);
         assertThat(testProduct.getMainImageId()).isEqualTo(DEFAULT_MAIN_IMAGE_ID);
+        assertThat(testProduct.getFromDate()).isEqualTo(DEFAULT_FROM_DATE);
+        assertThat(testProduct.getEndDate()).isEqualTo(DEFAULT_END_DATE);
 
         // Validate the Product in ElasticSearch
         Product productEs = productSearchRepository.findOne(testProduct.getId());
         assertThat(productEs).isEqualToComparingFieldByField(testProduct);
+    }
+
+    @Test
+    @Transactional
+    public void checkFromDateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = productRepository.findAll().size();
+        // set the field null
+        product.setFromDate(null);
+
+        // Create the Product, which fails.
+
+        restProductMockMvc.perform(post("/api/products")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(product)))
+                .andExpect(status().isBadRequest());
+
+        List<Product> products = productRepository.findAll();
+        assertThat(products).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkEndDateIsRequired() throws Exception {
+        int databaseSizeBeforeTest = productRepository.findAll().size();
+        // set the field null
+        product.setEndDate(null);
+
+        // Create the Product, which fails.
+
+        restProductMockMvc.perform(post("/api/products")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(product)))
+                .andExpect(status().isBadRequest());
+
+        List<Product> products = productRepository.findAll();
+        assertThat(products).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -165,7 +218,9 @@ public class ProductResourceIntTest {
                 .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
                 .andExpect(jsonPath("$.[*].standardPrice").value(hasItem(DEFAULT_STANDARD_PRICE.intValue())))
                 .andExpect(jsonPath("$.[*].label").value(hasItem(DEFAULT_LABEL.toString())))
-                .andExpect(jsonPath("$.[*].mainImageId").value(hasItem(DEFAULT_MAIN_IMAGE_ID.intValue())));
+                .andExpect(jsonPath("$.[*].mainImageId").value(hasItem(DEFAULT_MAIN_IMAGE_ID.intValue())))
+                .andExpect(jsonPath("$.[*].fromDate").value(hasItem(DEFAULT_FROM_DATE_STR)))
+                .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE_STR)));
     }
 
     @Test
@@ -185,7 +240,9 @@ public class ProductResourceIntTest {
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()))
             .andExpect(jsonPath("$.standardPrice").value(DEFAULT_STANDARD_PRICE.intValue()))
             .andExpect(jsonPath("$.label").value(DEFAULT_LABEL.toString()))
-            .andExpect(jsonPath("$.mainImageId").value(DEFAULT_MAIN_IMAGE_ID.intValue()));
+            .andExpect(jsonPath("$.mainImageId").value(DEFAULT_MAIN_IMAGE_ID.intValue()))
+            .andExpect(jsonPath("$.fromDate").value(DEFAULT_FROM_DATE_STR))
+            .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE_STR));
     }
 
     @Test
@@ -213,7 +270,9 @@ public class ProductResourceIntTest {
                 .status(UPDATED_STATUS)
                 .standardPrice(UPDATED_STANDARD_PRICE)
                 .label(UPDATED_LABEL)
-                .mainImageId(UPDATED_MAIN_IMAGE_ID);
+                .mainImageId(UPDATED_MAIN_IMAGE_ID)
+                .fromDate(UPDATED_FROM_DATE)
+                .endDate(UPDATED_END_DATE);
 
         restProductMockMvc.perform(put("/api/products")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -231,6 +290,8 @@ public class ProductResourceIntTest {
         assertThat(testProduct.getStandardPrice()).isEqualTo(UPDATED_STANDARD_PRICE);
         assertThat(testProduct.getLabel()).isEqualTo(UPDATED_LABEL);
         assertThat(testProduct.getMainImageId()).isEqualTo(UPDATED_MAIN_IMAGE_ID);
+        assertThat(testProduct.getFromDate()).isEqualTo(UPDATED_FROM_DATE);
+        assertThat(testProduct.getEndDate()).isEqualTo(UPDATED_END_DATE);
 
         // Validate the Product in ElasticSearch
         Product productEs = productSearchRepository.findOne(testProduct.getId());
@@ -276,6 +337,8 @@ public class ProductResourceIntTest {
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
             .andExpect(jsonPath("$.[*].standardPrice").value(hasItem(DEFAULT_STANDARD_PRICE.intValue())))
             .andExpect(jsonPath("$.[*].label").value(hasItem(DEFAULT_LABEL.toString())))
-            .andExpect(jsonPath("$.[*].mainImageId").value(hasItem(DEFAULT_MAIN_IMAGE_ID.intValue())));
+            .andExpect(jsonPath("$.[*].mainImageId").value(hasItem(DEFAULT_MAIN_IMAGE_ID.intValue())))
+            .andExpect(jsonPath("$.[*].fromDate").value(hasItem(DEFAULT_FROM_DATE_STR)))
+            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE_STR)));
     }
 }

@@ -43,6 +43,8 @@
                     <th jh-sort-by="standardPrice"><span data-translate="smarteshopApp.product.standardPrice">Standard Price</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="label"><span data-translate="smarteshopApp.product.label">Label</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="mainImageId"><span data-translate="smarteshopApp.product.mainImageId">Main Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fromDate"><span data-translate="smarteshopApp.product.fromDate">From Date</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="endDate"><span data-translate="smarteshopApp.product.endDate">End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="brand.id"><span data-translate="smarteshopApp.product.brand">Brand</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="category.id"><span data-translate="smarteshopApp.product.category">Category</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
@@ -58,6 +60,8 @@
                     <td>{{product.standardPrice}}</td>
                     <td data-translate="{{'smarteshopApp.ProductLabelEnum.' + product.label}}">{{product.label}}</td>
                     <td>{{product.mainImageId}}</td>
+                    <td>{{product.fromDate | date:'medium'}}</td>
+                    <td>{{product.endDate | date:'medium'}}</td>
                     <td>
                         <a ui-sref="brand-detail({id:product.brand.id})">{{product.brand.id}}</a>
                     </td>

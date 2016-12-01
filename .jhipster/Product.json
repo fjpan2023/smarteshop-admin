@@ -56,11 +56,25 @@
         {
             "fieldName": "mainImageId",
             "fieldType": "Long"
+        },
+        {
+            "fieldName": "fromDate",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "endDate",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20161130115213",
-    "entityTableName": "product",
     "dto": "no",
-    "pagination": "pagination",
-    "service": "serviceImpl"
+    "service": "serviceImpl",
+    "entityTableName": "product",
+    "pagination": "pagination"
 }

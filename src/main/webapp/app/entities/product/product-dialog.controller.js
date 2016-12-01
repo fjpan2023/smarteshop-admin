@@ -12,6 +12,8 @@
 
         vm.product = entity;
         vm.clear = clear;
+        vm.datePickerOpenStatus = {};
+        vm.openCalendar = openCalendar;
         vm.save = save;
         vm.skus = Sku.query();
         vm.relatedproducts = RelatedProduct.query();
@@ -45,6 +47,11 @@
             vm.isSaving = false;
         }
 
+        vm.datePickerOpenStatus.fromDate = false;
+        vm.datePickerOpenStatus.endDate = false;
 
+        function openCalendar (date) {
+            vm.datePickerOpenStatus[date] = true;
+        }
     }
 })();

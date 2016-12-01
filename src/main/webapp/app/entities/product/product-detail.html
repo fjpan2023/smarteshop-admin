@@ -32,6 +32,14 @@
         <dd>
             <span>{{vm.product.mainImageId}}</span>
         </dd>
+        <dt><span data-translate="smarteshopApp.product.fromDate">From Date</span></dt>
+        <dd>
+            <span>{{vm.product.fromDate | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.product.endDate">End Date</span></dt>
+        <dd>
+            <span>{{vm.product.endDate | date:'medium'}}</span>
+        </dd>
         <dt><span data-translate="smarteshopApp.product.brand">Brand</span></dt>
         <dd>
             <a ui-sref="brand-detail({id:vm.product.brand.id})">{{vm.product.brand.id}}</a>

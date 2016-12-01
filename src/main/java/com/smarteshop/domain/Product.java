@@ -1,29 +1,22 @@
 package com.smarteshop.domain;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.smarteshop.domain.enumeration.ProductLabelEnum;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Objects;
+
 import com.smarteshop.domain.enumeration.StatusEnum;
+
+import com.smarteshop.domain.enumeration.ProductLabelEnum;
 
 /**
  * A Product.
@@ -32,7 +25,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 @Table(name = "product")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "product")
-public class Product  extends AbstractAuditingEntity implements Serializable {
+public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -62,6 +55,14 @@ public class Product  extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "main_image_id")
     private Long mainImageId;
+
+    @NotNull
+    @Column(name = "from_date", nullable = false)
+    private ZonedDateTime fromDate;
+
+    @NotNull
+    @Column(name = "end_date", nullable = false)
+    private ZonedDateTime endDate;
 
     @OneToMany(mappedBy = "product")
     @JsonIgnore
@@ -178,6 +179,32 @@ public class Product  extends AbstractAuditingEntity implements Serializable {
         this.mainImageId = mainImageId;
     }
 
+    public ZonedDateTime getFromDate() {
+        return fromDate;
+    }
+
+    public Product fromDate(ZonedDateTime fromDate) {
+        this.fromDate = fromDate;
+        return this;
+    }
+
+    public void setFromDate(ZonedDateTime fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public ZonedDateTime getEndDate() {
+        return endDate;
+    }
+
+    public Product endDate(ZonedDateTime endDate) {
+        this.endDate = endDate;
+        return this;
+    }
+
+    public void setEndDate(ZonedDateTime endDate) {
+        this.endDate = endDate;
+    }
+
     public Set<Sku> getSkuses() {
         return skuses;
     }
@@ -285,6 +312,8 @@ public class Product  extends AbstractAuditingEntity implements Serializable {
             ", standardPrice='" + standardPrice + "'" +
             ", label='" + label + "'" +
             ", mainImageId='" + mainImageId + "'" +
+            ", fromDate='" + fromDate + "'" +
+            ", endDate='" + endDate + "'" +
             '}';
     }
 }

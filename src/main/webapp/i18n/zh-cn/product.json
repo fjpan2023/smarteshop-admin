@@ -23,6 +23,8 @@
             "standardPrice": "Standard Price",
             "label": "Label",
             "mainImageId": "Main Image Id",
+            "fromDate": "From Date",
+            "endDate": "End Date",
             "skus": "Skus",
             "relatedProducts": "Related Products",
             "brand": "Brand",

@@ -4,9 +4,9 @@
         .module('smarteshopApp')
         .factory('Product', Product);
 
-    Product.$inject = ['$resource'];
+    Product.$inject = ['$resource', 'DateUtils'];
 
-    function Product ($resource) {
+    function Product ($resource, DateUtils) {
         var resourceUrl =  'api/products/:id';
 
         return $resource(resourceUrl, {}, {
@@ -16,6 +16,8 @@
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
+                        data.fromDate = DateUtils.convertDateTimeFromServer(data.fromDate);
+                        data.endDate = DateUtils.convertDateTimeFromServer(data.endDate);
                     }
                     return data;
                 }

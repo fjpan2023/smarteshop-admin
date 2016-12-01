@@ -135,6 +135,8 @@
                                 standardPrice: null,
                                 label: null,
                                 mainImageId: null,
+                                fromDate: null,
+                                endDate: null,
                                 id: null
                             };
                         }
