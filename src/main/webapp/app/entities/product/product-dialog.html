@@ -68,7 +68,7 @@
 			<div class="col-sm-4">
 				<select class="form-control" id="field_brand" name="brand"
 					ng-model="vm.product.brand"
-					ng-options="brand as brand.id for brand in vm.brands track by brand.id">
+					ng-options="brand as brand.name for brand in vm.brands track by brand.id">
 					<option value=""></option>
 				</select>
 			</div>
@@ -78,7 +78,7 @@
 			<div class="col-sm-4">
 				<select class="form-control" id="field_category" name="category"
 					ng-model="vm.product.category"
-					ng-options="category as category.id for category in vm.categories track by category.id">
+					ng-options="category as category.name for category in vm.categories track by category.id">
 					<option value=""></option>
 				</select>
 			</div>
@@ -161,7 +161,7 @@
 		</div>
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default" >
+		<button type="button" class="btn btn-default" ui-sref="{{vm.previousState}}">
 			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
 				data-translate="entity.action.cancel">Cancel</span>
 		</button>

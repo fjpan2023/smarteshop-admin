@@ -5,19 +5,21 @@
         .module('smarteshopApp')
         .controller('ProductDialogController', ProductDialogController);
 
-    ProductDialogController.$inject = ['$timeout', '$scope', '$stateParams', 'entity', 'Product', 'Sku', 'RelatedProduct', 'Brand', 'Category'];
+    ProductDialogController.$inject = ['$timeout', '$scope','$state', '$stateParams', 'previousState','entity', 'Product', 'Sku', 'RelatedProduct', 'Brand', 'Category'];
 
-    function ProductDialogController ($timeout, $scope, $stateParams,  entity, Product, Sku, RelatedProduct, Brand, Category) {
+    function ProductDialogController ($timeout, $scope, $state,$stateParams, previousState, entity, Product, Sku, RelatedProduct, Brand, Category) {
         var vm = this;
 
         vm.product = entity;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
+        vm.previousState = previousState.name;
         vm.save = save;
         vm.skus = Sku.query();
         vm.relatedproducts = RelatedProduct.query();
         vm.brands = Brand.query();
         vm.categories = Category.query();
+        
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -39,6 +41,7 @@
         function onSaveSuccess (result) {
             $scope.$emit('smarteshopApp:productUpdate', result);
             vm.isSaving = false;
+            $state.go('product');
         }
 
         function onSaveError () {
