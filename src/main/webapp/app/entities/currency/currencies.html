@@ -13,7 +13,7 @@
             </div>
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right" >
+                   <!--  <div class="input-group pull-right" >
                         <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'smarteshopApp.currency.home.search' | translate }}">
                         <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
@@ -25,7 +25,7 @@
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
                         </span>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>
@@ -50,12 +50,12 @@
                     <td>{{currency.symbolRight}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
+                           <!--  <button type="submit"
                                     ui-sref="currency-detail({id:currency.id})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
-                            </button>
+                            </button> -->
                             <button type="submit"
                                     ui-sref="currency.edit({id:currency.id})"
                                     class="btn btn-primary btn-sm">
