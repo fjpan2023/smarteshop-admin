@@ -7,7 +7,7 @@
 
     BrandDialogController.$inject = ['$timeout', '$scope', '$state', '$stateParams','previousState', 'DataUtils', 'entity', 'Brand'];
 
-    function BrandDialogController ($timeout, $scope, $state, $stateParams, DataUtils, previousState, entity, Brand) {
+    function BrandDialogController ($timeout, $scope, $state, $stateParams, previousState, DataUtils, entity, Brand) {
         var vm = this;
         vm.brand = entity;
         vm.byteSize = DataUtils.byteSize;
