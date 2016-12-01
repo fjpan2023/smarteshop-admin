@@ -28,7 +28,7 @@
 				</select>
 			</div>
 		</div>
-		<div class="form-group">
+		<!-- <div class="form-group">
 			<label class="col-sm-2 control-label"
 				data-translate="smarteshopApp.brand.briefdesc"
 				for="field_briefdescription">Brief Description</label>
@@ -36,34 +36,35 @@
 				<summernote config="options" ng-model="vm.brand.briefDesc"
 					name="description" id="field_description">{{vm.brand.briefDesc}}</summernote>
 			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label"
-				data-translate="smarteshopApp.brand.description"
-				for="field_description">Description</label>
-			<div class="col-sm-10">
-				<summernote config="options" ng-model="vm.brand.description"
-					name="description" id="field_description">{{vm.brand.description}}</summernote>
-			</div>
-		</div>
+		</div> -->
 
-		<div class="form-group" ngf-drop
+
+		<!-- 	<div class="form-group" ngf-drop
 			ngf-change="vm.setImage($file, vm.brand)" ngf-pattern="'image/*'">
 			<label class=" col-sm-2 control-label"
 				data-translate="smarteshopApp.brand.image" for="field_image">Image</label>
-			<div class="col-sm-10">
-				<img
-					data-ng-src="{{'data:' + vm.brand.imageContentType + ';base64,' + vm.brand.image}}"
-					style="max-height: 100px;" ng-if="vm.brand.image" />
-				<button type="button" ngf-select class="btn btn-default btn-block"
-					ngf-change="vm.setImage($file, vm.brand)" accept="image/*"
-					data-translate="entity.action.addimage">Add image</button>
-			</div>
+
+		</div> -->
+
+		<uib-tabset active="activeForm"> <uib-tab index="0"
+			heading="BriefDesc"> <summernote config="options"
+			ng-model="vm.brand.briefDesc" name="description"
+			id="field_description">{{vm.brand.briefDesc}}</summernote> </uib-tab> <uib-tab
+			index="1" heading="Descripton"> <summernote
+			config="options" ng-model="vm.brand.description" name="description"
+			id="field_description">{{vm.brand.description}}</summernote> </uib-tab> <uib-tab
+			index="2" heading="图片">
+			<img
+				data-ng-src="{{'data:' + vm.brand.imageContentType + ';base64,' + vm.brand.image}}"
+				style="max-height: 100px;" ng-if="vm.brand.image" />
+			<button type="button" ngf-select class="btn btn-default btn-block"
+				ngf-change="vm.setImage($file, vm.brand)" accept="image/*"
+				data-translate="entity.action.addimage">Add image</button>
 			<input type="hidden" class="form-control" name="image"
 				id="field_image" ng-model="vm.brand.image" /> <input type="hidden"
 				class="form-control" name="imageContentType"
 				id="field_imageContentType" ng-model="vm.brand.imageContentType" />
-		</div>
+		</uib-tab> </uib-tabset>
 
 	</div>
 	<div class="modal-footer">
