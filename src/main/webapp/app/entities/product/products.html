@@ -1,101 +1,125 @@
 <div>
-    <h2 data-translate="smarteshopApp.product.home.title">Products</h2>
-    <jhi-alert></jhi-alert>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="product.new" >
-                    <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs"  data-translate="smarteshopApp.product.home.createLabel">
-                        Create new Product
-                    </span>
-                </button>
-            </div>
-            <div class="col-xs-8 no-padding-right">
-                <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'smarteshopApp.product.home.search' | translate }}">
-                        <span  class="input-group-btn width-min" >
-                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
-                            <button class="btn btn-info" ng-click="vm.clear()">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
-            <thead>
-                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="code"><span data-translate="smarteshopApp.product.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="name"><span data-translate="smarteshopApp.product.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="description"><span data-translate="smarteshopApp.product.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="status"><span data-translate="smarteshopApp.product.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="standardPrice"><span data-translate="smarteshopApp.product.standardPrice">Standard Price</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="label"><span data-translate="smarteshopApp.product.label">Label</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="mainImageId"><span data-translate="smarteshopApp.product.mainImageId">Main Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="fromDate"><span data-translate="smarteshopApp.product.fromDate">From Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="endDate"><span data-translate="smarteshopApp.product.endDate">End Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="brand.id"><span data-translate="smarteshopApp.product.brand">Brand</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="category.id"><span data-translate="smarteshopApp.product.category">Category</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="product in vm.products track by product.id">
-                    <td><a ui-sref="product-detail({id:product.id})">{{product.id}}</a></td>
-                    <td>{{product.code}}</td>
-                    <td>{{product.name}}</td>
-                    <td>{{product.description}}</td>
-                    <td data-translate="{{'smarteshopApp.StatusEnum.' + product.status}}">{{product.status}}</td>
-                    <td>{{product.standardPrice}}</td>
-                    <td data-translate="{{'smarteshopApp.ProductLabelEnum.' + product.label}}">{{product.label}}</td>
-                    <td>{{product.mainImageId}}</td>
-                    <td>{{product.fromDate | date:'medium'}}</td>
-                    <td>{{product.endDate | date:'medium'}}</td>
-                    <td>
-                        <a ui-sref="brand-detail({id:product.brand.id})">{{product.brand.id}}</a>
-                    </td>
-                    <td>
-                        <a ui-sref="category-detail({id:product.category.id})">{{product.category.id}}</a>
-                    </td>
-                    <td class="text-right">
-                        <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="product-detail({id:product.id})"
-                                    class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="product.edit({id:product.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="product.delete({id:product.id})"
-                                    class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
-    </div>
+	<h2 data-translate="smarteshopApp.product.home.title">Products</h2>
+	<jhi-alert></jhi-alert>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-4 no-padding-left">
+				<button class="btn btn-primary" ui-sref="product.new">
+					<span class="glyphicon glyphicon-plus"></span> <span
+						class="hidden-xs"
+						data-translate="smarteshopApp.product.home.createLabel">
+						Create new Product </span>
+				</button>
+			</div>
+			<div class="col-xs-8 no-padding-right">
+				<form name="searchForm" class="form-inline">
+					<div class="input-group pull-right">
+						<input type="text" class="form-control" ng-model="vm.searchQuery"
+							id="searchQuery"
+							placeholder="{{ 'smarteshopApp.product.home.search' | translate }}">
+						<span class="input-group-btn width-min">
+							<button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span> <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+							<button class="btn btn-info" ng-click="vm.clear()">
+								<span class="glyphicon glyphicon-trash"></span>
+							</button>
+						</span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="table-responsive">
+		<table class="jh-table table table-striped">
+			<thead>
+				<tr jh-sort="vm.predicate" ascending="vm.reverse"
+					callback="vm.transition()">
+					<th jh-sort-by="id"><span data-translate="global.field.id">ID</span>
+						<span class="glyphicon glyphicon-sort"></span></th>
+					<th><span data-translate="smarteshopApp.product.mainImageId">Main
+							Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="code"><span
+						data-translate="smarteshopApp.product.code">Code</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="name"><span
+						data-translate="smarteshopApp.product.name">Name</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="brand.id"><span
+						data-translate="smarteshopApp.product.brand">Brand</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="category.id"><span
+						data-translate="smarteshopApp.product.category">Category</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="status"><span
+						data-translate="smarteshopApp.product.status">Status</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="standardPrice"><span
+						data-translate="smarteshopApp.product.standardPrice">Standard
+							Price</span> <span class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="label"><span
+						data-translate="smarteshopApp.product.label">Label</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="fromDate"><span
+						data-translate="smarteshopApp.product.fromDate">From Date</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="endDate"><span
+						data-translate="smarteshopApp.product.endDate">End Date</span> <span
+						class="glyphicon glyphicon-sort"></span></th>
+
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="product in vm.products track by product.id">
+					<td><a ui-sref="product-detail({id:product.id})">{{product.id}}</a></td>
+					<td>{{product.mainImageId}}</td>
+					<td>{{product.code}}</td>
+					<td>{{product.name}}</td>
+					<td><a ui-sref="brand-detail({id:product.brand.id})">{{product.brand.name}}</a>
+					</td>
+					<td><a ui-sref="category-detail({id:product.category.id})">{{product.category.name}}</a>
+					</td>
+					<td
+						data-translate="{{'smarteshopApp.StatusEnum.' + product.status}}">{{product.status}}</td>
+					<td>{{product.standardPrice}}</td>
+					<td
+						data-translate="{{'smarteshopApp.ProductLabelEnum.' + product.label}}">{{product.label}}</td>
+
+					<td>{{product.fromDate | date:'medium'}}</td>
+					<td>{{product.endDate | date:'medium'}}</td>
+					
+					<td class="text-right">
+						<div class="btn-group flex-btn-group-container">
+							<button type="submit" ui-sref="product-detail({id:product.id})"
+								class="btn btn-info btn-sm">
+								<span class="glyphicon glyphicon-eye-open"></span> <span
+									class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+							</button>
+							<button type="submit" ui-sref="product.edit({id:product.id})"
+								class="btn btn-primary btn-sm">
+								<span class="glyphicon glyphicon-pencil"></span> <span
+									class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+							</button>
+							<button type="submit" ui-sref="product.delete({id:product.id})"
+								class="btn btn-danger btn-sm">
+								<span class="glyphicon glyphicon-remove-circle"></span> <span
+									class="hidden-xs hidden-sm"
+									data-translate="entity.action.delete"></span>
+							</button>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="text-center">
+		<jhi-item-count page="vm.page" total="vm.queryCount"
+			items-per-page="vm.itemsPerPage"></jhi-item-count>
+		<uib-pagination class="pagination-sm" total-items="vm.totalItems"
+			items-per-page="vm.itemsPerPage" ng-model="vm.page"
+			ng-change="vm.transition()"></uib-pagination>
+	</div>
 </div>

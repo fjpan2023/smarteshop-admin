@@ -10,10 +10,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smarteshop.domain.enumeration.TemplateTypeEnum;
@@ -33,6 +35,7 @@ public class Template extends AbstractAuditingEntity  implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotEmpty
     @Enumerated(EnumType.STRING)
     @Column(name = "type")
     private TemplateTypeEnum type;
@@ -40,9 +43,11 @@ public class Template extends AbstractAuditingEntity  implements Serializable {
     @Column(name = "super_id")
     private Long superId;
 
-    @Column(name = "template_key")
+    @NotEmpty
+    @Column(name = "template_key", nullable=false)
     private String templateKey;
 
+    @Lob
     @Column(name = "content")
     private String content;
 

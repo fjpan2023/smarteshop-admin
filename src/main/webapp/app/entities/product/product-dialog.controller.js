@@ -5,13 +5,12 @@
         .module('smarteshopApp')
         .controller('ProductDialogController', ProductDialogController);
 
-    ProductDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Product', 'Sku', 'RelatedProduct', 'Brand', 'Category'];
+    ProductDialogController.$inject = ['$timeout', '$scope', '$stateParams', 'entity', 'Product', 'Sku', 'RelatedProduct', 'Brand', 'Category'];
 
-    function ProductDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Product, Sku, RelatedProduct, Brand, Category) {
+    function ProductDialogController ($timeout, $scope, $stateParams,  entity, Product, Sku, RelatedProduct, Brand, Category) {
         var vm = this;
 
         vm.product = entity;
-        vm.clear = clear;
         vm.datePickerOpenStatus = {};
         vm.openCalendar = openCalendar;
         vm.save = save;
@@ -24,9 +23,9 @@
             angular.element('.form-group:eq(1)>input').focus();
         });
 
-        function clear () {
-            $uibModalInstance.dismiss('cancel');
-        }
+//        function clear () {
+//            $uibModalInstance.dismiss('cancel');
+//        }
 
         function save () {
             vm.isSaving = true;
@@ -39,7 +38,6 @@
 
         function onSaveSuccess (result) {
             $scope.$emit('smarteshopApp:productUpdate', result);
-            $uibModalInstance.close(result);
             vm.isSaving = false;
         }
 

@@ -118,35 +118,61 @@
             data: {
                 authorities: ['ROLE_USER']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/product/product-dialog.html',
                     controller: 'ProductDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: function () {
-                            return {
-                                code: null,
-                                name: null,
-                                description: null,
-                                status: null,
-                                standardPrice: null,
-                                label: null,
-                                mainImageId: null,
-                                fromDate: null,
-                                endDate: null,
-                                id: null
-                            };
-                        }
-                    }
-                }).result.then(function() {
-                    $state.go('product', null, { reload: 'product' });
-                }, function() {
-                    $state.go('product');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('product');
+                    $translatePartialLoader.addPart('statusEnum');
+                    $translatePartialLoader.addPart('productLabelEnum');
+                    return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'Product', function() {
+                    return {};
+                }],
+                previousState: ["$state", function ($state) {
+                    var currentStateData = {
+                        name: $state.current.name || 'product',
+                        params: $state.params,
+                        url: $state.href($state.current.name, $state.params)
+                    };
+                    return currentStateData;
+                }]
+            }
+//            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+//                $uibModal.open({
+//                    templateUrl: 'app/entities/product/product-dialog.html',
+//                    controller: 'ProductDialogController',
+//                    controllerAs: 'vm',
+//                    backdrop: 'static',
+//                    size: 'lg',
+//                    resolve: {
+//                        entity: function () {
+//                            return {
+//                                code: null,
+//                                name: null,
+//                                description: null,
+//                                status: null,
+//                                standardPrice: null,
+//                                label: null,
+//                                mainImageId: null,
+//                                fromDate: null,
+//                                endDate: null,
+//                                id: null
+//                            };
+//                        }
+//                    }
+//                }).result.then(function() {
+//                    $state.go('product', null, { reload: 'product' });
+//                }, function() {
+//                    $state.go('product');
+//                });
+//            }]
         })
         .state('product.edit', {
             parent: 'product',

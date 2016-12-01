@@ -1,22 +1,32 @@
 package com.smarteshop.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.elasticsearch.annotations.Document;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
-import com.smarteshop.domain.enumeration.StatusEnum;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.springframework.data.elasticsearch.annotations.Document;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smarteshop.domain.enumeration.ProductLabelEnum;
+import com.smarteshop.domain.enumeration.StatusEnum;
 
 /**
  * A Product.
@@ -25,7 +35,7 @@ import com.smarteshop.domain.enumeration.ProductLabelEnum;
 @Table(name = "product")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "product")
-public class Product implements Serializable {
+public class Product extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -36,9 +46,10 @@ public class Product implements Serializable {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "name")
+    @Column(name = "name", length = 50)
     private String name;
 
+    @Lob
     @Column(name = "description")
     private String description;
 
@@ -49,6 +60,9 @@ public class Product implements Serializable {
     @Column(name = "standard_price", precision=10, scale=2)
     private BigDecimal standardPrice;
 
+    @Column(name = "sell_price", precision=10, scale=2)
+    private BigDecimal sellPrice;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "label")
     private ProductLabelEnum label;
@@ -58,11 +72,11 @@ public class Product implements Serializable {
 
     @NotNull
     @Column(name = "from_date", nullable = false)
-    private ZonedDateTime fromDate;
+    private ZonedDateTime fromDate =ZonedDateTime.now();
 
     @NotNull
     @Column(name = "end_date", nullable = false)
-    private ZonedDateTime endDate;
+    private ZonedDateTime endDate = ZonedDateTime.now();
 
     @OneToMany(mappedBy = "product")
     @JsonIgnore
@@ -281,6 +295,15 @@ public class Product implements Serializable {
         this.category = category;
     }
 
+
+    public BigDecimal getSellPrice() {
+      return sellPrice;
+    }
+
+    public void setSellPrice(BigDecimal sellPrice) {
+      this.sellPrice = sellPrice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -303,17 +326,13 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "Product{" +
-            "id=" + id +
-            ", code='" + code + "'" +
-            ", name='" + name + "'" +
-            ", description='" + description + "'" +
-            ", status='" + status + "'" +
-            ", standardPrice='" + standardPrice + "'" +
-            ", label='" + label + "'" +
-            ", mainImageId='" + mainImageId + "'" +
-            ", fromDate='" + fromDate + "'" +
-            ", endDate='" + endDate + "'" +
-            '}';
+      return "Product [id=" + id + ", code=" + code + ", name=" + name + ", description="
+          + description + ", status=" + status + ", standardPrice=" + standardPrice + ", sellPrice="
+          + sellPrice + ", label=" + label + ", mainImageId=" + mainImageId + ", fromDate="
+          + fromDate + ", endDate=" + endDate + ", skuses=" + skuses + ", relatedProducts="
+          + relatedProducts + ", brand=" + brand + ", category=" + category + "]";
     }
+
+
+
 }

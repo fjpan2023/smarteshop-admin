@@ -1,4 +1,5 @@
-
+<form name="editForm" class="form-horizontal" role="form" novalidate
+		ng-submit="vm.save()">
 <div class="modal-header">
 	<h4 class="modal-title" id="myTemplateLabel"
 		data-translate="smarteshopApp.template.home.createOrEditLabel">Create
@@ -6,8 +7,7 @@
 </div>
 <div class="modal-body">
 	<jhi-alert-error></jhi-alert-error>
-	<form name="editForm" class="form-horizontal" role="form" novalidate
-		ng-submit="vm.save()">
+	
 		<div class="form-group">
 			<label class="col-sm-1 control-label"
 				data-translate="smarteshopApp.template.type" for="field_type">Type</label>
@@ -38,8 +38,7 @@
 			id="field_description">{{vm.template.content}}</summernote>
 			</div>
 		</div>
-	</form>
-
+	
 </div>
 <div class="modal-footer">
 	<button type="button" class="btn btn-default" data-dismiss="modal"
@@ -53,4 +52,5 @@
 			data-translate="entity.action.save">Save</span>
 	</button>
 </div>
+</form>
 
