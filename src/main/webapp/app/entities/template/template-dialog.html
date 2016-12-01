@@ -1,51 +1,56 @@
 
-<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+<div class="modal-header">
+	<h4 class="modal-title" id="myTemplateLabel"
+		data-translate="smarteshopApp.template.home.createOrEditLabel">Create
+		or edit a Template</h4>
+</div>
+<div class="modal-body">
+	<jhi-alert-error></jhi-alert-error>
+	<form name="editForm" class="form-horizontal" role="form" novalidate
+		ng-submit="vm.save()">
+		<div class="form-group">
+			<label class="col-sm-1 control-label"
+				data-translate="smarteshopApp.template.type" for="field_type">Type</label>
+			<div class="col-sm-4">
+				<select class="form-control" name="type" ng-model="vm.template.type"
+					id="field_type">
+					<option value="EMAIL"
+						data-translate="smarteshopApp.TemplateTypeEnum.EMAIL">EMAIL</option>
+					<option value="LAYOUT"
+						data-translate="smarteshopApp.TemplateTypeEnum.LAYOUT">LAYOUT</option>
+				</select>
+			</div>
+			<label class="col-sm-2 control-label"
+				data-translate="smarteshopApp.template.templateKey"
+				for="field_templateKey">Template Key</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" name="templateKey"
+					id="field_templateKey" ng-model="vm.template.templateKey" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 control-label"
+				data-translate="smarteshopApp.template.content" for="field_content">Content</label>
+		
+				<div class="col-sm-11" style="margin-top: 15px;">
+				<summernote config="vm.summernoteroptions"
+			ng-model="vm.template.content" name="description"
+			id="field_description">{{vm.template.content}}</summernote>
+			</div>
+		</div>
+	</form>
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myTemplateLabel" data-translate="smarteshopApp.template.home.createOrEditLabel">Create or edit a Template</h4>
-    </div>
-    <div class="modal-body">
-        <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.template.id">
-            <label for="id" data-translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.template.id" readonly />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smarteshopApp.template.type" for="field_type">Type</label>
-            <select class="form-control" name="type" ng-model="vm.template.type" id="field_type">
-                <option value="EMAIL" data-translate="smarteshopApp.TemplateTypeEnum.EMAIL">EMAIL</option>
-                <option value="LAYOUT" data-translate="smarteshopApp.TemplateTypeEnum.LAYOUT">LAYOUT</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smarteshopApp.template.superId" for="field_superId">Super Id</label>
-            <input type="number" class="form-control" name="superId" id="field_superId"
-                    ng-model="vm.template.superId"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smarteshopApp.template.templateKey" for="field_templateKey">Template Key</label>
-            <input type="text" class="form-control" name="templateKey" id="field_templateKey"
-                    ng-model="vm.template.templateKey"
-                     />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smarteshopApp.template.content" for="field_content">Content</label>
-            <input type="text" class="form-control" name="content" id="field_content"
-                    ng-model="vm.template.content"
-                     />
-        </div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal"
+		ui-sref="{{vm.previousState}}">
+		<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+			data-translate="entity.action.cancel">Cancel</span>
+	</button>
+	<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving"
+		class="btn btn-primary">
+		<span class="glyphicon glyphicon-save"></span>&nbsp;<span
+			data-translate="entity.action.save">Save</span>
+	</button>
+</div>
 
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
-        </button>
-    </div>
-</form>

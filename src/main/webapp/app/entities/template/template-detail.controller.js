@@ -5,9 +5,9 @@
         .module('smarteshopApp')
         .controller('TemplateDetailController', TemplateDetailController);
 
-    TemplateDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Template'];
+    TemplateDetailController.$inject = ['$scope', '$rootScope', '$state','$stateParams', 'previousState', 'entity', 'Template'];
 
-    function TemplateDetailController($scope, $rootScope, $stateParams, previousState, entity, Template) {
+    function TemplateDetailController($scope, $rootScope, $state, $stateParams, previousState, entity, Template) {
         var vm = this;
 
         vm.template = entity;

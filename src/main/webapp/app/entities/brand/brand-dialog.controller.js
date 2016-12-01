@@ -5,26 +5,17 @@
         .module('smarteshopApp')
         .controller('BrandDialogController', BrandDialogController);
 
-    BrandDialogController.$inject = ['$timeout', '$scope', '$state', '$stateParams', 'DataUtils', 'entity', 'Brand'];
+    BrandDialogController.$inject = ['$timeout', '$scope', '$state', '$stateParams','previousState', 'DataUtils', 'entity', 'Brand'];
 
-    function BrandDialogController ($timeout, $scope, $state, $stateParams, DataUtils, entity, Brand) {
+    function BrandDialogController ($timeout, $scope, $state, $stateParams, DataUtils, previousState, entity, Brand) {
         var vm = this;
         vm.brand = entity;
         vm.byteSize = DataUtils.byteSize;
         vm.openFile = DataUtils.openFile;
         vm.save = save;
-        $scope.options = {
+        vm.previousState = previousState.name;
+        $scope.summernoteroptions = {
 				height: 300,
-//				
-//				toolbar: [
-//				          // [groupName, [list of button]]
-//				          ['style', ['bold', 'italic', 'underline', 'clear']],
-//				          ['font', ['strikethrough', 'superscript', 'subscript']],
-//				          ['fontsize', ['fontsize']],
-//				          ['color', ['color']],
-//				          ['para', ['ul', 'ol', 'paragraph']],
-//				          ['height', ['height']]
-//				        ],
 		};
         
         $timeout(function (){

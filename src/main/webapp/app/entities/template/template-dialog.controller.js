@@ -5,14 +5,20 @@
         .module('smarteshopApp')
         .controller('TemplateDialogController', TemplateDialogController);
 
-    TemplateDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Template'];
+    TemplateDialogController.$inject = ['$timeout', '$scope', '$state','$stateParams','previousState', 'entity', 'Template'];
 
-    function TemplateDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Template) {
+    function TemplateDialogController ($timeout, $scope,  $state,  $stateParams, previousState, entity, Template) {
         var vm = this;
 
         vm.template = entity;
         vm.clear = clear;
         vm.save = save;
+        vm.previousState = previousState.name;
+        
+        vm.summernoteroptions = {
+				height: 300,
+		};
+        
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -33,8 +39,8 @@
 
         function onSaveSuccess (result) {
             $scope.$emit('smarteshopApp:templateUpdate', result);
-            $uibModalInstance.close(result);
             vm.isSaving = false;
+            $state.go(vm.previousState);
         }
 
         function onSaveError () {
