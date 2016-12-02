@@ -60,12 +60,12 @@ class ContactPersonGatlingTest extends Simulation {
         .pause(10)
         .repeat(2) {
             exec(http("Get all contactPeople")
-            .get("/api/contact-people")
+            .get("/api/contactPersons")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
             .exec(http("Create new contactPerson")
-            .post("/api/contact-people")
+            .post("/api/contactPersons")
             .headers(headers_http_authenticated)
             .body(StringBody("""{"id":null, "name":"SAMPLE_TEXT", "email":"SAMPLE_TEXT", "phone":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))

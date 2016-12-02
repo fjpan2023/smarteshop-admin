@@ -28,7 +28,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  * REST controller for managing ContactPerson.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/contactPersons")
 public class ContactPersonController {
 
     private final Logger log = LoggerFactory.getLogger(ContactPersonController.class);
@@ -43,7 +43,7 @@ public class ContactPersonController {
      * @return the ResponseEntity with status 201 (Created) and with body the new contactPerson, or with status 400 (Bad Request) if the contactPerson has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/contact-people")
+    @PostMapping("")
     @Timed
     public ResponseEntity<ContactPerson> createContactPerson(@RequestBody ContactPerson contactPerson) throws URISyntaxException {
         log.debug("REST request to save ContactPerson : {}", contactPerson);
@@ -65,7 +65,7 @@ public class ContactPersonController {
      * or with status 500 (Internal Server Error) if the contactPerson couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/contact-people")
+    @PutMapping()
     @Timed
     public ResponseEntity<ContactPerson> updateContactPerson(@RequestBody ContactPerson contactPerson) throws URISyntaxException {
         log.debug("REST request to update ContactPerson : {}", contactPerson);
@@ -85,7 +85,7 @@ public class ContactPersonController {
      * @return the ResponseEntity with status 200 (OK) and the list of contactPeople in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/contact-people")
+    @GetMapping()
     @Timed
     public ResponseEntity<List<ContactPerson>> getAllContactPeople(Pageable pageable)
         throws URISyntaxException {
@@ -101,7 +101,7 @@ public class ContactPersonController {
      * @param id the id of the contactPerson to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the contactPerson, or with status 404 (Not Found)
      */
-    @GetMapping("/contact-people/{id}")
+    @GetMapping("/{id}")
     @Timed
     public ResponseEntity<ContactPerson> getContactPerson(@PathVariable Long id) {
         log.debug("REST request to get ContactPerson : {}", id);
@@ -119,7 +119,7 @@ public class ContactPersonController {
      * @param id the id of the contactPerson to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/contact-people/{id}")
+    @DeleteMapping("/{id}")
     @Timed
     public ResponseEntity<Void> deleteContactPerson(@PathVariable Long id) {
         log.debug("REST request to delete ContactPerson : {}", id);
@@ -136,7 +136,7 @@ public class ContactPersonController {
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/_search/contact-people")
+    @GetMapping("/_search")
     @Timed
     public ResponseEntity<List<ContactPerson>> searchContactPeople(@RequestParam String query, Pageable pageable)
         throws URISyntaxException {

@@ -28,7 +28,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  * REST controller for managing Template.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/templates")
 public class TemplateController {
 
     private final Logger log = LoggerFactory.getLogger(TemplateController.class);
@@ -43,17 +43,15 @@ public class TemplateController {
      * @return the ResponseEntity with status 201 (Created) and with body the new template, or with status 400 (Bad Request) if the template has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/templates")
+    @PostMapping()
     @Timed
-    public ResponseEntity<Template> createTemplate(@RequestBody Template template) throws URISyntaxException {
+    public ResponseEntity<Long> createTemplate(@RequestBody Template template) throws URISyntaxException {
         log.debug("REST request to save Template : {}", template);
         if (template.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("template", "idexists", "A new template cannot already have an ID")).body(null);
         }
         Template result = templateService.save(template);
-        return ResponseEntity.created(new URI("/api/templates/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("template", result.getId().toString()))
-            .body(result);
+        return new ResponseEntity<Long>(result.getId(),HttpStatus.CREATED);
     }
 
     /**
@@ -65,17 +63,13 @@ public class TemplateController {
      * or with status 500 (Internal Server Error) if the template couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/templates")
+    @PutMapping()
     @Timed
-    public ResponseEntity<Template> updateTemplate(@RequestBody Template template) throws URISyntaxException {
+    public ResponseEntity<Void> updateTemplate(@RequestBody Template template) throws URISyntaxException {
         log.debug("REST request to update Template : {}", template);
-        if (template.getId() == null) {
-            return createTemplate(template);
-        }
+       
         Template result = templateService.save(template);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("template", template.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().build();
     }
 
     /**
@@ -85,7 +79,7 @@ public class TemplateController {
      * @return the ResponseEntity with status 200 (OK) and the list of templates in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/templates")
+    @GetMapping()
     @Timed
     public ResponseEntity<List<Template>> getAllTemplates(Pageable pageable)
         throws URISyntaxException {
@@ -101,7 +95,7 @@ public class TemplateController {
      * @param id the id of the template to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the template, or with status 404 (Not Found)
      */
-    @GetMapping("/templates/{id}")
+    @GetMapping("/{id}")
     @Timed
     public ResponseEntity<Template> getTemplate(@PathVariable Long id) {
         log.debug("REST request to get Template : {}", id);
@@ -119,7 +113,7 @@ public class TemplateController {
      * @param id the id of the template to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/templates/{id}")
+    @DeleteMapping("/{id}")
     @Timed
     public ResponseEntity<Void> deleteTemplate(@PathVariable Long id) {
         log.debug("REST request to delete Template : {}", id);
@@ -136,7 +130,7 @@ public class TemplateController {
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/_search/templates")
+    @GetMapping("/_search")
     @Timed
     public ResponseEntity<List<Template>> searchTemplates(@RequestParam String query, Pageable pageable)
         throws URISyntaxException {

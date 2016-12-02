@@ -75,7 +75,7 @@ public class BrandController extends AbstractBaseController<Brand> {
     public ResponseEntity<Void> updateBrand(@RequestBody Brand brand) throws URISyntaxException {
         log.debug("REST request to update Brand : {}", brand);
 
-        Brand result = brandService.save(brand);
+        brandService.save(brand);
         return ResponseEntity.ok().build();
 
     }

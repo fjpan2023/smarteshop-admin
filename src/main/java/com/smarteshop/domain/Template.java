@@ -35,9 +35,8 @@ public class Template extends AbstractAuditingEntity  implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotEmpty
     @Enumerated(EnumType.STRING)
-    @Column(name = "type")
+    @Column(name = "type", nullable=false)
     private TemplateTypeEnum type;
 
     @Column(name = "super_id")

@@ -7,7 +7,7 @@
     ContactPerson.$inject = ['$resource'];
 
     function ContactPerson ($resource) {
-        var resourceUrl =  'api/contact-people/:id';
+        var resourceUrl =  'api/contactPersons/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
