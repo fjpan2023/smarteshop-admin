@@ -1,5 +1,5 @@
 
-<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+<form name="editForm" role="form" class="form-horizontal" novalidate ng-submit="vm.save()" show-validation>
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -8,13 +8,10 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <div class="form-group" ng-show="vm.emailSetting.id">
-            <label for="id" data-translate="global.field.id">ID</label>
-            <input type="text" class="form-control" id="id" name="id"
-                    ng-model="vm.emailSetting.id" readonly />
-        </div>
+       
         <div class="form-group">
-            <label class="control-label" data-translate="smarteshopApp.emailSetting.host" for="field_host">Host</label>
+            <label class="col-sm-2   control-label" data-translate="smarteshopApp.emailSetting.host" for="field_host">Host</label>
+            <div class="col-sm-4">
             <input type="text" class="form-control" name="host" id="field_host"
                     ng-model="vm.emailSetting.host"
                     required />
@@ -24,10 +21,9 @@
                     This field is required.
                 </p>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smarteshopApp.emailSetting.port" for="field_port">Port</label>
-            <input type="number" class="form-control" name="port" id="field_port"
+            </div>
+            <label class="col-sm-2  control-label" data-translate="smarteshopApp.emailSetting.port" for="field_port">Port</label>
+            <div class="col-sm-4"><input type="number" class="form-control" name="port" id="field_port"
                     ng-model="vm.emailSetting.port"
                     required />
             <div ng-show="editForm.port.$invalid">
@@ -40,10 +36,11 @@
                     This field should be a number.
                 </p>
             </div>
+            </div>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="smarteshopApp.emailSetting.smtpSecurity" for="field_smtpSecurity">Smtp Security</label>
-            <select class="form-control" name="smtpSecurity" ng-model="vm.emailSetting.smtpSecurity" id="field_smtpSecurity" required>
+            <label class="col-sm-2   control-label" data-translate="smarteshopApp.emailSetting.smtpSecurity" for="field_smtpSecurity">Smtp Security</label>
+            <div class="col-sm-4"><select class="form-control" name="smtpSecurity" ng-model="vm.emailSetting.smtpSecurity" id="field_smtpSecurity" required>
                 <option value="PLAIN" data-translate="smarteshopApp.SMTPSecurityEnum.PLAIN">PLAIN</option>
                 <option value="SSL" data-translate="smarteshopApp.SMTPSecurityEnum.SSL">SSL</option>
                 <option value="STARTTLS" data-translate="smarteshopApp.SMTPSecurityEnum.STARTTLS">STARTTLS</option>
@@ -54,10 +51,10 @@
                     This field is required.
                 </p>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smarteshopApp.emailSetting.fromAddress" for="field_fromAddress">From Address</label>
-            <input type="text" class="form-control" name="fromAddress" id="field_fromAddress"
+            </div>
+       
+            <label class="col-sm-2  control-label" data-translate="smarteshopApp.emailSetting.fromAddress" for="field_fromAddress">From Address</label>
+            <div class="col-sm-4"><input type="email" class="form-control" name="fromAddress" id="field_fromAddress"
                     ng-model="vm.emailSetting.fromAddress"
                     required />
             <div ng-show="editForm.fromAddress.$invalid">
@@ -66,10 +63,11 @@
                     This field is required.
                 </p>
             </div>
+            </div>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="smarteshopApp.emailSetting.userName" for="field_userName">User Name</label>
-            <input type="text" class="form-control" name="userName" id="field_userName"
+            <label class="col-sm-2  control-label" data-translate="smarteshopApp.emailSetting.userName" for="field_userName">User Name</label>
+            <div class="col-sm-4"><input type="text" class="form-control" name="userName" id="field_userName"
                     ng-model="vm.emailSetting.userName"
                     required />
             <div ng-show="editForm.userName.$invalid">
@@ -78,10 +76,10 @@
                     This field is required.
                 </p>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smarteshopApp.emailSetting.password" for="field_password">Password</label>
-            <input type="text" class="form-control" name="password" id="field_password"
+            </div>
+       
+            <label class="col-sm-2  control-label" data-translate="smarteshopApp.emailSetting.password" for="field_password">Password</label>
+            <div class="col-sm-4"><input type="password" class="form-control" name="password" id="field_password"
                     ng-model="vm.emailSetting.password"
                     required />
             <div ng-show="editForm.password.$invalid">
@@ -89,6 +87,7 @@
                     ng-show="editForm.password.$error.required" data-translate="entity.validation.required">
                     This field is required.
                 </p>
+            </div>
             </div>
         </div>
 
