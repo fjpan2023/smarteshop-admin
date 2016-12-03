@@ -50,5 +50,7 @@
 
     <cache alias="com.smarteshop.domain.Comments" uses-template="simple"/>
 
+    <cache alias="com.smarteshop.domain.Attachment" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>
