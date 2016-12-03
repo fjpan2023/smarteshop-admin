@@ -81,7 +81,7 @@ public class RelatedProduct extends AbstractAuditingEntity implements Serializab
             return false;
         }
         RelatedProduct relatedProduct = (RelatedProduct) o;
-        if(relatedProduct.id == null || id == null) {
+        if (relatedProduct.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, relatedProduct.id);

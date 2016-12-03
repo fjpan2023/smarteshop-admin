@@ -14,7 +14,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,6 +23,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smarteshop.domain.enumeration.ProductLabelEnum;
 import com.smarteshop.domain.enumeration.StatusEnum;
 
@@ -45,10 +45,9 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @Column(name = "code")
     private String code;
 
-    @Column(name = "name", length = 50)
+    @Column(name = "name")
     private String name;
 
-    @Lob
     @Column(name = "description")
     private String description;
 
@@ -59,9 +58,6 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @Column(name = "standard_price", precision=10, scale=2)
     private BigDecimal standardPrice;
 
-    @Column(name = "sell_price", precision=10, scale=2)
-    private BigDecimal sellPrice;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "label")
     private ProductLabelEnum label;
@@ -69,19 +65,20 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @Column(name = "main_image_id")
     private Long mainImageId;
 
-    @NotNull
-    @Column(name = "from_date", nullable = false)
-    private ZonedDateTime fromDate =ZonedDateTime.now();
+    @Column(name = "from_date")
+    private ZonedDateTime fromDate;
 
     @NotNull
     @Column(name = "end_date", nullable = false)
-    private ZonedDateTime endDate = ZonedDateTime.now();
+    private ZonedDateTime endDate;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Sku> skuses = new HashSet<>();
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<RelatedProduct> relatedProducts = new HashSet<>();
 
@@ -292,15 +289,6 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         this.category = category;
     }
 
-
-    public BigDecimal getSellPrice() {
-      return sellPrice;
-    }
-
-    public void setSellPrice(BigDecimal sellPrice) {
-      this.sellPrice = sellPrice;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -310,7 +298,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
             return false;
         }
         Product product = (Product) o;
-        if(product.id == null || id == null) {
+        if (product.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, product.id);
@@ -323,13 +311,17 @@ public class Product extends AbstractAuditingEntity implements Serializable {
 
     @Override
     public String toString() {
-      return "Product [id=" + id + ", code=" + code + ", name=" + name + ", description="
-          + description + ", status=" + status + ", standardPrice=" + standardPrice + ", sellPrice="
-          + sellPrice + ", label=" + label + ", mainImageId=" + mainImageId + ", fromDate="
-          + fromDate + ", endDate=" + endDate + ", skuses=" + skuses + ", relatedProducts="
-          + relatedProducts + ", brand=" + brand + ", category=" + category + "]";
+        return "Product{" +
+            "id=" + id +
+            ", code='" + code + "'" +
+            ", name='" + name + "'" +
+            ", description='" + description + "'" +
+            ", status='" + status + "'" +
+            ", standardPrice='" + standardPrice + "'" +
+            ", label='" + label + "'" +
+            ", mainImageId='" + mainImageId + "'" +
+            ", fromDate='" + fromDate + "'" +
+            ", endDate='" + endDate + "'" +
+            '}';
     }
-
-
-
 }

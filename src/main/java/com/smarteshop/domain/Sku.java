@@ -28,7 +28,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 @Table(name = "sku")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "sku")
-public class Sku extends AbstractAuditingEntity  implements Serializable {
+public class Sku extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -66,7 +66,7 @@ public class Sku extends AbstractAuditingEntity  implements Serializable {
     private BigDecimal sellPrice;
 
     @Column(name = "default_sku")
-    private Boolean defaultSku;
+    private Boolean defaultSKU;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -200,17 +200,17 @@ public class Sku extends AbstractAuditingEntity  implements Serializable {
         this.sellPrice = sellPrice;
     }
 
-    public Boolean isDefaultSku() {
-        return defaultSku;
+    public Boolean isDefaultSKU() {
+        return defaultSKU;
     }
 
-    public Sku defaultSku(Boolean defaultSku) {
-        this.defaultSku = defaultSku;
+    public Sku defaultSKU(Boolean defaultSKU) {
+        this.defaultSKU = defaultSKU;
         return this;
     }
 
-    public void setDefaultSku(Boolean defaultSku) {
-        this.defaultSku = defaultSku;
+    public void setDefaultSKU(Boolean defaultSKU) {
+        this.defaultSKU = defaultSKU;
     }
 
     public StatusEnum getStatus() {
@@ -248,7 +248,7 @@ public class Sku extends AbstractAuditingEntity  implements Serializable {
             return false;
         }
         Sku sku = (Sku) o;
-        if(sku.id == null || id == null) {
+        if (sku.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, sku.id);
@@ -272,7 +272,7 @@ public class Sku extends AbstractAuditingEntity  implements Serializable {
             ", weight='" + weight + "'" +
             ", standardPrice='" + standardPrice + "'" +
             ", sellPrice='" + sellPrice + "'" +
-            ", defaultSku='" + defaultSku + "'" +
+            ", defaultSKU='" + defaultSKU + "'" +
             ", status='" + status + "'" +
             '}';
     }

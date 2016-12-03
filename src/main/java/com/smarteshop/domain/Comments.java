@@ -126,7 +126,7 @@ public class Comments extends AbstractAuditingEntity implements Serializable {
             return false;
         }
         Comments comments = (Comments) o;
-        if(comments.id == null || id == null) {
+        if (comments.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, comments.id);

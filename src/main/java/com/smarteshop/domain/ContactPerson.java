@@ -94,7 +94,7 @@ public class ContactPerson extends AbstractAuditingEntity implements Serializabl
             return false;
         }
         ContactPerson contactPerson = (ContactPerson) o;
-        if(contactPerson.id == null || id == null) {
+        if (contactPerson.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, contactPerson.id);

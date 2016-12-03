@@ -19,8 +19,7 @@
             "name": "Name",
             "description": "Description",
             "status": "Status",
-            "image": "Image",
-            "briefDesc": "Brief Description"
+            "image": "Image"
         }
     }
 }

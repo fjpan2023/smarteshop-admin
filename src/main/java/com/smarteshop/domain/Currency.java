@@ -94,7 +94,7 @@ public class Currency extends AbstractAuditingEntity implements Serializable {
             return false;
         }
         Currency currency = (Currency) o;
-        if(currency.id == null || id == null) {
+        if (currency.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, currency.id);

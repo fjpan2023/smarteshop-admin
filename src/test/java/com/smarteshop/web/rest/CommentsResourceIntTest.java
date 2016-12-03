@@ -10,12 +10,11 @@ import com.smarteshop.repository.search.CommentsSearchRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,6 +26,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -116,9 +116,9 @@ public class CommentsResourceIntTest {
         // Create the Comments
 
         restCommentsMockMvc.perform(post("/api/comments")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(comments)))
-                .andExpect(status().isCreated());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(comments)))
+            .andExpect(status().isCreated());
 
         // Validate the Comments in the database
         List<Comments> comments = commentsRepository.findAll();
@@ -143,14 +143,14 @@ public class CommentsResourceIntTest {
 
         // Get all the comments
         restCommentsMockMvc.perform(get("/api/comments?sort=id,desc"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(comments.getId().intValue())))
-                .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
-                .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
-                .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
-                .andExpect(jsonPath("$.[*].isHandle").value(hasItem(DEFAULT_IS_HANDLE.booleanValue())))
-                .andExpect(jsonPath("$.[*].subject").value(hasItem(DEFAULT_SUBJECT.toString())));
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(comments.getId().intValue())))
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
+            .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())))
+            .andExpect(jsonPath("$.[*].isHandle").value(hasItem(DEFAULT_IS_HANDLE.booleanValue())))
+            .andExpect(jsonPath("$.[*].subject").value(hasItem(DEFAULT_SUBJECT.toString())));
     }
 
     @Test
@@ -176,7 +176,7 @@ public class CommentsResourceIntTest {
     public void getNonExistingComments() throws Exception {
         // Get the comments
         restCommentsMockMvc.perform(get("/api/comments/{id}", Long.MAX_VALUE))
-                .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound());
     }
 
     @Test
@@ -197,9 +197,9 @@ public class CommentsResourceIntTest {
                 .subject(UPDATED_SUBJECT);
 
         restCommentsMockMvc.perform(put("/api/comments")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(updatedComments)))
-                .andExpect(status().isOk());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(updatedComments)))
+            .andExpect(status().isOk());
 
         // Validate the Comments in the database
         List<Comments> comments = commentsRepository.findAll();
@@ -226,8 +226,8 @@ public class CommentsResourceIntTest {
 
         // Get the comments
         restCommentsMockMvc.perform(delete("/api/comments/{id}", comments.getId())
-                .accept(TestUtil.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk());
+            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(status().isOk());
 
         // Validate ElasticSearch is empty
         boolean commentsExistsInEs = commentsSearchRepository.exists(comments.getId());

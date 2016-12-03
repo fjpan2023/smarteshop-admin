@@ -29,7 +29,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 @Table(name = "category")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "category")
-public class Category extends AbstractAuditingEntity  implements Serializable {
+public class Category extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -165,7 +165,7 @@ public class Category extends AbstractAuditingEntity  implements Serializable {
             return false;
         }
         Category category = (Category) o;
-        if(category.id == null || id == null) {
+        if (category.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, category.id);

@@ -28,7 +28,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  * REST controller for managing Category.
  */
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/api")
 public class CategoryController {
 
     private final Logger log = LoggerFactory.getLogger(CategoryController.class);
@@ -43,7 +43,7 @@ public class CategoryController {
      * @return the ResponseEntity with status 201 (Created) and with body the new category, or with status 400 (Bad Request) if the category has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping()
+    @PostMapping("/categories")
     @Timed
     public ResponseEntity<Category> createCategory(@RequestBody Category category) throws URISyntaxException {
         log.debug("REST request to save Category : {}", category);
@@ -65,7 +65,7 @@ public class CategoryController {
      * or with status 500 (Internal Server Error) if the category couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping()
+    @PutMapping("/categories")
     @Timed
     public ResponseEntity<Category> updateCategory(@RequestBody Category category) throws URISyntaxException {
         log.debug("REST request to update Category : {}", category);
@@ -85,7 +85,7 @@ public class CategoryController {
      * @return the ResponseEntity with status 200 (OK) and the list of categories in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping()
+    @GetMapping("/categories")
     @Timed
     public ResponseEntity<List<Category>> getAllCategories(Pageable pageable)
         throws URISyntaxException {
@@ -101,7 +101,7 @@ public class CategoryController {
      * @param id the id of the category to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the category, or with status 404 (Not Found)
      */
-    @GetMapping("/{id}")
+    @GetMapping("/categories/{id}")
     @Timed
     public ResponseEntity<Category> getCategory(@PathVariable Long id) {
         log.debug("REST request to get Category : {}", id);
@@ -119,7 +119,7 @@ public class CategoryController {
      * @param id the id of the category to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/categories/{id}")
     @Timed
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         log.debug("REST request to delete Category : {}", id);
@@ -136,7 +136,7 @@ public class CategoryController {
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/_search")
+    @GetMapping("/_search/categories")
     @Timed
     public ResponseEntity<List<Category>> searchCategories(@RequestParam String query, Pageable pageable)
         throws URISyntaxException {

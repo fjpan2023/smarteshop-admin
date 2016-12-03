@@ -10,12 +10,11 @@ import com.smarteshop.repository.search.EmailSettingSearchRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,6 +26,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -116,9 +116,9 @@ public class EmailSettingResourceIntTest {
         // Create the EmailSetting
 
         restEmailSettingMockMvc.perform(post("/api/email-settings")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(emailSetting)))
-                .andExpect(status().isCreated());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(emailSetting)))
+            .andExpect(status().isCreated());
 
         // Validate the EmailSetting in the database
         List<EmailSetting> emailSettings = emailSettingRepository.findAll();
@@ -145,9 +145,9 @@ public class EmailSettingResourceIntTest {
         // Create the EmailSetting, which fails.
 
         restEmailSettingMockMvc.perform(post("/api/email-settings")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(emailSetting)))
-                .andExpect(status().isBadRequest());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(emailSetting)))
+            .andExpect(status().isBadRequest());
 
         List<EmailSetting> emailSettings = emailSettingRepository.findAll();
         assertThat(emailSettings).hasSize(databaseSizeBeforeTest);
@@ -163,9 +163,9 @@ public class EmailSettingResourceIntTest {
         // Create the EmailSetting, which fails.
 
         restEmailSettingMockMvc.perform(post("/api/email-settings")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(emailSetting)))
-                .andExpect(status().isBadRequest());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(emailSetting)))
+            .andExpect(status().isBadRequest());
 
         List<EmailSetting> emailSettings = emailSettingRepository.findAll();
         assertThat(emailSettings).hasSize(databaseSizeBeforeTest);
@@ -181,9 +181,9 @@ public class EmailSettingResourceIntTest {
         // Create the EmailSetting, which fails.
 
         restEmailSettingMockMvc.perform(post("/api/email-settings")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(emailSetting)))
-                .andExpect(status().isBadRequest());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(emailSetting)))
+            .andExpect(status().isBadRequest());
 
         List<EmailSetting> emailSettings = emailSettingRepository.findAll();
         assertThat(emailSettings).hasSize(databaseSizeBeforeTest);
@@ -199,9 +199,9 @@ public class EmailSettingResourceIntTest {
         // Create the EmailSetting, which fails.
 
         restEmailSettingMockMvc.perform(post("/api/email-settings")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(emailSetting)))
-                .andExpect(status().isBadRequest());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(emailSetting)))
+            .andExpect(status().isBadRequest());
 
         List<EmailSetting> emailSettings = emailSettingRepository.findAll();
         assertThat(emailSettings).hasSize(databaseSizeBeforeTest);
@@ -217,9 +217,9 @@ public class EmailSettingResourceIntTest {
         // Create the EmailSetting, which fails.
 
         restEmailSettingMockMvc.perform(post("/api/email-settings")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(emailSetting)))
-                .andExpect(status().isBadRequest());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(emailSetting)))
+            .andExpect(status().isBadRequest());
 
         List<EmailSetting> emailSettings = emailSettingRepository.findAll();
         assertThat(emailSettings).hasSize(databaseSizeBeforeTest);
@@ -233,14 +233,14 @@ public class EmailSettingResourceIntTest {
 
         // Get all the emailSettings
         restEmailSettingMockMvc.perform(get("/api/email-settings?sort=id,desc"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(emailSetting.getId().intValue())))
-                .andExpect(jsonPath("$.[*].host").value(hasItem(DEFAULT_HOST.toString())))
-                .andExpect(jsonPath("$.[*].port").value(hasItem(DEFAULT_PORT)))
-                .andExpect(jsonPath("$.[*].fromAddress").value(hasItem(DEFAULT_FROM_ADDRESS.toString())))
-                .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
-                .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD.toString())));
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(emailSetting.getId().intValue())))
+            .andExpect(jsonPath("$.[*].host").value(hasItem(DEFAULT_HOST.toString())))
+            .andExpect(jsonPath("$.[*].port").value(hasItem(DEFAULT_PORT)))
+            .andExpect(jsonPath("$.[*].fromAddress").value(hasItem(DEFAULT_FROM_ADDRESS.toString())))
+            .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
+            .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD.toString())));
     }
 
     @Test
@@ -266,7 +266,7 @@ public class EmailSettingResourceIntTest {
     public void getNonExistingEmailSetting() throws Exception {
         // Get the emailSetting
         restEmailSettingMockMvc.perform(get("/api/email-settings/{id}", Long.MAX_VALUE))
-                .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound());
     }
 
     @Test
@@ -287,9 +287,9 @@ public class EmailSettingResourceIntTest {
                 .password(UPDATED_PASSWORD);
 
         restEmailSettingMockMvc.perform(put("/api/email-settings")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(updatedEmailSetting)))
-                .andExpect(status().isOk());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(updatedEmailSetting)))
+            .andExpect(status().isOk());
 
         // Validate the EmailSetting in the database
         List<EmailSetting> emailSettings = emailSettingRepository.findAll();
@@ -316,8 +316,8 @@ public class EmailSettingResourceIntTest {
 
         // Get the emailSetting
         restEmailSettingMockMvc.perform(delete("/api/email-settings/{id}", emailSetting.getId())
-                .accept(TestUtil.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk());
+            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(status().isOk());
 
         // Validate ElasticSearch is empty
         boolean emailSettingExistsInEs = emailSettingSearchRepository.exists(emailSetting.getId());

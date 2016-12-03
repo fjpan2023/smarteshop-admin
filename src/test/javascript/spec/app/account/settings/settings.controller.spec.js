@@ -34,7 +34,7 @@ describe('Controller Tests', function() {
 
                 activated: true,
                 email: "john.doe@mail.com",
-                langKey: "zh-cn",
+                langKey: "en",
                 login: "john"
             };
             MockPrincipal.identity.and.returnValue($q.resolve(accountValues));

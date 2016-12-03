@@ -28,7 +28,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  * REST controller for managing Comments.
  */
 @RestController
-@RequestMapping("/api/comments")
+@RequestMapping("/api")
 public class CommentsController {
 
     private final Logger log = LoggerFactory.getLogger(CommentsController.class);
@@ -43,7 +43,7 @@ public class CommentsController {
      * @return the ResponseEntity with status 201 (Created) and with body the new comments, or with status 400 (Bad Request) if the comments has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping()
+    @PostMapping("/comments")
     @Timed
     public ResponseEntity<Comments> createComments(@RequestBody Comments comments) throws URISyntaxException {
         log.debug("REST request to save Comments : {}", comments);
@@ -65,7 +65,7 @@ public class CommentsController {
      * or with status 500 (Internal Server Error) if the comments couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping()
+    @PutMapping("/comments")
     @Timed
     public ResponseEntity<Comments> updateComments(@RequestBody Comments comments) throws URISyntaxException {
         log.debug("REST request to update Comments : {}", comments);
@@ -85,7 +85,7 @@ public class CommentsController {
      * @return the ResponseEntity with status 200 (OK) and the list of comments in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping()
+    @GetMapping("/comments")
     @Timed
     public ResponseEntity<List<Comments>> getAllComments(Pageable pageable)
         throws URISyntaxException {
@@ -101,7 +101,7 @@ public class CommentsController {
      * @param id the id of the comments to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the comments, or with status 404 (Not Found)
      */
-    @GetMapping("/{id}")
+    @GetMapping("/comments/{id}")
     @Timed
     public ResponseEntity<Comments> getComments(@PathVariable Long id) {
         log.debug("REST request to get Comments : {}", id);
@@ -119,7 +119,7 @@ public class CommentsController {
      * @param id the id of the comments to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/comments/{id}")
     @Timed
     public ResponseEntity<Void> deleteComments(@PathVariable Long id) {
         log.debug("REST request to delete Comments : {}", id);
@@ -136,7 +136,7 @@ public class CommentsController {
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/_search")
+    @GetMapping("/_search/comments")
     @Timed
     public ResponseEntity<List<Comments>> searchComments(@RequestParam String query, Pageable pageable)
         throws URISyntaxException {

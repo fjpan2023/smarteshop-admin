@@ -10,12 +10,11 @@ import com.smarteshop.repository.search.TemplateSearchRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,6 +26,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -113,9 +113,9 @@ public class TemplateResourceIntTest {
         // Create the Template
 
         restTemplateMockMvc.perform(post("/api/templates")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(template)))
-                .andExpect(status().isCreated());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(template)))
+            .andExpect(status().isCreated());
 
         // Validate the Template in the database
         List<Template> templates = templateRepository.findAll();
@@ -139,13 +139,13 @@ public class TemplateResourceIntTest {
 
         // Get all the templates
         restTemplateMockMvc.perform(get("/api/templates?sort=id,desc"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(template.getId().intValue())))
-                .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
-                .andExpect(jsonPath("$.[*].superId").value(hasItem(DEFAULT_SUPER_ID.intValue())))
-                .andExpect(jsonPath("$.[*].templateKey").value(hasItem(DEFAULT_TEMPLATE_KEY.toString())))
-                .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())));
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(template.getId().intValue())))
+            .andExpect(jsonPath("$.[*].type").value(hasItem(DEFAULT_TYPE.toString())))
+            .andExpect(jsonPath("$.[*].superId").value(hasItem(DEFAULT_SUPER_ID.intValue())))
+            .andExpect(jsonPath("$.[*].templateKey").value(hasItem(DEFAULT_TEMPLATE_KEY.toString())))
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT.toString())));
     }
 
     @Test
@@ -170,7 +170,7 @@ public class TemplateResourceIntTest {
     public void getNonExistingTemplate() throws Exception {
         // Get the template
         restTemplateMockMvc.perform(get("/api/templates/{id}", Long.MAX_VALUE))
-                .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound());
     }
 
     @Test
@@ -190,9 +190,9 @@ public class TemplateResourceIntTest {
                 .content(UPDATED_CONTENT);
 
         restTemplateMockMvc.perform(put("/api/templates")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(updatedTemplate)))
-                .andExpect(status().isOk());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(updatedTemplate)))
+            .andExpect(status().isOk());
 
         // Validate the Template in the database
         List<Template> templates = templateRepository.findAll();
@@ -218,8 +218,8 @@ public class TemplateResourceIntTest {
 
         // Get the template
         restTemplateMockMvc.perform(delete("/api/templates/{id}", template.getId())
-                .accept(TestUtil.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk());
+            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(status().isOk());
 
         // Validate ElasticSearch is empty
         boolean templateExistsInEs = templateSearchRepository.exists(template.getId());

@@ -19,7 +19,6 @@
                 "store": "Store",
                 "contactPerson": "Contact Person",
                 "comments": "Comments",
-                "attachment": "Attachment",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -10,12 +10,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smarteshop.domain.enumeration.TemplateTypeEnum;
@@ -27,7 +25,7 @@ import com.smarteshop.domain.enumeration.TemplateTypeEnum;
 @Table(name = "template")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "template")
-public class Template extends AbstractAuditingEntity  implements Serializable {
+public class Template extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -36,17 +34,15 @@ public class Template extends AbstractAuditingEntity  implements Serializable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable=false)
+    @Column(name = "type")
     private TemplateTypeEnum type;
 
     @Column(name = "super_id")
     private Long superId;
 
-    @NotEmpty
-    @Column(name = "template_key", nullable=false)
+    @Column(name = "template_key")
     private String templateKey;
 
-    @Lob
     @Column(name = "content")
     private String content;
 
@@ -119,7 +115,7 @@ public class Template extends AbstractAuditingEntity  implements Serializable {
             return false;
         }
         Template template = (Template) o;
-        if(template.id == null || id == null) {
+        if (template.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, template.id);

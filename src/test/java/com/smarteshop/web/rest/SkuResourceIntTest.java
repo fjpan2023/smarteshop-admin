@@ -10,12 +10,11 @@ import com.smarteshop.repository.search.SkuSearchRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,6 +27,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -35,7 +35,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 /**
  * Test class for the SkuResource REST controller.
  *
- * @see SKUController
+ * @see SkuController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApp.class)
@@ -99,7 +99,7 @@ public class SkuResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        SKUController skuResource = new SKUController();
+        SkuController skuResource = new SkuController();
         ReflectionTestUtils.setField(skuResource, "skuService", skuService);
         this.restSkuMockMvc = MockMvcBuilders.standaloneSetup(skuResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
@@ -123,7 +123,7 @@ public class SkuResourceIntTest {
                 .weight(DEFAULT_WEIGHT)
                 .standardPrice(DEFAULT_STANDARD_PRICE)
                 .sellPrice(DEFAULT_SELL_PRICE)
-                .defaultSku(DEFAULT_DEFAULT_SKU)
+                .defaultSKU(DEFAULT_DEFAULT_SKU)
                 .status(DEFAULT_STATUS);
         return sku;
     }
@@ -142,9 +142,9 @@ public class SkuResourceIntTest {
         // Create the Sku
 
         restSkuMockMvc.perform(post("/api/skus")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(sku)))
-                .andExpect(status().isCreated());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(sku)))
+            .andExpect(status().isCreated());
 
         // Validate the Sku in the database
         List<Sku> skus = skuRepository.findAll();
@@ -159,7 +159,7 @@ public class SkuResourceIntTest {
         assertThat(testSku.getWeight()).isEqualTo(DEFAULT_WEIGHT);
         assertThat(testSku.getStandardPrice()).isEqualTo(DEFAULT_STANDARD_PRICE);
         assertThat(testSku.getSellPrice()).isEqualTo(DEFAULT_SELL_PRICE);
-        assertThat(testSku.isDefaultSku()).isEqualTo(DEFAULT_DEFAULT_SKU);
+        assertThat(testSku.isDefaultSKU()).isEqualTo(DEFAULT_DEFAULT_SKU);
         assertThat(testSku.getStatus()).isEqualTo(DEFAULT_STATUS);
 
         // Validate the Sku in ElasticSearch
@@ -177,9 +177,9 @@ public class SkuResourceIntTest {
         // Create the Sku, which fails.
 
         restSkuMockMvc.perform(post("/api/skus")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(sku)))
-                .andExpect(status().isBadRequest());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(sku)))
+            .andExpect(status().isBadRequest());
 
         List<Sku> skus = skuRepository.findAll();
         assertThat(skus).hasSize(databaseSizeBeforeTest);
@@ -195,9 +195,9 @@ public class SkuResourceIntTest {
         // Create the Sku, which fails.
 
         restSkuMockMvc.perform(post("/api/skus")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(sku)))
-                .andExpect(status().isBadRequest());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(sku)))
+            .andExpect(status().isBadRequest());
 
         List<Sku> skus = skuRepository.findAll();
         assertThat(skus).hasSize(databaseSizeBeforeTest);
@@ -211,20 +211,20 @@ public class SkuResourceIntTest {
 
         // Get all the skus
         restSkuMockMvc.perform(get("/api/skus?sort=id,desc"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(sku.getId().intValue())))
-                .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
-                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-                .andExpect(jsonPath("$.[*].size").value(hasItem(DEFAULT_SIZE.toString())))
-                .andExpect(jsonPath("$.[*].width").value(hasItem(DEFAULT_WIDTH.intValue())))
-                .andExpect(jsonPath("$.[*].heigh").value(hasItem(DEFAULT_HEIGH.intValue())))
-                .andExpect(jsonPath("$.[*].length").value(hasItem(DEFAULT_LENGTH.intValue())))
-                .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT.intValue())))
-                .andExpect(jsonPath("$.[*].standardPrice").value(hasItem(DEFAULT_STANDARD_PRICE.intValue())))
-                .andExpect(jsonPath("$.[*].sellPrice").value(hasItem(DEFAULT_SELL_PRICE.intValue())))
-                .andExpect(jsonPath("$.[*].defaultSku").value(hasItem(DEFAULT_DEFAULT_SKU.booleanValue())))
-                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(sku.getId().intValue())))
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].size").value(hasItem(DEFAULT_SIZE.toString())))
+            .andExpect(jsonPath("$.[*].width").value(hasItem(DEFAULT_WIDTH.intValue())))
+            .andExpect(jsonPath("$.[*].heigh").value(hasItem(DEFAULT_HEIGH.intValue())))
+            .andExpect(jsonPath("$.[*].length").value(hasItem(DEFAULT_LENGTH.intValue())))
+            .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT.intValue())))
+            .andExpect(jsonPath("$.[*].standardPrice").value(hasItem(DEFAULT_STANDARD_PRICE.intValue())))
+            .andExpect(jsonPath("$.[*].sellPrice").value(hasItem(DEFAULT_SELL_PRICE.intValue())))
+            .andExpect(jsonPath("$.[*].defaultSKU").value(hasItem(DEFAULT_DEFAULT_SKU.booleanValue())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 
     @Test
@@ -247,7 +247,7 @@ public class SkuResourceIntTest {
             .andExpect(jsonPath("$.weight").value(DEFAULT_WEIGHT.intValue()))
             .andExpect(jsonPath("$.standardPrice").value(DEFAULT_STANDARD_PRICE.intValue()))
             .andExpect(jsonPath("$.sellPrice").value(DEFAULT_SELL_PRICE.intValue()))
-            .andExpect(jsonPath("$.defaultSku").value(DEFAULT_DEFAULT_SKU.booleanValue()))
+            .andExpect(jsonPath("$.defaultSKU").value(DEFAULT_DEFAULT_SKU.booleanValue()))
             .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
     }
 
@@ -256,7 +256,7 @@ public class SkuResourceIntTest {
     public void getNonExistingSku() throws Exception {
         // Get the sku
         restSkuMockMvc.perform(get("/api/skus/{id}", Long.MAX_VALUE))
-                .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound());
     }
 
     @Test
@@ -279,13 +279,13 @@ public class SkuResourceIntTest {
                 .weight(UPDATED_WEIGHT)
                 .standardPrice(UPDATED_STANDARD_PRICE)
                 .sellPrice(UPDATED_SELL_PRICE)
-                .defaultSku(UPDATED_DEFAULT_SKU)
+                .defaultSKU(UPDATED_DEFAULT_SKU)
                 .status(UPDATED_STATUS);
 
         restSkuMockMvc.perform(put("/api/skus")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(updatedSku)))
-                .andExpect(status().isOk());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(updatedSku)))
+            .andExpect(status().isOk());
 
         // Validate the Sku in the database
         List<Sku> skus = skuRepository.findAll();
@@ -300,7 +300,7 @@ public class SkuResourceIntTest {
         assertThat(testSku.getWeight()).isEqualTo(UPDATED_WEIGHT);
         assertThat(testSku.getStandardPrice()).isEqualTo(UPDATED_STANDARD_PRICE);
         assertThat(testSku.getSellPrice()).isEqualTo(UPDATED_SELL_PRICE);
-        assertThat(testSku.isDefaultSku()).isEqualTo(UPDATED_DEFAULT_SKU);
+        assertThat(testSku.isDefaultSKU()).isEqualTo(UPDATED_DEFAULT_SKU);
         assertThat(testSku.getStatus()).isEqualTo(UPDATED_STATUS);
 
         // Validate the Sku in ElasticSearch
@@ -318,8 +318,8 @@ public class SkuResourceIntTest {
 
         // Get the sku
         restSkuMockMvc.perform(delete("/api/skus/{id}", sku.getId())
-                .accept(TestUtil.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk());
+            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(status().isOk());
 
         // Validate ElasticSearch is empty
         boolean skuExistsInEs = skuSearchRepository.exists(sku.getId());
@@ -350,7 +350,7 @@ public class SkuResourceIntTest {
             .andExpect(jsonPath("$.[*].weight").value(hasItem(DEFAULT_WEIGHT.intValue())))
             .andExpect(jsonPath("$.[*].standardPrice").value(hasItem(DEFAULT_STANDARD_PRICE.intValue())))
             .andExpect(jsonPath("$.[*].sellPrice").value(hasItem(DEFAULT_SELL_PRICE.intValue())))
-            .andExpect(jsonPath("$.[*].defaultSku").value(hasItem(DEFAULT_DEFAULT_SKU.booleanValue())))
+            .andExpect(jsonPath("$.[*].defaultSKU").value(hasItem(DEFAULT_DEFAULT_SKU.booleanValue())))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
     }
 }

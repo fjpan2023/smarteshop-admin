@@ -21,7 +21,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Table(name = "customer")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "customer")
-public class Customer extends AbstractAuditingEntity  implements Serializable {
+public class Customer  extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -142,7 +142,7 @@ public class Customer extends AbstractAuditingEntity  implements Serializable {
             return false;
         }
         Customer customer = (Customer) o;
-        if(customer.id == null || id == null) {
+        if (customer.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, customer.id);

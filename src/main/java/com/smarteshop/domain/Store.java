@@ -25,7 +25,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 @Table(name = "store")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "store")
-public class Store extends AbstractAuditingEntity  implements Serializable {
+public class Store extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -99,7 +99,7 @@ public class Store extends AbstractAuditingEntity  implements Serializable {
             return false;
         }
         Store store = (Store) o;
-        if(store.id == null || id == null) {
+        if (store.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, store.id);

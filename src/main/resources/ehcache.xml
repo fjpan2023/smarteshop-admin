@@ -1,105 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
-         name="CM1"
-         updateCheck="false"
-         maxBytesLocalHeap="16M">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns='http://www.ehcache.org/v3'
+         xsi:schemaLocation="http://www.ehcache.org/v3 http://www.ehcache.org/schema/ehcache-core-3.0.xsd">
 
-    <!--
-      This is a default configuration, it is re-configured by the CacheConfiguration Spring Bean, using the
-      properties from the resources/config/*.yml files.
-    -->
+    <cache-template name="simple">
+        <expiry>
+            <ttl unit="seconds">3600</ttl>
+        </expiry>
+        <heap>100</heap>
+    </cache-template>
 
-    <diskStore path="java.io.tmpdir"/>
+    <cache alias="com.smarteshop.domain.User" uses-template="simple"/>
 
-    <defaultCache
-            eternal="false"
-            overflowToDisk="false"
-            />
+    <cache alias="com.smarteshop.domain.Authority" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.User"
-           timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.User.authorities" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.Authority"
-           timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.PersistentToken" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.User.authorities"
-           timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.User.persistentTokens" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.PersistentToken"
-           timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.Product" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.User.persistentTokens"
-           timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.Product.skuses" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.Product"
-        timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.Product.relatedProducts" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.Product.skuses"
-        timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.Brand" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.Product.relatedProducts"
-        timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.Category" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.Brand"
-        timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.Category.products" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.Category"
-        timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.Sku" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.Category.products"
-        timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.RelatedProduct" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.Sku"
-        timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.EmailSetting" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.RelatedProduct"
-        timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.Currency" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.EmailSetting"
-        timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.Customer" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.Currency"
-        timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.Template" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.Customer"
-        timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.Store" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.Template"
-        timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.ContactPerson" uses-template="simple"/>
 
-    <cache name="com.smarteshop.domain.Store"
-        timeToLiveSeconds="3600">
-    </cache>
-
-    <cache name="com.smarteshop.domain.ContactPerson"
-        timeToLiveSeconds="3600">
-    </cache>
-
-    <cache name="com.smarteshop.domain.Comments"
-        timeToLiveSeconds="3600">
-    </cache>
-
-    <cache name="com.smarteshop.domain.Attachment"
-        timeToLiveSeconds="3600">
-    </cache>
+    <cache alias="com.smarteshop.domain.Comments" uses-template="simple"/>
 
     <!-- jhipster-needle-ehcache-add-entry -->
-</ehcache>
+</config>

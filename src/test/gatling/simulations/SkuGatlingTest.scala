@@ -67,7 +67,7 @@ class SkuGatlingTest extends Simulation {
             .exec(http("Create new sku")
             .post("/api/skus")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "code":"SAMPLE_TEXT", "name":"SAMPLE_TEXT", "size":"SAMPLE_TEXT", "width":null, "heigh":null, "length":null, "weight":null, "standardPrice":null, "sellPrice":null, "defaultSku":null, "status":null}""")).asJSON
+            .body(StringBody("""{"id":null, "code":"SAMPLE_TEXT", "name":"SAMPLE_TEXT", "size":"SAMPLE_TEXT", "width":null, "heigh":null, "length":null, "weight":null, "standardPrice":null, "sellPrice":null, "defaultSKU":null, "status":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_sku_url"))).exitHereIfFailed
             .pause(10)

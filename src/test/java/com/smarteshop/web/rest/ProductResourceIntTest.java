@@ -10,12 +10,11 @@ import com.smarteshop.repository.search.ProductSearchRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,12 +26,13 @@ import javax.persistence.EntityManager;
 import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.time.ZoneId;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static com.smarteshop.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -70,11 +70,9 @@ public class ProductResourceIntTest {
 
     private static final ZonedDateTime DEFAULT_FROM_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_FROM_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-    private static final String DEFAULT_FROM_DATE_STR = DateTimeFormatter.ISO_INSTANT.format(DEFAULT_FROM_DATE);
 
     private static final ZonedDateTime DEFAULT_END_DATE = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_END_DATE = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-    private static final String DEFAULT_END_DATE_STR = DateTimeFormatter.ISO_INSTANT.format(DEFAULT_END_DATE);
 
     @Inject
     private ProductRepository productRepository;
@@ -142,9 +140,9 @@ public class ProductResourceIntTest {
         // Create the Product
 
         restProductMockMvc.perform(post("/api/products")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(product)))
-                .andExpect(status().isCreated());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(product)))
+            .andExpect(status().isCreated());
 
         // Validate the Product in the database
         List<Product> products = productRepository.findAll();
@@ -167,24 +165,6 @@ public class ProductResourceIntTest {
 
     @Test
     @Transactional
-    public void checkFromDateIsRequired() throws Exception {
-        int databaseSizeBeforeTest = productRepository.findAll().size();
-        // set the field null
-        product.setFromDate(null);
-
-        // Create the Product, which fails.
-
-        restProductMockMvc.perform(post("/api/products")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(product)))
-                .andExpect(status().isBadRequest());
-
-        List<Product> products = productRepository.findAll();
-        assertThat(products).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkEndDateIsRequired() throws Exception {
         int databaseSizeBeforeTest = productRepository.findAll().size();
         // set the field null
@@ -193,9 +173,9 @@ public class ProductResourceIntTest {
         // Create the Product, which fails.
 
         restProductMockMvc.perform(post("/api/products")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(product)))
-                .andExpect(status().isBadRequest());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(product)))
+            .andExpect(status().isBadRequest());
 
         List<Product> products = productRepository.findAll();
         assertThat(products).hasSize(databaseSizeBeforeTest);
@@ -209,18 +189,18 @@ public class ProductResourceIntTest {
 
         // Get all the products
         restProductMockMvc.perform(get("/api/products?sort=id,desc"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(product.getId().intValue())))
-                .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
-                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-                .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
-                .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
-                .andExpect(jsonPath("$.[*].standardPrice").value(hasItem(DEFAULT_STANDARD_PRICE.intValue())))
-                .andExpect(jsonPath("$.[*].label").value(hasItem(DEFAULT_LABEL.toString())))
-                .andExpect(jsonPath("$.[*].mainImageId").value(hasItem(DEFAULT_MAIN_IMAGE_ID.intValue())))
-                .andExpect(jsonPath("$.[*].fromDate").value(hasItem(DEFAULT_FROM_DATE_STR)))
-                .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE_STR)));
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(product.getId().intValue())))
+            .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())))
+            .andExpect(jsonPath("$.[*].standardPrice").value(hasItem(DEFAULT_STANDARD_PRICE.intValue())))
+            .andExpect(jsonPath("$.[*].label").value(hasItem(DEFAULT_LABEL.toString())))
+            .andExpect(jsonPath("$.[*].mainImageId").value(hasItem(DEFAULT_MAIN_IMAGE_ID.intValue())))
+            .andExpect(jsonPath("$.[*].fromDate").value(hasItem(sameInstant(DEFAULT_FROM_DATE))))
+            .andExpect(jsonPath("$.[*].endDate").value(hasItem(sameInstant(DEFAULT_END_DATE))));
     }
 
     @Test
@@ -241,8 +221,8 @@ public class ProductResourceIntTest {
             .andExpect(jsonPath("$.standardPrice").value(DEFAULT_STANDARD_PRICE.intValue()))
             .andExpect(jsonPath("$.label").value(DEFAULT_LABEL.toString()))
             .andExpect(jsonPath("$.mainImageId").value(DEFAULT_MAIN_IMAGE_ID.intValue()))
-            .andExpect(jsonPath("$.fromDate").value(DEFAULT_FROM_DATE_STR))
-            .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE_STR));
+            .andExpect(jsonPath("$.fromDate").value(sameInstant(DEFAULT_FROM_DATE)))
+            .andExpect(jsonPath("$.endDate").value(sameInstant(DEFAULT_END_DATE)));
     }
 
     @Test
@@ -250,7 +230,7 @@ public class ProductResourceIntTest {
     public void getNonExistingProduct() throws Exception {
         // Get the product
         restProductMockMvc.perform(get("/api/products/{id}", Long.MAX_VALUE))
-                .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound());
     }
 
     @Test
@@ -275,9 +255,9 @@ public class ProductResourceIntTest {
                 .endDate(UPDATED_END_DATE);
 
         restProductMockMvc.perform(put("/api/products")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(updatedProduct)))
-                .andExpect(status().isOk());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(updatedProduct)))
+            .andExpect(status().isOk());
 
         // Validate the Product in the database
         List<Product> products = productRepository.findAll();
@@ -308,8 +288,8 @@ public class ProductResourceIntTest {
 
         // Get the product
         restProductMockMvc.perform(delete("/api/products/{id}", product.getId())
-                .accept(TestUtil.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk());
+            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(status().isOk());
 
         // Validate ElasticSearch is empty
         boolean productExistsInEs = productSearchRepository.exists(product.getId());
@@ -338,7 +318,7 @@ public class ProductResourceIntTest {
             .andExpect(jsonPath("$.[*].standardPrice").value(hasItem(DEFAULT_STANDARD_PRICE.intValue())))
             .andExpect(jsonPath("$.[*].label").value(hasItem(DEFAULT_LABEL.toString())))
             .andExpect(jsonPath("$.[*].mainImageId").value(hasItem(DEFAULT_MAIN_IMAGE_ID.intValue())))
-            .andExpect(jsonPath("$.[*].fromDate").value(hasItem(DEFAULT_FROM_DATE_STR)))
-            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE_STR)));
+            .andExpect(jsonPath("$.[*].fromDate").value(hasItem(sameInstant(DEFAULT_FROM_DATE))))
+            .andExpect(jsonPath("$.[*].endDate").value(hasItem(sameInstant(DEFAULT_END_DATE))));
     }
 }

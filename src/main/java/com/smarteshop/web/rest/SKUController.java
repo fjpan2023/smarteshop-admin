@@ -30,9 +30,9 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
  */
 @RestController
 @RequestMapping("/api")
-public class SKUController {
+public class SkuController {
 
-    private final Logger log = LoggerFactory.getLogger(SKUController.class);
+    private final Logger log = LoggerFactory.getLogger(SkuController.class);
         
     @Inject
     private SkuService skuService;

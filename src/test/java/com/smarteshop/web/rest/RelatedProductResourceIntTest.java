@@ -10,12 +10,11 @@ import com.smarteshop.repository.search.RelatedProductSearchRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,6 +26,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -100,9 +100,9 @@ public class RelatedProductResourceIntTest {
         // Create the RelatedProduct
 
         restRelatedProductMockMvc.perform(post("/api/related-products")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(relatedProduct)))
-                .andExpect(status().isCreated());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(relatedProduct)))
+            .andExpect(status().isCreated());
 
         // Validate the RelatedProduct in the database
         List<RelatedProduct> relatedProducts = relatedProductRepository.findAll();
@@ -125,9 +125,9 @@ public class RelatedProductResourceIntTest {
         // Create the RelatedProduct, which fails.
 
         restRelatedProductMockMvc.perform(post("/api/related-products")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(relatedProduct)))
-                .andExpect(status().isBadRequest());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(relatedProduct)))
+            .andExpect(status().isBadRequest());
 
         List<RelatedProduct> relatedProducts = relatedProductRepository.findAll();
         assertThat(relatedProducts).hasSize(databaseSizeBeforeTest);
@@ -141,10 +141,10 @@ public class RelatedProductResourceIntTest {
 
         // Get all the relatedProducts
         restRelatedProductMockMvc.perform(get("/api/related-products?sort=id,desc"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(relatedProduct.getId().intValue())))
-                .andExpect(jsonPath("$.[*].relatedProductId").value(hasItem(DEFAULT_RELATED_PRODUCT_ID.intValue())));
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(relatedProduct.getId().intValue())))
+            .andExpect(jsonPath("$.[*].relatedProductId").value(hasItem(DEFAULT_RELATED_PRODUCT_ID.intValue())));
     }
 
     @Test
@@ -166,7 +166,7 @@ public class RelatedProductResourceIntTest {
     public void getNonExistingRelatedProduct() throws Exception {
         // Get the relatedProduct
         restRelatedProductMockMvc.perform(get("/api/related-products/{id}", Long.MAX_VALUE))
-                .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound());
     }
 
     @Test
@@ -183,9 +183,9 @@ public class RelatedProductResourceIntTest {
                 .relatedProductId(UPDATED_RELATED_PRODUCT_ID);
 
         restRelatedProductMockMvc.perform(put("/api/related-products")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(updatedRelatedProduct)))
-                .andExpect(status().isOk());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(updatedRelatedProduct)))
+            .andExpect(status().isOk());
 
         // Validate the RelatedProduct in the database
         List<RelatedProduct> relatedProducts = relatedProductRepository.findAll();
@@ -208,8 +208,8 @@ public class RelatedProductResourceIntTest {
 
         // Get the relatedProduct
         restRelatedProductMockMvc.perform(delete("/api/related-products/{id}", relatedProduct.getId())
-                .accept(TestUtil.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk());
+            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(status().isOk());
 
         // Validate ElasticSearch is empty
         boolean relatedProductExistsInEs = relatedProductSearchRepository.exists(relatedProduct.getId());

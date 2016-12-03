@@ -10,12 +10,11 @@ import com.smarteshop.repository.search.CurrencySearchRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,6 +26,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -108,9 +108,9 @@ public class CurrencyResourceIntTest {
         // Create the Currency
 
         restCurrencyMockMvc.perform(post("/api/currencies")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(currency)))
-                .andExpect(status().isCreated());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(currency)))
+            .andExpect(status().isCreated());
 
         // Validate the Currency in the database
         List<Currency> currencies = currencyRepository.findAll();
@@ -133,12 +133,12 @@ public class CurrencyResourceIntTest {
 
         // Get all the currencies
         restCurrencyMockMvc.perform(get("/api/currencies?sort=id,desc"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(currency.getId().intValue())))
-                .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
-                .andExpect(jsonPath("$.[*].symbolLeft").value(hasItem(DEFAULT_SYMBOL_LEFT.toString())))
-                .andExpect(jsonPath("$.[*].symbolRight").value(hasItem(DEFAULT_SYMBOL_RIGHT.toString())));
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(currency.getId().intValue())))
+            .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE.toString())))
+            .andExpect(jsonPath("$.[*].symbolLeft").value(hasItem(DEFAULT_SYMBOL_LEFT.toString())))
+            .andExpect(jsonPath("$.[*].symbolRight").value(hasItem(DEFAULT_SYMBOL_RIGHT.toString())));
     }
 
     @Test
@@ -162,7 +162,7 @@ public class CurrencyResourceIntTest {
     public void getNonExistingCurrency() throws Exception {
         // Get the currency
         restCurrencyMockMvc.perform(get("/api/currencies/{id}", Long.MAX_VALUE))
-                .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound());
     }
 
     @Test
@@ -181,9 +181,9 @@ public class CurrencyResourceIntTest {
                 .symbolRight(UPDATED_SYMBOL_RIGHT);
 
         restCurrencyMockMvc.perform(put("/api/currencies")
-                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(updatedCurrency)))
-                .andExpect(status().isOk());
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(updatedCurrency)))
+            .andExpect(status().isOk());
 
         // Validate the Currency in the database
         List<Currency> currencies = currencyRepository.findAll();
@@ -208,8 +208,8 @@ public class CurrencyResourceIntTest {
 
         // Get the currency
         restCurrencyMockMvc.perform(delete("/api/currencies/{id}", currency.getId())
-                .accept(TestUtil.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk());
+            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(status().isOk());
 
         // Validate ElasticSearch is empty
         boolean currencyExistsInEs = currencySearchRepository.exists(currency.getId());

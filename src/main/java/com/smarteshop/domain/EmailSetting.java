@@ -22,7 +22,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Table(name = "email_setting")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "emailsetting")
-public class EmailSetting extends AbstractAuditingEntity  implements Serializable {
+public class EmailSetting extends AbstractAuditingEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -132,7 +132,7 @@ public class EmailSetting extends AbstractAuditingEntity  implements Serializabl
             return false;
         }
         EmailSetting emailSetting = (EmailSetting) o;
-        if(emailSetting.id == null || id == null) {
+        if (emailSetting.id == null || id == null) {
             return false;
         }
         return Objects.equals(id, emailSetting.id);
