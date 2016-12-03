@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="smarteshopApp.comments.detail.title">Comments</span> {{vm.comments.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smarteshopApp.comments.email">Email</span></dt>
+        <dd>
+            <span>{{vm.comments.email}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.comments.userName">User Name</span></dt>
+        <dd>
+            <span>{{vm.comments.userName}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.comments.content">Content</span></dt>
+        <dd>
+            <span>{{vm.comments.content}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.comments.isHandle">Is Handle</span></dt>
+        <dd>
+            <span>{{vm.comments.isHandle}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.comments.subject">Subject</span></dt>
+        <dd>
+            <span>{{vm.comments.subject}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="comments-detail.edit({id:vm.comments.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

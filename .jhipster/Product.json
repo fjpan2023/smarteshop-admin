@@ -1,0 +1,80 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "skus",
+            "otherEntityName": "sku",
+            "otherEntityRelationshipName": "product"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "relatedProducts",
+            "otherEntityName": "relatedProduct",
+            "otherEntityRelationshipName": "product"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "brand",
+            "otherEntityName": "brand",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "category",
+            "otherEntityName": "category",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "code",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "status",
+            "fieldType": "StatusEnum",
+            "fieldValues": "ACTIVITY,UNACTIVITY"
+        },
+        {
+            "fieldName": "standardPrice",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "label",
+            "fieldType": "ProductLabelEnum",
+            "fieldValues": "CAMPAIGN,DISCOUNT,RECOMMEND"
+        },
+        {
+            "fieldName": "mainImageId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "fromDate",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "endDate",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20161130115213",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "product",
+    "pagination": "pagination"
+}

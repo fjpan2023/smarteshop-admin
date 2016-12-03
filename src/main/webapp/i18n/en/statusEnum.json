@@ -1,0 +1,9 @@
+{
+    "smarteshopApp": {
+        "StatusEnum" : {
+            "null": "",
+            "ACTIVITY": "ACTIVITY",
+            "UNACTIVITY": "UNACTIVITY"
+        }
+    }
+}

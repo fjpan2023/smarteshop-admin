@@ -1,0 +1,23 @@
+{
+    "smarteshopApp": {
+        "relatedProduct" : {
+            "home": {
+                "title": "Related Products",
+                "createLabel": "Create a new Related Product",
+                "createOrEditLabel": "Create or edit a Related Product",
+                "search": "Search for Related Product"
+            },
+            "created": "A new Related Product is created with identifier {{ param }}",
+            "updated": "A Related Product is updated with identifier {{ param }}",
+            "deleted": "A Related Product is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Related Product {{ id }}?"
+            },
+            "detail": {
+                "title": "Related Product"
+            },
+            "relatedProductId": "Related Product Id",
+            "product": "Product"
+        }
+    }
+}

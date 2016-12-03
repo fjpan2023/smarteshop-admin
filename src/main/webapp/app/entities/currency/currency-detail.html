@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span data-translate="smarteshopApp.currency.detail.title">Currency</span> {{vm.currency.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smarteshopApp.currency.title">Title</span></dt>
+        <dd>
+            <span>{{vm.currency.title}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.currency.symbolLeft">Symbol Left</span></dt>
+        <dd>
+            <span>{{vm.currency.symbolLeft}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.currency.symbolRight">Symbol Right</span></dt>
+        <dd>
+            <span>{{vm.currency.symbolRight}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="currency-detail.edit({id:vm.currency.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

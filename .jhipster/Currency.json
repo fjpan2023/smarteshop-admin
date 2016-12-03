@@ -1,0 +1,23 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "symbolLeft",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "symbolRight",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20161130115219",
+    "entityTableName": "currency",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl"
+}
