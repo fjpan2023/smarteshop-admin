@@ -1,0 +1,21 @@
+
+enum SMTPSecurityEnum{
+     PLAIN, SSL, STARTTLS
+}
+
+entity EmailSetting{
+ 	host String required,
+ 	port Integer required,
+    smtpSecurity SMTPSecurityEnum required,
+ 	fromAddress String required,
+ 	userName String required,
+ 	password String  required
+}
+
+
+
+// Set pagination options
+paginate all with pagination
+
+// Set service options to all except few
+service all with serviceImpl

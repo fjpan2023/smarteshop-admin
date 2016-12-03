@@ -18,6 +18,7 @@
             },
             "host": "Host",
             "port": "Port",
+            "smtpSecurity": "Smtp Security",
             "fromAddress": "From Address",
             "userName": "User Name",
             "password": "Password"

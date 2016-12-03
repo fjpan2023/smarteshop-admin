@@ -42,6 +42,20 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="control-label" data-translate="smarteshopApp.emailSetting.smtpSecurity" for="field_smtpSecurity">Smtp Security</label>
+            <select class="form-control" name="smtpSecurity" ng-model="vm.emailSetting.smtpSecurity" id="field_smtpSecurity" required>
+                <option value="PLAIN" data-translate="smarteshopApp.SMTPSecurityEnum.PLAIN">PLAIN</option>
+                <option value="SSL" data-translate="smarteshopApp.SMTPSecurityEnum.SSL">SSL</option>
+                <option value="STARTTLS" data-translate="smarteshopApp.SMTPSecurityEnum.STARTTLS">STARTTLS</option>
+            </select>
+            <div ng-show="editForm.smtpSecurity.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.smtpSecurity.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="control-label" data-translate="smarteshopApp.emailSetting.fromAddress" for="field_fromAddress">From Address</label>
             <input type="text" class="form-control" name="fromAddress" id="field_fromAddress"
                     ng-model="vm.emailSetting.fromAddress"

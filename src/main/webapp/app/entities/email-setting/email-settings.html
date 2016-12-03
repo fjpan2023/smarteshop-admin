@@ -11,23 +11,6 @@
                     </span>
                 </button>
             </div>
-            <div class="col-xs-8 no-padding-right">
-                <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'smarteshopApp.emailSetting.home.search' | translate }}">
-                        <span  class="input-group-btn width-min" >
-                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
-                            <button class="btn btn-info" ng-click="vm.clear()">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
     <br/>
@@ -35,9 +18,9 @@
         <table class="jh-table table table-striped">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="host"><span data-translate="smarteshopApp.emailSetting.host">Host</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="port"><span data-translate="smarteshopApp.emailSetting.port">Port</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="smtpSecurity"><span data-translate="smarteshopApp.emailSetting.smtpSecurity">Smtp Security</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="fromAddress"><span data-translate="smarteshopApp.emailSetting.fromAddress">From Address</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="userName"><span data-translate="smarteshopApp.emailSetting.userName">User Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="password"><span data-translate="smarteshopApp.emailSetting.password">Password</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -46,32 +29,22 @@
             </thead>
             <tbody>
                 <tr ng-repeat="emailSetting in vm.emailSettings track by emailSetting.id">
-                    <td><a ui-sref="email-setting-detail({id:emailSetting.id})">{{emailSetting.id}}</a></td>
                     <td>{{emailSetting.host}}</td>
                     <td>{{emailSetting.port}}</td>
+                    <td data-translate="{{'smarteshopApp.SMTPSecurityEnum.' + emailSetting.smtpSecurity}}">{{emailSetting.smtpSecurity}}</td>
                     <td>{{emailSetting.fromAddress}}</td>
                     <td>{{emailSetting.userName}}</td>
                     <td>{{emailSetting.password}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
-                            <button type="submit"
-                                    ui-sref="email-setting-detail({id:emailSetting.id})"
-                                    class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
-                            </button>
+                            
                             <button type="submit"
                                     ui-sref="email-setting.edit({id:emailSetting.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
                             </button>
-                            <button type="submit"
-                                    ui-sref="email-setting.delete({id:emailSetting.id})"
-                                    class="btn btn-danger btn-sm">
-                                <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
-                            </button>
+                           
                         </div>
                     </td>
                 </tr>

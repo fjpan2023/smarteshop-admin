@@ -46,6 +46,7 @@
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('emailSetting');
+                    $translatePartialLoader.addPart('sMTPSecurityEnum');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
@@ -68,6 +69,7 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('emailSetting');
+                    $translatePartialLoader.addPart('sMTPSecurityEnum');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'EmailSetting', function($stateParams, EmailSetting) {
@@ -126,6 +128,7 @@
                             return {
                                 host: null,
                                 port: null,
+                                smtpSecurity: null,
                                 fromAddress: null,
                                 userName: null,
                                 password: null,

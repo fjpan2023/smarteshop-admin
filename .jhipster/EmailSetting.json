@@ -17,6 +17,14 @@
             ]
         },
         {
+            "fieldName": "smtpSecurity",
+            "fieldType": "SMTPSecurityEnum",
+            "fieldValues": "PLAIN,SSL,STARTTLS",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "fromAddress",
             "fieldType": "String",
             "fieldValidateRules": [

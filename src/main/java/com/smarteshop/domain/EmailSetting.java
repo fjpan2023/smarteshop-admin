@@ -5,6 +5,8 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +16,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
+
+import com.smarteshop.domain.enumeration.SMTPSecurityEnum;
 
 /**
  * A EmailSetting.
@@ -37,6 +41,11 @@ public class EmailSetting extends AbstractAuditingEntity implements Serializable
     @NotNull
     @Column(name = "port", nullable = false)
     private Integer port;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "smtp_security", nullable = false)
+    private SMTPSecurityEnum smtpSecurity;
 
     @NotNull
     @Column(name = "from_address", nullable = false)
@@ -82,6 +91,19 @@ public class EmailSetting extends AbstractAuditingEntity implements Serializable
 
     public void setPort(Integer port) {
         this.port = port;
+    }
+
+    public SMTPSecurityEnum getSmtpSecurity() {
+        return smtpSecurity;
+    }
+
+    public EmailSetting smtpSecurity(SMTPSecurityEnum smtpSecurity) {
+        this.smtpSecurity = smtpSecurity;
+        return this;
+    }
+
+    public void setSmtpSecurity(SMTPSecurityEnum smtpSecurity) {
+        this.smtpSecurity = smtpSecurity;
     }
 
     public String getFromAddress() {
@@ -149,6 +171,7 @@ public class EmailSetting extends AbstractAuditingEntity implements Serializable
             "id=" + id +
             ", host='" + host + "'" +
             ", port='" + port + "'" +
+            ", smtpSecurity='" + smtpSecurity + "'" +
             ", fromAddress='" + fromAddress + "'" +
             ", userName='" + userName + "'" +
             ", password='" + password + "'" +

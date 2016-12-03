@@ -30,6 +30,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.smarteshop.domain.enumeration.SMTPSecurityEnum;
 /**
  * Test class for the EmailSettingResource REST controller.
  *
@@ -44,6 +45,9 @@ public class EmailSettingResourceIntTest {
 
     private static final Integer DEFAULT_PORT = 1;
     private static final Integer UPDATED_PORT = 2;
+
+    private static final SMTPSecurityEnum DEFAULT_SMTP_SECURITY = SMTPSecurityEnum.PLAIN;
+    private static final SMTPSecurityEnum UPDATED_SMTP_SECURITY = SMTPSecurityEnum.SSL;
 
     private static final String DEFAULT_FROM_ADDRESS = "AAAAAAAAAA";
     private static final String UPDATED_FROM_ADDRESS = "BBBBBBBBBB";
@@ -96,6 +100,7 @@ public class EmailSettingResourceIntTest {
         EmailSetting emailSetting = new EmailSetting()
                 .host(DEFAULT_HOST)
                 .port(DEFAULT_PORT)
+                .smtpSecurity(DEFAULT_SMTP_SECURITY)
                 .fromAddress(DEFAULT_FROM_ADDRESS)
                 .userName(DEFAULT_USER_NAME)
                 .password(DEFAULT_PASSWORD);
@@ -126,6 +131,7 @@ public class EmailSettingResourceIntTest {
         EmailSetting testEmailSetting = emailSettings.get(emailSettings.size() - 1);
         assertThat(testEmailSetting.getHost()).isEqualTo(DEFAULT_HOST);
         assertThat(testEmailSetting.getPort()).isEqualTo(DEFAULT_PORT);
+        assertThat(testEmailSetting.getSmtpSecurity()).isEqualTo(DEFAULT_SMTP_SECURITY);
         assertThat(testEmailSetting.getFromAddress()).isEqualTo(DEFAULT_FROM_ADDRESS);
         assertThat(testEmailSetting.getUserName()).isEqualTo(DEFAULT_USER_NAME);
         assertThat(testEmailSetting.getPassword()).isEqualTo(DEFAULT_PASSWORD);
@@ -159,6 +165,24 @@ public class EmailSettingResourceIntTest {
         int databaseSizeBeforeTest = emailSettingRepository.findAll().size();
         // set the field null
         emailSetting.setPort(null);
+
+        // Create the EmailSetting, which fails.
+
+        restEmailSettingMockMvc.perform(post("/api/email-settings")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(emailSetting)))
+            .andExpect(status().isBadRequest());
+
+        List<EmailSetting> emailSettings = emailSettingRepository.findAll();
+        assertThat(emailSettings).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkSmtpSecurityIsRequired() throws Exception {
+        int databaseSizeBeforeTest = emailSettingRepository.findAll().size();
+        // set the field null
+        emailSetting.setSmtpSecurity(null);
 
         // Create the EmailSetting, which fails.
 
@@ -238,6 +262,7 @@ public class EmailSettingResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(emailSetting.getId().intValue())))
             .andExpect(jsonPath("$.[*].host").value(hasItem(DEFAULT_HOST.toString())))
             .andExpect(jsonPath("$.[*].port").value(hasItem(DEFAULT_PORT)))
+            .andExpect(jsonPath("$.[*].smtpSecurity").value(hasItem(DEFAULT_SMTP_SECURITY.toString())))
             .andExpect(jsonPath("$.[*].fromAddress").value(hasItem(DEFAULT_FROM_ADDRESS.toString())))
             .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
             .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD.toString())));
@@ -256,6 +281,7 @@ public class EmailSettingResourceIntTest {
             .andExpect(jsonPath("$.id").value(emailSetting.getId().intValue()))
             .andExpect(jsonPath("$.host").value(DEFAULT_HOST.toString()))
             .andExpect(jsonPath("$.port").value(DEFAULT_PORT))
+            .andExpect(jsonPath("$.smtpSecurity").value(DEFAULT_SMTP_SECURITY.toString()))
             .andExpect(jsonPath("$.fromAddress").value(DEFAULT_FROM_ADDRESS.toString()))
             .andExpect(jsonPath("$.userName").value(DEFAULT_USER_NAME.toString()))
             .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD.toString()));
@@ -282,6 +308,7 @@ public class EmailSettingResourceIntTest {
         updatedEmailSetting
                 .host(UPDATED_HOST)
                 .port(UPDATED_PORT)
+                .smtpSecurity(UPDATED_SMTP_SECURITY)
                 .fromAddress(UPDATED_FROM_ADDRESS)
                 .userName(UPDATED_USER_NAME)
                 .password(UPDATED_PASSWORD);
@@ -297,6 +324,7 @@ public class EmailSettingResourceIntTest {
         EmailSetting testEmailSetting = emailSettings.get(emailSettings.size() - 1);
         assertThat(testEmailSetting.getHost()).isEqualTo(UPDATED_HOST);
         assertThat(testEmailSetting.getPort()).isEqualTo(UPDATED_PORT);
+        assertThat(testEmailSetting.getSmtpSecurity()).isEqualTo(UPDATED_SMTP_SECURITY);
         assertThat(testEmailSetting.getFromAddress()).isEqualTo(UPDATED_FROM_ADDRESS);
         assertThat(testEmailSetting.getUserName()).isEqualTo(UPDATED_USER_NAME);
         assertThat(testEmailSetting.getPassword()).isEqualTo(UPDATED_PASSWORD);
@@ -341,6 +369,7 @@ public class EmailSettingResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(emailSetting.getId().intValue())))
             .andExpect(jsonPath("$.[*].host").value(hasItem(DEFAULT_HOST.toString())))
             .andExpect(jsonPath("$.[*].port").value(hasItem(DEFAULT_PORT)))
+            .andExpect(jsonPath("$.[*].smtpSecurity").value(hasItem(DEFAULT_SMTP_SECURITY.toString())))
             .andExpect(jsonPath("$.[*].fromAddress").value(hasItem(DEFAULT_FROM_ADDRESS.toString())))
             .andExpect(jsonPath("$.[*].userName").value(hasItem(DEFAULT_USER_NAME.toString())))
             .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD.toString())));

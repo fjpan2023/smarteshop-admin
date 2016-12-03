@@ -1,7 +1,6 @@
 
 <form name="editForm" role="form" class="form-horizontal" novalidate
 	ng-submit="vm.save()" show-validation>
-
 	<div class="modal-header">
 
 		<h4 class="modal-title" id="myProductLabel"
@@ -159,6 +158,77 @@
 				id="field_image" ng-model="vm.brand.image" /> <input type="hidden"
 				class="form-control" name="imageContentType"
 				id="field_imageContentType" ng-model="vm.brand.imageContentType" />
+			</uib-tab> <uib-tab index="2" heading="Related Product">
+			<div class="modal-header">
+
+				<h4 class="modal-title" >Create
+					or edit Related Product</h4>
+				<img
+					data-ng-src="{{'data:' + vm.product.imageContentType + ';base64,' + vm.product.image}}"
+					class="img-thumbnail" ng-if="vm.product.portrait" />
+			</div>
+			<div class="modal-body">
+
+
+				<div class="table-responsive">
+					<table class="jh-table table table-striped">
+						<thead>
+							<tr jh-sort="vm.predicate" ascending="vm.reverse"
+								callback="vm.transition()">
+								<th jh-sort-by="id"><span data-translate="global.field.id">ID</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th><span
+									data-translate="smarteshopApp.product.mainImageId">Main
+										Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="code"><span
+									data-translate="smarteshopApp.product.code">Code</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="name"><span
+									data-translate="smarteshopApp.product.name">Name</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="brand.id"><span
+									data-translate="smarteshopApp.product.brand">Brand</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="category.id"><span
+									data-translate="smarteshopApp.product.category">Category</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="status"><span
+									data-translate="smarteshopApp.product.status">Status</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="product in vm.products track by product.id">
+								<td><a ui-sref="product-detail({id:product.id})">{{product.id}}</a></td>
+								<td>{{product.mainImageId}}</td>
+								<td>{{product.code}}</td>
+								<td>{{product.name}}</td>
+								<td><a ui-sref="brand-detail({id:product.brand.id})">{{product.brand.name}}</a>
+								</td>
+								<td><a ui-sref="category-detail({id:product.category.id})">{{product.category.name}}</a>
+								</td>
+
+
+								<td class="text-right">
+									<div class="btn-group flex-btn-group-container">
+										<button type="submit" ui-sref="product.edit({id:product.id})"
+											class="btn btn-primary btn-sm">
+											<span class="glyphicon glyphicon-pencil"></span> <span
+												class="hidden-xs hidden-sm"
+												data-translate="entity.action.edit"></span>
+										</button>
+
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+
 			</uib-tab> </uib-tabset>
 		</div>
 
