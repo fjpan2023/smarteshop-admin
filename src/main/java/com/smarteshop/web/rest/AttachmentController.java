@@ -1,10 +1,13 @@
 package com.smarteshop.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.smarteshop.domain.Attachment;
-import com.smarteshop.service.AttachmentService;
-import com.smarteshop.web.rest.util.HeaderUtil;
-import com.smarteshop.web.rest.util.PaginationUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
+import javax.inject.Inject;
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -12,28 +15,32 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import com.codahale.metrics.annotation.Timed;
+import com.smarteshop.domain.Attachment;
+import com.smarteshop.service.AttachmentService;
+import com.smarteshop.web.common.AbstractController;
+import com.smarteshop.web.rest.util.HeaderUtil;
+import com.smarteshop.web.rest.util.PaginationUtil;
 
 /**
  * REST controller for managing Attachment.
  */
 @RestController
 @RequestMapping("/api")
-public class AttachmentResource {
+public class AttachmentController extends AbstractController{
 
-    private final Logger log = LoggerFactory.getLogger(AttachmentResource.class);
-        
+    private final Logger log = LoggerFactory.getLogger(AttachmentController.class);
+
     @Inject
     private AttachmentService attachmentService;
 
@@ -132,7 +139,7 @@ public class AttachmentResource {
      * SEARCH  /_search/attachments?query=:query : search for the attachment corresponding
      * to the query.
      *
-     * @param query the query of the attachment search 
+     * @param query the query of the attachment search
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers

@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the AttachmentResource REST controller.
  *
- * @see AttachmentResource
+ * @see AttachmentController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApp.class)
@@ -79,7 +79,7 @@ public class AttachmentResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        AttachmentResource attachmentResource = new AttachmentResource();
+        AttachmentController attachmentResource = new AttachmentController();
         ReflectionTestUtils.setField(attachmentResource, "attachmentService", attachmentService);
         this.restAttachmentMockMvc = MockMvcBuilders.standaloneSetup(attachmentResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

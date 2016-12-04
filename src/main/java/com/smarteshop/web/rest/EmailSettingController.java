@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codahale.metrics.annotation.Timed;
 import com.smarteshop.domain.EmailSetting;
 import com.smarteshop.service.EmailSettingService;
+import com.smarteshop.web.common.AbstractController;
 import com.smarteshop.web.rest.util.HeaderUtil;
 import com.smarteshop.web.rest.util.PaginationUtil;
 
@@ -36,7 +37,7 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class EmailSettingController {
+public class EmailSettingController extends AbstractController {
 
     private final Logger log = LoggerFactory.getLogger(EmailSettingController.class);
 
