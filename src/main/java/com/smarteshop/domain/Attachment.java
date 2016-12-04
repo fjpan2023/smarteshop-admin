@@ -33,16 +33,16 @@ public class Attachment implements Serializable {
     private Long entityId;
 
     @NotNull
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @NotNull
     @Lob
     @Column(name = "content", nullable = false)
     private byte[] content;
 
     @Column(name = "content_content_type", nullable = false)
     private String contentContentType;
-
-    @NotNull
-    @Column(name = "name", nullable = false)
-    private String name;
 
     public Long getId() {
         return id;
@@ -78,6 +78,19 @@ public class Attachment implements Serializable {
         this.entityId = entityId;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Attachment name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public byte[] getContent() {
         return content;
     }
@@ -102,19 +115,6 @@ public class Attachment implements Serializable {
 
     public void setContentContentType(String contentContentType) {
         this.contentContentType = contentContentType;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Attachment name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
@@ -143,9 +143,9 @@ public class Attachment implements Serializable {
             "id=" + id +
             ", entityName='" + entityName + "'" +
             ", entityId='" + entityId + "'" +
+            ", name='" + name + "'" +
             ", content='" + content + "'" +
             ", contentContentType='" + contentContentType + "'" +
-            ", name='" + name + "'" +
             '}';
     }
 }

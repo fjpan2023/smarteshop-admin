@@ -12,16 +12,16 @@
         <dd>
             <span>{{vm.attachment.entityId}}</span>
         </dd>
+        <dt><span data-translate="smarteshopApp.attachment.name">Name</span></dt>
+        <dd>
+            <span>{{vm.attachment.name}}</span>
+        </dd>
         <dt><span data-translate="smarteshopApp.attachment.content">Content</span></dt>
         <dd>
             <div ng-if="vm.attachment.content">
                 <a ng-click="vm.openFile(vm.attachment.contentContentType, vm.attachment.content)" data-translate="entity.action.open">open</a>
                 {{vm.attachment.contentContentType}}, {{vm.byteSize(vm.attachment.content)}}
             </div>
-        </dd>
-        <dt><span data-translate="smarteshopApp.attachment.name">Name</span></dt>
-        <dd>
-            <span>{{vm.attachment.name}}</span>
         </dd>
     </dl>
 

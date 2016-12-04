@@ -17,16 +17,16 @@
             ]
         },
         {
-            "fieldName": "content",
-            "fieldType": "byte[]",
-            "fieldTypeBlobContent": "any",
+            "fieldName": "name",
+            "fieldType": "String",
             "fieldValidateRules": [
                 "required"
             ]
         },
         {
-            "fieldName": "name",
-            "fieldType": "String",
+            "fieldName": "content",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any",
             "fieldValidateRules": [
                 "required"
             ]

@@ -2,7 +2,10 @@ package com.smarteshop.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -152,6 +155,45 @@ public class CategoryController extends AbstractController{
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/categories");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+
+
+    @GetMapping("/tree")
+    public List<CategoryInfo> tree(){
+      Map<Long, CategoryInfo> result = new HashMap<Long,CategoryInfo>();
+      List<Category> list = this.repo.findAll();
+      if(CollectionUtils.isEmpty(list)){
+        return null;
+      }
+      for(Category each: list){
+        if(each.isLeaf()){
+          continue;
+        }
+        List<CategoryInfo> subList = new LinkedList<CategoryInfo>();
+        CategoryInfo info = new CategoryInfo();
+        info.setId(each.getId());
+        info.setName(each.getName());
+        info.setSub(subList);
+        result.put(each.getId(), info);
+      }
+      for(Category each:list){
+        if(!each.isLeaf()){
+          continue;
+        }
+        CategoryInfo sub = new CategoryInfo();
+        sub.setId(each.getId());
+        sub.setName(each.getName());
+        LOGGER.info("CategoryInfo: ", sub);
+
+        result.get(each.getParentId()).getSub().add(sub);
+      }
+      List<CategoryInfo> resultList= new LinkedList<CategoryInfo>();
+      for(CategoryInfo value : result.values()){
+        resultList.add(value);
+      }
+      result = null;
+      return resultList;
+    }
+
 
 
 }

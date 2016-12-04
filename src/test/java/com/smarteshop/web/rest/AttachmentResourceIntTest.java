@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the AttachmentResource REST controller.
  *
- * @see AttachmentController
+ * @see AttachmentResource
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApp.class)
@@ -46,13 +46,13 @@ public class AttachmentResourceIntTest {
     private static final Long DEFAULT_ENTITY_ID = 1L;
     private static final Long UPDATED_ENTITY_ID = 2L;
 
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
     private static final byte[] DEFAULT_CONTENT = TestUtil.createByteArray(1, "0");
     private static final byte[] UPDATED_CONTENT = TestUtil.createByteArray(2, "1");
     private static final String DEFAULT_CONTENT_CONTENT_TYPE = "image/jpg";
     private static final String UPDATED_CONTENT_CONTENT_TYPE = "image/png";
-
-    private static final String DEFAULT_NAME = "AAAAAAAAAA";
-    private static final String UPDATED_NAME = "BBBBBBBBBB";
 
     @Inject
     private AttachmentRepository attachmentRepository;
@@ -79,7 +79,7 @@ public class AttachmentResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        AttachmentController attachmentResource = new AttachmentController();
+        AttachmentResource attachmentResource = new AttachmentResource();
         ReflectionTestUtils.setField(attachmentResource, "attachmentService", attachmentService);
         this.restAttachmentMockMvc = MockMvcBuilders.standaloneSetup(attachmentResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
@@ -96,9 +96,9 @@ public class AttachmentResourceIntTest {
         Attachment attachment = new Attachment()
                 .entityName(DEFAULT_ENTITY_NAME)
                 .entityId(DEFAULT_ENTITY_ID)
+                .name(DEFAULT_NAME)
                 .content(DEFAULT_CONTENT)
-                .contentContentType(DEFAULT_CONTENT_CONTENT_TYPE)
-                .name(DEFAULT_NAME);
+                .contentContentType(DEFAULT_CONTENT_CONTENT_TYPE);
         return attachment;
     }
 
@@ -126,9 +126,9 @@ public class AttachmentResourceIntTest {
         Attachment testAttachment = attachments.get(attachments.size() - 1);
         assertThat(testAttachment.getEntityName()).isEqualTo(DEFAULT_ENTITY_NAME);
         assertThat(testAttachment.getEntityId()).isEqualTo(DEFAULT_ENTITY_ID);
+        assertThat(testAttachment.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testAttachment.getContent()).isEqualTo(DEFAULT_CONTENT);
         assertThat(testAttachment.getContentContentType()).isEqualTo(DEFAULT_CONTENT_CONTENT_TYPE);
-        assertThat(testAttachment.getName()).isEqualTo(DEFAULT_NAME);
 
         // Validate the Attachment in ElasticSearch
         Attachment attachmentEs = attachmentSearchRepository.findOne(testAttachment.getId());
@@ -173,10 +173,10 @@ public class AttachmentResourceIntTest {
 
     @Test
     @Transactional
-    public void checkContentIsRequired() throws Exception {
+    public void checkNameIsRequired() throws Exception {
         int databaseSizeBeforeTest = attachmentRepository.findAll().size();
         // set the field null
-        attachment.setContent(null);
+        attachment.setName(null);
 
         // Create the Attachment, which fails.
 
@@ -191,10 +191,10 @@ public class AttachmentResourceIntTest {
 
     @Test
     @Transactional
-    public void checkNameIsRequired() throws Exception {
+    public void checkContentIsRequired() throws Exception {
         int databaseSizeBeforeTest = attachmentRepository.findAll().size();
         // set the field null
-        attachment.setName(null);
+        attachment.setContent(null);
 
         // Create the Attachment, which fails.
 
@@ -220,9 +220,9 @@ public class AttachmentResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(attachment.getId().intValue())))
             .andExpect(jsonPath("$.[*].entityName").value(hasItem(DEFAULT_ENTITY_NAME.toString())))
             .andExpect(jsonPath("$.[*].entityId").value(hasItem(DEFAULT_ENTITY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].contentContentType").value(hasItem(DEFAULT_CONTENT_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(Base64Utils.encodeToString(DEFAULT_CONTENT))))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].content").value(hasItem(Base64Utils.encodeToString(DEFAULT_CONTENT))));
     }
 
     @Test
@@ -238,9 +238,9 @@ public class AttachmentResourceIntTest {
             .andExpect(jsonPath("$.id").value(attachment.getId().intValue()))
             .andExpect(jsonPath("$.entityName").value(DEFAULT_ENTITY_NAME.toString()))
             .andExpect(jsonPath("$.entityId").value(DEFAULT_ENTITY_ID.intValue()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.contentContentType").value(DEFAULT_CONTENT_CONTENT_TYPE))
-            .andExpect(jsonPath("$.content").value(Base64Utils.encodeToString(DEFAULT_CONTENT)))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+            .andExpect(jsonPath("$.content").value(Base64Utils.encodeToString(DEFAULT_CONTENT)));
     }
 
     @Test
@@ -264,9 +264,9 @@ public class AttachmentResourceIntTest {
         updatedAttachment
                 .entityName(UPDATED_ENTITY_NAME)
                 .entityId(UPDATED_ENTITY_ID)
+                .name(UPDATED_NAME)
                 .content(UPDATED_CONTENT)
-                .contentContentType(UPDATED_CONTENT_CONTENT_TYPE)
-                .name(UPDATED_NAME);
+                .contentContentType(UPDATED_CONTENT_CONTENT_TYPE);
 
         restAttachmentMockMvc.perform(put("/api/attachments")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -279,9 +279,9 @@ public class AttachmentResourceIntTest {
         Attachment testAttachment = attachments.get(attachments.size() - 1);
         assertThat(testAttachment.getEntityName()).isEqualTo(UPDATED_ENTITY_NAME);
         assertThat(testAttachment.getEntityId()).isEqualTo(UPDATED_ENTITY_ID);
+        assertThat(testAttachment.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testAttachment.getContent()).isEqualTo(UPDATED_CONTENT);
         assertThat(testAttachment.getContentContentType()).isEqualTo(UPDATED_CONTENT_CONTENT_TYPE);
-        assertThat(testAttachment.getName()).isEqualTo(UPDATED_NAME);
 
         // Validate the Attachment in ElasticSearch
         Attachment attachmentEs = attachmentSearchRepository.findOne(testAttachment.getId());
@@ -323,8 +323,8 @@ public class AttachmentResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(attachment.getId().intValue())))
             .andExpect(jsonPath("$.[*].entityName").value(hasItem(DEFAULT_ENTITY_NAME.toString())))
             .andExpect(jsonPath("$.[*].entityId").value(hasItem(DEFAULT_ENTITY_ID.intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].contentContentType").value(hasItem(DEFAULT_CONTENT_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(Base64Utils.encodeToString(DEFAULT_CONTENT))))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].content").value(hasItem(Base64Utils.encodeToString(DEFAULT_CONTENT))));
     }
 }

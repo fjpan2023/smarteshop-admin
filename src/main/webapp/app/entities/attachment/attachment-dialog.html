@@ -41,6 +41,18 @@
                 </p>
             </div>
         </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="smarteshopApp.attachment.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.attachment.name"
+                    required />
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
         <div class="form-group" ngf-drop ngf-change="vm.setContent($file, vm.attachment)">
             <label class="control-label" data-translate="smarteshopApp.attachment.content" for="field_content">Content</label>
             <div>
@@ -65,18 +77,6 @@
             <div ng-show="editForm.content.$invalid">
                 <p class="help-block"
                     ng-show="editForm.content.$error.required" data-translate="entity.validation.required">
-                    This field is required.
-                </p>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="smarteshopApp.attachment.name" for="field_name">Name</label>
-            <input type="text" class="form-control" name="name" id="field_name"
-                    ng-model="vm.attachment.name"
-                    required />
-            <div ng-show="editForm.name.$invalid">
-                <p class="help-block"
-                    ng-show="editForm.name.$error.required" data-translate="entity.validation.required">
                     This field is required.
                 </p>
             </div>

@@ -126,9 +126,9 @@
                             return {
                                 entityName: null,
                                 entityId: null,
+                                name: null,
                                 content: null,
                                 contentContentType: null,
-                                name: null,
                                 id: null
                             };
                         }

@@ -18,8 +18,8 @@
             },
             "entityName": "Entity Name",
             "entityId": "Entity Id",
-            "content": "Content",
-            "name": "Name"
+            "name": "Name",
+            "content": "Content"
         }
     }
 }

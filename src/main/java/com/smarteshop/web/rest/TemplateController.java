@@ -50,7 +50,7 @@ public class TemplateController extends AbstractController{
      * @return the ResponseEntity with status 201 (Created) and with body the new template, or with status 400 (Bad Request) if the template has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping(" ")
+    @PostMapping()
     @Timed
     public ResponseEntity<Template> createTemplate(@RequestBody Template template) throws URISyntaxException {
         log.debug("REST request to save Template : {}", template);
@@ -72,7 +72,7 @@ public class TemplateController extends AbstractController{
      * or with status 500 (Internal Server Error) if the template couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping(" ")
+    @PutMapping()
     @Timed
     public ResponseEntity<Template> updateTemplate(@RequestBody Template template) throws URISyntaxException {
         log.debug("REST request to update Template : {}", template);
@@ -92,7 +92,7 @@ public class TemplateController extends AbstractController{
      * @return the ResponseEntity with status 200 (OK) and the list of templates in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping(" ")
+    @GetMapping()
     @Timed
     public ResponseEntity<List<Template>> getAllTemplates(Pageable pageable)
         throws URISyntaxException {

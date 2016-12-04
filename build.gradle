@@ -225,6 +225,13 @@ dependencies {
     testCompile "com.h2database:h2"
     optional "org.springframework.boot:spring-boot-configuration-processor:${spring_boot_version}"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
+    
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+	compile 'org.apache.commons:commons-lang3'
+	compile 'commons-io:commons-io'
+	
+
+    
 }
 
 clean {
