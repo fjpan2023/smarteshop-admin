@@ -1,35 +1,37 @@
 <div>
-	<h4>
-		<span data-translate="smarteshopApp.brand.detail.title">Brand</span>
+	<div class="modal-header">
+		<label class="modal-title title-label"
+			data-translate="smarteshopApp.brand.detail.title">Brand</label>
 		#{{vm.brand.id}}
-	</h4>
-	<hr>
-	<jhi-alert-error></jhi-alert-error>
-	<div class="form-horizontal">
-		<div class="form-group">
-			<label class="col-sm-2 control-label"
-				data-translate="smarteshopApp.brand.name">Name</label>
-			<div class="col-sm-4">
-				<p class="form-control-static">{{vm.brand.name}}</p>
-			</div>
-			<label class="col-sm-2 control-label"
-				data-translate="smarteshopApp.brand.status">Status</label>
-			<div class="col-sm-4">
-				<p class="form-control-static"
-					data-translate="{{'smarteshopApp.StatusEnum.' + vm.brand.status}}">{{vm.brand.status}}</p>
-			</div>
-		</div>
-		<uib-tabset active="activeForm" class="col-sm-offset-1">
-		<uib-tab index="0" heading="Brief Description">
-		<div ng-bind-html="vm.brand.briefDesc"></div>
-		</uib-tab> <uib-tab index="1" heading="Descripton">
-		<div ng-bind-html="vm.brand.description"></div>
-		</uib-tab> <uib-tab index="2" heading="图片"> <img
-			data-ng-src="{{'data:' + vm.brand.imageContentType + ';base64,' + vm.brand.image}}"
-			class="img-thumbnail" ng-if="vm.brand.image" /> </uib-tab> </uib-tabset>
 	</div>
-
-
+	<div class="modal-body">
+		<jhi-alert-error></jhi-alert-error>
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label"
+					data-translate="smarteshopApp.brand.name">Name</label>
+				<div class="col-sm-4">
+					<p class="form-control-static">{{vm.brand.name}}</p>
+				</div>
+				<label class="col-sm-2 control-label"
+					data-translate="smarteshopApp.brand.status">Status</label>
+				<div class="col-sm-4">
+					<p class="form-control-static"
+						data-translate="{{'smarteshopApp.StatusEnum.' + vm.brand.status}}">{{vm.brand.status}}</p>
+				</div>
+			</div>
+			<uib-tabset active="activeForm" class="col-sm-offset-1">
+			<uib-tab index="0" heading="Brief Description">
+			<div ng-bind-html="vm.brand.briefDesc"></div>
+			</uib-tab> <uib-tab index="1" heading="Descripton">
+			<div ng-bind-html="vm.brand.description"></div>
+			</uib-tab> <uib-tab index="2" heading="图片"> <img
+				data-ng-src="{{'data:' + vm.image.contentType + ';base64,' + vm.image.content}}"
+				class="img-thumbnail" ng-if="vm.image" /> </uib-tab> </uib-tabset>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
 	<button type="submit" ui-sref="{{ vm.previousState }}"
 		class="btn btn-info">
 		<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
