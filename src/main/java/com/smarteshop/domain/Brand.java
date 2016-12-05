@@ -29,142 +29,109 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 @Document(indexName = "brand")
 public class Brand  extends AbstractAuditingEntity implements Serializable {
 
-  private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-  @Column(name = "name")
-  private String name;
+	@Column(name = "name")
+	private String name;
 
-  @Lob
-  @Column(name = "brief_desc")
-  private String briefDesc;
+	@Lob
+	@Column(name = "brief_desc")
+	private String briefDesc;
 
-  @Lob
-  @Column(name = "description")
-  private String description;
+	@Lob
+	@Column(name = "description")
+	private String description;
 
-  @Enumerated(EnumType.STRING)
-  @Column(name = "status")
-  private StatusEnum status;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private StatusEnum status;
 
-  @Lob
-  @Column(name = "image")
-  private byte[] image;
+	public Long getId() {
+		return id;
+	}
 
-  @Column(name = "image_content_type")
-  private String imageContentType;
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-  public Long getId() {
-    return id;
-  }
+	public String getName() {
+		return name;
+	}
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+	public Brand name(String name) {
+		this.name = name;
+		return this;
+	}
 
-  public String getName() {
-    return name;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  public Brand name(String name) {
-    this.name = name;
-    return this;
-  }
+	public String getDescription() {
+		return description;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public Brand description(String description) {
+		this.description = description;
+		return this;
+	}
 
-  public String getDescription() {
-    return description;
-  }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-  public Brand description(String description) {
-    this.description = description;
-    return this;
-  }
+	public StatusEnum getStatus() {
+		return status;
+	}
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+	public Brand status(StatusEnum status) {
+		this.status = status;
+		return this;
+	}
 
-  public StatusEnum getStatus() {
-    return status;
-  }
+	public void setStatus(StatusEnum status) {
+		this.status = status;
+	}
 
-  public Brand status(StatusEnum status) {
-    this.status = status;
-    return this;
-  }
 
-  public void setStatus(StatusEnum status) {
-    this.status = status;
-  }
 
-  public byte[] getImage() {
-    return image;
-  }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Brand brand = (Brand) o;
+		if(brand.id == null || id == null) {
+			return false;
+		}
+		return Objects.equals(id, brand.id);
+	}
 
-  public Brand image(byte[] image) {
-    this.image = image;
-    return this;
-  }
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(id);
+	}
 
-  public void setImage(byte[] image) {
-    this.image = image;
-  }
+	public String getBriefDesc() {
+		return briefDesc;
+	}
 
-  public String getImageContentType() {
-    return imageContentType;
-  }
+	public void setBriefDesc(String briefDesc) {
+		this.briefDesc = briefDesc;
+	}
 
-  public Brand imageContentType(String imageContentType) {
-    this.imageContentType = imageContentType;
-    return this;
-  }
-
-  public void setImageContentType(String imageContentType) {
-    this.imageContentType = imageContentType;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Brand brand = (Brand) o;
-    if(brand.id == null || id == null) {
-      return false;
-    }
-    return Objects.equals(id, brand.id);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hashCode(id);
-  }
-
-  public String getBriefDesc() {
-    return briefDesc;
-  }
-
-  public void setBriefDesc(String briefDesc) {
-    this.briefDesc = briefDesc;
-  }
-
-  @Override
-  public String toString() {
-    return "Brand [id=" + id + ", name=" + name + ", briefDesc=" + briefDesc + ", description="
-        + description + ", status=" + status + ", image=" + Arrays.toString(image)
-        + ", imageContentType=" + imageContentType + "]";
-  }
-
+	@Override
+	public String toString() {
+		return "Brand [id=" + id + ", name=" + name + ", briefDesc=" + briefDesc + ", description=" + description
+				+ ", status=" + status + "]";
+	}
 
 
 }

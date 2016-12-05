@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codahale.metrics.annotation.Timed;
 import com.smarteshop.domain.Attachment;
 import com.smarteshop.service.AttachmentService;
+import com.smarteshop.service.impl.AttachmentServiceImpl;
 import com.smarteshop.web.common.AbstractController;
 import com.smarteshop.web.rest.util.HeaderUtil;
 import com.smarteshop.web.rest.util.PaginationUtil;
@@ -95,13 +96,14 @@ public class AttachmentController extends AbstractController{
      */
     @GetMapping("/attachments")
     @Timed
-    public ResponseEntity<List<Attachment>> getAllAttachments(Pageable pageable)
+    public ResponseEntity<List<Attachment>> getAllAttachments(Pageable pageable, String entityName, Long entityId)
         throws URISyntaxException {
         log.debug("REST request to get a page of Attachments");
-        Page<Attachment> page = attachmentService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/attachments");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
+        List<Attachment> list = attachmentService.getAttachmentsByEntityInfo(entityName, entityId);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }   
+    
+    
 
     /**
      * GET  /attachments/:id : get the "id" attachment.

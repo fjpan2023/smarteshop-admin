@@ -132,6 +132,12 @@
 				}
 			},
 			resolve: {
+				translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+					$translatePartialLoader.addPart('brand');
+					$translatePartialLoader.addPart('statusEnum');
+					return $translate.refresh();
+				}],
+			
 				entity:function(){
 					return {
 						name: null,
@@ -141,7 +147,15 @@
 						imageContentType: null,
 						id: null
 					}
-				}
+				},
+				previousState: ["$state", function ($state) {
+					var currentStateData = {
+							name: $state.current.name || 'brand',
+							params: $state.params,
+							url: $state.href($state.current.name, $state.params)
+					};
+					return currentStateData;
+				}]
 			}
 		})
 		.state('brand.edit', {

@@ -95,4 +95,10 @@ public class AttachmentServiceImpl implements AttachmentService{
         Page<Attachment> result = attachmentSearchRepository.search(queryStringQuery(query), pageable);
         return result;
     }
+    
+	@Override
+	@Transactional(readOnly = true)     
+	public List<Attachment> getAttachmentsByEntityInfo(String entityName, Long entityId) {
+		 return this.attachmentRepository.getAttachmentsByEntityInfo(entityName, entityId);		
+	}
 }

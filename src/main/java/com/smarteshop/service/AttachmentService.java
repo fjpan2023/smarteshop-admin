@@ -51,4 +51,7 @@ public interface AttachmentService {
      *  @return the list of entities
      */
     Page<Attachment> search(String query, Pageable pageable);
+    
+
+	List<Attachment> getAttachmentsByEntityInfo(String entityName, Long entityId);
 }
