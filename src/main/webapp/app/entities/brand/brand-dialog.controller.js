@@ -14,12 +14,13 @@
         vm.openFile = DataUtils.openFile;
         vm.previousState = previousState.name;
         vm.save = save;
-        var list = Attachment.query({entityId:entity.id, entityName:'Brand'});
-        if(list){
-        	vm.image = list[0];
-        }
-        
-        
+        Attachment.query({entityId:entity.id, entityName:'Brand'}, function(attachments){
+        	if(attachments){
+        		vm.image = attachments[0];
+        	}
+        	
+        });
+       
         $scope.summernoteroptions = {
 				height: 300,
 		};

@@ -144,15 +144,19 @@
 		</div>
 
 		<div class="col-sm-offset-2">
-			<uib-tabset active="activeForm"> <uib-tab index="0"
+			<uib-tabset class="nav nav-pills nav-stacked" active="activeForm"> <uib-tab index="0"
 				heading="Descripton"> <summernote
 				config="summernoteroptions" ng-model="vm.product.description"
 				name="description" id="field_description">{{vm.product.description}}</summernote>
-			</uib-tab> <uib-tab index="1" heading="Images"> <!-- <img
-				data-ng-src="{{'data:' + vm.product.imageContentType + ';base64,' + vm.b.image}}"
-				class="img-thumbnail" ng-if="vm.product.image" /> -->
+			</uib-tab> <uib-tab index="1" heading="Images">
+			<div ng-if="vm.attachments" ng-repeat="attachment in vm.attachments">
+			 <img data-ng-src="{{'data:' + vm.attachment.contentType + ';base64,' + vm.attachment.image}}"
+				class="img-thumbnail" />
+			</div>
+			
+			
 			<button type="button" ngf-select class="btn btn-default btn-block"
-				ngf-change="vm.setImage($file, vm.brand)" accept="image/*"
+				ngf-change="vm.setImage($file, vm.product)" accept="image/*"
 				data-translate="entity.action.addimage">Add image</button>
 			<input type="hidden" class="form-control" name="image"
 				id="field_image" ng-model="vm.brand.image" /> <input type="hidden"

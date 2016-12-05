@@ -42,8 +42,8 @@
 		</uib-tab> 
 		<uib-tab index="2" heading="图片">		
 			<img
-				data-ng-src="{{'data:' + vm.brand.imageContentType + ';base64,' + vm.brand.image}}"
-				class="img-thumbnail" ng-if="vm.brand.image" />
+				data-ng-src="{{'data:' + vm.image.contentType + ';base64,' + vm.image.content}}"
+				class="img-thumbnail" ng-if="vm.image" />
 			<button type="button" ngf-select class="btn btn-default btn-block"
 				ngf-change="vm.setImage($file, vm.brand)" accept="image/*"
 				data-translate="entity.action.addimage">Add image</button>
