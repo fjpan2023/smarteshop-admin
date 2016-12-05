@@ -58,7 +58,7 @@ public class TemplateController extends AbstractController{
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("template", "idexists", "A new template cannot already have an ID")).body(null);
         }
         Template result = templateService.save(template);
-        return ResponseEntity.created(new URI("/api /" + result.getId()))
+        return ResponseEntity.created(new URI("/api/templates/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("template", result.getId().toString()))
             .body(result);
     }
