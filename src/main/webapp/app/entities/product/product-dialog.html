@@ -40,16 +40,6 @@
 						data-translate="smarteshopApp.StatusEnum.UNACTIVITY">UNACTIVITY</option>
 				</select>
 			</div>
-
-			<label class="col-sm-2  control-label"
-				data-translate="smarteshopApp.product.standardPrice"
-				for="field_standardPrice">Standard Price</label>
-			<div class="col-sm-4">
-				<input type="number" class="form-control" name="standardPrice"
-					id="field_standardPrice" ng-model="vm.product.standardPrice" />
-			</div>
-		</div>
-		<div class="form-group">
 			<label class="col-sm-2  control-label"
 				data-translate="smarteshopApp.product.label" for="field_label">Label</label>
 			<div class="col-sm-4">
@@ -64,6 +54,24 @@
 				</select>
 			</div>
 		</div>
+
+		<div class="form-group">
+			<label class="col-sm-2  control-label"
+				data-translate="smarteshopApp.product.standardPrice"
+				for="field_standardPrice">Standard Price</label>
+			<div class="col-sm-4">
+				<input type="number" class="form-control" name="standardPrice"
+					id="field_standardPrice" ng-model="vm.product.standardPrice"  required/>
+			</div>
+			<label class="col-sm-2  control-label"
+				data-translate="smarteshopApp.product.sellPrice"
+				for="field_sellPrice">Sell Price</label>
+			<div class="col-sm-4">
+				<input type="number" class="form-control" name="sellPrice"
+					id="field_sellPrice" ng-model="vm.product.sellPrice" required/>
+			</div>
+		</div>
+
 		<div class="form-group">
 			<label class="col-sm-2 control-label"
 				data-translate="smarteshopApp.product.brand" for="field_brand">Brand</label>
@@ -142,19 +150,19 @@
 			</div>
 
 		</div>
-
 		<div class="col-sm-offset-2">
-			<uib-tabset class="nav nav-pills nav-stacked" active="activeForm"> <uib-tab index="0"
-				heading="Descripton"> <summernote
+			<uib-tabset class="nav nav-pills nav-stacked" active="activeForm">
+			<uib-tab index="0" heading="Descripton"> <summernote
 				config="summernoteroptions" ng-model="vm.product.description"
 				name="description" id="field_description">{{vm.product.description}}</summernote>
 			</uib-tab> <uib-tab index="1" heading="Images">
 			<div ng-if="vm.attachments" ng-repeat="attachment in vm.attachments">
-			 <img data-ng-src="{{'data:' + vm.attachment.contentType + ';base64,' + vm.attachment.image}}"
-				class="img-thumbnail" />
+				<img
+					data-ng-src="{{'data:' + vm.attachment.contentType + ';base64,' + vm.attachment.image}}"
+					class="img-thumbnail" />
 			</div>
-			
-			
+
+
 			<button type="button" ngf-select class="btn btn-default btn-block"
 				ngf-change="vm.setImage($file, vm.product)" accept="image/*"
 				data-translate="entity.action.addimage">Add image</button>
@@ -165,8 +173,7 @@
 			</uib-tab> <uib-tab index="2" heading="Related Product">
 			<div class="modal-header">
 
-				<h4 class="modal-title" >Create
-					or edit Related Product</h4>
+				<h4 class="modal-title">Create or edit Related Product</h4>
 				<img
 					data-ng-src="{{'data:' + vm.product.imageContentType + ';base64,' + vm.product.image}}"
 					class="img-thumbnail" ng-if="vm.product.portrait" />

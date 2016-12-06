@@ -5,23 +5,20 @@
         .module('smarteshopApp')
         .controller('CategoryDialogController', CategoryDialogController);
 
-    CategoryDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Category', 'Product'];
+    CategoryDialogController.$inject = ['$timeout', '$scope', '$state','$stateParams','previousState', 'entity', 'Category', 'Product'];
 
-    function CategoryDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Category, Product) {
+    function CategoryDialogController ($timeout, $scope, $state, $stateParams, previousState, entity, Category, Product) {
         var vm = this;
 
         vm.category = entity;
-        vm.clear = clear;
         vm.save = save;
         vm.products = Product.query();
+        vm.previousState = previousState.name;
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
 
-        function clear () {
-            $uibModalInstance.dismiss('cancel');
-        }
 
         function save () {
             vm.isSaving = true;
@@ -34,8 +31,8 @@
 
         function onSaveSuccess (result) {
             $scope.$emit('smarteshopApp:categoryUpdate', result);
-            $uibModalInstance.close(result);
             vm.isSaving = false;
+            $state.go(vm.previousState);
         }
 
         function onSaveError () {

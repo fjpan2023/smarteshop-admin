@@ -4,7 +4,7 @@
 
 	<div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal"
-			aria-hidden="true" ng-click="vm.clear()">&times;</button>
+			aria-hidden="true" >&times;</button>
 		<h4 class="modal-title" id="myCustomerLabel"
 			data-translate="smarteshopApp.customer.home.createOrEditLabel">Create
 			or edit a Customer</h4>
@@ -65,7 +65,7 @@
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-default" data-dismiss="modal"
-			ng-click="vm.clear()">
+			ui-sref="{{vm.previousState}}">
 			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
 				data-translate="entity.action.cancel">Cancel</span>
 		</button>

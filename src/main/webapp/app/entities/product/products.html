@@ -56,9 +56,13 @@
 					<th jh-sort-by="status"><span
 						data-translate="smarteshopApp.product.status">Status</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
+					<th jh-sort-by="sellPrice"><span
+						data-translate="smarteshopApp.product.sellPrice">Sell
+							Price</span> <span class="glyphicon glyphicon-sort"></span></th>
 					<th jh-sort-by="standardPrice"><span
 						data-translate="smarteshopApp.product.standardPrice">Standard
 							Price</span> <span class="glyphicon glyphicon-sort"></span></th>
+					
 					<th jh-sort-by="label"><span
 						data-translate="smarteshopApp.product.label">Label</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
@@ -82,8 +86,10 @@
 					</td>
 					<td><a ui-sref="category-detail({id:product.category.id})">{{product.category.name}}</a>
 					</td>
+					
 					<td
 						data-translate="{{'smarteshopApp.StatusEnum.' + product.status}}">{{product.status}}</td>
+					<td>{{product.sellPrice}}</td>
 					<td>{{product.standardPrice}}</td>
 					<td
 						data-translate="{{'smarteshopApp.ProductLabelEnum.' + product.label}}">{{product.label}}</td>

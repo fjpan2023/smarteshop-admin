@@ -21,6 +21,7 @@
             "description": "Description",
             "status": "Status",
             "standardPrice": "Standard Price",
+            "sellPrice": "Sell Price",
             "label": "Label",
             "mainImageId": "Main Image Id",
             "fromDate": "From Date",

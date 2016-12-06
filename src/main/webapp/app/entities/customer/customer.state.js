@@ -89,24 +89,48 @@
             data: {
                 authorities: ['ROLE_USER']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/customer/customer-dialog.html',
                     controller: 'CustomerDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['Customer', function(Customer) {
-                            return Customer.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('^', {}, { reload: false });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('customer');
+                    return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'Customer', function($stateParams, Customer) {
+                    return Customer.get({id : $stateParams.id}).$promise;
+                }],
+                previousState: ["$state", function ($state) {
+                    var currentStateData = {
+                        name: $state.current.name || 'customer',
+                        params: $state.params,
+                        url: $state.href($state.current.name, $state.params)
+                    };
+                    return currentStateData;
+                }]
+            }
+//            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+//                $uibModal.open({
+//                    templateUrl: 'app/entities/customer/customer-dialog.html',
+//                    controller: 'CustomerDialogController',
+//                    controllerAs: 'vm',
+//                    backdrop: 'static',
+//                    size: 'lg',
+//                    resolve: {
+//                        entity: ['Customer', function(Customer) {
+//                            return Customer.get({id : $stateParams.id}).$promise;
+//                        }]
+//                    }
+//                }).result.then(function() {
+//                    $state.go('^', {}, { reload: false });
+//                }, function() {
+//                    $state.go('^');
+//                });
+//            }]
         })
         .state('customer.new', {
             parent: 'customer',
@@ -114,32 +138,32 @@
             data: {
                 authorities: ['ROLE_USER']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/customer/customer-dialog.html',
                     controller: 'CustomerDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: function () {
-                            return {
-                                firstName: null,
-                                lastName: null,
-                                email: null,
-                                phone: null,
-                                fax: null,
-                                remark: null,
-                                id: null
-                            };
-                        }
-                    }
-                }).result.then(function() {
-                    $state.go('customer', null, { reload: 'customer' });
-                }, function() {
-                    $state.go('customer');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('customer');
+                    return $translate.refresh();
+                }],
+                entity: function(){
+					return {
+						
+					}
+                },
+                previousState: ["$state", function ($state) {
+                    var currentStateData = {
+                        name: $state.current.name || 'customer',
+                        params: $state.params,
+                        url: $state.href($state.current.name, $state.params)
+                    };
+                    return currentStateData;
+                }]
+            },
         })
         .state('customer.edit', {
             parent: 'customer',
@@ -147,24 +171,30 @@
             data: {
                 authorities: ['ROLE_USER']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/customer/customer-dialog.html',
                     controller: 'CustomerDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['Customer', function(Customer) {
-                            return Customer.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('customer', null, { reload: 'customer' });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('customer');
+                    return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'Customer', function($stateParams, Customer) {
+					return Customer.get({id : $stateParams.id}).$promise;
+				}],
+                previousState: ["$state", function ($state) {
+                    var currentStateData = {
+                        name: $state.current.name || 'customer',
+                        params: $state.params,
+                        url: $state.href($state.current.name, $state.params)
+                    };
+                    return currentStateData;
+                }]
+            },
         })
         .state('customer.delete', {
             parent: 'customer',

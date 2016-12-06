@@ -3,8 +3,7 @@
 	ng-submit="vm.save()">
 
 	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"
-			aria-hidden="true" ng-click="vm.clear()">&times;</button>
+		
 		<h4 class="modal-title" id="myCategoryLabel"
 			data-translate="smarteshopApp.category.home.createOrEditLabel">Create
 			or edit a Category</h4>
@@ -47,7 +46,7 @@
 			<label class="col-sm-1 control-label"
 				data-translate="smarteshopApp.category.status" for="field_status">Status</label>
 			<div class="col-sm-4">
-				<select class="form-control" name="status"
+				<select class="form-control" name="status" 
 					ng-model="vm.category.status" id="field_status">
 					<option value="ACTIVITY"
 						data-translate="smarteshopApp.StatusEnum.ACTIVITY">ACTIVITY</option>
@@ -60,7 +59,7 @@
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-default" data-dismiss="modal"
-			ng-click="vm.clear()">
+			ui-sref="{{vm.previousState}}">
 			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
 				data-translate="entity.action.cancel">Cancel</span>
 		</button>

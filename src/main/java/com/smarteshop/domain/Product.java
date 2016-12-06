@@ -55,8 +55,11 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     @Column(name = "status")
     private StatusEnum status;
 
-    @Column(name = "standard_price", precision=10, scale=2)
+    @Column(name = "standard_price", nullable=false,precision=10, scale=2)
     private BigDecimal standardPrice;
+
+    @Column(name = "sell_price", nullable=false, precision=10, scale=2)
+    private BigDecimal sellPrice;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "label")
@@ -287,6 +290,16 @@ public class Product extends AbstractAuditingEntity implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+
+
+    public BigDecimal getSellPrice() {
+      return sellPrice;
+    }
+
+    public void setSellPrice(BigDecimal sellPrice) {
+      this.sellPrice = sellPrice;
     }
 
     @Override
