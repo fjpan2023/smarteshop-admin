@@ -132,4 +132,11 @@ public class ProductServiceImpl implements ProductService{
     Page<Product> result =null;// productRepository.findAll(predicate, pageable);
     return result;
   }
+
+  @Override
+  public Page<Product> findAll(Predicate predicate, Pageable pageable) {
+    log.debug("Request to get all Products");
+    Page<Product> result = productRepository.findAll(predicate, pageable);
+    return result;
+  }
 }

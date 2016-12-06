@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.querydsl.core.types.Predicate;
 import com.smarteshop.domain.Attachment;
 import com.smarteshop.domain.Product;
 
@@ -28,6 +29,7 @@ public interface ProductService {
      *  @return the list of entities
      */
     Page<Product> findAll(Pageable pageable);
+    Page<Product> findAll(Predicate predicate, Pageable pageable);
 
     /**
      *  Get the "id" product.

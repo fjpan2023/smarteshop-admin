@@ -3,7 +3,6 @@ package com.smarteshop.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
-import com.smarteshop.domain.QStore;
 import com.smarteshop.domain.Store;
 
 /**
@@ -11,6 +10,6 @@ import com.smarteshop.domain.Store;
  */
 @SuppressWarnings("unused")
 public interface StoreRepository extends JpaRepository<Store,Long>,
-QueryDslPredicateExecutor<QStore> {
+QueryDslPredicateExecutor<Store> {
 
 }

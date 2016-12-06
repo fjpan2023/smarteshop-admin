@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.querydsl.core.types.Predicate;
 import com.smarteshop.domain.Product;
 import com.smarteshop.service.ProductService;
 import com.smarteshop.web.common.AbstractController;
@@ -102,10 +104,10 @@ public class ProductController extends AbstractController {
      */
     @GetMapping( )
     @Timed
-    public ResponseEntity<List<Product>> getAllProducts(Pageable pageable)
+    public ResponseEntity<List<Product>> getAllProducts(@QuerydslPredicate(root=Product.class) Predicate predicate,Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Products");
-        Page<Product> page = productService.findAll(pageable);
+        Page<Product> page = productService.findAll(predicate, pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

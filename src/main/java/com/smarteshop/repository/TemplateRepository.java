@@ -3,7 +3,6 @@ package com.smarteshop.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
-import com.smarteshop.domain.QTemplate;
 import com.smarteshop.domain.Template;
 
 /**
@@ -11,6 +10,6 @@ import com.smarteshop.domain.Template;
  */
 @SuppressWarnings("unused")
 public interface TemplateRepository extends JpaRepository<Template,Long>,
-QueryDslPredicateExecutor<QTemplate> {
+QueryDslPredicateExecutor<Template> {
 
 }
