@@ -1,15 +1,22 @@
 package com.smarteshop.repository;
 
-import com.smarteshop.domain.Category;
-
-import org.springframework.data.jpa.repository.*;
-
 import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
+
+import com.smarteshop.domain.Category;
+import com.smarteshop.domain.QCategory;
+import com.smarteshop.service.dto.CategoryCountInfo;
 
 /**
  * Spring Data JPA repository for the Category entity.
  */
 @SuppressWarnings("unused")
-public interface CategoryRepository extends JpaRepository<Category,Long> {
+public interface CategoryRepository extends JpaRepository<Category,Long>,QueryDslPredicateExecutor<QCategory> {
+
+  @Query("select u.parentId, count(*) from Category u where u.leaf= false group by u.parentId")
+  public List<CategoryCountInfo> categoryCountInfo();
 
 }

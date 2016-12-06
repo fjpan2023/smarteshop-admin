@@ -1,15 +1,15 @@
 package com.smarteshop.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
+
 import com.smarteshop.domain.EmailSetting;
-
-import org.springframework.data.jpa.repository.*;
-
-import java.util.List;
+import com.smarteshop.domain.QEmailSetting;
 
 /**
  * Spring Data JPA repository for the EmailSetting entity.
  */
 @SuppressWarnings("unused")
-public interface EmailSettingRepository extends JpaRepository<EmailSetting,Long> {
+public interface EmailSettingRepository extends JpaRepository<EmailSetting,Long>,QueryDslPredicateExecutor<QEmailSetting> {
 
 }

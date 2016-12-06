@@ -21,11 +21,11 @@
 		</div>
 		<uib-tabset active="activeForm"> <uib-tab index="0" heading="Brief Description"> <summernote config="summernoteroptions" ng-model="vm.brand.briefDesc" name="description" id="field_description">{{vm.brand.briefDesc}}</summernote> </uib-tab> <uib-tab index="1" heading="Descripton"> <summernote config="summernoteroptions" ng-model="vm.brand.description" name="description" id="field_description">{{vm.brand.description}}</summernote> </uib-tab> <uib-tab index="2" heading="图片"> <img data-ng-src="{{'data:' + vm.image.contentType + ';base64,' + vm.image.content}}" class="img-thumbnail" ng-if="vm.image" />
 		<button type="button" ngf-select class="btn btn-default btn-block" ngf-change="vm.setImage($file, vm.brand)" accept="image/*" data-translate="entity.action.addimage">Add image</button>
-		<!-- <input type="hidden" class="form-control" name="image"
+		<input type="hidden" class="form-control" name="image"
 				id="field_image" ng-model="vm.brand.image" />  <input type="hidden"
 				class="form-control" name="imageContentType"
 				id="field_imageContentType" ng-model="vm.brand.imageContentType" />
-				--> </uib-tab> </uib-tabset>
+				 </uib-tab> </uib-tabset>
 
 	</div>
 	<div class="modal-footer">

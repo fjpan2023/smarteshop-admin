@@ -32,6 +32,8 @@ import com.smarteshop.web.common.AbstractController;
 import com.smarteshop.web.rest.util.HeaderUtil;
 import com.smarteshop.web.rest.util.PaginationUtil;
 
+import BusinessException.BusinessException;
+
 /**
  * REST controller for managing Product.
  */
@@ -52,14 +54,18 @@ public class ProductController extends AbstractController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @Timed
-    @PostMapping("")  
+    @PostMapping("")
     public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) throws URISyntaxException {
         log.debug("REST request to save Product : {}", product);
         if (product.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("product", "idexists", "A new product cannot already have an ID")).body(null);
         }
+        if(this.productService.exist(product.getName(), product.getCode())){
+          throw new  BusinessException(" has been existed");
+
+        }
         Product result = productService.save(product);
-        productService.saveImages(result.getId(),product.getImages());        
+        productService.saveImages(result.getId(),product.getImages());
         return ResponseEntity.created(new URI("/api/products" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("product", result.getId().toString()))
             .body(result);
@@ -75,7 +81,7 @@ public class ProductController extends AbstractController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @Timed
-    @PutMapping( )  
+    @PutMapping( )
     public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product) throws URISyntaxException {
         log.debug("REST request to update Product : {}", product);
         if (product.getId() == null) {

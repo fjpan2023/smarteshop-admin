@@ -1,15 +1,16 @@
 package com.smarteshop.repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
+
+import com.smarteshop.domain.QStore;
 import com.smarteshop.domain.Store;
-
-import org.springframework.data.jpa.repository.*;
-
-import java.util.List;
 
 /**
  * Spring Data JPA repository for the Store entity.
  */
 @SuppressWarnings("unused")
-public interface StoreRepository extends JpaRepository<Store,Long> {
+public interface StoreRepository extends JpaRepository<Store,Long>,
+QueryDslPredicateExecutor<QStore> {
 
 }

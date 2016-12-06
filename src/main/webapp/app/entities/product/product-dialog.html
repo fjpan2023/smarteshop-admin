@@ -9,7 +9,10 @@
 		<div class="form-group">
 			<label class=" col-sm-2  control-label" data-translate="smarteshopApp.product.code" for="field_code">Code</label>
 			<div class="col-sm-4">
-				<input type="text" class="form-control" name="code" id="field_code" ng-model="vm.product.code" />
+				<input type="text" class="form-control" name="code" id="field_code" ng-model="vm.product.code" required />
+				<div ng-show="editForm.code.$invalid">
+					<p class="help-block" ng-show="editForm.code.$error.required" data-translate="entity.validation.required">This field is required.</p>
+				</div>
 			</div>
 
 			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.name" for="field_name">Name</label>

@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codahale.metrics.annotation.Timed;
 import com.smarteshop.domain.Category;
 import com.smarteshop.service.CategoryService;
+import com.smarteshop.service.dto.CategoryCountInfo;
 import com.smarteshop.web.common.AbstractController;
 import com.smarteshop.web.rest.util.HeaderUtil;
 import com.smarteshop.web.rest.util.PaginationUtil;
@@ -190,6 +191,12 @@ public class CategoryController extends AbstractController{
 //      result = null;
 //      return resultList;
 //    }
+
+
+    @GetMapping("/countInfo")
+    public List<CategoryCountInfo>  queryCountInfo(){
+      return this.categoryService.categoryCountInfo();
+    }
 
 
 

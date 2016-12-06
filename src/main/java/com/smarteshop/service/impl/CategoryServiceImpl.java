@@ -1,22 +1,23 @@
 package com.smarteshop.service.impl;
 
-import com.smarteshop.service.CategoryService;
-import com.smarteshop.domain.Category;
-import com.smarteshop.repository.CategoryRepository;
-import com.smarteshop.repository.search.CategorySearchRepository;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import com.smarteshop.domain.Category;
+import com.smarteshop.repository.CategoryRepository;
+import com.smarteshop.repository.search.CategorySearchRepository;
+import com.smarteshop.service.CategoryService;
+import com.smarteshop.service.dto.CategoryCountInfo;
 
 /**
  * Service Implementation for managing Category.
@@ -26,7 +27,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class CategoryServiceImpl implements CategoryService{
 
     private final Logger log = LoggerFactory.getLogger(CategoryServiceImpl.class);
-    
+
     @Inject
     private CategoryRepository categoryRepository;
 
@@ -39,6 +40,7 @@ public class CategoryServiceImpl implements CategoryService{
      * @param category the entity to save
      * @return the persisted entity
      */
+    @Override
     public Category save(Category category) {
         log.debug("Request to save Category : {}", category);
         Category result = categoryRepository.save(category);
@@ -48,11 +50,12 @@ public class CategoryServiceImpl implements CategoryService{
 
     /**
      *  Get all the categories.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Override
+    @Transactional(readOnly = true)
     public Page<Category> findAll(Pageable pageable) {
         log.debug("Request to get all Categories");
         Page<Category> result = categoryRepository.findAll(pageable);
@@ -65,7 +68,8 @@ public class CategoryServiceImpl implements CategoryService{
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Override
+    @Transactional(readOnly = true)
     public Category findOne(Long id) {
         log.debug("Request to get Category : {}", id);
         Category category = categoryRepository.findOne(id);
@@ -77,6 +81,7 @@ public class CategoryServiceImpl implements CategoryService{
      *
      *  @param id the id of the entity
      */
+    @Override
     public void delete(Long id) {
         log.debug("Request to delete Category : {}", id);
         categoryRepository.delete(id);
@@ -89,10 +94,16 @@ public class CategoryServiceImpl implements CategoryService{
      *  @param query the query of the search
      *  @return the list of entities
      */
+    @Override
     @Transactional(readOnly = true)
     public Page<Category> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Categories for query {}", query);
         Page<Category> result = categorySearchRepository.search(queryStringQuery(query), pageable);
         return result;
+    }
+
+    @Override
+    public List<CategoryCountInfo> categoryCountInfo() {
+      return  this.categoryRepository.categoryCountInfo();
     }
 }
