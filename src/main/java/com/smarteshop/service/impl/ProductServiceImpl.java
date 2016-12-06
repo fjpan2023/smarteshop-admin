@@ -124,4 +124,12 @@ public class ProductServiceImpl implements ProductService{
     Predicate predicate = qProduct.name.eq(name).or( qProduct.code.eq(code));
     return this.productRepository.exists(predicate);
   }
+
+  @Override
+  public Page<Product> findRelatedProduct(Long id, Pageable pageable) {
+    log.debug("Request to get all Products");
+   // Specification spec = null;
+    Page<Product> result =null;// productRepository.findAll(predicate, pageable);
+    return result;
+  }
 }

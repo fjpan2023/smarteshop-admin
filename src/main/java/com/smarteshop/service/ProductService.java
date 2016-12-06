@@ -56,4 +56,6 @@ public interface ProductService {
 
     void saveImages(Long productId, Collection<Attachment> images);
     boolean exist(String name, String code);
+
+    Page<Product> findRelatedProduct(Long id, Pageable pageable);
 }
