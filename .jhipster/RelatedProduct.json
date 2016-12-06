@@ -1,25 +1,25 @@
 {
-    "fluentMethods": true,
-    "relationships": [
-        {
-            "relationshipName": "product",
-            "otherEntityName": "product",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        }
-    ],
-    "fields": [
-        {
-            "fieldName": "relatedProductId",
-            "fieldType": "Long",
-            "fieldValidateRules": [
-                "required"
-            ]
-        }
-    ],
-    "changelogDate": "20161130115217",
-    "entityTableName": "related_product",
-    "dto": "no",
-    "pagination": "pagination",
-    "service": "serviceImpl"
+	"fluentMethods": true,
+	"relationships": [
+		{
+			"relationshipName": "product",
+			"otherEntityName": "product",
+			"relationshipType": "many-to-one",
+			"otherEntityField": "id"
+		}
+	],
+	"fields": [
+		{
+			"fieldName": "relatedProductId",
+			"fieldType": "Long",
+			"fieldValidateRules": [
+				"required"
+			]
+		}
+	],
+	"changelogDate": "20161130115217",
+	"entityTableName": "related_product",
+	"dto": "no",
+	"pagination": "pagination",
+	"service": "serviceImpl"
 }

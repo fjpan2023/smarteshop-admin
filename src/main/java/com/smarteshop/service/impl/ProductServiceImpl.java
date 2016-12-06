@@ -1,22 +1,25 @@
 package com.smarteshop.service.impl;
 
-import com.smarteshop.service.ProductService;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+
+import java.util.Collection;
+
+import javax.inject.Inject;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.smarteshop.domain.Attachment;
 import com.smarteshop.domain.Product;
 import com.smarteshop.repository.ProductRepository;
 import com.smarteshop.repository.search.ProductSearchRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.stereotype.Service;
-
-import javax.inject.Inject;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import com.smarteshop.service.AttachmentService;
+import com.smarteshop.service.ProductService;
 
 /**
  * Service Implementation for managing Product.
@@ -32,6 +35,9 @@ public class ProductServiceImpl implements ProductService{
 
     @Inject
     private ProductSearchRepository productSearchRepository;
+    
+    @Autowired
+    private AttachmentService attachmentService; 
 
     /**
      * Save a product.
@@ -95,4 +101,13 @@ public class ProductServiceImpl implements ProductService{
         Page<Product> result = productSearchRepository.search(queryStringQuery(query), pageable);
         return result;
     }
+
+	@Override
+	public void saveImages(Long productId, Collection<Attachment> images) {
+		for(Attachment each : images){
+			each.setEntityId(productId);
+			this.attachmentService.save(each);
+		}
+		
+	}
 }

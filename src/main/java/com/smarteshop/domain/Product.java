@@ -3,6 +3,8 @@ package com.smarteshop.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -17,13 +19,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smarteshop.domain.enumeration.ProductLabelEnum;
 import com.smarteshop.domain.enumeration.StatusEnum;
 
@@ -76,12 +78,10 @@ public class Product extends AbstractAuditingEntity implements Serializable {
     private ZonedDateTime endDate;
 
     @OneToMany(mappedBy = "product")
-    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Sku> skuses = new HashSet<>();
 
     @OneToMany(mappedBy = "product")
-    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<RelatedProduct> relatedProducts = new HashSet<>();
 
@@ -90,6 +90,9 @@ public class Product extends AbstractAuditingEntity implements Serializable {
 
     @ManyToOne
     private Category category;
+    
+    @Transient
+    private Set<Attachment> images = new HashSet<Attachment>();
 
     public Long getId() {
         return id;
@@ -300,9 +303,15 @@ public class Product extends AbstractAuditingEntity implements Serializable {
 
     public void setSellPrice(BigDecimal sellPrice) {
       this.sellPrice = sellPrice;
-    }
+    }    
+    public Collection<Attachment> getImages() {
+		return images;
+	}
+	public void setImages(Set<Attachment> images) {
+		this.images = images;
+	}
 
-    @Override
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -322,19 +331,10 @@ public class Product extends AbstractAuditingEntity implements Serializable {
         return Objects.hashCode(id);
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-            "id=" + id +
-            ", code='" + code + "'" +
-            ", name='" + name + "'" +
-            ", description='" + description + "'" +
-            ", status='" + status + "'" +
-            ", standardPrice='" + standardPrice + "'" +
-            ", label='" + label + "'" +
-            ", mainImageId='" + mainImageId + "'" +
-            ", fromDate='" + fromDate + "'" +
-            ", endDate='" + endDate + "'" +
-            '}';
-    }
+	@Override
+	public String toString() {
+		return "Product [id=" + id + ", code=" + code + ", name=" + name + ", description=" + description + ", status="
+				+ status + ", standardPrice=" + standardPrice + ", sellPrice=" + sellPrice + ", label=" + label
+				+ ", mainImageId=" + mainImageId + ", fromDate=" + fromDate + ", endDate=" + endDate + "]";
+	}   
 }

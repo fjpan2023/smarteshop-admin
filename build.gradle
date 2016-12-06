@@ -29,6 +29,7 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'war'
 apply plugin: 'propdeps'
 apply plugin: 'io.spring.dependency-management'
+apply plugin: "eclipse"
 defaultTasks 'bootRun'
 
 bootRepackage {
@@ -210,6 +211,11 @@ dependencies {
     compile "io.springfox:springfox-bean-validators:${springfox_version}"
     compile "mysql:mysql-connector-java"
     compile "org.mapstruct:mapstruct-jdk8:${mapstruct_version}"
+    compile 'org.apache.commons:commons-lang3'
+	compile 'commons-io:commons-io'
+    
+    
+    
     testCompile "com.jayway.awaitility:awaitility:${awaility_version}"
     testCompile "com.jayway.jsonpath:json-path"
     testCompile "org.springframework.boot:spring-boot-starter-test"
@@ -225,13 +231,13 @@ dependencies {
     testCompile "com.h2database:h2"
     optional "org.springframework.boot:spring-boot-configuration-processor:${spring_boot_version}"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
-    
-    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
-	compile 'org.apache.commons:commons-lang3'
-	compile 'commons-io:commons-io'
-	
+}
 
-    
+eclipse {
+    classpath {
+        downloadJavadoc = true
+        downloadSources = true
+    }
 }
 
 clean {

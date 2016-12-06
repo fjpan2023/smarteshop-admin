@@ -83,7 +83,6 @@
             vm.currentSearch = searchQuery;
             vm.transition();
         }
-
         function clear () {
             vm.links = null;
             vm.page = 1;

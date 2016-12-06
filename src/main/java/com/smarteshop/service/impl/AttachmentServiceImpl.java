@@ -42,7 +42,7 @@ public class AttachmentServiceImpl implements AttachmentService{
     public Attachment save(Attachment attachment) {
         log.debug("Request to save Attachment : {}", attachment);
         Attachment result = attachmentRepository.save(attachment);
-        attachmentSearchRepository.save(result);
+        //attachmentSearchRepository.save(result);
         return result;
     }
 
@@ -80,7 +80,7 @@ public class AttachmentServiceImpl implements AttachmentService{
     public void delete(Long id) {
         log.debug("Request to delete Attachment : {}", id);
         attachmentRepository.delete(id);
-        attachmentSearchRepository.delete(id);
+       // attachmentSearchRepository.delete(id);
     }
 
     /**

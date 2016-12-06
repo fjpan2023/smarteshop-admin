@@ -133,15 +133,7 @@ public class BrandController extends AbstractController{
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("brand", id.toString())).build();
     }
 
-    /**
-     * SEARCH  /_search/brands?query=:query : search for the brand corresponding
-     * to the query.
-     *
-     * @param query the query of the brand search
-     * @param pageable the pagination information
-     * @return the result of the search
-     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
-     */
+   
     @GetMapping("/_search/brands")
     @Timed
     public ResponseEntity<List<Brand>> searchBrands(@RequestParam String query, Pageable pageable)

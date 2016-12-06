@@ -1,10 +1,12 @@
 package com.smarteshop.service;
 
-import com.smarteshop.domain.Product;
+import java.util.Collection;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+import com.smarteshop.domain.Attachment;
+import com.smarteshop.domain.Product;
 
 /**
  * Service Interface for managing Product.
@@ -51,4 +53,6 @@ public interface ProductService {
      *  @return the list of entities
      */
     Page<Product> search(String query, Pageable pageable);
+    
+    void saveImages(Long productId, Collection<Attachment> images);
 }

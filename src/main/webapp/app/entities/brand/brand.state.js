@@ -142,7 +142,7 @@
 					return {
 						name: null,
 						description: null,
-						status: null,
+						status: 'ACTIVITY',
 						image: null,
 						imageContentType: null,
 						id: null

@@ -18,7 +18,6 @@
         	if(attachments){
         		vm.image = attachments[0];
         	}
-        	
         });
        
         $scope.summernoteroptions = {

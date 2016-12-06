@@ -51,15 +51,16 @@ public class ProductController extends AbstractController {
      * @return the ResponseEntity with status 201 (Created) and with body the new product, or with status 400 (Bad Request) if the product has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("")
     @Timed
+    @PostMapping("")  
     public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) throws URISyntaxException {
         log.debug("REST request to save Product : {}", product);
         if (product.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("product", "idexists", "A new product cannot already have an ID")).body(null);
         }
         Product result = productService.save(product);
-        return ResponseEntity.created(new URI("/api/" + result.getId()))
+        productService.saveImages(result.getId(),product.getImages());        
+        return ResponseEntity.created(new URI("/api/products" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("product", result.getId().toString()))
             .body(result);
     }
@@ -73,8 +74,8 @@ public class ProductController extends AbstractController {
      * or with status 500 (Internal Server Error) if the product couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping( )
     @Timed
+    @PutMapping( )  
     public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product) throws URISyntaxException {
         log.debug("REST request to update Product : {}", product);
         if (product.getId() == null) {

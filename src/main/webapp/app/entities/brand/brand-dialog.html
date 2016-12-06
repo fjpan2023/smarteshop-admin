@@ -1,71 +1,39 @@
 
-<form name="editForm" role="form" class="form-horizontal" novalidate
-	ng-submit="vm.save()">
+<form name="editForm" role="form" class="form-horizontal" novalidate ng-submit="vm.save()">
 
 	<div class="modal-header">
-		<label class="modal-title title-label" id="myBrandLabel"
-			data-translate="smarteshopApp.brand.home.createOrEditLabel">Create
-			or edit a Brand </label> #{{vm.brand.id}}
+		<label class="modal-title title-label" id="myBrandLabel" data-translate="smarteshopApp.brand.home.createOrEditLabel">Create or edit a Brand </label> #{{vm.brand.id}}
 	</div>
 	<div class="modal-body">
 		<jhi-alert-error></jhi-alert-error>
 		<div class="form-group">
-			<label class="col-sm-1  control-label"
-				data-translate="smarteshopApp.brand.name" for="field_name">Name</label>
+			<label class="col-sm-1  control-label" data-translate="smarteshopApp.brand.name" for="field_name">Name</label>
 			<div class="col-sm-4">
-				<input type="text" class=" form-control" name="name" id="field_name"
-					ng-model="vm.brand.name" />
+				<input type="text" class=" form-control" name="name" id="field_name" ng-model="vm.brand.name" />
 			</div>
-			<label class="col-sm-1 control-label"
-				data-translate="smarteshopApp.brand.status" for="field_status">Status</label>
+			<label class="col-sm-1 control-label" data-translate="smarteshopApp.brand.status" for="field_status">Status</label>
 			<div class="col-sm-4">
-				<select class="form-control" name="status"
-					ng-model="vm.brand.status" id="field_status">
-					<option value="ACTIVITY"
-						data-translate="smarteshopApp.StatusEnum.ACTIVITY">ACTIVITY</option>
-					<option value="UNACTIVITY"
-						data-translate="smarteshopApp.StatusEnum.UNACTIVITY">UNACTIVITY</option>
+				<select class="form-control" name="status" ng-model="vm.brand.status" id="field_status" required>
+					<option value="ACTIVITY" data-translate="smarteshopApp.StatusEnum.ACTIVITY">ACTIVITY</option>
+					<option value="UNACTIVITY" data-translate="smarteshopApp.StatusEnum.UNACTIVITY">UNACTIVITY</option>
 				</select>
 			</div>
 		</div>
-	
-		<uib-tabset active="activeForm"> 
-		<uib-tab index="0"
-			heading="Brief Description"> 
-			<summernote config="summernoteroptions"
-			ng-model="vm.brand.briefDesc" name="description"
-			id="field_description">{{vm.brand.briefDesc}}</summernote> 
-			</uib-tab> 
-	    <uib-tab index="1" heading="Descripton"> 
-	    	<summernote config="summernoteroptions" ng-model="vm.brand.description" name="description"
-			id="field_description">{{vm.brand.description}}</summernote> 
-		</uib-tab> 
-		<uib-tab index="2" heading="图片">		
-			<img
-				data-ng-src="{{'data:' + vm.image.contentType + ';base64,' + vm.image.content}}"
-				class="img-thumbnail" ng-if="vm.image" />
-			<button type="button" ngf-select class="btn btn-default btn-block"
-				ngf-change="vm.setImage($file, vm.brand)" accept="image/*"
-				data-translate="entity.action.addimage">Add image</button>
-			<!-- <input type="hidden" class="form-control" name="image"
+		<uib-tabset active="activeForm"> <uib-tab index="0" heading="Brief Description"> <summernote config="summernoteroptions" ng-model="vm.brand.briefDesc" name="description" id="field_description">{{vm.brand.briefDesc}}</summernote> </uib-tab> <uib-tab index="1" heading="Descripton"> <summernote config="summernoteroptions" ng-model="vm.brand.description" name="description" id="field_description">{{vm.brand.description}}</summernote> </uib-tab> <uib-tab index="2" heading="图片"> <img data-ng-src="{{'data:' + vm.image.contentType + ';base64,' + vm.image.content}}" class="img-thumbnail" ng-if="vm.image" />
+		<button type="button" ngf-select class="btn btn-default btn-block" ngf-change="vm.setImage($file, vm.brand)" accept="image/*" data-translate="entity.action.addimage">Add image</button>
+		<!-- <input type="hidden" class="form-control" name="image"
 				id="field_image" ng-model="vm.brand.image" />  <input type="hidden"
 				class="form-control" name="imageContentType"
 				id="field_imageContentType" ng-model="vm.brand.imageContentType" />
-				-->
-		</uib-tab> 
-		</uib-tabset>
+				--> </uib-tab> </uib-tabset>
 
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal"
-			ui-sref="{{vm.previousState}}">
-			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
-				data-translate="entity.action.cancel">Cancel</span>
+		<button type="button" class="btn btn-default" data-dismiss="modal" ui-sref="{{vm.previousState}}">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
 		</button>
-		<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving"
-			class="btn btn-primary">
-			<span class="glyphicon glyphicon-save"></span>&nbsp;<span
-				data-translate="entity.action.save">Save</span>
+		<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
 		</button>
 	</div>
 </form>

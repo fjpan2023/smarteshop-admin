@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,8 +53,8 @@ public class AttachmentController extends AbstractController{
      * @return the ResponseEntity with status 201 (Created) and with body the new attachment, or with status 400 (Bad Request) if the attachment has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/attachments")
     @Timed
+    @PostMapping("/attachments")   
     public ResponseEntity<Attachment> createAttachment(@Valid @RequestBody Attachment attachment) throws URISyntaxException {
         log.debug("REST request to save Attachment : {}", attachment);
         if (attachment.getId() != null) {
@@ -136,6 +137,21 @@ public class AttachmentController extends AbstractController{
         attachmentService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("attachment", id.toString())).build();
     }
+    
+    
+    
+    @GetMapping("/attachments/{entityName}/{entityId}/thumbnail")
+    @Timed
+    public ResponseEntity<byte[]> getThumbnail(@PathVariable  String entityName, @PathVariable  Long entityId)
+        throws URISyntaxException {
+        log.debug("REST request to get a thumbnail {} {}", entityName, entityId);
+        byte[] thumbnail = null;
+        List<Attachment> list = attachmentService.getAttachmentsByEntityInfo(entityName, entityId);
+        if(!CollectionUtils.isEmpty(list)){
+        	thumbnail = list.get(0).getContent();        	
+        }
+        return new ResponseEntity<>(thumbnail, HttpStatus.OK);
+    }   
 
     /**
      * SEARCH  /_search/attachments?query=:query : search for the attachment corresponding

@@ -2,7 +2,7 @@
 	<div class="modal-header">
 		<label class="modal-title title-label"
 			data-translate="smarteshopApp.brand.detail.title">Brand</label>
-		#{{vm.brand.id}}
+		#{{vm.brand.id}}<img data-ng-src='/api/attachments/Brand/{{vm.brand.id}}/thumbnail' style="max-height: 30px;" />
 	</div>
 	<div class="modal-body">
 		<jhi-alert-error></jhi-alert-error>

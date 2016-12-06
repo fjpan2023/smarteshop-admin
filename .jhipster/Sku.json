@@ -1,69 +1,69 @@
 {
-    "fluentMethods": true,
-    "relationships": [
-        {
-            "relationshipName": "product",
-            "otherEntityName": "product",
-            "relationshipType": "many-to-one",
-            "otherEntityField": "id"
-        }
-    ],
-    "fields": [
-        {
-            "fieldName": "code",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "name",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "size",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "width",
-            "fieldType": "BigDecimal"
-        },
-        {
-            "fieldName": "heigh",
-            "fieldType": "BigDecimal"
-        },
-        {
-            "fieldName": "length",
-            "fieldType": "BigDecimal"
-        },
-        {
-            "fieldName": "weight",
-            "fieldType": "BigDecimal"
-        },
-        {
-            "fieldName": "standardPrice",
-            "fieldType": "BigDecimal",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "sellPrice",
-            "fieldType": "BigDecimal",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "defaultSku",
-            "fieldType": "Boolean"
-        },
-        {
-            "fieldName": "status",
-            "fieldType": "StatusEnum",
-            "fieldValues": "ACTIVITY,UNACTIVITY"
-        }
-    ],
-    "changelogDate": "20161130115216",
-    "entityTableName": "sku",
-    "dto": "no",
-    "pagination": "pagination",
-    "service": "serviceImpl"
+	"fluentMethods": true,
+	"relationships": [
+		{
+			"relationshipName": "product",
+			"otherEntityName": "product",
+			"relationshipType": "many-to-one",
+			"otherEntityField": "id"
+		}
+	],
+	"fields": [
+		{
+			"fieldName": "code",
+			"fieldType": "String"
+		},
+		{
+			"fieldName": "name",
+			"fieldType": "String"
+		},
+		{
+			"fieldName": "size",
+			"fieldType": "String"
+		},
+		{
+			"fieldName": "width",
+			"fieldType": "BigDecimal"
+		},
+		{
+			"fieldName": "heigh",
+			"fieldType": "BigDecimal"
+		},
+		{
+			"fieldName": "length",
+			"fieldType": "BigDecimal"
+		},
+		{
+			"fieldName": "weight",
+			"fieldType": "BigDecimal"
+		},
+		{
+			"fieldName": "standardPrice",
+			"fieldType": "BigDecimal",
+			"fieldValidateRules": [
+				"required"
+			]
+		},
+		{
+			"fieldName": "sellPrice",
+			"fieldType": "BigDecimal",
+			"fieldValidateRules": [
+				"required"
+			]
+		},
+		{
+			"fieldName": "defaultSku",
+			"fieldType": "Boolean"
+		},
+		{
+			"fieldName": "status",
+			"fieldType": "StatusEnum",
+			"fieldValues": "ACTIVITY,UNACTIVITY"
+		}
+	],
+	"changelogDate": "20161130115216",
+	"entityTableName": "sku",
+	"dto": "no",
+	"pagination": "pagination",
+	"service": "serviceImpl"
 }

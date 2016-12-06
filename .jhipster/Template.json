@@ -1,28 +1,28 @@
 {
-    "fluentMethods": true,
-    "relationships": [],
-    "fields": [
-        {
-            "fieldName": "type",
-            "fieldType": "TemplateTypeEnum",
-            "fieldValues": "EMAIL,LAYOUT"
-        },
-        {
-            "fieldName": "superId",
-            "fieldType": "Long"
-        },
-        {
-            "fieldName": "templateKey",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "content",
-            "fieldType": "String"
-        }
-    ],
-    "changelogDate": "20161130115221",
-    "entityTableName": "template",
-    "dto": "no",
-    "pagination": "pagination",
-    "service": "serviceImpl"
+	"fluentMethods": true,
+	"relationships": [],
+	"fields": [
+		{
+			"fieldName": "type",
+			"fieldType": "TemplateTypeEnum",
+			"fieldValues": "EMAIL,LAYOUT"
+		},
+		{
+			"fieldName": "superId",
+			"fieldType": "Long"
+		},
+		{
+			"fieldName": "templateKey",
+			"fieldType": "String"
+		},
+		{
+			"fieldName": "content",
+			"fieldType": "String"
+		}
+	],
+	"changelogDate": "20161130115221",
+	"entityTableName": "template",
+	"dto": "no",
+	"pagination": "pagination",
+	"service": "serviceImpl"
 }
