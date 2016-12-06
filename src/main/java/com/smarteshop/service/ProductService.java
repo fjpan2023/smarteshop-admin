@@ -23,7 +23,7 @@ public interface ProductService {
 
     /**
      *  Get all the products.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -48,11 +48,12 @@ public interface ProductService {
      * Search for the product corresponding to the query.
      *
      *  @param query the query of the search
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
     Page<Product> search(String query, Pageable pageable);
-    
+
     void saveImages(Long productId, Collection<Attachment> images);
+    boolean exist(String name, String code);
 }

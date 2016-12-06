@@ -18,6 +18,8 @@ buildscript {
         classpath "com.moowork.gradle:gradle-gulp-plugin:0.13"
         classpath "io.spring.gradle:dependency-management-plugin:0.6.1.RELEASE"
         //jhipster-needle-gradle-buildscript-dependency - JHipster will add additional gradle build script plugins here
+        classpath "gradle.plugin.com.ewerk.gradle.plugins:querydsl-plugin:1.0.7"
+    
     }
 }
 
@@ -30,6 +32,7 @@ apply plugin: 'war'
 apply plugin: 'propdeps'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: "eclipse"
+apply plugin: "com.ewerk.gradle.plugins.querydsl"
 defaultTasks 'bootRun'
 
 bootRepackage {
@@ -211,8 +214,12 @@ dependencies {
     compile "io.springfox:springfox-bean-validators:${springfox_version}"
     compile "mysql:mysql-connector-java"
     compile "org.mapstruct:mapstruct-jdk8:${mapstruct_version}"
+    
+    //  customize part
     compile 'org.apache.commons:commons-lang3'
 	compile 'commons-io:commons-io'
+	compile 'com.querydsl:querydsl-jpa:4.1.4'
+	compile 'org.springframework.data:spring-data-jpa'
     
     
     
@@ -239,7 +246,11 @@ eclipse {
         downloadSources = true
     }
 }
-
+querydsl {
+  library "com.querydsl:querydsl-apt:4.1.4"
+  querydslSourcesDir = "src/querydsl/java"
+  jpa = true
+}
 clean {
     delete "target"
 }

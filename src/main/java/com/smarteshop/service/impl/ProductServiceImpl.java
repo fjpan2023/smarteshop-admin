@@ -14,8 +14,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.querydsl.core.types.Predicate;
 import com.smarteshop.domain.Attachment;
 import com.smarteshop.domain.Product;
+import com.smarteshop.domain.QProduct;
 import com.smarteshop.repository.ProductRepository;
 import com.smarteshop.repository.search.ProductSearchRepository;
 import com.smarteshop.service.AttachmentService;
@@ -29,15 +31,15 @@ import com.smarteshop.service.ProductService;
 public class ProductServiceImpl implements ProductService{
 
     private final Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
-    
+
     @Inject
     private ProductRepository productRepository;
 
     @Inject
     private ProductSearchRepository productSearchRepository;
-    
+
     @Autowired
-    private AttachmentService attachmentService; 
+    private AttachmentService attachmentService;
 
     /**
      * Save a product.
@@ -45,6 +47,7 @@ public class ProductServiceImpl implements ProductService{
      * @param product the entity to save
      * @return the persisted entity
      */
+    @Override
     public Product save(Product product) {
         log.debug("Request to save Product : {}", product);
         Product result = productRepository.save(product);
@@ -54,11 +57,12 @@ public class ProductServiceImpl implements ProductService{
 
     /**
      *  Get all the products.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Override
+    @Transactional(readOnly = true)
     public Page<Product> findAll(Pageable pageable) {
         log.debug("Request to get all Products");
         Page<Product> result = productRepository.findAll(pageable);
@@ -71,7 +75,8 @@ public class ProductServiceImpl implements ProductService{
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Override
+    @Transactional(readOnly = true)
     public Product findOne(Long id) {
         log.debug("Request to get Product : {}", id);
         Product product = productRepository.findOne(id);
@@ -83,6 +88,7 @@ public class ProductServiceImpl implements ProductService{
      *
      *  @param id the id of the entity
      */
+    @Override
     public void delete(Long id) {
         log.debug("Request to delete Product : {}", id);
         productRepository.delete(id);
@@ -95,6 +101,7 @@ public class ProductServiceImpl implements ProductService{
      *  @param query the query of the search
      *  @return the list of entities
      */
+    @Override
     @Transactional(readOnly = true)
     public Page<Product> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Products for query {}", query);
@@ -108,6 +115,14 @@ public class ProductServiceImpl implements ProductService{
 			each.setEntityId(productId);
 			this.attachmentService.save(each);
 		}
-		
+
 	}
+
+  @Override
+  public boolean exist(String name, String code) {
+    QProduct qProduct = QProduct.product;
+    Predicate predicate = qProduct.name.eq(name).or( qProduct.code.eq(code));
+    return false;
+  //  return this.productRepository.exists(predicate);
+  }
 }

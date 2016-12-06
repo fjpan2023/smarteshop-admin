@@ -1,8 +1,6 @@
 package com.smarteshop.web.common;
 
-import com.redis.E;
-
-public abstract class AbstractController {
+public abstract class AbstractController<E> {
 
   protected void onLoad(Long id){};
   protected void onCreate(E entity){};
