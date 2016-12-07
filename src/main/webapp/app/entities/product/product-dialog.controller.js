@@ -84,6 +84,11 @@
 				});
 			}
 		};
+		
+	function showNotRelatedProducts(ids){
+		
+		
+	}
 
 	}
 })();

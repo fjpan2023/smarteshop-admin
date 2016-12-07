@@ -111,8 +111,10 @@
 			</div>
 			</uib-tab> <uib-tab index="2" heading="Related Product">
 			<div class="modal-header">
-				<h4 class="modal-title">Create or edit Related Product</h4>
-				<img data-ng-src="{{'data:' + vm.product.imageContentType + ';base64,' + vm.product.image}}" class="img-thumbnail" ng-if="vm.product.portrait" />
+				<label class="modal-title">Create or edit Related Product</label>
+				<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary pull-right" ng-click="vm.showNotRelatedProducts()">
+					<span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.addRelated">Add Related</span>
+				</button>
 			</div>
 			<div class="modal-body">
 				<div class="table-responsive">
