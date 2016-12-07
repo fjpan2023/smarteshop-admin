@@ -11,7 +11,7 @@
         $stateProvider
         .state('contact-person', {
             parent: 'entity',
-            url: '/contact-person?page&sort&search',
+            url: '/contactPersons?page&sort&search',
             data: {
                 authorities: ['ROLE_USER'],
                 pageTitle: 'smarteshopApp.contactPerson.home.title'
@@ -53,7 +53,7 @@
         })
         .state('contact-person-detail', {
             parent: 'entity',
-            url: '/contact-person/{id}',
+            url: '/contactPersons/{id}',
             data: {
                 authorities: ['ROLE_USER'],
                 pageTitle: 'smarteshopApp.contactPerson.detail.title'

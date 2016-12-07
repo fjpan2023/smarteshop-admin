@@ -35,7 +35,7 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  * REST controller for managing ContactPerson.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/contactPersons")
 public class ContactPersonController extends AbstractController{
 
     private final Logger log = LoggerFactory.getLogger(ContactPersonController.class);
@@ -50,8 +50,8 @@ public class ContactPersonController extends AbstractController{
      * @return the ResponseEntity with status 201 (Created) and with body the new contactPerson, or with status 400 (Bad Request) if the contactPerson has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/contact-people")
     @Timed
+    @PostMapping()   
     public ResponseEntity<ContactPerson> createContactPerson(@RequestBody ContactPerson contactPerson) throws URISyntaxException {
         log.debug("REST request to save ContactPerson : {}", contactPerson);
         if (contactPerson.getId() != null) {
@@ -72,8 +72,8 @@ public class ContactPersonController extends AbstractController{
      * or with status 500 (Internal Server Error) if the contactPerson couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/contact-people")
     @Timed
+    @PutMapping()   
     public ResponseEntity<ContactPerson> updateContactPerson(@RequestBody ContactPerson contactPerson) throws URISyntaxException {
         log.debug("REST request to update ContactPerson : {}", contactPerson);
         if (contactPerson.getId() == null) {
@@ -92,8 +92,8 @@ public class ContactPersonController extends AbstractController{
      * @return the ResponseEntity with status 200 (OK) and the list of contactPeople in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/contact-people")
     @Timed
+    @GetMapping()    
     public ResponseEntity<List<ContactPerson>> getAllContactPeople(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of ContactPeople");
@@ -108,8 +108,8 @@ public class ContactPersonController extends AbstractController{
      * @param id the id of the contactPerson to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the contactPerson, or with status 404 (Not Found)
      */
-    @GetMapping("/contact-people/{id}")
     @Timed
+    @GetMapping("/{id}")    
     public ResponseEntity<ContactPerson> getContactPerson(@PathVariable Long id) {
         log.debug("REST request to get ContactPerson : {}", id);
         ContactPerson contactPerson = contactPersonService.findOne(id);
@@ -126,8 +126,8 @@ public class ContactPersonController extends AbstractController{
      * @param id the id of the contactPerson to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/contact-people/{id}")
     @Timed
+    @DeleteMapping("/{id}")    
     public ResponseEntity<Void> deleteContactPerson(@PathVariable Long id) {
         log.debug("REST request to delete ContactPerson : {}", id);
         contactPersonService.delete(id);
@@ -142,9 +142,9 @@ public class ContactPersonController extends AbstractController{
      * @param pageable the pagination information
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
-     */
-    @GetMapping("/_search/contact-people")
+     */ 
     @Timed
+    @GetMapping("/_search/contact-people")   
     public ResponseEntity<List<ContactPerson>> searchContactPeople(@RequestParam String query, Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to search for a page of ContactPeople for query {}", query);
