@@ -35,8 +35,8 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  * REST controller for managing Customer.
  */
 @RestController
-@RequestMapping("/api")
-public class CustomerController extends AbstractController{
+@RequestMapping("/api/customers")
+public class CustomerController extends AbstractController<Customer>{
 
     private final Logger log = LoggerFactory.getLogger(CustomerController.class);
 
@@ -50,7 +50,7 @@ public class CustomerController extends AbstractController{
      * @return the ResponseEntity with status 201 (Created) and with body the new customer, or with status 400 (Bad Request) if the customer has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/customers")
+    @PostMapping()
     @Timed
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) throws URISyntaxException {
         log.debug("REST request to save Customer : {}", customer);
@@ -72,7 +72,7 @@ public class CustomerController extends AbstractController{
      * or with status 500 (Internal Server Error) if the customer couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/customers")
+    @PutMapping()
     @Timed
     public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) throws URISyntaxException {
         log.debug("REST request to update Customer : {}", customer);
@@ -92,7 +92,7 @@ public class CustomerController extends AbstractController{
      * @return the ResponseEntity with status 200 (OK) and the list of customers in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/customers")
+    @GetMapping()
     @Timed
     public ResponseEntity<List<Customer>> getAllCustomers(Pageable pageable)
         throws URISyntaxException {
@@ -108,7 +108,7 @@ public class CustomerController extends AbstractController{
      * @param id the id of the customer to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the customer, or with status 404 (Not Found)
      */
-    @GetMapping("/customers/{id}")
+    @GetMapping("/{id}")
     @Timed
     public ResponseEntity<Customer> getCustomer(@PathVariable Long id) {
         log.debug("REST request to get Customer : {}", id);
@@ -126,7 +126,7 @@ public class CustomerController extends AbstractController{
      * @param id the id of the customer to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/customers/{id}")
+    @DeleteMapping("/{id}")
     @Timed
     public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
         log.debug("REST request to delete Customer : {}", id);
@@ -143,13 +143,13 @@ public class CustomerController extends AbstractController{
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/_search/customers")
+    @GetMapping("/_search")
     @Timed
     public ResponseEntity<List<Customer>> searchCustomers(@RequestParam String query, Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to search for a page of Customers for query {}", query);
         Page<Customer> page = customerService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/customers");
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/customers/_search");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

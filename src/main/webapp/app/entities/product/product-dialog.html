@@ -101,7 +101,7 @@
 			</div>
 
 		</div>
-		<div>
+		<div class="tab-div">
 			<uib-tabset active="activeForm" justified=true> <uib-tab index="0" heading="Descripton"> <summernote config="summernoteroptions" ng-model="vm.product.description" name="description" id="field_description">{{vm.product.description}}</summernote> </uib-tab> <uib-tab index="1" heading="Images">
 			<div class="row">
 				<div ng-if="vm.product.images" ng-repeat="productImage in vm.product.images">

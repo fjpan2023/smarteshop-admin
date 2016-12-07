@@ -1,43 +1,54 @@
 
-<div>
-    <h2><span data-translate="smarteshopApp.customer.detail.title">Customer</span> {{vm.customer.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="smarteshopApp.customer.firstName">First Name</span></dt>
-        <dd>
-            <span>{{vm.customer.firstName}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.customer.lastName">Last Name</span></dt>
-        <dd>
-            <span>{{vm.customer.lastName}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.customer.email">Email</span></dt>
-        <dd>
-            <span>{{vm.customer.email}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.customer.phone">Phone</span></dt>
-        <dd>
-            <span>{{vm.customer.phone}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.customer.fax">Fax</span></dt>
-        <dd>
-            <span>{{vm.customer.fax}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.customer.remark">Remark</span></dt>
-        <dd>
-            <span>{{vm.customer.remark}}</span>
-        </dd>
-    </dl>
+<div class="form-horizontal">
+	<div class="modal-header">
+		<h3>
+			<span data-translate="smarteshopApp.customer.detail.title">Customer</span> #{{vm.customer.id}}
+		</h3>
+	</div>
+	<div class="modal-body">
+		<jhi-alert-error></jhi-alert-error>
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label" data-translate="smarteshopApp.customer.firstName">First Name</label>
+				<div class="col-sm-4">
+					<p class="form-control-static">{{vm.customer.firstName}}</p>
+				</div>
+				<label class="col-sm-2 control-label" data-translate="smarteshopApp.customer.lastName">Last Name</label>
+				<div class="col-sm-4">
+					<p class="form-control-static">{{vm.customer.lastName}}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" data-translate="smarteshopApp.customer.email">Email</label>
+				<div class="col-sm-4">
+					<p class="form-control-static">{{vm.customer.email}}</p>
+				</div>
+				<label class="col-sm-2 control-label" data-translate="smarteshopApp.customer.phone">Phone</label>
+				<div class="col-sm-4">
+					<p class="form-control-static">{{vm.customer.phone}}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" data-translate="smarteshopApp.customer.fax">fax</label>
+				<div class="col-sm-4">
+					<p class="form-control-static">{{vm.customer.fax}}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" data-translate="smarteshopApp.customer.remark">Remark</label>
+				<div class="col-sm-4">
+					<p class="form-control-static">{{vm.customer.remark}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="submit" ui-sref="{{ vm.previousState }}" class="btn btn-info">
+			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+		</button>
 
-    <button type="submit"
-            ui-sref="{{ vm.previousState }}"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
-
-    <button type="button" ui-sref="customer-detail.edit({id:vm.customer.id})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
-    </button>
+		<button type="button" ui-sref="customer-detail.edit({id:vm.customer.id})" class="btn btn-primary">
+			<span class="glyphicon glyphicon-pencil"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+		</button>
+	</div>
 </div>
