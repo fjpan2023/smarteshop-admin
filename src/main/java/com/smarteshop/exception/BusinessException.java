@@ -1,4 +1,4 @@
-package BusinessException;
+package com.smarteshop.exception;
 
 import java.text.MessageFormat;
 

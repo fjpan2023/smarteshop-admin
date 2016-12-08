@@ -29,12 +29,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codahale.metrics.annotation.Timed;
 import com.querydsl.core.types.Predicate;
 import com.smarteshop.domain.Product;
+import com.smarteshop.exception.BusinessException;
 import com.smarteshop.service.ProductService;
 import com.smarteshop.web.common.AbstractController;
 import com.smarteshop.web.rest.util.HeaderUtil;
 import com.smarteshop.web.rest.util.PaginationUtil;
-
-import BusinessException.BusinessException;
 
 /**
  * REST controller for managing Product.
