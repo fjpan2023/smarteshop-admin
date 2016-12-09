@@ -172,5 +172,4 @@ public class ProductController extends AbstractController {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-
 }

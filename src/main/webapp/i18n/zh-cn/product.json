@@ -29,7 +29,8 @@
             "skus": "Skus",
             "relatedProducts": "Related Products",
             "brand": "Brand",
-            "category": "Category"
+            "category": "Category",
+             "addRelative": "Add Relative"
         }
     }
 }

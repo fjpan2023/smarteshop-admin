@@ -20,6 +20,7 @@
                 "contactPerson": "Contact Person",
                 "comments": "Comments",
                 "attachment": "Attachment",
+                "customerGroup": "Customer Group",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
