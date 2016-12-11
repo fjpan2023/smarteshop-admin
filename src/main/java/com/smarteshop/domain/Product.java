@@ -3,7 +3,6 @@ package com.smarteshop.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -26,6 +25,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smarteshop.domain.common.BusinessObjectInterface;
 import com.smarteshop.domain.enumeration.ProductLabelEnum;
 import com.smarteshop.domain.enumeration.StatusEnum;
 
@@ -36,7 +36,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 @Table(name = "product")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "product")
-public class Product extends AbstractAuditingEntity implements Serializable {
+public class Product extends AbstractAuditingEntity implements BusinessObjectInterface, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -90,7 +90,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
 
     @ManyToOne
     private Category category;
-    
+
     @Transient
     private Set<Attachment> images = new HashSet<Attachment>();
 
@@ -303,7 +303,7 @@ public class Product extends AbstractAuditingEntity implements Serializable {
 
     public void setSellPrice(BigDecimal sellPrice) {
       this.sellPrice = sellPrice;
-    }    
+    }
     public Collection<Attachment> getImages() {
 		return images;
 	}
@@ -336,5 +336,5 @@ public class Product extends AbstractAuditingEntity implements Serializable {
 		return "Product [id=" + id + ", code=" + code + ", name=" + name + ", description=" + description + ", status="
 				+ status + ", standardPrice=" + standardPrice + ", sellPrice=" + sellPrice + ", label=" + label
 				+ ", mainImageId=" + mainImageId + ", fromDate=" + fromDate + ", endDate=" + endDate + "]";
-	}   
+	}
 }

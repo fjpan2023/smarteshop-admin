@@ -40,7 +40,7 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  */
 @RestController
 @RequestMapping("/api/products")
-public class ProductController extends AbstractController {
+public class ProductController extends AbstractController<Product> {
 
     private final Logger log = LoggerFactory.getLogger(ProductController.class);
 
@@ -62,8 +62,7 @@ public class ProductController extends AbstractController {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("product", "idexists", "A new product cannot already have an ID")).body(null);
         }
         if(this.productService.exist(product.getName(), product.getCode())){
-          throw new  BusinessException(" has been existed");
-
+          throw new  BusinessException(" {} / {}has been existed", product.getName(), product.getCode());
         }
         Product result = productService.save(product);
         productService.saveImages(result.getId(),product.getImages());
