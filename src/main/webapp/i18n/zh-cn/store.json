@@ -18,7 +18,8 @@
             },
             "name": "Name",
             "url": "Url",
-            "status": "Status"
-        }
+            "status": "Status",
+            "currency" : "Currency"
+            }
     }
 }

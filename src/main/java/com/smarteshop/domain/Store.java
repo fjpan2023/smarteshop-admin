@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -42,6 +43,9 @@ public class Store extends AbstractAuditingEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private StatusEnum status;
+    
+    @ManyToOne
+    private Currency currency;
 
     public Long getId() {
         return id;
@@ -90,7 +94,16 @@ public class Store extends AbstractAuditingEntity implements Serializable {
         this.status = status;
     }
 
-    @Override
+     
+    public Currency getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
