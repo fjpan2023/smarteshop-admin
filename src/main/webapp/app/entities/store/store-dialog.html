@@ -13,7 +13,7 @@
 			<div class="col-sm-4 no-padding-left">
 				<input type="text" class="form-control" name="name" id="field_name" ng-model="vm.store.name" />
 			</div>
-			<label class="col-sm-1 control-label" data-translate="smarteshopApp.store.status" for="field_status">Status</label>
+			<label class="col-sm-2 control-label" data-translate="smarteshopApp.store.status" for="field_status">Status</label>
 			<div class="col-sm-4 no-padding-left">
 				<select class="form-control" name="status" ng-model="vm.store.status" id="field_status">
 					<option value="ACTIVITY" data-translate="smarteshopApp.StatusEnum.ACTIVITY">ACTIVITY</option>
@@ -27,7 +27,7 @@
 			<div class="col-sm-4 no-padding-left">
 				<input type="url" class="form-control" name="url" id="field_url" ng-model="vm.store.url" />
 			</div>
-			<label class="col-sm-1  control-label" data-translate="smarteshopApp.store.currency" for="field_url">Currency</label>
+			<label class="col-sm-2 control-label" data-translate="smarteshopApp.store.currency" for="field_url">Currency</label>
 			<div class="col-sm-4  no-padding-left">
 				<select class="form-control" id="field_currency" name="currency" ng-model="vm.store.currency" ng-options="currency as currency.name for currency in vm.currencies track by currency.id">
 					<option value=""></option>

@@ -128,7 +128,7 @@
                             return {
                                 name: null,
                                 url: null,
-                                status: null,
+                                status: "ACTIVITY",
                                 id: null
                             };
                         }
