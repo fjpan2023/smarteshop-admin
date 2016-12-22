@@ -36,7 +36,7 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class CommentsController extends AbstractController{
+public class CommentsController extends AbstractController<Comments>{
 
     private final Logger log = LoggerFactory.getLogger(CommentsController.class);
 

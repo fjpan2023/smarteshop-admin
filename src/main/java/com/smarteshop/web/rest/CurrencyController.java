@@ -36,7 +36,7 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class CurrencyController extends AbstractController{
+public class CurrencyController extends AbstractController<Currency>{
 
     private final Logger log = LoggerFactory.getLogger(CurrencyController.class);
 

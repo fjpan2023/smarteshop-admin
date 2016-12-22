@@ -29,7 +29,7 @@ import com.smarteshop.web.rest.util.HeaderUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class EmailSettingController extends AbstractController {
+public class EmailSettingController extends AbstractController<EmailSetting> {
 
     private final Logger log = LoggerFactory.getLogger(EmailSettingController.class);
 

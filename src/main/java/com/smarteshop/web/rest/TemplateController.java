@@ -36,7 +36,7 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  */
 @RestController
 @RequestMapping("/api/templates")
-public class TemplateController extends AbstractController{
+public class TemplateController extends AbstractController<Template>{
 
     private final Logger log = LoggerFactory.getLogger(TemplateController.class);
 

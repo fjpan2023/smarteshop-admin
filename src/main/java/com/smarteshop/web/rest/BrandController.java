@@ -35,7 +35,7 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class BrandController extends AbstractController{
+public class BrandController extends AbstractController<Brand>{
 
     private final Logger log = LoggerFactory.getLogger(BrandController.class);
 
@@ -133,7 +133,7 @@ public class BrandController extends AbstractController{
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("brand", id.toString())).build();
     }
 
-   
+
     @GetMapping("/_search/brands")
     @Timed
     public ResponseEntity<List<Brand>> searchBrands(@RequestParam String query, Pageable pageable)
