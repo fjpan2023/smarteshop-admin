@@ -299,7 +299,7 @@ ui bootstrap tweaks
 /* jhipster-needle-scss-add-main JHipster will add new css style */
 
 .modal-header {
-  padding-top: 5px;
+  padding-top: 10px;
   padding-bottom: 10px;
   }
 h1, .h1,
