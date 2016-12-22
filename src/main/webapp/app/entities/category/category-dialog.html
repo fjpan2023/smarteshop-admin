@@ -9,12 +9,12 @@
 		<jhi-alert-error></jhi-alert-error>
 		<div class="form-group">
 			<label class="col-sm-1 control-label" data-translate="smarteshopApp.category.name" for="field_name">Name</label>
-			<div class="col-sm-4">
+			<div class="col-sm-4 no-padding-left">
 				<input type="text" class="form-control" name="name" id="field_name" ng-model="vm.category.name" required/>
 			</div>
 
 			<label class="col-sm-1 control-label" data-translate="smarteshopApp.category.status" for="field_status">Status</label>
-			<div class="col-sm-4">
+			<div class="col-sm-4 no-padding-left">
 				<select class="form-control" name="status" ng-model="vm.category.status" id="field_status">
 					<option value="ACTIVITY" data-translate="smarteshopApp.StatusEnum.ACTIVITY">ACTIVITY</option>
 					<option value="UNACTIVITY" data-translate="smarteshopApp.StatusEnum.UNACTIVITY">UNACTIVITY</option>
@@ -24,18 +24,18 @@
 		</div>
 		<div class="form-group">
 			<label class="col-sm-1 control-label" data-translate="smarteshopApp.category.leaf" for="field_leaf">Leaf</label>
-			<div class="col-sm-4">
+			<div class="col-sm-4 no-padding-left">
 				<input type="checkbox" class="form-control" name="leaf" id="field_leaf" ng-model="vm.category.leaf" />
 			</div>
 			<label class="col-sm-1 control-label" data-translate="smarteshopApp.category.includeMenu" for="field_includeMenu">Include Menu</label>
-			<div class="col-sm-4">
+			<div class="col-sm-4 no-padding-left">
 				<input type="checkbox" class="form-control" name="includeMenu" id="field_includeMenu" ng-model="vm.category.includeMenu" />
 			</div>
 		</div>
 		<div class="form-group">
 			<div ng-if="! vm.category.leaf">
 				<label class="col-sm-1 control-label" data-translate="smarteshopApp.category.parentId" for="field_parentId">Parent Id</label>
-				<div class="col-sm-4">
+				<div class="col-sm-4 no-padding-left">
 					<input type="number" class="form-control" name="parentId" id="field_parentId" ng-model="vm.category.parentId" required />
 				</div>
 			</div>

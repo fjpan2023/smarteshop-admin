@@ -11,7 +11,7 @@
 		<div class="form-group">
 			<label class="col-sm-1 control-label"
 				data-translate="smarteshopApp.template.type" for="field_type">Type</label>
-			<div class="col-sm-4">
+			<div class="col-sm-4 no-padding-left">
 				<select class="form-control" name="type" ng-model="vm.template.type"
 					id="field_type">
 					<option value="EMAIL"
@@ -23,7 +23,7 @@
 			<label class="col-sm-2 control-label"
 				data-translate="smarteshopApp.template.templateKey"
 				for="field_templateKey">Template Key</label>
-			<div class="col-sm-4">
+			<div class="col-sm-4 no-padding-left">
 				<input type="text" class="form-control" name="templateKey"
 					id="field_templateKey" ng-model="vm.template.templateKey" />
 			</div>
@@ -31,8 +31,7 @@
 		<div class="form-group">
 			<label class="col-sm-1 control-label"
 				data-translate="smarteshopApp.template.content" for="field_content">Content</label>
-		
-				<div class="col-sm-11" style="margin-top: 15px;">
+				<div class="col-sm-11 no-padding-left" style="margin-top: 15px;">
 				<summernote config="vm.summernoteroptions"
 			ng-model="vm.template.content" name="description"
 			id="field_description">{{vm.template.content}}</summernote>

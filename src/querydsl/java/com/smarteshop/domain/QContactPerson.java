@@ -29,6 +29,8 @@ public class QContactPerson extends EntityPathBase<ContactPerson> {
 
     public final StringPath email = createString("email");
 
+    public final StringPath firstName = createString("firstName");
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     //inherited
@@ -36,6 +38,8 @@ public class QContactPerson extends EntityPathBase<ContactPerson> {
 
     //inherited
     public final DateTimePath<java.time.ZonedDateTime> lastModifiedDate = _super.lastModifiedDate;
+
+    public final StringPath lastName = createString("lastName");
 
     public final StringPath name = createString("name");
 
