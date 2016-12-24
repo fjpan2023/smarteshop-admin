@@ -29,7 +29,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.codahale.metrics.annotation.Timed;
 import com.smarteshop.domain.Attachment;
 import com.smarteshop.service.AttachmentService;
-import com.smarteshop.service.impl.AttachmentServiceImpl;
 import com.smarteshop.web.common.AbstractController;
 import com.smarteshop.web.rest.util.HeaderUtil;
 import com.smarteshop.web.rest.util.PaginationUtil;
@@ -38,7 +37,7 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  * REST controller for managing Attachment.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/attachments")
 public class AttachmentController extends AbstractController{
 
     private final Logger log = LoggerFactory.getLogger(AttachmentController.class);
@@ -54,7 +53,7 @@ public class AttachmentController extends AbstractController{
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @Timed
-    @PostMapping("/attachments")   
+    @PostMapping()
     public ResponseEntity<Attachment> createAttachment(@Valid @RequestBody Attachment attachment) throws URISyntaxException {
         log.debug("REST request to save Attachment : {}", attachment);
         if (attachment.getId() != null) {
@@ -75,8 +74,8 @@ public class AttachmentController extends AbstractController{
      * or with status 500 (Internal Server Error) if the attachment couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/attachments")
     @Timed
+    @PutMapping()
     public ResponseEntity<Attachment> updateAttachment(@Valid @RequestBody Attachment attachment) throws URISyntaxException {
         log.debug("REST request to update Attachment : {}", attachment);
         if (attachment.getId() == null) {
@@ -95,16 +94,16 @@ public class AttachmentController extends AbstractController{
      * @return the ResponseEntity with status 200 (OK) and the list of attachments in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/attachments")
     @Timed
+    @GetMapping()
     public ResponseEntity<List<Attachment>> getAllAttachments(Pageable pageable, String entityName, Long entityId)
         throws URISyntaxException {
         log.debug("REST request to get a page of Attachments");
         List<Attachment> list = attachmentService.getAttachmentsByEntityInfo(entityName, entityId);
         return new ResponseEntity<>(list, HttpStatus.OK);
-    }   
-    
-    
+    }
+
+
 
     /**
      * GET  /attachments/:id : get the "id" attachment.
@@ -112,8 +111,8 @@ public class AttachmentController extends AbstractController{
      * @param id the id of the attachment to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the attachment, or with status 404 (Not Found)
      */
-    @GetMapping("/attachments/{id}")
     @Timed
+    @GetMapping("/{id}")
     public ResponseEntity<Attachment> getAttachment(@PathVariable Long id) {
         log.debug("REST request to get Attachment : {}", id);
         Attachment attachment = attachmentService.findOne(id);
@@ -130,28 +129,27 @@ public class AttachmentController extends AbstractController{
      * @param id the id of the attachment to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/attachments/{id}")
     @Timed
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAttachment(@PathVariable Long id) {
         log.debug("REST request to delete Attachment : {}", id);
         attachmentService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("attachment", id.toString())).build();
     }
-    
-    
-    
-    @GetMapping("/attachments/{entityName}/{entityId}/thumbnail")
+
+
     @Timed
+    @GetMapping("/{entityName}/{entityId}/thumbnail")
     public ResponseEntity<byte[]> getThumbnail(@PathVariable  String entityName, @PathVariable  Long entityId)
         throws URISyntaxException {
         log.debug("REST request to get a thumbnail {} {}", entityName, entityId);
         byte[] thumbnail = null;
         List<Attachment> list = attachmentService.getAttachmentsByEntityInfo(entityName, entityId);
         if(!CollectionUtils.isEmpty(list)){
-        	thumbnail = list.get(0).getContent();        	
+        	thumbnail = list.get(0).getContent();
         }
         return new ResponseEntity<>(thumbnail, HttpStatus.OK);
-    }   
+    }
 
     /**
      * SEARCH  /_search/attachments?query=:query : search for the attachment corresponding
@@ -162,13 +160,13 @@ public class AttachmentController extends AbstractController{
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/_search/attachments")
     @Timed
+    @GetMapping("/_search")
     public ResponseEntity<List<Attachment>> searchAttachments(@RequestParam String query, Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to search for a page of Attachments for query {}", query);
         Page<Attachment> page = attachmentService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/attachments");
+        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/attachments/_search");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

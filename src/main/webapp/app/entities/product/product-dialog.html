@@ -108,14 +108,24 @@
 
 		</div>
 		<div class="tab-div">
-			<uib-tabset active="activeForm" justified=true> <uib-tab index="0" heading="Descripton"> <summernote config="summernoteroptions" ng-model="vm.product.description" name="description" id="field_description">{{vm.product.description}}</summernote> </uib-tab> <uib-tab index="1" heading="Images">
+			<uib-tabset active="activeForm" justified=true> 
+			<uib-tab index="0" heading="Descripton"> <br />
+			<summernote config="summernoteroptions" ng-model="vm.product.description" name="description" id="field_description">{{vm.product.description}}</summernote> 
+			</uib-tab>
+			<uib-tab index="1" heading="Images">
+			 <br />
 			<div class="row">
 				<div ng-if="vm.product.images" ng-repeat="productImage in vm.product.images">
 					<img data-ng-src="{{'data:' + productImage.contentType + ';base64,' + productImage.content}}" class="col-sm-3 col-md-2 rounded" />
 				</div>
-				<button type="button" ngf-select class="col-sm-6 col-md-3 rounded" ngf-change="vm.setImage($file, vm.product)" accept="image/*" data-translate="entity.action.addimage">Add image</button>
+				<button type="button" ngf-change="vm.setImage($file, vm.product)" accept="image/*" data-translate="entity.action.addimage">Add image</button>
 			</div>
-			</uib-tab> <uib-tab index="2" heading="Related Product">
+			</uib-tab> 
+			<uib-tab index="2" heading="SKU">
+			 <br />
+			
+			</uib-tab> 
+			<uib-tab index="3" heading="Related Product"> <br />
 			<div class="modal-header">
 				<label class="modal-title">Create or edit Related Product</label>
 				<button type="submit" class="btn btn-primary pull-right" ng-click="vm.showNotRelatedProducts()">
