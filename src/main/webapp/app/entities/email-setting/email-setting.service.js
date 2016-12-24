@@ -7,7 +7,7 @@
     EmailSetting.$inject = ['$resource'];
 
     function EmailSetting ($resource) {
-        var resourceUrl =  'api/email-settings/:id';
+        var resourceUrl =  'api/emailSetting/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},

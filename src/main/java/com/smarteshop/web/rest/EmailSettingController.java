@@ -28,7 +28,7 @@ import com.smarteshop.web.rest.util.HeaderUtil;
  * REST controller for managing EmailSetting.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/emailSetting")
 public class EmailSettingController extends AbstractController<EmailSetting> {
 
     private final Logger log = LoggerFactory.getLogger(EmailSettingController.class);
@@ -43,7 +43,7 @@ public class EmailSettingController extends AbstractController<EmailSetting> {
      * @return the ResponseEntity with status 201 (Created) and with body the new emailSetting, or with status 400 (Bad Request) if the emailSetting has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/email-settings")
+    @PostMapping("")
     @Timed
     public ResponseEntity<EmailSetting> createEmailSetting(@Valid @RequestBody EmailSetting emailSetting) throws URISyntaxException {
         log.debug("REST request to save EmailSetting : {}", emailSetting);
@@ -65,7 +65,7 @@ public class EmailSettingController extends AbstractController<EmailSetting> {
      * or with status 500 (Internal Server Error) if the emailSetting couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/email-settings")
+    @PutMapping()
     @Timed
     public ResponseEntity<EmailSetting> updateEmailSetting(@Valid @RequestBody EmailSetting emailSetting) throws URISyntaxException {
         log.debug("REST request to update EmailSetting : {}", emailSetting);
@@ -85,7 +85,7 @@ public class EmailSettingController extends AbstractController<EmailSetting> {
      * @return the ResponseEntity with status 200 (OK) and the list of emailSettings in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/email-settings")
+    @GetMapping()
     @Timed
     public ResponseEntity<EmailSetting> getAllEmailSettings(Pageable pageable)
         throws URISyntaxException {
@@ -93,26 +93,4 @@ public class EmailSettingController extends AbstractController<EmailSetting> {
         EmailSetting emailSetting= emailSettingService.find();
         return new ResponseEntity<>(emailSetting, HttpStatus.OK);
     }
-
-//    /**
-//     * GET  /email-settings/:id : get the "id" emailSetting.
-//     *
-//     * @param id the id of the emailSetting to retrieve
-//     * @return the ResponseEntity with status 200 (OK) and with body the emailSetting, or with status 404 (Not Found)
-//     */
-//    @GetMapping("/email-settings/{id}")
-//    @Timed
-//    public ResponseEntity<EmailSetting> getEmailSetting(@PathVariable Long id) {
-//        log.debug("REST request to get EmailSetting : {}", id);
-//        EmailSetting emailSetting = emailSettingService.findOne(id);
-//        return Optional.ofNullable(emailSetting)
-//            .map(result -> new ResponseEntity<>(
-//                result,
-//                HttpStatus.OK))
-//            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-//    }
-
-
-
-
 }

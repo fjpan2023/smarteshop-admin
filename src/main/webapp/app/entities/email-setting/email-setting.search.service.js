@@ -8,7 +8,7 @@
     EmailSettingSearch.$inject = ['$resource'];
 
     function EmailSettingSearch($resource) {
-        var resourceUrl =  'api/_search/email-settings/:id';
+        var resourceUrl =  'api/emailSetting/_search/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true}

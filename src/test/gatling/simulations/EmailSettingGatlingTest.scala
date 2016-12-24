@@ -60,12 +60,12 @@ class EmailSettingGatlingTest extends Simulation {
         .pause(10)
         .repeat(2) {
             exec(http("Get all emailSettings")
-            .get("/api/email-settings")
+            .get("/api/emailSetting")
             .headers(headers_http_authenticated)
             .check(status.is(200)))
             .pause(10 seconds, 20 seconds)
             .exec(http("Create new emailSetting")
-            .post("/api/email-settings")
+            .post("/api/emailSetting")
             .headers(headers_http_authenticated)
             .body(StringBody("""{"id":null, "host":"SAMPLE_TEXT", "port":"0", "smtpSecurity":null, "fromAddress":"SAMPLE_TEXT", "userName":"SAMPLE_TEXT", "password":"SAMPLE_TEXT"}""")).asJSON
             .check(status.is(201))
