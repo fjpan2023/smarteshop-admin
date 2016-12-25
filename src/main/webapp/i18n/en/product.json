@@ -23,7 +23,7 @@
             "standardPrice": "Standard Price",
             "sellPrice": "Sell Price",
             "label": "Label",
-            "mainImageId": "Main Image Id",
+            "mainImageId": "Image",
             "fromDate": "From Date",
             "endDate": "End Date",
             "skus": "Skus",

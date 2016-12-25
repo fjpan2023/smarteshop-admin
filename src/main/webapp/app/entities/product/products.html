@@ -37,10 +37,10 @@
 			<thead>
 				<tr jh-sort="vm.predicate" ascending="vm.reverse"
 					callback="vm.transition()">
-					<th jh-sort-by="id"><span data-translate="global.field.id">ID</span>
-						<span class="glyphicon glyphicon-sort"></span></th>
+					<!-- <th jh-sort-by="id"><span data-translate="global.field.id">ID</span>
+						<span class="glyphicon glyphicon-sort"></span></th> -->
 					<th><span data-translate="smarteshopApp.product.mainImageId">Main
-							Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+							Image Id</span></th>
 					<th jh-sort-by="code"><span
 						data-translate="smarteshopApp.product.code">Code</span> <span
 						class="glyphicon glyphicon-sort"></span></th>
@@ -78,8 +78,8 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="product in vm.products track by product.id">
-					<td><a ui-sref="product-detail({id:product.id})">{{product.id}}</a></td>
-					<td>{{product.mainImageId}}</td>
+<!-- 					<td><a ui-sref="product-detail({id:product.id})">{{product.id}}</a></td>
+ -->					<td>{{product.mainImageId}}</td>
 					<td>{{product.code}}</td>
 					<td>{{product.name}}</td>
 					<td><a ui-sref="brand-detail({id:product.brand.id})">{{product.brand.name}}</a>

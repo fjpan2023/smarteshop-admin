@@ -1,43 +1,50 @@
+<div class="form-horizontal">
+	<div class="modal-header">
+		<h2>
+			<span data-translate="smarteshopApp.emailSetting.detail.title">Email Setting</span>
+		</h2>
+	</div>
+	<div class="modal-body">
+		<jhi-alert-error></jhi-alert-error>
+		<div class="form-group">
+			<label class="col-sm-2   control-label" data-translate="smarteshopApp.emailSetting.host" for="field_host">Host</label>
+			<div class="col-sm-4 no-padding-left">
+				<p class="form-control-static">{{vm.emailSetting.host}}</p>
+			</div>
+			<label class="col-sm-2  control-label" data-translate="smarteshopApp.emailSetting.port" for="field_port">Port</label>
+			<div class="col-sm-4 no-padding-left">
+				<p class="form-control-static">{{vm.emailSetting.port}}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2   control-label" data-translate="smarteshopApp.emailSetting.smtpSecurity" for="field_smtpSecurity">Smtp Security</label>
+			<div class="col-sm-4 no-padding-left">
+				<p class="form-control-static" data-translate="{{'smarteshopApp.SMTPSecurityEnum.' + vm.emailSetting.smtpSecurity}}">{{vm.emailSetting.smtpSecurity}}</p>
+			</div>
+			<label class="col-sm-2  control-label" data-translate="smarteshopApp.emailSetting.fromAddress" for="field_fromAddress">From Address</label>
+			<div class="col-sm-4 no-padding-left">
+				<p class="form-control-static">{{vm.emailSetting.fromAddress}}</p>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2  control-label" data-translate="smarteshopApp.emailSetting.userName" for="field_userName">User Name</label>
+			<div class="col-sm-4 no-padding-left">
+				<p class="form-control-static">{{vm.emailSetting.userName}}</p>
+			</div>
+			<label class="col-sm-2  control-label" data-translate="smarteshopApp.emailSetting.password" for="field_password">Password</label>
+			<div class="col-sm-4 no-padding-left">
+				<p class="form-control-static">{{vm.emailSetting.password}}</p>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="submit" ui-sref="{{ vm.previousState }}" class="btn btn-info">
+			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+		</button>
 
-<div>
-    <h2><span data-translate="smarteshopApp.emailSetting.detail.title">Email Setting</span> {{vm.emailSetting.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="smarteshopApp.emailSetting.host">Host</span></dt>
-        <dd>
-            <span>{{vm.emailSetting.host}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.emailSetting.port">Port</span></dt>
-        <dd>
-            <span>{{vm.emailSetting.port}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.emailSetting.smtpSecurity">Smtp Security</span></dt>
-        <dd>
-            <span data-translate="{{'smarteshopApp.SMTPSecurityEnum.' + vm.emailSetting.smtpSecurity}}">{{vm.emailSetting.smtpSecurity}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.emailSetting.fromAddress">From Address</span></dt>
-        <dd>
-            <span>{{vm.emailSetting.fromAddress}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.emailSetting.userName">User Name</span></dt>
-        <dd>
-            <span>{{vm.emailSetting.userName}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.emailSetting.password">Password</span></dt>
-        <dd>
-            <span>{{vm.emailSetting.password}}</span>
-        </dd>
-    </dl>
-
-    <button type="submit"
-            ui-sref="{{ vm.previousState }}"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
-
-    <button type="button" ui-sref="email-setting-detail.edit({id:vm.emailSetting.id})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
-    </button>
+		<button type="button" ui-sref="email-setting-detail.edit({id:vm.emailSetting.id})" class="btn btn-primary">
+			<span class="glyphicon glyphicon-pencil"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+		</button>
+	</div>
 </div>
+
