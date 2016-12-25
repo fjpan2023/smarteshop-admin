@@ -16,6 +16,8 @@
 		vm.openCalendar = openCalendar;
 		vm.previousState = previousState.name;
 		vm.save = save;
+		vm.showNotRelatedProducts = showNotRelatedProducts;
+		vm.editSKU = editSKU;
 		vm.skus = Sku.query();
 		vm.relatedproducts = RelatedProduct.query();
 		vm.brands = Brand.query();
@@ -85,10 +87,15 @@
 			}
 		};
 		
-	function showNotRelatedProducts(ids){
+	function showNotRelatedProducts(){
+		alert("show relatedProduct");
 		
+	};
+	
+	function editSKU(){
+		alert("edit sku ...");
 		
-	}
+	};
 
 	}
 })();
