@@ -138,6 +138,7 @@
                 }],
                 entity: function () {
                     return {
+                    	leaf: false,
                         includeMenu: true,
                         status: "ACTIVITY",
                     };

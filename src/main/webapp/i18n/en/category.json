@@ -17,7 +17,7 @@
                 "title": "Category"
             },
             "name": "Name",
-            "parentId": "Parent Id",
+            "parentId": "Parent",
             "leaf": "Leaf",
             "includeMenu": "Include Menu",
             "status": "Status",
