@@ -24,9 +24,9 @@ import java.util.Collection;
 @ComponentScan
 @EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
 @EnableConfigurationProperties({ JHipsterProperties.class, LiquibaseProperties.class })
-public class SmarteshopApp {
+public class SmarteshopApplication {
 
-    private static final Logger log = LoggerFactory.getLogger(SmarteshopApp.class);
+    private static final Logger log = LoggerFactory.getLogger(SmarteshopApplication.class);
 
     @Inject
     private Environment env;
@@ -59,7 +59,7 @@ public class SmarteshopApp {
      * @throws UnknownHostException if the local host name could not be resolved into an address
      */
     public static void main(String[] args) throws UnknownHostException {
-        SpringApplication app = new SpringApplication(SmarteshopApp.class);
+        SpringApplication app = new SpringApplication(SmarteshopApplication.class);
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         log.info("\n----------------------------------------------------------\n\t" +

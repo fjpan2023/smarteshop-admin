@@ -21,6 +21,8 @@
                 "comments": "Comments",
                 "attachment": "Attachment",
                 "customerGroup": "Customer Group",
+                "variant": "Variant",
+                "variantValue": "Variant Value",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

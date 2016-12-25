@@ -1,6 +1,6 @@
 package com.smarteshop.service;
 
-import com.smarteshop.SmarteshopApp;
+import com.smarteshop.SmarteshopApplication;
 import com.smarteshop.domain.PersistentToken;
 import com.smarteshop.domain.User;
 import com.smarteshop.repository.PersistentTokenRepository;
@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.*;
  * @see UserService
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SmarteshopApp.class)
+@SpringBootTest(classes = SmarteshopApplication.class)
 @Transactional
 public class UserServiceIntTest {
 

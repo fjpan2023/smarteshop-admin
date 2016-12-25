@@ -1,6 +1,6 @@
 package com.smarteshop.web.rest;
 
-import com.smarteshop.SmarteshopApp;
+import com.smarteshop.SmarteshopApplication;
 
 import com.smarteshop.domain.Category;
 import com.smarteshop.repository.CategoryRepository;
@@ -37,7 +37,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
  * @see CategoryController
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SmarteshopApp.class)
+@SpringBootTest(classes = SmarteshopApplication.class)
 public class CategoryResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";

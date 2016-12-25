@@ -1,6 +1,6 @@
 package com.smarteshop.web.rest;
 
-import com.smarteshop.SmarteshopApp;
+import com.smarteshop.SmarteshopApplication;
 import com.smarteshop.domain.Authority;
 import com.smarteshop.domain.User;
 import com.smarteshop.repository.AuthorityRepository;
@@ -40,7 +40,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see UserService
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SmarteshopApp.class)
+@SpringBootTest(classes = SmarteshopApplication.class)
 public class AccountResourceIntTest {
 
     @Inject

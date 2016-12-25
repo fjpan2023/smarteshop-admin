@@ -1,6 +1,6 @@
 package com.smarteshop.web.rest;
 
-import com.smarteshop.SmarteshopApp;
+import com.smarteshop.SmarteshopApplication;
 
 import com.smarteshop.domain.Sku;
 import com.smarteshop.repository.SkuRepository;
@@ -38,7 +38,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
  * @see SkuController
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SmarteshopApp.class)
+@SpringBootTest(classes = SmarteshopApplication.class)
 public class SkuResourceIntTest {
 
     private static final String DEFAULT_CODE = "AAAAAAAAAA";

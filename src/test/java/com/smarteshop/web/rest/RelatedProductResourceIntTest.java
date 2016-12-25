@@ -1,6 +1,6 @@
 package com.smarteshop.web.rest;
 
-import com.smarteshop.SmarteshopApp;
+import com.smarteshop.SmarteshopApplication;
 
 import com.smarteshop.domain.RelatedProduct;
 import com.smarteshop.repository.RelatedProductRepository;
@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see RelatedProductController
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SmarteshopApp.class)
+@SpringBootTest(classes = SmarteshopApplication.class)
 public class RelatedProductResourceIntTest {
 
     private static final Long DEFAULT_RELATED_PRODUCT_ID = 1L;

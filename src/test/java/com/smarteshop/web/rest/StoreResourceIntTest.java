@@ -1,6 +1,6 @@
 package com.smarteshop.web.rest;
 
-import com.smarteshop.SmarteshopApp;
+import com.smarteshop.SmarteshopApplication;
 
 import com.smarteshop.domain.Store;
 import com.smarteshop.repository.StoreRepository;
@@ -37,7 +37,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
  * @see StoreController
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SmarteshopApp.class)
+@SpringBootTest(classes = SmarteshopApplication.class)
 public class StoreResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";

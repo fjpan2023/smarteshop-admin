@@ -1,6 +1,6 @@
 package com.smarteshop.web.rest;
 
-import com.smarteshop.SmarteshopApp;
+import com.smarteshop.SmarteshopApplication;
 
 import com.smarteshop.domain.Product;
 import com.smarteshop.repository.ProductRepository;
@@ -44,7 +44,7 @@ import com.smarteshop.domain.enumeration.ProductLabelEnum;
  * @see ProductController
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SmarteshopApp.class)
+@SpringBootTest(classes = SmarteshopApplication.class)
 public class ProductResourceIntTest {
 
     private static final String DEFAULT_CODE = "AAAAAAAAAA";

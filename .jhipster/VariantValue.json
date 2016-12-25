@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "variant",
+            "otherEntityName": "variant",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "value",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "displayOrder",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20161225095746",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "variant_value",
+    "pagination": "pagination"
+}

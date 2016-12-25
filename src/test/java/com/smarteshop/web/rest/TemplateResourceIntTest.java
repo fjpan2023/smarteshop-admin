@@ -1,6 +1,6 @@
 package com.smarteshop.web.rest;
 
-import com.smarteshop.SmarteshopApp;
+import com.smarteshop.SmarteshopApplication;
 
 import com.smarteshop.domain.Template;
 import com.smarteshop.repository.TemplateRepository;
@@ -37,7 +37,7 @@ import com.smarteshop.domain.enumeration.TemplateTypeEnum;
  * @see TemplateController
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SmarteshopApp.class)
+@SpringBootTest(classes = SmarteshopApplication.class)
 public class TemplateResourceIntTest {
 
     private static final TemplateTypeEnum DEFAULT_TYPE = TemplateTypeEnum.EMAIL;

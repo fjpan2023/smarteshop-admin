@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -17,6 +18,8 @@ public class QStore extends EntityPathBase<Store> {
 
     private static final long serialVersionUID = -1140408986L;
 
+    private static final PathInits INITS = PathInits.DIRECT2;
+
     public static final QStore store = new QStore("store");
 
     public final QAbstractAuditingEntity _super = new QAbstractAuditingEntity(this);
@@ -26,6 +29,8 @@ public class QStore extends EntityPathBase<Store> {
 
     //inherited
     public final DateTimePath<java.time.ZonedDateTime> createdDate = _super.createdDate;
+
+    public final QCurrency currency;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -42,15 +47,24 @@ public class QStore extends EntityPathBase<Store> {
     public final StringPath url = createString("url");
 
     public QStore(String variable) {
-        super(Store.class, forVariable(variable));
+        this(Store.class, forVariable(variable), INITS);
     }
 
     public QStore(Path<? extends Store> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QStore(PathMetadata metadata) {
-        super(Store.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QStore(PathMetadata metadata, PathInits inits) {
+        this(Store.class, metadata, inits);
+    }
+
+    public QStore(Class<? extends Store> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.currency = inits.isInitialized("currency") ? new QCurrency(forProperty("currency")) : null;
     }
 
 }

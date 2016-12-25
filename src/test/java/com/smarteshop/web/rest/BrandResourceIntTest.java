@@ -1,6 +1,6 @@
 package com.smarteshop.web.rest;
 
-import com.smarteshop.SmarteshopApp;
+import com.smarteshop.SmarteshopApplication;
 
 import com.smarteshop.domain.Brand;
 import com.smarteshop.repository.BrandRepository;
@@ -37,7 +37,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
  * @see BrandController
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SmarteshopApp.class)
+@SpringBootTest(classes = SmarteshopApplication.class)
 public class BrandResourceIntTest {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
