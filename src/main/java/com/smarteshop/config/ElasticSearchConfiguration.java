@@ -12,7 +12,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Configuration
+//@Configuration
 public class ElasticSearchConfiguration {
 
     @Bean

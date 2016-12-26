@@ -5,9 +5,9 @@
         .module('smarteshopApp')
         .controller('SKUVariantController', SKUVariantController);
 
-    SKUVariantController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModal','$uibModalInstance', 'entity', 'Variant'];
+    SKUVariantController.$inject = ['$timeout', '$scope', '$state', '$stateParams', '$uibModal','$uibModalInstance', 'entity', 'Variant'];
 
-    function SKUVariantController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Variant) {
+    function SKUVariantController ($timeout, $scope, $state, $stateParams, $uibModal, $uibModalInstance, entity, Variant) {
         var vm = this;
         vm.variant = entity;
         vm.clear = clear;

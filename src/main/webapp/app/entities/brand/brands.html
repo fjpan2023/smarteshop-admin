@@ -40,7 +40,7 @@
 			<tbody>
 				<tr ng-repeat="brand in vm.brands track by brand.id">
 					<td><a ui-sref="brand-detail({id:brand.id})">{{brand.id}}</a></td>
-					<td><img data-ng-src='/api/attachments/Brand/{{brand.id}}/thumbnail' style="max-height: 30px;" />
+					<td><img data-ng-src='/api/attachments/Brand/{{brand.id}}/thumbnail' class="img-rounded center-block" style="width: 60px; height: 40px;" />
 					<td>{{brand.name}}</td>
 					<td data-translate="{{'smarteshopApp.StatusEnum.' + brand.status}}">{{brand.status}}</td>
 

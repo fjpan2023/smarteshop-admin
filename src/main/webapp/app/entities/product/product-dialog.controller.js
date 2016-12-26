@@ -5,10 +5,10 @@
 	.module('smarteshopApp')
 	.controller('ProductDialogController', ProductDialogController);
 
-	ProductDialogController.$inject = ['$timeout', '$scope','$state', '$stateParams', 'DataUtils','previousState','entity', 'Product', 'Sku', 
+	ProductDialogController.$inject = ['$timeout', '$scope','$state', '$stateParams',  '$uibModal','DataUtils','previousState','entity', 'Product', 'Sku', 
 	                                   'RelatedProduct', 'Brand', 'Category','Attachment'];
 
-	function ProductDialogController ($timeout, $scope, $state,$stateParams, DataUtils,previousState, entity, Product, Sku, 
+	function ProductDialogController ($timeout, $scope, $state,$stateParams, $uibModal, DataUtils,previousState, entity, Product, Sku, 
 			RelatedProduct, Brand, Category, Attachment) {
 		var vm = this;
 		vm.product = entity;
@@ -86,16 +86,31 @@
 				});
 			}
 		};
-		
-	function showNotRelatedProducts(){
-		alert("show relatedProduct");
-		
-	};
-	
-	function editSKU(){
-		alert("edit sku ...");
-		
-	};
+
+		function showNotRelatedProducts(){
+			alert("show relatedProduct");
+
+		};
+
+		function editSKU(){
+			$uibModal.open({
+				templateUrl: 'app/entities/product/sku-variant.html',
+				controller: 'SKUVariantController',
+				controllerAs: 'vm',
+				backdrop: 'static',
+				size: 'lg',
+				resolve: {
+					entity: ['Product', function(Product) {
+						return Product.get({id : $stateParams.id}).$promise;
+					}]
+				}
+			}).result.then(function($state) {
+				$state.go($state.name, {}, { reload: false });
+			}, function($state) {
+				$state.go($state.name);
+			});
+
+		};
 
 	}
 })();

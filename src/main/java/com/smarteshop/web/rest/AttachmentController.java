@@ -38,7 +38,7 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  */
 @RestController
 @RequestMapping("/api/attachments")
-public class AttachmentController extends AbstractController{
+public class AttachmentController extends AbstractController<Attachment>{
 
     private final Logger log = LoggerFactory.getLogger(AttachmentController.class);
 
@@ -65,28 +65,7 @@ public class AttachmentController extends AbstractController{
             .body(result);
     }
 
-    /**
-     * PUT  /attachments : Updates an existing attachment.
-     *
-     * @param attachment the attachment to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated attachment,
-     * or with status 400 (Bad Request) if the attachment is not valid,
-     * or with status 500 (Internal Server Error) if the attachment couldnt be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
-    @Timed
-    @PutMapping()
-    public ResponseEntity<Attachment> updateAttachment(@Valid @RequestBody Attachment attachment) throws URISyntaxException {
-        log.debug("REST request to update Attachment : {}", attachment);
-        if (attachment.getId() == null) {
-            return createAttachment(attachment);
-        }
-        Attachment result = attachmentService.save(attachment);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("attachment", attachment.getId().toString()))
-            .body(result);
-    }
-
+    
     /**
      * GET  /attachments : get all the attachments.
      *
