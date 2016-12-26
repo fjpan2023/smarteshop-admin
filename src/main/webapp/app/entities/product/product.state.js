@@ -212,6 +212,30 @@
                     $state.go('^');
                 });
             }]
+        }).state('sku-variant.edit', {
+            parent: 'product.edit',
+            url: '/{id}/sku-variant/edit',
+            data: {
+                authorities: ['ROLE_USER']
+            },
+            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                $uibModal.open({
+                    templateUrl: 'app/entities/product/sku-variant.html',
+                    controller: 'SKUVariantController',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: 'lg',
+                    resolve: {
+                        entity: ['Variant', function(Variant) {
+                            return Variant.get({id : $stateParams.id}).$promise;
+                        }]
+                    }
+                }).result.then(function() {
+                    $state.go('^', {}, { reload: false });
+                }, function() {
+                    $state.go('^');
+                });
+            }]
         });
     }
 

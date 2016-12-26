@@ -1,11 +1,19 @@
 package com.smarteshop.web.rest;
 
-import com.smarteshop.SmarteshopApp;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.smarteshop.domain.VariantValue;
-import com.smarteshop.repository.VariantValueRepository;
-import com.smarteshop.service.VariantValueService;
-import com.smarteshop.repository.search.VariantValueSearchRepository;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,14 +29,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.smarteshop.SmarteshopApplication;
+import com.smarteshop.domain.VariantValue;
+import com.smarteshop.repository.VariantValueRepository;
+import com.smarteshop.repository.search.VariantValueSearchRepository;
+import com.smarteshop.service.VariantValueService;
 
 /**
  * Test class for the VariantValueResource REST controller.
@@ -36,7 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see VariantValueResource
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = SmarteshopApp.class)
+@SpringBootTest(classes = SmarteshopApplication.class)
 public class VariantValueResourceIntTest {
 
     private static final String DEFAULT_VALUE = "AAAAAAAAAA";
