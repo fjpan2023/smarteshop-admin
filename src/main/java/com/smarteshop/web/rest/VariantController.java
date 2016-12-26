@@ -26,7 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.smarteshop.domain.Variant;
+import com.smarteshop.domain.VariantValue;
 import com.smarteshop.service.VariantService;
+import com.smarteshop.web.common.AbstractController;
 import com.smarteshop.web.rest.util.HeaderUtil;
 import com.smarteshop.web.rest.util.PaginationUtil;
 
@@ -35,7 +37,7 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  */
 @RestController
 @RequestMapping("/api/variants")
-public class VariantController {
+public class VariantController  extends AbstractController<Variant>{
 
     private final Logger log = LoggerFactory.getLogger(VariantController.class);
 

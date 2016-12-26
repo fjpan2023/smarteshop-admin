@@ -1,13 +1,18 @@
 package com.smarteshop.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -23,9 +28,7 @@ import com.smarteshop.domain.common.BusinessObjectInterface;
 @Table(name = "variant")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "variant")
-public class Variant  extends AbstractAuditingEntity implements BusinessObjectInterface, Serializable  {
-
-
+public class Variant  extends AbstractAuditingEntity implements BusinessObjectInterface, Serializable{
     /**
    *
    */
@@ -34,7 +37,6 @@ public class Variant  extends AbstractAuditingEntity implements BusinessObjectIn
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     @Column(name = "name")
     private String name;
 
@@ -43,6 +45,9 @@ public class Variant  extends AbstractAuditingEntity implements BusinessObjectIn
 
     @Column(name = "display_order")
     private Integer displayOrder;
+    
+    @OneToMany(mappedBy="variant",fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    private List<VariantValue> variantValues = new ArrayList<VariantValue>();
 
     public Long getId() {
         return id;
@@ -89,9 +94,18 @@ public class Variant  extends AbstractAuditingEntity implements BusinessObjectIn
 
     public void setDisplayOrder(Integer displayOrder) {
         this.displayOrder = displayOrder;
-    }
+    }   
+    
 
-    @Override
+    public List<VariantValue> getVariantValues() {
+		return variantValues;
+	}
+
+	public void setVariantValues(List<VariantValue> variantValues) {
+		this.variantValues = variantValues;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

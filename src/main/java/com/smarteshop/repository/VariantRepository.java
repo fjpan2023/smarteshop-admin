@@ -9,7 +9,6 @@ import com.smarteshop.domain.Variant;
  * Spring Data JPA repository for the Variant entity.
  */
 @SuppressWarnings("unused")
-public interface VariantRepository extends JpaRepository<Variant,Long>,
-QueryDslPredicateExecutor<Variant> {
+public interface VariantRepository extends JpaRepository<Variant,Long>, QueryDslPredicateExecutor<Variant> {
 
 }

@@ -27,7 +27,8 @@
             "sellPrice": "Sell Price",
             "defaultSKU": "Default SKU",
             "status": "Status",
-            "product": "Product"
+            "product": "Product",
+            "editSKU": "edit SKU"
         }
     }
 }

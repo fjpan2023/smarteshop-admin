@@ -1,20 +1,31 @@
 <form name="editForm" role="form" novalidate ng-submit="vm.save()">
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="vm.clear()">&times;</button>
-        <h4 class="modal-title" id="myVariantLabel" data-translate="smarteshopApp.variant.home.createOrEditLabel">Create or edit a Variant</h4>
-    </div>
-    <div class="modal-body">
-        <jhi-alert-error></jhi-alert-error>
-        <p> ....  </p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
-            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
-        </button>
-    </div>
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button>
+		<h4 class="modal-title" id="myVariantLabel" data-translate="smarteshopApp.sku.editSKU">Edit SKU</h4>
+	</div>
+	<div class="modal-body">
+		<jhi-alert-error></jhi-alert-error>
+		<table class="table">
+			<tr ng-repeat="item in vm.variants">
+				<td><h4>{{item.name}}</h4></td>
+				<td>
+					<div class="form-group">
+						<div class="checkbox" ng-repeat="vv in item.variantValues">
+							<label> <input type="checkbox" ng-checked="exists(vv.info, vvSelected)" ng-click="toggle(vv.info, vvSelected)" value='{{vv.value}}' /> {{vv.value}}
+							</label>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+		</button>
+		<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+		</button>
+	</div>
 </form>

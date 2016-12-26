@@ -38,7 +38,7 @@ import com.smarteshop.service.VariantValueService;
 /**
  * Test class for the VariantValueResource REST controller.
  *
- * @see VariantValueResource
+ * @see VariantValueController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApplication.class)
@@ -78,7 +78,7 @@ public class VariantValueResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        VariantValueResource variantValueResource = new VariantValueResource();
+        VariantValueController variantValueResource = new VariantValueController();
         ReflectionTestUtils.setField(variantValueResource, "variantValueService", variantValueService);
         this.restVariantValueMockMvc = MockMvcBuilders.standaloneSetup(variantValueResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

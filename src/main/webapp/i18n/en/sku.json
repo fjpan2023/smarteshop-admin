@@ -14,7 +14,7 @@
                 "question": "Are you sure you want to delete Sku {{ id }}?"
             },
             "detail": {
-                "title": "Sku"
+                "title": "SKU"
             },
             "code": "Code",
             "name": "Name",
@@ -27,7 +27,8 @@
             "sellPrice": "Sell Price",
             "defaultSKU": "Default SKU",
             "status": "Status",
-            "product": "Product"
+            "product": "Product",
+            "editSKU": "edit SKU"
         }
     }
 }
