@@ -58,5 +58,7 @@
 
     <cache alias="com.smarteshop.domain.VariantValue" uses-template="simple"/>
 
+    <cache alias="com.smarteshop.domain.Variant.variantValues" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>

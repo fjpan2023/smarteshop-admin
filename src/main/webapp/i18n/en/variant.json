@@ -18,7 +18,8 @@
             },
             "name": "Name",
             "description": "Description",
-            "displayOrder": "Display Order"
+            "displayOrder": "Display Order",
+            "variantValue": "Variant Value"
         }
     }
 }

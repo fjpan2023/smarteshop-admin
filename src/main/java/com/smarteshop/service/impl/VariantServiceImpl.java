@@ -30,9 +30,7 @@ public class VariantServiceImpl implements VariantService{
     @Inject
     private VariantRepository variantRepository;
 
-    @Inject
-    private VariantSearchRepository variantSearchRepository;
-
+   
     /**
      * Save a variant.
      *
@@ -42,7 +40,6 @@ public class VariantServiceImpl implements VariantService{
     public Variant save(Variant variant) {
         log.debug("Request to save Variant : {}", variant);
         Variant result = variantRepository.save(variant);
-        variantSearchRepository.save(result);
         return result;
     }
 
@@ -80,7 +77,6 @@ public class VariantServiceImpl implements VariantService{
     public void delete(Long id) {
         log.debug("Request to delete Variant : {}", id);
         variantRepository.delete(id);
-        variantSearchRepository.delete(id);
     }
 
     /**
@@ -92,7 +88,6 @@ public class VariantServiceImpl implements VariantService{
     @Transactional(readOnly = true)
     public Page<Variant> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Variants for query {}", query);
-        Page<Variant> result = variantSearchRepository.search(queryStringQuery(query), pageable);
-        return result;
+        return null;
     }
 }

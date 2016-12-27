@@ -38,7 +38,7 @@ import com.smarteshop.service.VariantService;
 /**
  * Test class for the VariantResource REST controller.
  *
- * @see VariantController
+ * @see VariantResource
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApplication.class)

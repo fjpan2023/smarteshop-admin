@@ -5,9 +5,9 @@
         .module('smarteshopApp')
         .controller('VariantDetailController', VariantDetailController);
 
-    VariantDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Variant'];
+    VariantDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Variant', 'VariantValue'];
 
-    function VariantDetailController($scope, $rootScope, $stateParams, previousState, entity, Variant) {
+    function VariantDetailController($scope, $rootScope, $stateParams, previousState, entity, Variant, VariantValue) {
         var vm = this;
 
         vm.variant = entity;

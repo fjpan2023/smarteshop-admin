@@ -5,14 +5,15 @@
         .module('smarteshopApp')
         .controller('VariantDialogController', VariantDialogController);
 
-    VariantDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Variant'];
+    VariantDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Variant', 'VariantValue'];
 
-    function VariantDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Variant) {
+    function VariantDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Variant, VariantValue) {
         var vm = this;
 
         vm.variant = entity;
         vm.clear = clear;
         vm.save = save;
+        vm.variantvalues = VariantValue.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

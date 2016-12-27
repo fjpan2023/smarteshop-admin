@@ -1,6 +1,13 @@
 {
     "fluentMethods": true,
-    "relationships": [],
+    "relationships": [
+        {
+            "relationshipName": "variantValue",
+            "otherEntityName": "variantValue",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "variant"
+        }
+    ],
     "fields": [
         {
             "fieldName": "name",

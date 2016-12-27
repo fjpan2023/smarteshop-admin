@@ -1,23 +1,24 @@
 package com.smarteshop.config;
 
-import com.smarteshop.config.liquibase.AsyncSpringLiquibase;
+import javax.inject.Inject;
+import javax.sql.DataSource;
 
-import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
-import liquibase.integration.spring.SpringLiquibase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.inject.Inject;
-import javax.sql.DataSource;
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module.Feature;
+import com.smarteshop.config.liquibase.AsyncSpringLiquibase;
+
+import liquibase.integration.spring.SpringLiquibase;
 
 @Configuration
 @EnableJpaRepositories("com.smarteshop.repository")
@@ -52,6 +53,9 @@ public class DatabaseConfiguration {
 
     @Bean
     public Hibernate5Module hibernate5Module() {
-        return new Hibernate5Module();
+    	Hibernate5Module module = new Hibernate5Module();
+    	module.disable(Feature.USE_TRANSIENT_ANNOTATION);
+    	
+    	return module;
     }
 }
