@@ -1,31 +1,73 @@
-
 <div>
-    <h2><span data-translate="smarteshopApp.variant.detail.title">Variant</span> {{vm.variant.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="smarteshopApp.variant.name">Name</span></dt>
-        <dd>
-            <span>{{vm.variant.name}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.variant.description">Description</span></dt>
-        <dd>
-            <span>{{vm.variant.description}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.variant.displayOrder">Display Order</span></dt>
-        <dd>
-            <span>{{vm.variant.displayOrder}}</span>
-        </dd>
-    </dl>
+	<div class="modal-header">
+		<h2 class="modal-title title-label" data-translate="smarteshopApp.variant.detail.title">Variant #{{vm.variant.id}}</h2>
+	</div>
 
-    <button type="submit"
-            ui-sref="{{ vm.previousState }}"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
+	<div class="modal-body">
+		<jhi-alert-error></jhi-alert-error>
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label" data-translate="smarteshopApp.variant.name">Name</label>
+				<div class="col-sm-4 no-padding-left">
+					<p class="form-control-static">{{vm.variant.name}}</p>
+				</div>
+				<label class="col-sm-2 control-label" data-translate="smarteshopApp.variant.description">description</label>
+				<div class="col-sm-4 no-padding-left">
+					<p class="form-control-static">{{vm.variant.description}}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" data-translate="smarteshopApp.variant.displayOrder">Display Order</label>
+				<div class="col-sm-4 no-padding-left">
+					<p class="form-control-static">{{vm.variant.displayOrder}}</p>
+				</div>
+			</div>
+		</div>
 
-    <button type="button" ui-sref="variant-detail.edit({id:vm.variant.id})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
-    </button>
+		<h4>Variant values</h4>
+		<div class="table-responsive">
+			<table class="jh-table table table-striped">
+				<thead>
+					<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+						<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+						<th jh-sort-by="code"><span data-translate="smarteshopApp.variantValue.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+						<th jh-sort-by="value"><span data-translate="smarteshopApp.variantValue.value">Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+						<th jh-sort-by="displayOrder"><span data-translate="smarteshopApp.variantValue.displayOrder">Display Order</span> <span class="glyphicon glyphicon-sort"></span></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="variantValue in vm.variant.variantValues track by variantValue.id">
+						<td><a ui-sref="variant-value-detail({id:variantValue.id})">{{variantValue.id}}</a></td>
+						<td>{{variantValue.code}}</td>
+						<td>{{variantValue.value}}</td>
+						<td>{{variantValue.displayOrder}}</td>
+						<td class="text-right">
+							<div class="btn-group flex-btn-group-container">
+								<button type="submit" ui-sref="variant-value-detail({id:variantValue.id})" class="btn btn-info btn-sm">
+									<span class="glyphicon glyphicon-eye-open"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+								</button>
+								<button type="submit" ui-sref="variant-value.edit({id:variantValue.id})" class="btn btn-primary btn-sm">
+									<span class="glyphicon glyphicon-pencil"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+								</button>
+								<button type="submit" ui-sref="variant-value.delete({id:variantValue.id})" class="btn btn-danger btn-sm">
+									<span class="glyphicon glyphicon-remove-circle"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+								</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="modal-footer">
+		<button type="submit" ui-sref="{{ vm.previousState }}" class="btn btn-info">
+			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+		</button>
+
+		<button type="button" ui-sref="variant-detail.edit({id:vm.variant.id})" class="btn btn-primary">
+			<span class="glyphicon glyphicon-pencil"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+		</button>
+	</div>
 </div>

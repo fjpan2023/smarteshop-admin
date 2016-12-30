@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.smarteshop.domain.Variant;
-import com.smarteshop.domain.VariantValue;
 import com.smarteshop.service.VariantService;
 import com.smarteshop.web.common.AbstractController;
 import com.smarteshop.web.rest.util.HeaderUtil;
@@ -73,8 +72,8 @@ public class VariantController  extends AbstractController<Variant>{
      * or with status 500 (Internal Server Error) if the variant couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping()
     @Timed
+    @PutMapping()
     public ResponseEntity<Variant> updateVariant(@RequestBody Variant variant) throws URISyntaxException {
         log.debug("REST request to update Variant : {}", variant);
         if (variant.getId() == null) {
@@ -101,6 +100,16 @@ public class VariantController  extends AbstractController<Variant>{
         Page<Variant> page = variantService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/variants");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+
+    @GetMapping("/test")
+    @Timed
+    public List<Variant> getVariants()
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Variants");
+        Page<Variant> page = variantService.findAll(null);
+        return page.getContent();
     }
 
     /**

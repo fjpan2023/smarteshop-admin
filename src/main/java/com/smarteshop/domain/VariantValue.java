@@ -1,14 +1,20 @@
 package com.smarteshop.domain;
 
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
-
-import com.smarteshop.domain.common.BusinessObjectInterface;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A VariantValue.
@@ -17,12 +23,12 @@ import java.util.Objects;
 @Table(name = "variant_value")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "variantvalue")
-public class VariantValue extends AbstractAuditingEntity implements BusinessObjectInterface, Serializable  {
+public class VariantValue extends AbstractAuditingEntity implements Serializable  {
 
 
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -8155280208012644059L;
 
@@ -39,6 +45,7 @@ public class VariantValue extends AbstractAuditingEntity implements BusinessObje
 	@Column(name = "display_order")
 	private Integer displayOrder;
 
+	//@JsonIgnore
 	@ManyToOne
 	private Variant variant;
 

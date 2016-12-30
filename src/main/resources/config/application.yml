@@ -40,6 +40,10 @@ spring:
             enabled: false
     thymeleaf:
         mode: XHTML
+    http:
+        converters:
+            preferred-json-mapper: jackson
+
 
 security:
     basic:
