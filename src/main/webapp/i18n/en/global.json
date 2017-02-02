@@ -23,6 +23,7 @@
                 "customerGroup": "Customer Group",
                 "variant": "Variant",
                 "variantValue": "Variant Value",
+                "address": "Address",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

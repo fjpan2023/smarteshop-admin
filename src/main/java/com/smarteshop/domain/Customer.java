@@ -1,6 +1,7 @@
 package com.smarteshop.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -46,6 +48,10 @@ public class Customer  extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "remark")
     private String remark;
+
+    @Transient
+    private List<Address> addresses;
+
 
     public Long getId() {
         return id;
@@ -131,6 +137,17 @@ public class Customer  extends AbstractAuditingEntity implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+
+
+
+    public List<Address> getAddresses() {
+      return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+      this.addresses = addresses;
     }
 
     @Override

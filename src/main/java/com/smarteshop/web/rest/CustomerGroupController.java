@@ -35,10 +35,10 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  * REST controller for managing CustomerGroup.
  */
 @RestController
-@RequestMapping("/api")
-public class CustomerGroupResource extends AbstractController<CustomerGroup>{
+@RequestMapping("/api/customer-groups")
+public class CustomerGroupController extends AbstractController<CustomerGroup>{
 
-    private final Logger log = LoggerFactory.getLogger(CustomerGroupResource.class);
+    private final Logger log = LoggerFactory.getLogger(CustomerGroupController.class);
 
     @Inject
     private CustomerGroupService customerGroupService;
@@ -50,7 +50,7 @@ public class CustomerGroupResource extends AbstractController<CustomerGroup>{
      * @return the ResponseEntity with status 201 (Created) and with body the new customerGroup, or with status 400 (Bad Request) if the customerGroup has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/customer-groups")
+    @PostMapping()
     @Timed
     public ResponseEntity<CustomerGroup> createCustomerGroup(@RequestBody CustomerGroup customerGroup) throws URISyntaxException {
         log.debug("REST request to save CustomerGroup : {}", customerGroup);
@@ -72,7 +72,7 @@ public class CustomerGroupResource extends AbstractController<CustomerGroup>{
      * or with status 500 (Internal Server Error) if the customerGroup couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/customer-groups")
+    @PutMapping()
     @Timed
     public ResponseEntity<CustomerGroup> updateCustomerGroup(@RequestBody CustomerGroup customerGroup) throws URISyntaxException {
         log.debug("REST request to update CustomerGroup : {}", customerGroup);
@@ -92,7 +92,7 @@ public class CustomerGroupResource extends AbstractController<CustomerGroup>{
      * @return the ResponseEntity with status 200 (OK) and the list of customerGroups in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/customer-groups")
+    @GetMapping()
     @Timed
     public ResponseEntity<List<CustomerGroup>> getAllCustomerGroups(Pageable pageable)
         throws URISyntaxException {
@@ -108,7 +108,7 @@ public class CustomerGroupResource extends AbstractController<CustomerGroup>{
      * @param id the id of the customerGroup to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the customerGroup, or with status 404 (Not Found)
      */
-    @GetMapping("/customer-groups/{id}")
+    @GetMapping("/{id}")
     @Timed
     public ResponseEntity<CustomerGroup> getCustomerGroup(@PathVariable Long id) {
         log.debug("REST request to get CustomerGroup : {}", id);
@@ -126,7 +126,7 @@ public class CustomerGroupResource extends AbstractController<CustomerGroup>{
      * @param id the id of the customerGroup to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/customer-groups/{id}")
+    @DeleteMapping("/{id}")
     @Timed
     public ResponseEntity<Void> deleteCustomerGroup(@PathVariable Long id) {
         log.debug("REST request to delete CustomerGroup : {}", id);
@@ -143,7 +143,7 @@ public class CustomerGroupResource extends AbstractController<CustomerGroup>{
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/_search/customer-groups")
+    @GetMapping("/_search")
     @Timed
     public ResponseEntity<List<CustomerGroup>> searchCustomerGroups(@RequestParam String query, Pageable pageable)
         throws URISyntaxException {

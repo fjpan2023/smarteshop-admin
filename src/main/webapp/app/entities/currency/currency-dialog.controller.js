@@ -5,21 +5,20 @@
         .module('smarteshopApp')
         .controller('CurrencyDialogController', CurrencyDialogController);
 
-    CurrencyDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Currency'];
+    CurrencyDialogController.$inject = ['$timeout', '$scope','$state', '$stateParams', 'previousState', 'entity', 'Currency'];
 
-    function CurrencyDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Currency) {
+    function CurrencyDialogController ($timeout, $scope, $state, $stateParams, previousState, entity, Currency) {
         var vm = this;
-
         vm.currency = entity;
         vm.clear = clear;
         vm.save = save;
-
+        vm.previousState = previousState.name;
+        
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
         });
 
         function clear () {
-            $uibModalInstance.dismiss('cancel');
         }
 
         function save () {
@@ -33,8 +32,8 @@
 
         function onSaveSuccess (result) {
             $scope.$emit('smarteshopApp:currencyUpdate', result);
-            $uibModalInstance.close(result);
             vm.isSaving = false;
+            $state.go(vm.previousState);
         }
 
         function onSaveError () {

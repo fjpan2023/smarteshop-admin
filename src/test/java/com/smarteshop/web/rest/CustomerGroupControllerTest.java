@@ -33,11 +33,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the CustomerGroupResource REST controller.
  *
- * @see CustomerGroupResource
+ * @see CustomerGroupController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApplication.class)
-public class CustomerGroupResourceIntTest {
+public class CustomerGroupControllerTest {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
@@ -67,7 +67,7 @@ public class CustomerGroupResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        CustomerGroupResource customerGroupResource = new CustomerGroupResource();
+        CustomerGroupController customerGroupResource = new CustomerGroupController();
         ReflectionTestUtils.setField(customerGroupResource, "customerGroupService", customerGroupService);
         this.restCustomerGroupMockMvc = MockMvcBuilders.standaloneSetup(customerGroupResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

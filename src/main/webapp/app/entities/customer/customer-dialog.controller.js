@@ -5,7 +5,7 @@
         .module('smarteshopApp')
         .controller('CustomerDialogController', CustomerDialogController);
 
-    CustomerDialogController.$inject = ['$timeout', '$scope','$state', '$stateParams', 'previousState', 'entity', 'Customer'];
+    CustomerDialogController.$inject = ['$timeout', '$scope', '$state', '$stateParams', 'previousState', 'entity', 'Customer'];
 
     function CustomerDialogController ($timeout, $scope, $state, $stateParams, previousState, entity, Customer) {
         var vm = this;

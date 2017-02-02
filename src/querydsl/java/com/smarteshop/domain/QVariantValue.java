@@ -22,11 +22,25 @@ public class QVariantValue extends EntityPathBase<VariantValue> {
 
     public static final QVariantValue variantValue = new QVariantValue("variantValue");
 
+    public final QAbstractAuditingEntity _super = new QAbstractAuditingEntity(this);
+
     public final StringPath code = createString("code");
+
+    //inherited
+    public final StringPath createdBy = _super.createdBy;
+
+    //inherited
+    public final DateTimePath<java.time.ZonedDateTime> createdDate = _super.createdDate;
 
     public final NumberPath<Integer> displayOrder = createNumber("displayOrder", Integer.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    //inherited
+    public final StringPath lastModifiedBy = _super.lastModifiedBy;
+
+    //inherited
+    public final DateTimePath<java.time.ZonedDateTime> lastModifiedDate = _super.lastModifiedDate;
 
     public final StringPath value = createString("value");
 

@@ -1,77 +1,51 @@
 
-<form name="editForm" role="form" class="form-horizontal" novalidate
-	ng-submit="vm.save()">
+<form name="editForm" role="form" class="form-horizontal" novalidate ng-submit="vm.save()">
 	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal"
-			aria-hidden="true" >&times;</button>
-		<h4 class="modal-title" id="myCustomerLabel"
-			data-translate="smarteshopApp.customer.home.createOrEditLabel">Create
-			or edit a Customer</h4>
+		<h4 class="modal-title" id="myCustomerLabel" data-translate="smarteshopApp.customer.home.createOrEditLabel">Create or edit a Customer</h4>
 	</div>
 	<div class="modal-body">
 		<jhi-alert-error></jhi-alert-error>
-
 		<div class="form-group">
-			<label class="col-sm-2  control-label"
-				data-translate="smarteshopApp.customer.firstName"
-				for="field_firstName">First Name</label>
+			<label class="col-sm-2  control-label" data-translate="smarteshopApp.customer.firstName" for="field_firstName">First Name</label>
 			<div class="col-sm-4 no-padding-left">
-				<input type="text" class="form-control" name="firstName"
-					id="field_firstName" ng-model="vm.customer.firstName" />
+				<input type="text" class="form-control" name="firstName" id="field_firstName" ng-model="vm.customer.firstName" />
 			</div>
-			<label class="col-sm-2 control-label"
-				data-translate="smarteshopApp.customer.lastName"
-				for="field_lastName">Last Name</label>
+			<label class="col-sm-2 control-label" data-translate="smarteshopApp.customer.lastName" for="field_lastName">Last Name</label>
 			<div class="col-sm-4 no-padding-left">
-				<input type="text" class="form-control" name="lastName"
-					id="field_lastName" ng-model="vm.customer.lastName" />
+				<input type="text" class="form-control" name="lastName" id="field_lastName" ng-model="vm.customer.lastName" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label"
-				data-translate="smarteshopApp.customer.email" for="field_email">Email</label>
+			<label class="col-sm-2 control-label" data-translate="smarteshopApp.customer.email" for="field_email">Email</label>
 			<div class="col-sm-4 no-padding-left">
-				<input type="email" class="form-control" name="email"
-					id="field_email" ng-model="vm.customer.email" /> <span
-					class="error" ng-show="editForm.input.$error.email"> Not valid
-					email!</span>
+				<input type="email" class="form-control" name="email" id="field_email" ng-model="vm.customer.email" /> <span class="error" ng-show="editForm.input.$error.email"> Not valid email!</span>
 			</div>
 
-			<label class="col-sm-2 control-label"
-				data-translate="smarteshopApp.customer.phone" for="field_phone">Phone</label>
+			<label class="col-sm-2 control-label" data-translate="smarteshopApp.customer.phone" for="field_phone">Phone</label>
 			<div class="col-sm-4 no-padding-left">
-				<input type="text" class="form-control" name="phone"
-					id="field_phone" ng-model="vm.customer.phone" />
+				<input type="text" class="form-control" name="phone" id="field_phone" ng-model="vm.customer.phone" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label"
-				data-translate="smarteshopApp.customer.fax" for="field_fax">Fax</label>
+			<label class="col-sm-2 control-label" data-translate="smarteshopApp.customer.fax" for="field_fax">Fax</label>
 			<div class="col-sm-4 no-padding-left">
-				<input type="text" class="form-control" name="fax" id="field_fax"
-					ng-model="vm.customer.fax" />
+				<input type="text" class="form-control" name="fax" id="field_fax" ng-model="vm.customer.fax" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2 control-label"
-				data-translate="smarteshopApp.customer.remark" for="field_remark">Remark</label>
+			<label class="col-sm-2 control-label" data-translate="smarteshopApp.customer.remark" for="field_remark">Remark</label>
 			<div class="col-sm-10 no-padding-left">
-				<textarea class="form-control" rows="5" name="remark"
-					id="field_remark" ng-model="vm.customer.remark"></textarea>
+				<textarea class="form-control" rows="5" name="remark" id="field_remark" ng-model="vm.customer.remark"></textarea>
 			</div>
 		</div>
 
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal"
-			ui-sref="{{vm.previousState}}">
-			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
-				data-translate="entity.action.cancel">Cancel</span>
+		<button type="button" class="btn btn-default" data-dismiss="modal" ui-sref="{{vm.previousState}}">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
 		</button>
-		<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving"
-			class="btn btn-primary">
-			<span class="glyphicon glyphicon-save"></span>&nbsp;<span
-				data-translate="entity.action.save">Save</span>
+		<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
 		</button>
 	</div>
 </form>

@@ -9,17 +9,17 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('currency', {
+        .state('address', {
             parent: 'entity',
-            url: '/currency?page&sort&search',
+            url: '/address?page&sort&search',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'smarteshopApp.currency.home.title'
+                pageTitle: 'smarteshopApp.address.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/currency/currencies.html',
-                    controller: 'CurrencyController',
+                    templateUrl: 'app/entities/address/addresses.html',
+                    controller: 'AddressController',
                     controllerAs: 'vm'
                 }
             },
@@ -45,37 +45,37 @@
                     };
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('currency');
+                    $translatePartialLoader.addPart('address');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('currency-detail', {
+        .state('address-detail', {
             parent: 'entity',
-            url: '/currency/{id}',
+            url: '/address/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'smarteshopApp.currency.detail.title'
+                pageTitle: 'smarteshopApp.address.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/currency/currency-detail.html',
-                    controller: 'CurrencyDetailController',
+                    templateUrl: 'app/entities/address/address-detail.html',
+                    controller: 'AddressDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('currency');
+                    $translatePartialLoader.addPart('address');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'Currency', function($stateParams, Currency) {
-                    return Currency.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Address', function($stateParams, Address) {
+                    return Address.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'currency',
+                        name: $state.current.name || 'address',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -83,22 +83,22 @@
                 }]
             }
         })
-        .state('currency-detail.edit', {
-            parent: 'currency-detail',
+        .state('address-detail.edit', {
+            parent: 'address-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/currency/currency-dialog.html',
-                    controller: 'CurrencyDialogController',
+                    templateUrl: 'app/entities/address/address-dialog.html',
+                    controller: 'AddressDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['Currency', function(Currency) {
-                            return Currency.get({id : $stateParams.id}).$promise;
+                        entity: ['Address', function(Address) {
+                            return Address.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -108,87 +108,84 @@
                 });
             }]
         })
-        .state('currency.new', {
-            parent: 'currency',
+        .state('address.new', {
+            parent: 'address',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/currency/currency-dialog.html',
-                    controller: 'CurrencyDialogController',
+                    templateUrl: 'app/entities/address/address-dialog.html',
+                    controller: 'AddressDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                title: null,
-                                symbolLeft: null,
-                                symbolRight: null,
+                                country: null,
+                                street1: null,
+                                state: null,
+                                stateCode: null,
+                                cityName: null,
+                                street2: null,
+                                zipCode: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('currency', null, { reload: 'currency' });
+                    $state.go('address', null, { reload: 'address' });
                 }, function() {
-                    $state.go('currency');
+                    $state.go('address');
                 });
             }]
         })
-        .state('currency.edit', {
-            parent: 'currency',
+        .state('address.edit', {
+            parent: 'address',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
-            views: {
-                'content@': {
-                    templateUrl: 'app/entities/currency/currency-dialog.html',
-                    controller: 'CurrencyDialogController',
-                    controllerAs: 'vm'
-                }
-            },
-            resolve: {
-                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('currency');
-                    $translatePartialLoader.addPart('statusEnum');
-                    return $translate.refresh();
-                }],
-                entity: ['$stateParams', 'Currency', function($stateParams, Currency) {
-                    return Currency.get({id : $stateParams.id}).$promise;
-                }],
-                previousState: ["$state", function ($state) {
-                    var currentStateData = {
-                        name: $state.current.name || 'currency',
-                        params: $state.params,
-                        url: $state.href($state.current.name, $state.params)
-                    };
-                    return currentStateData;
-                }]
-            }
+            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                $uibModal.open({
+                    templateUrl: 'app/entities/address/address-dialog.html',
+                    controller: 'AddressDialogController',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: 'lg',
+                    resolve: {
+                        entity: ['Address', function(Address) {
+                            return Address.get({id : $stateParams.id}).$promise;
+                        }]
+                    }
+                }).result.then(function() {
+                    $state.go('address', null, { reload: 'address' });
+                }, function() {
+                    $state.go('^');
+                });
+            }]
         })
-        .state('currency.delete', {
-            parent: 'currency',
+        .state('address.delete', {
+            parent: 'address',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/currency/currency-delete-dialog.html',
-                    controller: 'CurrencyDeleteController',
+                    templateUrl: 'app/entities/address/address-delete-dialog.html',
+                    controller: 'AddressDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['Currency', function(Currency) {
-                            return Currency.get({id : $stateParams.id}).$promise;
+                        entity: ['Address', function(Address) {
+                            return Address.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('currency', null, { reload: 'currency' });
+                    $state.go('address', null, { reload: 'address' });
                 }, function() {
                     $state.go('^');
                 });

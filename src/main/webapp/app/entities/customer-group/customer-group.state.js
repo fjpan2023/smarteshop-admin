@@ -89,24 +89,31 @@
             data: {
                 authorities: ['ROLE_USER']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/customer-group/customer-group-dialog.html',
                     controller: 'CustomerGroupDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['CustomerGroup', function(CustomerGroup) {
-                            return CustomerGroup.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('^', {}, { reload: false });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('customerGroup');
+                    $translatePartialLoader.addPart('statusEnum');
+                    return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'CustomerGroup', function($stateParams, Category) {
+                    return CustomerGroup.get({id : $stateParams.id}).$promise;
+                }],
+                previousState: ["$state", function ($state) {
+                    var currentStateData = {
+                        name: $state.current.name || 'customer-group',
+                        params: $state.params,
+                        url: $state.href($state.current.name, $state.params)
+                    };
+                    return currentStateData;
+                }]
+            }
         })
         .state('customer-group.new', {
             parent: 'customer-group',
@@ -142,24 +149,31 @@
             data: {
                 authorities: ['ROLE_USER']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/customer-group/customer-group-dialog.html',
                     controller: 'CustomerGroupDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['CustomerGroup', function(CustomerGroup) {
-                            return CustomerGroup.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('customer-group', null, { reload: 'customer-group' });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('customerGroup');
+                    $translatePartialLoader.addPart('statusEnum');
+                    return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'CustomerGroup', function($stateParams, Category) {
+                    return CustomerGroup.get({id : $stateParams.id}).$promise;
+                }],
+                previousState: ["$state", function ($state) {
+                    var currentStateData = {
+                        name: $state.current.name || 'customer-group',
+                        params: $state.params,
+                        url: $state.href($state.current.name, $state.params)
+                    };
+                    return currentStateData;
+                }]
+            }
         })
         .state('customer-group.delete', {
             parent: 'customer-group',

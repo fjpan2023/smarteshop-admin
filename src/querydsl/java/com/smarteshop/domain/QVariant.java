@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -40,6 +41,8 @@ public class QVariant extends EntityPathBase<Variant> {
     public final DateTimePath<java.time.ZonedDateTime> lastModifiedDate = _super.lastModifiedDate;
 
     public final StringPath name = createString("name");
+
+    public final SetPath<VariantValue, QVariantValue> variantValues = this.<VariantValue, QVariantValue>createSet("variantValues", VariantValue.class, QVariantValue.class, PathInits.DIRECT2);
 
     public QVariant(String variable) {
         super(Variant.class, forVariable(variable));

@@ -89,24 +89,31 @@
             data: {
                 authorities: ['ROLE_USER']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/contact-person/contact-person-dialog.html',
                     controller: 'ContactPersonDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['ContactPerson', function(ContactPerson) {
-                            return ContactPerson.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('^', {}, { reload: false });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('contactPerson');
+                    $translatePartialLoader.addPart('statusEnum');
+                    return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'ContactPerson', function($stateParams, ContactPerson) {
+                    return ContactPerson.get({id : $stateParams.id}).$promise;
+                }],
+                previousState: ["$state", function ($state) {
+                    var currentStateData = {
+                        name: $state.current.name || 'contact-person',
+                        params: $state.params,
+                        url: $state.href($state.current.name, $state.params)
+                    };
+                    return currentStateData;
+                }]
+            }
         })
         .state('contact-person.new', {
             parent: 'contact-person',
@@ -114,29 +121,32 @@
             data: {
                 authorities: ['ROLE_USER']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/contact-person/contact-person-dialog.html',
                     controller: 'ContactPersonDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: function () {
-                            return {
-                                name: null,
-                                email: null,
-                                phone: null,
-                                id: null
-                            };
-                        }
-                    }
-                }).result.then(function() {
-                    $state.go('contact-person', null, { reload: 'contact-person' });
-                }, function() {
-                    $state.go('contact-person');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('contactPerson');
+                    $translatePartialLoader.addPart('statusEnum');
+                    return $translate.refresh();
+                }],
+                entity: function () {
+                    return null;
+                },
+                previousState: ["$state", function ($state) {
+                    var currentStateData = {
+                        name: $state.current.name || 'contact-person',
+                        params: $state.params,
+                        url: $state.href($state.current.name, $state.params)
+                    };
+                    return currentStateData;
+                }]
+            }
+           
         })
         .state('contact-person.edit', {
             parent: 'contact-person',
@@ -144,24 +154,31 @@
             data: {
                 authorities: ['ROLE_USER']
             },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
+            views: {
+                'content@': {
                     templateUrl: 'app/entities/contact-person/contact-person-dialog.html',
                     controller: 'ContactPersonDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['ContactPerson', function(ContactPerson) {
-                            return ContactPerson.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('contact-person', null, { reload: 'contact-person' });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('contactPerson');
+                    $translatePartialLoader.addPart('statusEnum');
+                    return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'ContactPerson', function($stateParams, ContactPerson) {
+                    return ContactPerson.get({id : $stateParams.id}).$promise;
+                }],
+                previousState: ["$state", function ($state) {
+                    var currentStateData = {
+                        name: $state.current.name || 'contact-person',
+                        params: $state.params,
+                        url: $state.href($state.current.name, $state.params)
+                    };
+                    return currentStateData;
+                }]
+            }
         })
         .state('contact-person.delete', {
             parent: 'contact-person',
