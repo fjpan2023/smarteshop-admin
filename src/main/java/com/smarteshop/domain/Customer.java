@@ -2,7 +2,6 @@ package com.smarteshop.domain;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +15,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
+
 /**
  * A Customer.
  */
@@ -23,7 +24,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Table(name = "customer")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "customer")
-public class Customer  extends AbstractAuditingEntity implements Serializable {
+public class Customer  extends AbstractBusinessObjectEntity<Long, Customer> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -53,10 +54,12 @@ public class Customer  extends AbstractAuditingEntity implements Serializable {
     private List<Address> addresses;
 
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -150,36 +153,4 @@ public class Customer  extends AbstractAuditingEntity implements Serializable {
       this.addresses = addresses;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Customer customer = (Customer) o;
-        if (customer.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, customer.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Customer{" +
-            "id=" + id +
-            ", firstName='" + firstName + "'" +
-            ", lastName='" + lastName + "'" +
-            ", email='" + email + "'" +
-            ", phone='" + phone + "'" +
-            ", fax='" + fax + "'" +
-            ", remark='" + remark + "'" +
-            '}';
-    }
 }

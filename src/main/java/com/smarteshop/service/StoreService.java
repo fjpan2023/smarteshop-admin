@@ -1,6 +1,6 @@
 package com.smarteshop.service;
 
-import com.smarteshop.domain.Store;
+import com.smarteshop.domain.MerchantStore;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,7 +17,7 @@ public interface StoreService {
      * @param store the entity to save
      * @return the persisted entity
      */
-    Store save(Store store);
+    MerchantStore save(MerchantStore store);
 
     /**
      *  Get all the stores.
@@ -25,7 +25,7 @@ public interface StoreService {
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<Store> findAll(Pageable pageable);
+    Page<MerchantStore> findAll(Pageable pageable);
 
     /**
      *  Get the "id" store.
@@ -33,7 +33,7 @@ public interface StoreService {
      *  @param id the id of the entity
      *  @return the entity
      */
-    Store findOne(Long id);
+    MerchantStore findOne(Long id);
 
     /**
      *  Delete the "id" store.
@@ -50,5 +50,5 @@ public interface StoreService {
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    Page<Store> search(String query, Pageable pageable);
+    Page<MerchantStore> search(String query, Pageable pageable);
 }

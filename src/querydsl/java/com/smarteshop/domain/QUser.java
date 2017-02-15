@@ -20,7 +20,7 @@ public class QUser extends EntityPathBase<User> {
 
     public static final QUser user = new QUser("user");
 
-    public final QAbstractAuditingEntity _super = new QAbstractAuditingEntity(this);
+    public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
 
     public final BooleanPath activated = createBoolean("activated");
 

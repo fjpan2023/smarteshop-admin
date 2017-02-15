@@ -1,7 +1,7 @@
 package com.smarteshop.service.impl;
 
 import com.smarteshop.service.StoreService;
-import com.smarteshop.domain.Store;
+import com.smarteshop.domain.MerchantStore;
 import com.smarteshop.repository.StoreRepository;
 import com.smarteshop.repository.search.StoreSearchRepository;
 import org.slf4j.Logger;
@@ -39,9 +39,9 @@ public class StoreServiceImpl implements StoreService{
      * @param store the entity to save
      * @return the persisted entity
      */
-    public Store save(Store store) {
+    public MerchantStore save(MerchantStore store) {
         log.debug("Request to save Store : {}", store);
-        Store result = storeRepository.save(store);
+        MerchantStore result = storeRepository.save(store);
         storeSearchRepository.save(result);
         return result;
     }
@@ -53,9 +53,9 @@ public class StoreServiceImpl implements StoreService{
      *  @return the list of entities
      */
     @Transactional(readOnly = true) 
-    public Page<Store> findAll(Pageable pageable) {
+    public Page<MerchantStore> findAll(Pageable pageable) {
         log.debug("Request to get all Stores");
-        Page<Store> result = storeRepository.findAll(pageable);
+        Page<MerchantStore> result = storeRepository.findAll(pageable);
         return result;
     }
 
@@ -66,9 +66,9 @@ public class StoreServiceImpl implements StoreService{
      *  @return the entity
      */
     @Transactional(readOnly = true) 
-    public Store findOne(Long id) {
+    public MerchantStore findOne(Long id) {
         log.debug("Request to get Store : {}", id);
-        Store store = storeRepository.findOne(id);
+        MerchantStore store = storeRepository.findOne(id);
         return store;
     }
 
@@ -90,9 +90,9 @@ public class StoreServiceImpl implements StoreService{
      *  @return the list of entities
      */
     @Transactional(readOnly = true)
-    public Page<Store> search(String query, Pageable pageable) {
+    public Page<MerchantStore> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Stores for query {}", query);
-        Page<Store> result = storeSearchRepository.search(queryStringQuery(query), pageable);
+        Page<MerchantStore> result = storeSearchRepository.search(queryStringQuery(query), pageable);
         return result;
     }
 }

@@ -19,7 +19,7 @@ public class QCustomer extends EntityPathBase<Customer> {
 
     public static final QCustomer customer = new QCustomer("customer");
 
-    public final QAbstractAuditingEntity _super = new QAbstractAuditingEntity(this);
+    public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
 
     //inherited
     public final StringPath createdBy = _super.createdBy;

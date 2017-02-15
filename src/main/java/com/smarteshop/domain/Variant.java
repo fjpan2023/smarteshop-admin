@@ -1,7 +1,6 @@
 package com.smarteshop.domain;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -17,6 +16,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
 import com.smarteshop.domain.common.BusinessObjectInterface;
 
 /**
@@ -26,7 +26,7 @@ import com.smarteshop.domain.common.BusinessObjectInterface;
 @Table(name = "variant")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "variant")
-public class Variant extends AbstractAuditingEntity implements BusinessObjectInterface {
+public class Variant extends AbstractBusinessObjectEntity<Long, Variant> implements BusinessObjectInterface {
     /**
    *
    */
@@ -49,10 +49,12 @@ public class Variant extends AbstractAuditingEntity implements BusinessObjectInt
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<VariantValue> variantValues = new HashSet<>();
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -121,33 +123,4 @@ public class Variant extends AbstractAuditingEntity implements BusinessObjectInt
         this.variantValues = variantValues;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Variant variant = (Variant) o;
-        if (variant.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, variant.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Variant{" +
-            "id=" + id +
-            ", name='" + name + "'" +
-            ", description='" + description + "'" +
-            ", displayOrder='" + displayOrder + "'" +
-            '}';
-    }
 }

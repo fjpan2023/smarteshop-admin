@@ -2,7 +2,6 @@ package com.smarteshop.domain;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -20,6 +19,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
 import com.smarteshop.domain.enumeration.StatusEnum;
 
 /**
@@ -29,7 +29,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 @Table(name = "category")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "category")
-public class Category extends AbstractAuditingEntity implements Serializable {
+public class Category extends AbstractBusinessObjectEntity<Long, Category> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -58,10 +58,12 @@ public class Category extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Product> products = new HashSet<>();
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -156,35 +158,4 @@ public class Category extends AbstractAuditingEntity implements Serializable {
         this.products = products;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Category category = (Category) o;
-        if (category.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, category.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-            "id=" + id +
-            ", name='" + name + "'" +
-            ", parentId='" + parentId + "'" +
-            ", leaf='" + leaf + "'" +
-            ", includeMenu='" + includeMenu + "'" +
-            ", status='" + status + "'" +
-            '}';
-    }
 }

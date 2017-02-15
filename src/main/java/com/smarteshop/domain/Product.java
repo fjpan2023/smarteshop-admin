@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -25,6 +24,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
 import com.smarteshop.domain.common.BusinessObjectInterface;
 import com.smarteshop.domain.enumeration.ProductLabelEnum;
 import com.smarteshop.domain.enumeration.StatusEnum;
@@ -36,7 +36,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 @Table(name = "product")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "product")
-public class Product extends AbstractAuditingEntity implements BusinessObjectInterface, Serializable {
+public class Product extends AbstractBusinessObjectEntity<Long, Product> implements BusinessObjectInterface, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -94,10 +94,12 @@ public class Product extends AbstractAuditingEntity implements BusinessObjectInt
     @Transient
     private Set<Attachment> images = new HashSet<Attachment>();
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -311,30 +313,4 @@ public class Product extends AbstractAuditingEntity implements BusinessObjectInt
 		this.images = images;
 	}
 
-	@Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Product product = (Product) o;
-        if (product.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, product.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", code=" + code + ", name=" + name + ", description=" + description + ", status="
-				+ status + ", standardPrice=" + standardPrice + ", sellPrice=" + sellPrice + ", label=" + label
-				+ ", mainImageId=" + mainImageId + ", fromDate=" + fromDate + ", endDate=" + endDate + "]";
-	}
 }

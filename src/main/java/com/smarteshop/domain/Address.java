@@ -1,7 +1,6 @@
 package com.smarteshop.domain;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +13,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
+
 /**
  * A Address.
  */
@@ -21,7 +22,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Table(name = "address")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "address")
-public class Address extends AbstractAuditingEntity implements Serializable {
+public class Address extends AbstractBusinessObjectEntity<Long, Address>  implements Serializable {
   /**
    *
    */
@@ -58,10 +59,12 @@ public class Address extends AbstractAuditingEntity implements Serializable {
   @Column(name = "zip_code")
   private String zipCode;
 
+  @Override
   public Long getId() {
     return id;
   }
 
+  @Override
   public void setId(Long id) {
     this.id = id;
   }
@@ -174,25 +177,6 @@ public class Address extends AbstractAuditingEntity implements Serializable {
     this.entityName = entityName;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    Address address = (Address) o;
-    if (address.id == null || id == null) {
-      return false;
-    }
-    return Objects.equals(id, address.id);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hashCode(id);
-  }
 
   @Override
   public String toString() {

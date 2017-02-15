@@ -19,11 +19,7 @@ public class QAddress extends EntityPathBase<Address> {
 
     public static final QAddress address = new QAddress("address");
 
-    public final QAbstractAuditingEntity _super = new QAbstractAuditingEntity(this);
-
-    public final NumberPath<Long> boId = createNumber("boId", Long.class);
-
-    public final StringPath boName = createString("boName");
+    public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
 
     public final StringPath cityName = createString("cityName");
 
@@ -34,6 +30,10 @@ public class QAddress extends EntityPathBase<Address> {
 
     //inherited
     public final DateTimePath<java.time.ZonedDateTime> createdDate = _super.createdDate;
+
+    public final NumberPath<Long> entityId = createNumber("entityId", Long.class);
+
+    public final StringPath entityName = createString("entityName");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 

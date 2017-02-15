@@ -2,7 +2,7 @@ package com.smarteshop.web.rest;
 
 import com.smarteshop.SmarteshopApplication;
 
-import com.smarteshop.domain.Store;
+import com.smarteshop.domain.MerchantStore;
 import com.smarteshop.repository.StoreRepository;
 import com.smarteshop.service.StoreService;
 import com.smarteshop.repository.search.StoreSearchRepository;
@@ -69,7 +69,7 @@ public class StoreResourceIntTest {
 
     private MockMvc restStoreMockMvc;
 
-    private Store store;
+    private MerchantStore store;
 
     @Before
     public void setup() {
@@ -87,8 +87,8 @@ public class StoreResourceIntTest {
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
-    public static Store createEntity(EntityManager em) {
-        Store store = new Store()
+    public static MerchantStore createEntity(EntityManager em) {
+        MerchantStore store = new MerchantStore()
                 .name(DEFAULT_NAME)
                 .url(DEFAULT_URL)
                 .status(DEFAULT_STATUS);
@@ -114,15 +114,15 @@ public class StoreResourceIntTest {
             .andExpect(status().isCreated());
 
         // Validate the Store in the database
-        List<Store> stores = storeRepository.findAll();
+        List<MerchantStore> stores = storeRepository.findAll();
         assertThat(stores).hasSize(databaseSizeBeforeCreate + 1);
-        Store testStore = stores.get(stores.size() - 1);
+        MerchantStore testStore = stores.get(stores.size() - 1);
         assertThat(testStore.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testStore.getUrl()).isEqualTo(DEFAULT_URL);
         assertThat(testStore.getStatus()).isEqualTo(DEFAULT_STATUS);
 
         // Validate the Store in ElasticSearch
-        Store storeEs = storeSearchRepository.findOne(testStore.getId());
+        MerchantStore storeEs = storeSearchRepository.findOne(testStore.getId());
         assertThat(storeEs).isEqualToComparingFieldByField(testStore);
     }
 
@@ -175,7 +175,7 @@ public class StoreResourceIntTest {
         int databaseSizeBeforeUpdate = storeRepository.findAll().size();
 
         // Update the store
-        Store updatedStore = storeRepository.findOne(store.getId());
+        MerchantStore updatedStore = storeRepository.findOne(store.getId());
         updatedStore
                 .name(UPDATED_NAME)
                 .url(UPDATED_URL)
@@ -187,15 +187,15 @@ public class StoreResourceIntTest {
             .andExpect(status().isOk());
 
         // Validate the Store in the database
-        List<Store> stores = storeRepository.findAll();
+        List<MerchantStore> stores = storeRepository.findAll();
         assertThat(stores).hasSize(databaseSizeBeforeUpdate);
-        Store testStore = stores.get(stores.size() - 1);
+        MerchantStore testStore = stores.get(stores.size() - 1);
         assertThat(testStore.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testStore.getUrl()).isEqualTo(UPDATED_URL);
         assertThat(testStore.getStatus()).isEqualTo(UPDATED_STATUS);
 
         // Validate the Store in ElasticSearch
-        Store storeEs = storeSearchRepository.findOne(testStore.getId());
+        MerchantStore storeEs = storeSearchRepository.findOne(testStore.getId());
         assertThat(storeEs).isEqualToComparingFieldByField(testStore);
     }
 
@@ -217,7 +217,7 @@ public class StoreResourceIntTest {
         assertThat(storeExistsInEs).isFalse();
 
         // Validate the database is empty
-        List<Store> stores = storeRepository.findAll();
+        List<MerchantStore> stores = storeRepository.findAll();
         assertThat(stores).hasSize(databaseSizeBeforeDelete - 1);
     }
 

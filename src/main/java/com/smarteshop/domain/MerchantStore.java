@@ -1,7 +1,6 @@
 package com.smarteshop.domain;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,16 +16,17 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
 import com.smarteshop.domain.enumeration.StatusEnum;
 
 /**
  * A Store.
  */
 @Entity
-@Table(name = "store")
+@Table(name = "merchant_store")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "store")
-public class Store extends AbstractAuditingEntity implements Serializable {
+@Document(indexName = "merchant_store")
+public class MerchantStore extends AbstractBusinessObjectEntity<Long, MerchantStore> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -43,14 +43,16 @@ public class Store extends AbstractAuditingEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private StatusEnum status;
-    
+
     @ManyToOne
     private Currency currency;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -59,7 +61,7 @@ public class Store extends AbstractAuditingEntity implements Serializable {
         return name;
     }
 
-    public Store name(String name) {
+    public MerchantStore name(String name) {
         this.name = name;
         return this;
     }
@@ -72,7 +74,7 @@ public class Store extends AbstractAuditingEntity implements Serializable {
         return url;
     }
 
-    public Store url(String url) {
+    public MerchantStore url(String url) {
         this.url = url;
         return this;
     }
@@ -85,7 +87,7 @@ public class Store extends AbstractAuditingEntity implements Serializable {
         return status;
     }
 
-    public Store status(StatusEnum status) {
+    public MerchantStore status(StatusEnum status) {
         this.status = status;
         return this;
     }
@@ -94,7 +96,7 @@ public class Store extends AbstractAuditingEntity implements Serializable {
         this.status = status;
     }
 
-     
+
     public Currency getCurrency() {
 		return currency;
 	}
@@ -103,33 +105,4 @@ public class Store extends AbstractAuditingEntity implements Serializable {
 		this.currency = currency;
 	}
 
-	@Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Store store = (Store) o;
-        if (store.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, store.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Store{" +
-            "id=" + id +
-            ", name='" + name + "'" +
-            ", url='" + url + "'" +
-            ", status='" + status + "'" +
-            '}';
-    }
 }

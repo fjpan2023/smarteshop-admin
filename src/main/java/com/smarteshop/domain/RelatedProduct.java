@@ -1,7 +1,6 @@
 package com.smarteshop.domain;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +15,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
+
 /**
  * A RelatedProduct.
  */
@@ -23,7 +24,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Table(name = "related_product")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "relatedproduct")
-public class RelatedProduct extends AbstractAuditingEntity implements Serializable {
+public class RelatedProduct extends AbstractBusinessObjectEntity<Long, RelatedProduct> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,10 +39,12 @@ public class RelatedProduct extends AbstractAuditingEntity implements Serializab
     @ManyToOne
     private Product product;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -72,31 +75,4 @@ public class RelatedProduct extends AbstractAuditingEntity implements Serializab
         this.product = product;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        RelatedProduct relatedProduct = (RelatedProduct) o;
-        if (relatedProduct.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, relatedProduct.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
-    @Override
-    public String toString() {
-        return "RelatedProduct{" +
-            "id=" + id +
-            ", relatedProductId='" + relatedProductId + "'" +
-            '}';
-    }
 }

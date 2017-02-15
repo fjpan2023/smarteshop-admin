@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
-import com.smarteshop.domain.Store;
+import com.smarteshop.domain.MerchantStore;
 import com.smarteshop.service.StoreService;
 import com.smarteshop.web.common.AbstractController;
 import com.smarteshop.web.rest.util.HeaderUtil;
@@ -36,7 +36,7 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class StoreController extends AbstractController<Store>{
+public class StoreController extends AbstractController<MerchantStore>{
 
     private final Logger log = LoggerFactory.getLogger(StoreController.class);
 
@@ -52,12 +52,12 @@ public class StoreController extends AbstractController<Store>{
      */
     @PostMapping("/stores")
     @Timed
-    public ResponseEntity<Store> createStore(@RequestBody Store store) throws URISyntaxException {
+    public ResponseEntity<MerchantStore> createStore(@RequestBody MerchantStore store) throws URISyntaxException {
         log.debug("REST request to save Store : {}", store);
         if (store.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("store", "idexists", "A new store cannot already have an ID")).body(null);
         }
-        Store result = storeService.save(store);
+        MerchantStore result = storeService.save(store);
         return ResponseEntity.created(new URI("/api/stores/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("store", result.getId().toString()))
             .body(result);
@@ -74,12 +74,12 @@ public class StoreController extends AbstractController<Store>{
      */
     @PutMapping("/stores")
     @Timed
-    public ResponseEntity<Store> updateStore(@RequestBody Store store) throws URISyntaxException {
+    public ResponseEntity<MerchantStore> updateStore(@RequestBody MerchantStore store) throws URISyntaxException {
         log.debug("REST request to update Store : {}", store);
         if (store.getId() == null) {
             return createStore(store);
         }
-        Store result = storeService.save(store);
+        MerchantStore result = storeService.save(store);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert("store", store.getId().toString()))
             .body(result);
@@ -94,10 +94,10 @@ public class StoreController extends AbstractController<Store>{
      */
     @GetMapping("/stores")
     @Timed
-    public ResponseEntity<List<Store>> getAllStores(Pageable pageable)
+    public ResponseEntity<List<MerchantStore>> getAllStores(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Stores");
-        Page<Store> page = storeService.findAll(pageable);
+        Page<MerchantStore> page = storeService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/stores");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -110,9 +110,9 @@ public class StoreController extends AbstractController<Store>{
      */
     @GetMapping("/stores/{id}")
     @Timed
-    public ResponseEntity<Store> getStore(@PathVariable Long id) {
+    public ResponseEntity<MerchantStore> getStore(@PathVariable Long id) {
         log.debug("REST request to get Store : {}", id);
-        Store store = storeService.findOne(id);
+        MerchantStore store = storeService.findOne(id);
         return Optional.ofNullable(store)
             .map(result -> new ResponseEntity<>(
                 result,
@@ -145,10 +145,10 @@ public class StoreController extends AbstractController<Store>{
      */
     @GetMapping("/_search/stores")
     @Timed
-    public ResponseEntity<List<Store>> searchStores(@RequestParam String query, Pageable pageable)
+    public ResponseEntity<List<MerchantStore>> searchStores(@RequestParam String query, Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to search for a page of Stores for query {}", query);
-        Page<Store> page = storeService.search(query, pageable);
+        Page<MerchantStore> page = storeService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/stores");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

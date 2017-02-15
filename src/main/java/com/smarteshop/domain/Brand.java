@@ -1,7 +1,6 @@
 package com.smarteshop.domain;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -18,6 +17,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
 import com.smarteshop.domain.enumeration.StatusEnum;
 
 /**
@@ -27,7 +27,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 @Table(name = "brand")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "brand")
-public class Brand  extends AbstractAuditingEntity implements Serializable {
+public class Brand  extends AbstractBusinessObjectEntity<Long, Brand>  implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -50,11 +50,13 @@ public class Brand  extends AbstractAuditingEntity implements Serializable {
 	@Column(name = "status")
 	private StatusEnum status;
 
-	public Long getId() {
+	@Override
+  public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	@Override
+  public void setId(Long id) {
 		this.id = id;
 	}
 

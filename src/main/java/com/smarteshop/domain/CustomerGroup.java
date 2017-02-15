@@ -1,12 +1,17 @@
 package com.smarteshop.domain;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A CustomerGroup.
@@ -47,31 +52,4 @@ public class CustomerGroup implements Serializable {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        CustomerGroup customerGroup = (CustomerGroup) o;
-        if (customerGroup.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, customerGroup.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
-    @Override
-    public String toString() {
-        return "CustomerGroup{" +
-            "id=" + id +
-            ", name='" + name + "'" +
-            '}';
-    }
 }

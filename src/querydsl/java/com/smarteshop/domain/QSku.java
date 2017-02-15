@@ -22,7 +22,7 @@ public class QSku extends EntityPathBase<Sku> {
 
     public static final QSku sku = new QSku("sku");
 
-    public final QAbstractAuditingEntity _super = new QAbstractAuditingEntity(this);
+    public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
 
     public final StringPath code = createString("code");
 

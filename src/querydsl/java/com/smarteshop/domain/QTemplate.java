@@ -19,7 +19,7 @@ public class QTemplate extends EntityPathBase<Template> {
 
     public static final QTemplate template = new QTemplate("template");
 
-    public final QAbstractAuditingEntity _super = new QAbstractAuditingEntity(this);
+    public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
 
     public final StringPath content = createString("content");
 

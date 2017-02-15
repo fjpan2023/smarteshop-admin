@@ -11,16 +11,16 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QRelatedProduct is a Querydsl query type for RelatedProduct
+ * QMerchantStore is a Querydsl query type for MerchantStore
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QRelatedProduct extends EntityPathBase<RelatedProduct> {
+public class QMerchantStore extends EntityPathBase<MerchantStore> {
 
-    private static final long serialVersionUID = -692432033L;
+    private static final long serialVersionUID = -236287106L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QRelatedProduct relatedProduct = new QRelatedProduct("relatedProduct");
+    public static final QMerchantStore merchantStore = new QMerchantStore("merchantStore");
 
     public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
 
@@ -30,6 +30,8 @@ public class QRelatedProduct extends EntityPathBase<RelatedProduct> {
     //inherited
     public final DateTimePath<java.time.ZonedDateTime> createdDate = _super.createdDate;
 
+    public final QCurrency currency;
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     //inherited
@@ -38,29 +40,31 @@ public class QRelatedProduct extends EntityPathBase<RelatedProduct> {
     //inherited
     public final DateTimePath<java.time.ZonedDateTime> lastModifiedDate = _super.lastModifiedDate;
 
-    public final QProduct product;
+    public final StringPath name = createString("name");
 
-    public final NumberPath<Long> relatedProductId = createNumber("relatedProductId", Long.class);
+    public final EnumPath<com.smarteshop.domain.enumeration.StatusEnum> status = createEnum("status", com.smarteshop.domain.enumeration.StatusEnum.class);
 
-    public QRelatedProduct(String variable) {
-        this(RelatedProduct.class, forVariable(variable), INITS);
+    public final StringPath url = createString("url");
+
+    public QMerchantStore(String variable) {
+        this(MerchantStore.class, forVariable(variable), INITS);
     }
 
-    public QRelatedProduct(Path<? extends RelatedProduct> path) {
+    public QMerchantStore(Path<? extends MerchantStore> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QRelatedProduct(PathMetadata metadata) {
+    public QMerchantStore(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QRelatedProduct(PathMetadata metadata, PathInits inits) {
-        this(RelatedProduct.class, metadata, inits);
+    public QMerchantStore(PathMetadata metadata, PathInits inits) {
+        this(MerchantStore.class, metadata, inits);
     }
 
-    public QRelatedProduct(Class<? extends RelatedProduct> type, PathMetadata metadata, PathInits inits) {
+    public QMerchantStore(Class<? extends MerchantStore> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.product = inits.isInitialized("product") ? new QProduct(forProperty("product"), inits.get("product")) : null;
+        this.currency = inits.isInitialized("currency") ? new QCurrency(forProperty("currency")) : null;
     }
 
 }

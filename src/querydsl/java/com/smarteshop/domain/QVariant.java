@@ -20,7 +20,7 @@ public class QVariant extends EntityPathBase<Variant> {
 
     public static final QVariant variant = new QVariant("variant");
 
-    public final QAbstractAuditingEntity _super = new QAbstractAuditingEntity(this);
+    public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
 
     //inherited
     public final StringPath createdBy = _super.createdBy;

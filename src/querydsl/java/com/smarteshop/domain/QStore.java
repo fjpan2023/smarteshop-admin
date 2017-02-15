@@ -14,7 +14,7 @@ import com.querydsl.core.types.dsl.PathInits;
  * QStore is a Querydsl query type for Store
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QStore extends EntityPathBase<Store> {
+public class QStore extends EntityPathBase<MerchantStore> {
 
     private static final long serialVersionUID = -1140408986L;
 
@@ -47,10 +47,10 @@ public class QStore extends EntityPathBase<Store> {
     public final StringPath url = createString("url");
 
     public QStore(String variable) {
-        this(Store.class, forVariable(variable), INITS);
+        this(MerchantStore.class, forVariable(variable), INITS);
     }
 
-    public QStore(Path<? extends Store> path) {
+    public QStore(Path<? extends MerchantStore> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -59,10 +59,10 @@ public class QStore extends EntityPathBase<Store> {
     }
 
     public QStore(PathMetadata metadata, PathInits inits) {
-        this(Store.class, metadata, inits);
+        this(MerchantStore.class, metadata, inits);
     }
 
-    public QStore(Class<? extends Store> type, PathMetadata metadata, PathInits inits) {
+    public QStore(Class<? extends MerchantStore> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.currency = inits.isInitialized("currency") ? new QCurrency(forProperty("currency")) : null;
     }

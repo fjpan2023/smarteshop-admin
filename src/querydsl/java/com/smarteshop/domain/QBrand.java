@@ -19,7 +19,7 @@ public class QBrand extends EntityPathBase<Brand> {
 
     public static final QBrand brand = new QBrand("brand");
 
-    public final QAbstractAuditingEntity _super = new QAbstractAuditingEntity(this);
+    public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
 
     public final StringPath briefDesc = createString("briefDesc");
 

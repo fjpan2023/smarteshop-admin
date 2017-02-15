@@ -1,7 +1,6 @@
 package com.smarteshop.domain;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +13,8 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
+
 /**
  * A Comments.
  */
@@ -21,7 +22,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Table(name = "comments")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "comments")
-public class Comments extends AbstractAuditingEntity implements Serializable {
+public class Comments extends AbstractBusinessObjectEntity<Long, Comments>  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -44,10 +45,12 @@ public class Comments extends AbstractAuditingEntity implements Serializable {
     @Column(name = "subject")
     private String subject;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -117,35 +120,5 @@ public class Comments extends AbstractAuditingEntity implements Serializable {
         this.subject = subject;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Comments comments = (Comments) o;
-        if (comments.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, comments.id);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Comments{" +
-            "id=" + id +
-            ", email='" + email + "'" +
-            ", userName='" + userName + "'" +
-            ", content='" + content + "'" +
-            ", isHandle='" + isHandle + "'" +
-            ", subject='" + subject + "'" +
-            '}';
-    }
 }

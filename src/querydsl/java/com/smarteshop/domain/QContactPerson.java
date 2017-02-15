@@ -19,7 +19,7 @@ public class QContactPerson extends EntityPathBase<ContactPerson> {
 
     public static final QContactPerson contactPerson = new QContactPerson("contactPerson");
 
-    public final QAbstractAuditingEntity _super = new QAbstractAuditingEntity(this);
+    public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
 
     //inherited
     public final StringPath createdBy = _super.createdBy;

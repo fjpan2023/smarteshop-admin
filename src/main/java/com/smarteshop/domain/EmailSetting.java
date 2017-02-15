@@ -1,7 +1,6 @@
 package com.smarteshop.domain;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,6 +16,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
 import com.smarteshop.domain.enumeration.SMTPSecurityEnum;
 
 /**
@@ -26,7 +26,7 @@ import com.smarteshop.domain.enumeration.SMTPSecurityEnum;
 @Table(name = "email_setting")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "emailsetting")
-public class EmailSetting extends AbstractAuditingEntity implements Serializable {
+public class EmailSetting extends AbstractBusinessObjectEntity<Long, EmailSetting> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -59,10 +59,12 @@ public class EmailSetting extends AbstractAuditingEntity implements Serializable
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -143,38 +145,5 @@ public class EmailSetting extends AbstractAuditingEntity implements Serializable
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        EmailSetting emailSetting = (EmailSetting) o;
-        if (emailSetting.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, emailSetting.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
-    @Override
-    public String toString() {
-        return "EmailSetting{" +
-            "id=" + id +
-            ", host='" + host + "'" +
-            ", port='" + port + "'" +
-            ", smtpSecurity='" + smtpSecurity + "'" +
-            ", fromAddress='" + fromAddress + "'" +
-            ", userName='" + userName + "'" +
-            ", password='" + password + "'" +
-            '}';
     }
 }

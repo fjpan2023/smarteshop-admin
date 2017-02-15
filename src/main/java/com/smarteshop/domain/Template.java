@@ -1,7 +1,6 @@
 package com.smarteshop.domain;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +15,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
 import com.smarteshop.domain.enumeration.TemplateTypeEnum;
 
 /**
@@ -25,7 +25,7 @@ import com.smarteshop.domain.enumeration.TemplateTypeEnum;
 @Table(name = "template")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "template")
-public class Template extends AbstractAuditingEntity implements Serializable {
+public class Template extends AbstractBusinessObjectEntity<Long, Template> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -46,10 +46,12 @@ public class Template extends AbstractAuditingEntity implements Serializable {
     @Column(name = "content")
     private String content;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
@@ -106,34 +108,4 @@ public class Template extends AbstractAuditingEntity implements Serializable {
         this.content = content;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Template template = (Template) o;
-        if (template.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, template.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Template{" +
-            "id=" + id +
-            ", type='" + type + "'" +
-            ", superId='" + superId + "'" +
-            ", templateKey='" + templateKey + "'" +
-            ", content='" + content + "'" +
-            '}';
-    }
 }

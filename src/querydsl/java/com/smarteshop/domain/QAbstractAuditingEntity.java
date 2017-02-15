@@ -3,7 +3,7 @@ package com.smarteshop.domain;
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
 import com.querydsl.core.types.dsl.*;
-
+import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
@@ -13,7 +13,7 @@ import com.querydsl.core.types.Path;
  * QAbstractAuditingEntity is a Querydsl query type for AbstractAuditingEntity
  */
 @Generated("com.querydsl.codegen.SupertypeSerializer")
-public class QAbstractAuditingEntity extends EntityPathBase<AbstractAuditingEntity> {
+public class QAbstractAuditingEntity extends EntityPathBase<AbstractBusinessObjectEntity> {
 
     private static final long serialVersionUID = -834924601L;
 
@@ -28,15 +28,15 @@ public class QAbstractAuditingEntity extends EntityPathBase<AbstractAuditingEnti
     public final DateTimePath<java.time.ZonedDateTime> lastModifiedDate = createDateTime("lastModifiedDate", java.time.ZonedDateTime.class);
 
     public QAbstractAuditingEntity(String variable) {
-        super(AbstractAuditingEntity.class, forVariable(variable));
+        super(AbstractBusinessObjectEntity.class, forVariable(variable));
     }
 
-    public QAbstractAuditingEntity(Path<? extends AbstractAuditingEntity> path) {
+    public QAbstractAuditingEntity(Path<? extends AbstractBusinessObjectEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
     public QAbstractAuditingEntity(PathMetadata metadata) {
-        super(AbstractAuditingEntity.class, metadata);
+        super(AbstractBusinessObjectEntity.class, metadata);
     }
 
 }
