@@ -62,5 +62,7 @@
 
     <cache alias="com.smarteshop.domain.Address" uses-template="simple"/>
 
+    <cache alias="com.smarteshop.domain.ProductBundle" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>

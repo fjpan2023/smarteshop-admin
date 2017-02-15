@@ -16,7 +16,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
+import com.smarteshop.common.entity.BusinessObjectEntity;
 
 /**
  * A VariantValue.
@@ -25,7 +25,7 @@ import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
 @Table(name = "variant_value")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "variantvalue")
-public class VariantValue extends AbstractBusinessObjectEntity<Long, VariantValue> implements Serializable  {
+public class VariantValue extends BusinessObjectEntity<Long, VariantValue> implements Serializable  {
   private static final long serialVersionUID = -8155280208012644059L;
 
   @Id

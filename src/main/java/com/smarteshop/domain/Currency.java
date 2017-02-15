@@ -13,7 +13,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
+import com.smarteshop.common.entity.BusinessObjectEntity;
 
 /**
  * A Currency.
@@ -22,7 +22,7 @@ import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
 @Table(name = "currency")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "currency")
-public class Currency extends AbstractBusinessObjectEntity<Long, Currency> implements Serializable {
+public class Currency extends BusinessObjectEntity<Long, Currency> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

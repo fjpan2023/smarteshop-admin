@@ -16,7 +16,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
+import com.smarteshop.common.entity.BusinessObjectEntity;
 import com.smarteshop.domain.enumeration.StatusEnum;
 
 /**
@@ -26,7 +26,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 @Table(name = "merchant_store")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "merchant_store")
-public class MerchantStore extends AbstractBusinessObjectEntity<Long, MerchantStore> implements Serializable {
+public class MerchantStore extends BusinessObjectEntity<Long, MerchantStore> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

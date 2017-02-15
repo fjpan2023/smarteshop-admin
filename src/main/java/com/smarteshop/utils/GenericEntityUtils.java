@@ -3,7 +3,7 @@ package com.smarteshop.utils;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
+import com.smarteshop.common.entity.BusinessObjectEntity;
 
 
 public final class GenericEntityUtils {
@@ -24,7 +24,7 @@ public final class GenericEntityUtils {
             argumentClass = (Class<?>) argumentType;
           }
 
-          if (AbstractBusinessObjectEntity.class.isAssignableFrom(argumentClass)) {
+          if (BusinessObjectEntity.class.isAssignableFrom(argumentClass)) {
             return argumentClass;
           }
         }

@@ -13,7 +13,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
+import com.smarteshop.common.entity.BusinessObjectEntity;
 
 /**
  * A Comments.
@@ -22,7 +22,7 @@ import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
 @Table(name = "comments")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "comments")
-public class Comments extends AbstractBusinessObjectEntity<Long, Comments>  implements Serializable {
+public class Comments extends BusinessObjectEntity<Long, Comments>  implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

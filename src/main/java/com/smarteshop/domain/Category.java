@@ -19,7 +19,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
+import com.smarteshop.common.entity.BusinessObjectEntity;
 import com.smarteshop.domain.enumeration.StatusEnum;
 
 /**
@@ -29,7 +29,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 @Table(name = "category")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "category")
-public class Category extends AbstractBusinessObjectEntity<Long, Category> implements Serializable {
+public class Category extends BusinessObjectEntity<Long, Category> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

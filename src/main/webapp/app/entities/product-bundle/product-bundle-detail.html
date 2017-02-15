@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span data-translate="smarteshopApp.productBundle.detail.title">Product Bundle</span> {{vm.productBundle.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smarteshopApp.productBundle.priceModel">Price Model</span></dt>
+        <dd>
+            <span>{{vm.productBundle.priceModel}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.productBundle.autoBundle">Auto Bundle</span></dt>
+        <dd>
+            <span>{{vm.productBundle.autoBundle}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.productBundle.bundlePromotable">Bundle Promotable</span></dt>
+        <dd>
+            <span>{{vm.productBundle.bundlePromotable}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="product-bundle-detail.edit({id:vm.productBundle.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -24,7 +24,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @MappedSuperclass
 @Audited
 @EntityListeners(AuditingEntityListener.class)
-public abstract class AbstractBusinessObjectEntity<K extends Serializable & Comparable<K>, E extends AbstractBusinessObjectEntity<K, ?>>
+public abstract class BusinessObjectEntity<K extends Serializable & Comparable<K>, E extends BusinessObjectEntity<K, ?>>
 implements Serializable, Comparable<E> {
 
     private static final long serialVersionUID = 1L;
@@ -113,7 +113,7 @@ implements Serializable, Comparable<E> {
         return false;
       }
 
-      AbstractBusinessObjectEntity<K, E> entity = (AbstractBusinessObjectEntity<K, E>) object;
+      BusinessObjectEntity<K, E> entity = (BusinessObjectEntity<K, E>) object;
       K id = getId();
 
       if (id == null) {

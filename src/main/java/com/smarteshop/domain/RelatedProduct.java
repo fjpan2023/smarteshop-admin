@@ -15,7 +15,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
+import com.smarteshop.common.entity.BusinessObjectEntity;
 
 /**
  * A RelatedProduct.
@@ -24,7 +24,7 @@ import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
 @Table(name = "related_product")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "relatedproduct")
-public class RelatedProduct extends AbstractBusinessObjectEntity<Long, RelatedProduct> implements Serializable {
+public class RelatedProduct extends BusinessObjectEntity<Long, RelatedProduct> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

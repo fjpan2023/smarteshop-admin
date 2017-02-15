@@ -1,0 +1,23 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "priceModel",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "autoBundle",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "bundlePromotable",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170215152303",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "product_bundle",
+    "pagination": "pager"
+}

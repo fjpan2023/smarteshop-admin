@@ -27,7 +27,7 @@ import org.hibernate.validator.constraints.Email;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
+import com.smarteshop.common.entity.BusinessObjectEntity;
 import com.smarteshop.config.Constants;
 
 /**
@@ -37,7 +37,7 @@ import com.smarteshop.config.Constants;
 @Table(name = "jhi_user")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "user")
-public class User extends AbstractBusinessObjectEntity<Long, User> implements Serializable {
+public class User extends BusinessObjectEntity<Long, User> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

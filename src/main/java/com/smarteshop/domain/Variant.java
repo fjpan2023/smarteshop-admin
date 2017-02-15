@@ -16,7 +16,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import com.smarteshop.common.entity.AbstractBusinessObjectEntity;
+import com.smarteshop.common.entity.BusinessObjectEntity;
 import com.smarteshop.domain.common.BusinessObjectInterface;
 
 /**
@@ -26,7 +26,7 @@ import com.smarteshop.domain.common.BusinessObjectInterface;
 @Table(name = "variant")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "variant")
-public class Variant extends AbstractBusinessObjectEntity<Long, Variant> implements BusinessObjectInterface {
+public class Variant extends BusinessObjectEntity<Long, Variant> implements BusinessObjectInterface {
     /**
    *
    */

@@ -13,7 +13,7 @@ import com.querydsl.core.types.Path;
  * QAbstractBusinessObjectEntity is a Querydsl query type for AbstractBusinessObjectEntity
  */
 @Generated("com.querydsl.codegen.SupertypeSerializer")
-public class QAbstractBusinessObjectEntity extends EntityPathBase<AbstractBusinessObjectEntity<? extends java.io.Serializable, ?>> {
+public class QAbstractBusinessObjectEntity extends EntityPathBase<BusinessObjectEntity<? extends java.io.Serializable, ?>> {
 
     private static final long serialVersionUID = 1445862651L;
 
@@ -29,17 +29,17 @@ public class QAbstractBusinessObjectEntity extends EntityPathBase<AbstractBusine
 
     @SuppressWarnings({"all", "rawtypes", "unchecked"})
     public QAbstractBusinessObjectEntity(String variable) {
-        super((Class) AbstractBusinessObjectEntity.class, forVariable(variable));
+        super((Class) BusinessObjectEntity.class, forVariable(variable));
     }
 
     @SuppressWarnings({"all", "rawtypes", "unchecked"})
-    public QAbstractBusinessObjectEntity(Path<? extends AbstractBusinessObjectEntity> path) {
+    public QAbstractBusinessObjectEntity(Path<? extends BusinessObjectEntity> path) {
         super((Class) path.getType(), path.getMetadata());
     }
 
     @SuppressWarnings({"all", "rawtypes", "unchecked"})
     public QAbstractBusinessObjectEntity(PathMetadata metadata) {
-        super((Class) AbstractBusinessObjectEntity.class, metadata);
+        super((Class) BusinessObjectEntity.class, metadata);
     }
 
 }
