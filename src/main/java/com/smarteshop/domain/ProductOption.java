@@ -113,4 +113,13 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
         this.label = label;
     }
 
+    public Set<ProductOptionValue> getProductOptionValues() {
+      return productOptionValues;
+    }
+
+    public void setProductOptionValues(Set<ProductOptionValue> productOptionValues) {
+      this.productOptionValues = productOptionValues;
+    }
+
+
 }
