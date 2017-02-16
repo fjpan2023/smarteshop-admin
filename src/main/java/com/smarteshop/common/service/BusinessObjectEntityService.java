@@ -9,6 +9,9 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Order;
 import javax.persistence.metamodel.SingularAttribute;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.smarteshop.common.entity.BusinessObjectEntity;
 
 public interface BusinessObjectEntityService <K extends Serializable & Comparable<K>, E extends BusinessObjectEntity<K, ?>> {
@@ -29,7 +32,7 @@ public interface BusinessObjectEntityService <K extends Serializable & Comparabl
   /**
    * @param entity entity
    */
-  void save(E entity);
+  E save(E entity);
 
   /**
    * @param entity entity
@@ -91,6 +94,8 @@ public interface BusinessObjectEntityService <K extends Serializable & Comparabl
   Long count(Expression<Boolean> filter);
 
   EntityManager getEntityManager();
+
+  Page<E> findAll(Pageable pageable);
 
 
 

@@ -3,21 +3,61 @@
     "relationships": [],
     "fields": [
         {
-            "fieldName": "priceModel",
+            "fieldName": "model",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "isFeaturedProduct",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "canSellWithoutOptions",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "manufacturer",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "bundlePromotable",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "priority",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "overrideGeneratedUrl",
+            "fieldType": "Boolean"
         },
         {
             "fieldName": "autoBundle",
             "fieldType": "Boolean"
         },
         {
-            "fieldName": "bundlePromotable",
+            "fieldName": "pricingModel",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "itemsPromotable",
             "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "url",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "urlKey",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "displayTemplate",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20170215152303",
-    "dto": "no",
-    "service": "serviceImpl",
     "entityTableName": "product_bundle",
-    "pagination": "pager"
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl"
 }

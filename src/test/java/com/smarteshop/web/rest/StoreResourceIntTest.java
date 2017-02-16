@@ -34,7 +34,7 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 /**
  * Test class for the StoreResource REST controller.
  *
- * @see StoreController
+ * @see MerchantStoreController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SmarteshopApplication.class)
@@ -74,7 +74,7 @@ public class StoreResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        StoreController storeResource = new StoreController();
+        MerchantStoreController storeResource = new MerchantStoreController();
         ReflectionTestUtils.setField(storeResource, "storeService", storeService);
         this.restStoreMockMvc = MockMvcBuilders.standaloneSetup(storeResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)

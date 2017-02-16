@@ -6,10 +6,10 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.MetricFilterAutoConfiguration;
 import org.springframework.boot.actuate.autoconfigure.MetricRepositoryAutoConfiguration;
@@ -30,7 +30,7 @@ public class SmarteshopApplication {
 
     private static final Logger log = LoggerFactory.getLogger(SmarteshopApplication.class);
 
-    @Inject
+    @Autowired
     private Environment env;
 
     /**

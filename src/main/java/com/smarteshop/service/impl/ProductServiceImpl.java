@@ -4,8 +4,6 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 import java.util.Collection;
 
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.types.Predicate;
+import com.smarteshop.common.service.BusinessObjectEntityServiceImpl;
 import com.smarteshop.domain.Attachment;
 import com.smarteshop.domain.Product;
 import com.smarteshop.domain.QProduct;
@@ -28,19 +27,23 @@ import com.smarteshop.service.ProductService;
  */
 @Service
 @Transactional
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Product> implements ProductService{
 
   private final Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
 
-  @Inject
   private ProductRepository productRepository;
 
-  @Inject
+  @Autowired
   private ProductSearchRepository productSearchRepository;
 
   @Autowired
   private AttachmentService attachmentService;
 
+  public ProductServiceImpl(ProductRepository productRepository){
+    super(productRepository);
+    this.productRepository = productRepository;
+
+  }
   /**
    * Save a product.
    *
@@ -61,13 +64,6 @@ public class ProductServiceImpl implements ProductService{
    *  @param pageable the pagination information
    *  @return the list of entities
    */
-  @Override
-  @Transactional(readOnly = true)
-  public Page<Product> findAll(Pageable pageable) {
-    log.debug("Request to get all Products");
-    Page<Product> result = productRepository.findAll(pageable);
-    return result;
-  }
 
   /**
    *  Get one product by id.
@@ -128,7 +124,7 @@ public class ProductServiceImpl implements ProductService{
   @Override
   public Page<Product> findRelatedProduct(Long id, Pageable pageable) {
     log.debug("Request to get all Products");
-   // Specification spec = null;
+    // Specification spec = null;
     Page<Product> result =null;// productRepository.findAll(predicate, pageable);
     return result;
   }

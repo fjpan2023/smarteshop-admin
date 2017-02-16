@@ -7,15 +7,19 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -38,279 +42,328 @@ import com.smarteshop.domain.enumeration.StatusEnum;
 @Document(indexName = "product")
 public class Product extends BusinessObjectEntity<Long, Product> implements BusinessObjectInterface, Serializable {
 
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
+  @Column(name="product_url")
+  private String url;
 
-    @Column(name = "code")
-    private String code;
+  @Column(name="url_key")
+  private String urlKey;
 
-    @Column(name = "name")
-    private String name;
+  @Column(name = "code")
+  private String code;
 
-    @Column(name = "description")
-    private String description;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name="MERCHANT_ID", nullable=false)
+  private MerchantStore merchantStore;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
-    private StatusEnum status;
+  @OneToOne(cascade=CascadeType.ALL )
+  private Sku defaultSKU;
 
-    @Column(name = "standard_price", nullable=false,precision=10, scale=2)
-    private BigDecimal standardPrice;
+  @Column(name = "name")
+  private String name;
 
-    @Column(name = "sell_price", nullable=false, precision=10, scale=2)
-    private BigDecimal sellPrice;
+  @Column(name = "description")
+  private String description;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "label")
-    private ProductLabelEnum label;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "status")
+  private StatusEnum status;
 
-    @Column(name = "main_image_id")
-    private Long mainImageId;
+  @Column(name = "standard_price", nullable=false,precision=10, scale=2)
+  private BigDecimal standardPrice;
 
-    @Column(name = "from_date")
-    private ZonedDateTime fromDate;
+  @Column(name = "sell_price", nullable=false, precision=10, scale=2)
+  private BigDecimal sellPrice;
 
-    @NotNull
-    @Column(name = "end_date", nullable = false)
-    private ZonedDateTime endDate;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "label")
+  private ProductLabelEnum label;
 
-    @OneToMany(mappedBy = "product")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Sku> skuses = new HashSet<>();
+  @Column(name = "main_image_id")
+  private Long mainImageId;
 
-    @OneToMany(mappedBy = "product")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<RelatedProduct> relatedProducts = new HashSet<>();
+  @Column(name = "from_date")
+  private ZonedDateTime fromDate;
 
-    @ManyToOne
-    private Brand brand;
+  @NotNull
+  @Column(name = "end_date", nullable = false)
+  private ZonedDateTime endDate;
 
-    @ManyToOne
-    private Category category;
+  @OneToMany(mappedBy = "product")
+  @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+  private Set<Sku> skus = new HashSet<>();
 
-    @Transient
-    private Set<Attachment> images = new HashSet<Attachment>();
+  @OneToMany(mappedBy = "product")
+  @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+  private Set<RelatedProduct> relatedProducts = new HashSet<>();
 
-    @Override
-    public Long getId() {
-        return id;
-    }
+  @ManyToOne
+  private Brand brand;
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public Product code(String code) {
-        this.code = code;
-        return this;
-    }
+  @ManyToOne
+  private Category category;
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Product name(String name) {
-        this.name = name;
-        return this;
-    }
+  @Transient
+  private Set<Attachment> images = new HashSet<Attachment>();
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Product description(String description) {
-        this.description = description;
-        return this;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public StatusEnum getStatus() {
-        return status;
-    }
-
-    public Product status(StatusEnum status) {
-        this.status = status;
-        return this;
-    }
-
-    public void setStatus(StatusEnum status) {
-        this.status = status;
-    }
-
-    public BigDecimal getStandardPrice() {
-        return standardPrice;
-    }
-
-    public Product standardPrice(BigDecimal standardPrice) {
-        this.standardPrice = standardPrice;
-        return this;
-    }
-
-    public void setStandardPrice(BigDecimal standardPrice) {
-        this.standardPrice = standardPrice;
-    }
-
-    public ProductLabelEnum getLabel() {
-        return label;
-    }
-
-    public Product label(ProductLabelEnum label) {
-        this.label = label;
-        return this;
-    }
-
-    public void setLabel(ProductLabelEnum label) {
-        this.label = label;
-    }
-
-    public Long getMainImageId() {
-        return mainImageId;
-    }
-
-    public Product mainImageId(Long mainImageId) {
-        this.mainImageId = mainImageId;
-        return this;
-    }
-
-    public void setMainImageId(Long mainImageId) {
-        this.mainImageId = mainImageId;
-    }
-
-    public ZonedDateTime getFromDate() {
-        return fromDate;
-    }
-
-    public Product fromDate(ZonedDateTime fromDate) {
-        this.fromDate = fromDate;
-        return this;
-    }
-
-    public void setFromDate(ZonedDateTime fromDate) {
-        this.fromDate = fromDate;
-    }
-
-    public ZonedDateTime getEndDate() {
-        return endDate;
-    }
-
-    public Product endDate(ZonedDateTime endDate) {
-        this.endDate = endDate;
-        return this;
-    }
-
-    public void setEndDate(ZonedDateTime endDate) {
-        this.endDate = endDate;
-    }
-
-    public Set<Sku> getSkuses() {
-        return skuses;
-    }
-
-    public Product skuses(Set<Sku> skus) {
-        this.skuses = skus;
-        return this;
-    }
-
-    public Product addSkus(Sku sku) {
-        skuses.add(sku);
-        sku.setProduct(this);
-        return this;
-    }
-
-    public Product removeSkus(Sku sku) {
-        skuses.remove(sku);
-        sku.setProduct(null);
-        return this;
-    }
-
-    public void setSkuses(Set<Sku> skus) {
-        this.skuses = skus;
-    }
-
-    public Set<RelatedProduct> getRelatedProducts() {
-        return relatedProducts;
-    }
-
-    public Product relatedProducts(Set<RelatedProduct> relatedProducts) {
-        this.relatedProducts = relatedProducts;
-        return this;
-    }
-
-    public Product addRelatedProducts(RelatedProduct relatedProduct) {
-        relatedProducts.add(relatedProduct);
-        relatedProduct.setProduct(this);
-        return this;
-    }
-
-    public Product removeRelatedProducts(RelatedProduct relatedProduct) {
-        relatedProducts.remove(relatedProduct);
-        relatedProduct.setProduct(null);
-        return this;
-    }
-
-    public void setRelatedProducts(Set<RelatedProduct> relatedProducts) {
-        this.relatedProducts = relatedProducts;
-    }
-
-    public Brand getBrand() {
-        return brand;
-    }
-
-    public Product brand(Brand brand) {
-        this.brand = brand;
-        return this;
-    }
-
-    public void setBrand(Brand brand) {
-        this.brand = brand;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public Product category(Category category) {
-        this.category = category;
-        return this;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-
-
-    public BigDecimal getSellPrice() {
-      return sellPrice;
-    }
-
-    public void setSellPrice(BigDecimal sellPrice) {
-      this.sellPrice = sellPrice;
-    }
-    public Collection<Attachment> getImages() {
-		return images;
-	}
-	public void setImages(Set<Attachment> images) {
-		this.images = images;
-	}
+  @Override
+  public Long getId() {
+    return id;
+  }
+
+  @Override
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getCode() {
+    return code;
+  }
+
+  public Product code(String code) {
+    this.code = code;
+    return this;
+  }
+
+  public void setCode(String code) {
+    this.code = code;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public Product name(String name) {
+    this.name = name;
+    return this;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public Product description(String description) {
+    this.description = description;
+    return this;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public StatusEnum getStatus() {
+    return status;
+  }
+
+  public Product status(StatusEnum status) {
+    this.status = status;
+    return this;
+  }
+
+  public void setStatus(StatusEnum status) {
+    this.status = status;
+  }
+
+  public BigDecimal getStandardPrice() {
+    return standardPrice;
+  }
+
+  public Product standardPrice(BigDecimal standardPrice) {
+    this.standardPrice = standardPrice;
+    return this;
+  }
+
+  public void setStandardPrice(BigDecimal standardPrice) {
+    this.standardPrice = standardPrice;
+  }
+
+  public ProductLabelEnum getLabel() {
+    return label;
+  }
+
+  public Product label(ProductLabelEnum label) {
+    this.label = label;
+    return this;
+  }
+
+  public void setLabel(ProductLabelEnum label) {
+    this.label = label;
+  }
+
+  public Long getMainImageId() {
+    return mainImageId;
+  }
+
+  public Product mainImageId(Long mainImageId) {
+    this.mainImageId = mainImageId;
+    return this;
+  }
+
+  public void setMainImageId(Long mainImageId) {
+    this.mainImageId = mainImageId;
+  }
+
+  public ZonedDateTime getFromDate() {
+    return fromDate;
+  }
+
+  public Product fromDate(ZonedDateTime fromDate) {
+    this.fromDate = fromDate;
+    return this;
+  }
+
+  public void setFromDate(ZonedDateTime fromDate) {
+    this.fromDate = fromDate;
+  }
+
+  public ZonedDateTime getEndDate() {
+    return endDate;
+  }
+
+  public Product endDate(ZonedDateTime endDate) {
+    this.endDate = endDate;
+    return this;
+  }
+
+  public void setEndDate(ZonedDateTime endDate) {
+    this.endDate = endDate;
+  }
+
+
+
+  public Product addSkus(Sku sku) {
+    skus.add(sku);
+    sku.setProduct(this);
+    return this;
+  }
+
+  public Product removeSkus(Sku sku) {
+    skus.remove(sku);
+    sku.setProduct(null);
+    return this;
+  }
+
+  public void setSkuses(Set<Sku> skus) {
+    this.skus = skus;
+  }
+
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
+  public String getUrlKey() {
+    return urlKey;
+  }
+
+  public void setUrlKey(String urlKey) {
+    this.urlKey = urlKey;
+  }
+
+  public MerchantStore getMerchantStore() {
+    return merchantStore;
+  }
+
+  public void setMerchantStore(MerchantStore merchantStore) {
+    this.merchantStore = merchantStore;
+  }
+
+  public Sku getDefaultSKU() {
+    return defaultSKU;
+  }
+
+  public void setDefaultSKU(Sku defaultSKU) {
+    this.defaultSKU = defaultSKU;
+  }
+
+  public Set<Sku> getSkus() {
+    return skus;
+  }
+
+  public void setSkus(Set<Sku> skus) {
+    this.skus = skus;
+  }
+
+  public static long getSerialversionuid() {
+    return serialVersionUID;
+  }
+
+  public Set<RelatedProduct> getRelatedProducts() {
+    return relatedProducts;
+  }
+
+  public Product relatedProducts(Set<RelatedProduct> relatedProducts) {
+    this.relatedProducts = relatedProducts;
+    return this;
+  }
+
+  public Product addRelatedProducts(RelatedProduct relatedProduct) {
+    relatedProducts.add(relatedProduct);
+    relatedProduct.setProduct(this);
+    return this;
+  }
+
+  public Product removeRelatedProducts(RelatedProduct relatedProduct) {
+    relatedProducts.remove(relatedProduct);
+    relatedProduct.setProduct(null);
+    return this;
+  }
+
+  public void setRelatedProducts(Set<RelatedProduct> relatedProducts) {
+    this.relatedProducts = relatedProducts;
+  }
+
+  public Brand getBrand() {
+    return brand;
+  }
+
+  public Product brand(Brand brand) {
+    this.brand = brand;
+    return this;
+  }
+
+  public void setBrand(Brand brand) {
+    this.brand = brand;
+  }
+
+  public Category getCategory() {
+    return category;
+  }
+
+  public Product category(Category category) {
+    this.category = category;
+    return this;
+  }
+
+  public void setCategory(Category category) {
+    this.category = category;
+  }
+
+
+
+  public BigDecimal getSellPrice() {
+    return sellPrice;
+  }
+
+  public void setSellPrice(BigDecimal sellPrice) {
+    this.sellPrice = sellPrice;
+  }
+  public Collection<Attachment> getImages() {
+    return images;
+  }
+  public void setImages(Set<Attachment> images) {
+    this.images = images;
+  }
 
 }

@@ -25,6 +25,7 @@
                 "variantValue": "Variant Value",
                 "address": "Address",
                 "productBundle": "Product Bundle",
+                "manufacturer": "Manufacturer",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

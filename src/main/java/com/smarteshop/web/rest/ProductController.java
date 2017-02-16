@@ -105,7 +105,7 @@ public class ProductController extends AbstractController<Product> {
     public ResponseEntity<List<Product>> getAllProducts(@QuerydslPredicate(root=Product.class) Predicate predicate,Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Products");
-        Page<Product> page = productService.findAll(predicate, pageable);
+        Page<Product> page = productService.findAll( pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

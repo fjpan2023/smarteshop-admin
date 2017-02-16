@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/management")
-public class LogsResource {
+public class LogsController {
 
     @GetMapping("/logs")
     @Timed

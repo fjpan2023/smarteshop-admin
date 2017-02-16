@@ -1,6 +1,5 @@
 package com.smarteshop.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
 import com.smarteshop.domain.Product;
@@ -9,7 +8,7 @@ import com.smarteshop.domain.Product;
  * Spring Data JPA repository for the Product entity.
  */
 @SuppressWarnings("unused")
-public interface ProductRepository extends JpaRepository<Product,Long>,
+public interface ProductRepository extends BusinessObjectRepository<Product,Long>,
 QueryDslPredicateExecutor<Product> {
 
 

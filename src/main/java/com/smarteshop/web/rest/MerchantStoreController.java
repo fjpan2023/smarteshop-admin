@@ -36,9 +36,9 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class StoreController extends AbstractController<MerchantStore>{
+public class MerchantStoreController extends AbstractController<MerchantStore>{
 
-    private final Logger log = LoggerFactory.getLogger(StoreController.class);
+    private final Logger log = LoggerFactory.getLogger(MerchantStoreController.class);
 
     @Inject
     private StoreService storeService;
