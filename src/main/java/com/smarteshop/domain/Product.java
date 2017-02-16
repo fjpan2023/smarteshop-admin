@@ -57,7 +57,7 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   private String code;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name="MERCHANT_ID", nullable=false)
+  @JoinColumn(name="MERCHANT_ID")
   private MerchantStore merchantStore;
 
   @OneToOne(cascade=CascadeType.ALL )
