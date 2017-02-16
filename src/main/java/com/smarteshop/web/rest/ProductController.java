@@ -100,8 +100,8 @@ public class ProductController extends AbstractController<Product> {
      * @return the ResponseEntity with status 200 (OK) and the list of products in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping( )
     @Timed
+    @GetMapping( )
     public ResponseEntity<List<Product>> getAllProducts(@QuerydslPredicate(root=Product.class) Predicate predicate,Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Products");
@@ -169,6 +169,14 @@ public class ProductController extends AbstractController<Product> {
         Page<Product> page = productService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/{}");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+
+    @Timed
+    @PutMapping("/{id}/skus")
+    public ResponseEntity<Void> createSKUs(@PathVariable Long id, @Valid @RequestBody Product product)
+        throws URISyntaxException {
+        log.debug("create skus for this product{}",product.getId());
+        return ResponseEntity.ok().build();
     }
 
 }
