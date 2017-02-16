@@ -1,0 +1,129 @@
+entity CategoryMediaXref {
+       description String,
+       id Long,
+}
+entity SkuMediaXref {
+       description String,
+       id Long,
+}
+entity ProductOptionXref {
+       id Long,
+}
+entity SkuAttribute {
+       searchable Boolean,
+       value String,
+       id Long,
+       name String,
+}
+entity FeaturedProduct {
+       sequence BigDecimal,
+       promotionMessage String,
+       id Long,
+}
+entity CrossSaleProduct {
+       id Long,
+       promotionMessage String,
+       sequence BigDecimal,
+}
+entity CategoryAttribute {
+       id Long,
+       name String,
+       searchable Boolean,
+       value String,
+}
+entity ProductOption {
+       errorCode String,
+       displayOrder Integer,
+       errorMessage String,
+       label String,
+       type String,
+       required Boolean,
+       useInSkuGeneration Boolean,
+       id Long,
+       attributeName String,
+       productOptionValidationStrategyType String,
+       validationString String,
+       productOptionValidationType String,
+}
+entity UpSaleProduct {
+       id Long,
+       promotionMessage String,
+       sequence BigDecimal,
+}
+entity SkuProductOptionValueXref {
+       id Long,
+}
+entity ProductOptionValue {
+       displayOrder Long,
+       id Long,
+       attributeValue String,
+       priceAdjustment BigDecimal,
+}
+
+entity SkuFee {
+       expression String,
+       amount BigDecimal,
+       taxable Boolean,
+       description String,
+       name String,
+       id Long,
+       feeType String,
+}
+entity CategorySiteMapGeneratorConfiguration {
+       startingDepth Integer,
+       endingDepth Integer,
+       changeFreq String,
+       generatorType String,
+       priority String,
+       id Long,
+       disabled Boolean,
+}
+
+entity ProductBundle {
+       model String,
+       id Long,
+       isFeaturedProduct Boolean,
+       canSellWithoutOptions Boolean,
+       manufacturer String,
+       bundlePromotable Boolean,
+       priority Integer,
+       overrideGeneratedUrl Boolean,
+       autoBundle Boolean,
+       pricingModel String,
+       itemsPromotable Boolean,
+       url String,
+       urlKey String,
+       displayTemplate String,
+}
+entity SkuBundleItem {
+       id Long,
+       itemSalePrice BigDecimal,
+       quantity Integer,
+}
+entity ProductAttribute {
+       id Long,
+       name String,
+       searchable Boolean,
+       value String,
+}
+entity CategoryXref {
+       displayOrder BigDecimal,
+       defaultReference Boolean,
+       id Long,
+}
+entity CategoryProductXref {
+       displayOrder BigDecimal,
+       defaultReference Boolean,
+       id Long,
+}
+
+
+
+
+
+// Set pagination options
+paginate * with pagination
+
+
+// Set service options to all except few
+service all with serviceImpl 
