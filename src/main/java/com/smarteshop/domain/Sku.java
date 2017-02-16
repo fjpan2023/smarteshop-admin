@@ -2,9 +2,11 @@ package com.smarteshop.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -46,35 +48,34 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
     @Column(name = "name")
     private String name;
 
-    @Column(name = "size")
-    private String size;
-
-    @Column(name = "width", precision=10, scale=2)
-    private BigDecimal width;
-
-    @Column(name = "heigh", precision=10, scale=2)
-    private BigDecimal heigh;
-
-    @Column(name = "length", precision=10, scale=2)
-    private BigDecimal length;
-
-    @Column(name = "weight", precision=10, scale=2)
-    private BigDecimal weight;
 
     @NotNull
-    @Column(name = "standard_price", precision=10, scale=2, nullable = false)
-    private BigDecimal standardPrice;
+    @Column(name = "RETAIL_PRICE", precision = 19, scale = 5,nullable=false)
+    protected BigDecimal retailPrice;
 
     @NotNull
-    @Column(name = "sell_price", precision=10, scale=2, nullable = false)
-    private BigDecimal sellPrice;
+    @Column(name = "SALE_PRICE", precision = 19, scale = 5,nullable=false)
+    private BigDecimal salePrice;
+
+    @Embedded
+    protected Dimension dimension = new Dimension();
+
+    @Embedded
+    protected Weight weight = new Weight();
+
 
     @Column(name = "default_sku")
     private Boolean defaultSKU;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private StatusEnum status;
+    private StatusEnum status = StatusEnum.ACTIVITY;
+
+    @Column(name = "ACTIVE_START_DATE")
+    protected ZonedDateTime activeStartDate;
+
+    @Column(name = "ACTIVE_END_DATE")
+    protected ZonedDateTime activeEndDate;
 
     @OneToOne(optional = true, targetEntity = Product.class, cascade = {CascadeType.ALL})
     @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
@@ -126,134 +127,52 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
         this.name = name;
     }
 
-    public String getSize() {
-        return size;
+    public BigDecimal getRetailPrice() {
+      return retailPrice;
     }
 
-    public Sku size(String size) {
-        this.size = size;
-        return this;
+    public void setRetailPrice(BigDecimal retailPrice) {
+      this.retailPrice = retailPrice;
     }
 
-    public void setSize(String size) {
-        this.size = size;
+    public BigDecimal getSalePrice() {
+      return salePrice;
     }
 
-    public BigDecimal getWidth() {
-        return width;
+    public void setSalePrice(BigDecimal salePrice) {
+      this.salePrice = salePrice;
     }
 
-    public Sku width(BigDecimal width) {
-        this.width = width;
-        return this;
+    public Dimension getDimension() {
+      return dimension;
     }
 
-    public void setWidth(BigDecimal width) {
-        this.width = width;
+    public void setDimension(Dimension dimension) {
+      this.dimension = dimension;
     }
 
-    public BigDecimal getHeigh() {
-        return heigh;
+    public Weight getWeight() {
+      return weight;
     }
 
-    public Sku heigh(BigDecimal heigh) {
-        this.heigh = heigh;
-        return this;
+    public void setWeight(Weight weight) {
+      this.weight = weight;
     }
 
-    public void setHeigh(BigDecimal heigh) {
-        this.heigh = heigh;
-    }
-
-    public BigDecimal getLength() {
-        return length;
-    }
-
-    public Sku length(BigDecimal length) {
-        this.length = length;
-        return this;
-    }
-
-    public void setLength(BigDecimal length) {
-        this.length = length;
-    }
-
-    public BigDecimal getWeight() {
-        return weight;
-    }
-
-    public Sku weight(BigDecimal weight) {
-        this.weight = weight;
-        return this;
-    }
-
-    public void setWeight(BigDecimal weight) {
-        this.weight = weight;
-    }
-
-    public BigDecimal getStandardPrice() {
-        return standardPrice;
-    }
-
-    public Sku standardPrice(BigDecimal standardPrice) {
-        this.standardPrice = standardPrice;
-        return this;
-    }
-
-    public void setStandardPrice(BigDecimal standardPrice) {
-        this.standardPrice = standardPrice;
-    }
-
-    public BigDecimal getSellPrice() {
-        return sellPrice;
-    }
-
-    public Sku sellPrice(BigDecimal sellPrice) {
-        this.sellPrice = sellPrice;
-        return this;
-    }
-
-    public void setSellPrice(BigDecimal sellPrice) {
-        this.sellPrice = sellPrice;
-    }
-
-    public Boolean isDefaultSKU() {
-        return defaultSKU;
-    }
-
-    public Sku defaultSKU(Boolean defaultSKU) {
-        this.defaultSKU = defaultSKU;
-        return this;
+    public Boolean getDefaultSKU() {
+      return defaultSKU;
     }
 
     public void setDefaultSKU(Boolean defaultSKU) {
-        this.defaultSKU = defaultSKU;
+      this.defaultSKU = defaultSKU;
     }
 
     public StatusEnum getStatus() {
-        return status;
-    }
-
-    public Sku status(StatusEnum status) {
-        this.status = status;
-        return this;
+      return status;
     }
 
     public void setStatus(StatusEnum status) {
-        this.status = status;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public Sku product(Product product) {
-        this.product = product;
-        return this;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
+      this.status = status;
     }
 
     public Product getDefaultProduct() {
@@ -264,9 +183,12 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
       this.defaultProduct = defaultProduct;
     }
 
-    public Boolean getDefaultSKU() {
-      return defaultSKU;
+    public Product getProduct() {
+      return product;
     }
 
+    public void setProduct(Product product) {
+      this.product = product;
+    }
 
 }
