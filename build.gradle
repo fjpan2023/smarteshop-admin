@@ -220,9 +220,8 @@ dependencies {
 	compile 'commons-io:commons-io'
 	compile 'com.querydsl:querydsl-jpa:4.1.4'
 	compile 'org.springframework.data:spring-data-jpa'
-    
-    
-    
+	compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.1'
+
     testCompile "com.jayway.awaitility:awaitility:${awaility_version}"
     testCompile "com.jayway.jsonpath:json-path"
     testCompile "org.springframework.boot:spring-boot-starter-test"

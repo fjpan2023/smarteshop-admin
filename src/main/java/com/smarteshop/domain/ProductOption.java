@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
@@ -35,6 +36,8 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private Product product;
+
     @Column(name = "type")
     private String type;
 
@@ -48,6 +51,7 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
     private String label;
 
     @OneToMany(mappedBy = "productOption")
+    @OrderBy(value = "displayOrder")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ProductOptionValue> productOptionValues = new HashSet<>();
 
@@ -120,6 +124,15 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
     public void setProductOptionValues(Set<ProductOptionValue> productOptionValues) {
       this.productOptionValues = productOptionValues;
     }
+
+    public Product getProduct() {
+      return product;
+    }
+
+    public void setProduct(Product product) {
+      this.product = product;
+    }
+
 
 
 }

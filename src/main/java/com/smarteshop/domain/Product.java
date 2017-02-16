@@ -3,8 +3,10 @@ package com.smarteshop.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -24,8 +26,10 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cascade;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smarteshop.common.entity.BusinessObjectEntity;
@@ -93,13 +97,27 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   @Column(name = "end_date", nullable = false)
   private ZonedDateTime endDate;
 
-  @OneToMany(mappedBy = "product")
+  @OneToOne(targetEntity = Sku.class, mappedBy="defaultProduct", cascade = {CascadeType.ALL})
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+  @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
+  @JoinColumn(name = "DEFAULT_SKU_ID")
+  private Sku defaultSku;
+
+  @OneToMany(fetch = FetchType.LAZY, targetEntity = Sku.class, mappedBy = "product", cascade = CascadeType.ALL)
+  @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+  @BatchSize(size = 50)
+  protected List<Sku> additionalSkus = new ArrayList<Sku>();
+
+  @Transient
   private Set<Sku> skus = new HashSet<>();
 
   @OneToMany(mappedBy = "product")
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
   private Set<RelatedProduct> relatedProducts = new HashSet<>();
+
+  @OneToMany(mappedBy = "product")
+  @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+  private Set<ProductOption> productOptions = new HashSet<>();
 
   @ManyToOne
   private Brand brand;
@@ -238,6 +256,13 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   }
 
 
+  public Set<ProductOption> getProductOptions() {
+    return productOptions;
+  }
+
+  public void setProductOptions(Set<ProductOption> productOptions) {
+    this.productOptions = productOptions;
+  }
 
   public Product addSkus(Sku sku) {
     skus.add(sku);
@@ -364,6 +389,22 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   }
   public void setImages(Set<Attachment> images) {
     this.images = images;
+  }
+
+  public Sku getDefaultSku() {
+    return defaultSku;
+  }
+
+  public void setDefaultSku(Sku defaultSku) {
+    this.defaultSku = defaultSku;
+  }
+
+  public List<Sku> getAdditionalSkus() {
+    return additionalSkus;
+  }
+
+  public void setAdditionalSkus(List<Sku> additionalSkus) {
+    this.additionalSkus = additionalSkus;
   }
 
 }

@@ -3,6 +3,7 @@ package com.smarteshop.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,12 +11,15 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cascade;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smarteshop.common.entity.BusinessObjectEntity;
@@ -72,8 +76,19 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
     @Column(name = "status")
     private StatusEnum status;
 
-    @ManyToOne
-    private Product product;
+    @OneToOne(optional = true, targetEntity = Product.class, cascade = {CascadeType.ALL})
+    @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
+    @JoinColumn(name = "DEFAULT_PRODUCT_ID")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "blProducts")
+    protected Product defaultProduct;
+
+    /**
+     * This relationship will be non-null if and only if this Sku is contained in the list of
+     * additional Skus for a Product (for Skus based on ProductOptions)
+     */
+    @ManyToOne(optional = true, targetEntity = Product.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "ADDL_PRODUCT_ID")
+    protected Product product;
 
     @Override
     public Long getId() {
@@ -240,5 +255,18 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    public Product getDefaultProduct() {
+      return defaultProduct;
+    }
+
+    public void setDefaultProduct(Product defaultProduct) {
+      this.defaultProduct = defaultProduct;
+    }
+
+    public Boolean getDefaultSKU() {
+      return defaultSKU;
+    }
+
 
 }
