@@ -1,0 +1,35 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "oneToMany",
+            "otherEntityName": "product",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "productOption"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "type",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "attributeName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "label",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170216144239",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "product_option",
+    "pagination": "pagination"
+}

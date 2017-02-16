@@ -1,0 +1,20 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "attributeValue",
+            "fieldType": "String",
+            "fieldValidateRules": []
+        },
+        {
+            "fieldName": "displayOrder",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20170216145202",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "product_option_value",
+    "pagination": "pagination"
+}

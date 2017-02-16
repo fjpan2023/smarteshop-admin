@@ -66,5 +66,11 @@
 
     <cache alias="com.smarteshop.domain.Manufacturer" uses-template="simple"/>
 
+    <cache alias="com.smarteshop.domain.ProductOption" uses-template="simple"/>
+
+    <cache alias="com.smarteshop.domain.ProductOption.oneToManies" uses-template="simple"/>
+
+    <cache alias="com.smarteshop.domain.ProductOptionValue" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>

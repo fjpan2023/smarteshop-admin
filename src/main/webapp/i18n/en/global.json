@@ -26,6 +26,8 @@
                 "address": "Address",
                 "productBundle": "Product Bundle",
                 "manufacturer": "Manufacturer",
+                "productOption": "Product Option",
+                "productOptionValue": "Product Option Value",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

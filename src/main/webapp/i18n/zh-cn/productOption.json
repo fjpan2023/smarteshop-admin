@@ -1,0 +1,26 @@
+{
+    "smarteshopApp": {
+        "productOption" : {
+            "home": {
+                "title": "Product Options",
+                "createLabel": "Create a new Product Option",
+                "createOrEditLabel": "Create or edit a Product Option",
+                "search": "Search for Product Option"
+            },
+            "created": "A new Product Option is created with identifier {{ param }}",
+            "updated": "A Product Option is updated with identifier {{ param }}",
+            "deleted": "A Product Option is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Product Option {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Option"
+            },
+            "type": "Type",
+            "name": "Name",
+            "attributeName": "Attribute Name",
+            "label": "Label",
+            "oneToMany": "One To Many"
+        }
+    }
+}
