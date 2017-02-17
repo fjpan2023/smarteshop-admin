@@ -31,6 +31,7 @@
                 "productAttribute": "Product Attribute",
                 "skuAttribute": "Sku Attribute",
                 "productOptionXref": "Product Option Xref",
+                "skuProductOptionValueXref": "Sku Product Option Value Xref",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

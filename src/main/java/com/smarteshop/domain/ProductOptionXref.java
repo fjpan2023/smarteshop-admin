@@ -14,17 +14,20 @@ import java.util.Objects;
 @Entity
 @Table(name = "product_option_xref")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "productoptionxref")
 public class ProductOptionXref implements Serializable {
-
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @ManyToOne( optional=false, cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "PRODUCT_ID")
+    protected Product product = new Product();
+
+    @ManyToOne( optional=false)
+    @JoinColumn(name = "PRODUCT_OPTION_ID")
+    protected ProductOption productOption = new ProductOption();
 
     public Long getId() {
         return id;
@@ -34,20 +37,23 @@ public class ProductOptionXref implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
+    public Product getProduct() {
+		return product;
+	}
 
-    public ProductOptionXref name(String name) {
-        this.name = name;
-        return this;
-    }
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public ProductOption getProductOption() {
+		return productOption;
+	}
 
-    @Override
+	public void setProductOption(ProductOption productOption) {
+		this.productOption = productOption;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -67,11 +73,9 @@ public class ProductOptionXref implements Serializable {
         return Objects.hashCode(id);
     }
 
-    @Override
-    public String toString() {
-        return "ProductOptionXref{" +
-            "id=" + id +
-            ", name='" + name + "'" +
-            '}';
-    }
+	@Override
+	public String toString() {
+		return "ProductOptionXref [id=" + id + ", product=" + product + ", productOption=" + productOption + "]";
+	}
+    
 }

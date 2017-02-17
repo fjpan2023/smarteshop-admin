@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,8 +26,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -36,6 +38,7 @@ import com.smarteshop.common.entity.BusinessObjectEntity;
 import com.smarteshop.domain.common.BusinessObjectInterface;
 import com.smarteshop.domain.enumeration.ProductLabelEnum;
 import com.smarteshop.domain.enumeration.StatusEnum;
+
 
 /**
  * A Product.
@@ -120,6 +123,14 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
 
 	@Transient
 	private Set<Attachment> images = new HashSet<Attachment>();
+
+
+
+	@OneToMany(mappedBy = "product",
+			cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "blProducts")
+	@BatchSize(size = 10)
+	protected List<ProductOptionXref> productOptions = new ArrayList<ProductOptionXref>();
 
 	@Override
 	public Long getId() {
@@ -331,7 +342,7 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
 	public BigDecimal getSalePrice() {
 		return this.defaultSku.getSalePrice();
 	}
-	
+
 	public Collection<Attachment> getImages() {
 		return images;
 	}
@@ -362,5 +373,25 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
 	public void setSalePrice(BigDecimal salePrice) {
 		this.salePrice = salePrice;
 	}	
+	
+    public List<ProductOption> getProductOptions() {
+        List<ProductOption> response = new ArrayList<ProductOption>();
+        for (ProductOptionXref xref : getProductOptionXrefs()) {
+            response.add(xref.getProductOption());
+        }
+        return Collections.unmodifiableList(response);
+    }
+    
+    public List<ProductOptionXref> getProductOptionXrefs() {
+        List<ProductOptionXref> sorted = new ArrayList<ProductOptionXref>(productOptions);
+        Collections.sort(sorted, new Comparator<ProductOptionXref>() {
+            @Override
+            public int compare(ProductOptionXref o1, ProductOptionXref o2) {
+                return ObjectUtils.compare(o1.getProductOption().getDisplayOrder(), o2.getProductOption().getDisplayOrder(), true);
+            }
+
+        });
+        return sorted;
+    }
 
 }

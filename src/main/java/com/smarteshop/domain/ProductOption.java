@@ -47,6 +47,9 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
 
     @Column(name = "label")
     private String label;
+    
+    @Column(name = "display_order")
+    private int displayOrder;
 
     @OneToMany(mappedBy = "productOption")
     @OrderBy(value = "displayOrder")
@@ -123,4 +126,11 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
       this.productOptionValues = productOptionValues;
     }
 
+	public int getDisplayOrder() {
+		return displayOrder;
+	}
+
+	public void setDisplayOrder(int displayOrder) {
+		this.displayOrder = displayOrder;
+	}
 }

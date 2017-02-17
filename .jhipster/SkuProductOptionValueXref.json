@@ -1,0 +1,17 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "productOptionValue",
+            "otherEntityName": "productOptionValue",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20170217084646",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "sku_product_option_value_xref",
+    "pagination": "pagination"
+}

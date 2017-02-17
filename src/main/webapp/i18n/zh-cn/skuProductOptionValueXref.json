@@ -1,0 +1,22 @@
+{
+    "smarteshopApp": {
+        "skuProductOptionValueXref" : {
+            "home": {
+                "title": "Sku Product Option Value Xrefs",
+                "createLabel": "Create a new Sku Product Option Value Xref",
+                "createOrEditLabel": "Create or edit a Sku Product Option Value Xref",
+                "search": "Search for Sku Product Option Value Xref"
+            },
+            "created": "A new Sku Product Option Value Xref is created with identifier {{ param }}",
+            "updated": "A Sku Product Option Value Xref is updated with identifier {{ param }}",
+            "deleted": "A Sku Product Option Value Xref is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Sku Product Option Value Xref {{ id }}?"
+            },
+            "detail": {
+                "title": "Sku Product Option Value Xref"
+            },
+            "productOptionValue": "Product Option Value"
+        }
+    }
+}
