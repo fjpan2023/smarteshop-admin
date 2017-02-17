@@ -140,26 +140,26 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
 
 	}
 	@Override
-	public void generateAdditionalSkusByBatch(Long productId) {		
+	public void generateAdditionalSkusByBatch(Long productId) {
 		Product product = this.productRepository.getOne(productId);
 		if(product ==null){
 			throw new RuntimeException("null option");
 		}
-		List<ProductOption> productOptions = product.getProductOptions();
+		Set<ProductOption> productOptions = product.getProductOptions();
 		if(CollectionUtils.isEmpty(productOptions)){
-			return;			
-		}		
-		List<List<ProductOptionValue>> allPermutations = generatePermutations(0, new ArrayList<ProductOptionValue>(), product.getProductOptions());
+			return;
+		}
+		List<List<ProductOptionValue>> allPermutations = generatePermutations(0, new ArrayList<ProductOptionValue>(), new ArrayList(product.getProductOptions()));
 		// return -2 to indicate that one of the Product Options used in Sku generation has no Allowed Values
 		if (allPermutations == null) {
 			return ;
-		}        
+		}
 		//determine the permutations that I already have Skus for
 		List<List<ProductOptionValue>> previouslyGeneratedPermutations = new ArrayList<List<ProductOptionValue>>();
 		if (CollectionUtils.isNotEmpty(product.getAdditionalSkus())) {
 			for (Sku additionalSku : product.getAdditionalSkus()) {
-				if (CollectionUtils.isNotEmpty(additionalSku.getProductOptionValuesCollection())) {
-					previouslyGeneratedPermutations.add(new ArrayList(additionalSku.getProductOptionValuesCollection()));
+				if (CollectionUtils.isNotEmpty(additionalSku.productOptionValuesCollection())) {
+					previouslyGeneratedPermutations.add(new ArrayList(additionalSku.productOptionValuesCollection()));
 				}
 			}
 		}
@@ -180,32 +180,32 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
 		}
 
 		for (List<ProductOptionValue> permutation : permutationsToGenerate) {
-			if (permutation.isEmpty()) 
+			if (permutation.isEmpty())
 				continue;
 			Sku permutatedSku = new Sku();
 			permutatedSku.setProduct(product);
-			permutatedSku.setProductOptionValuesCollection(new HashSet<ProductOptionValue>(permutation));
+			permutatedSku.productOptionValuesCollection(new HashSet<ProductOptionValue>(permutation));
 			permutatedSku = this.skuRepository.save(permutatedSku);
 			product.getAdditionalSkus().add(permutatedSku);
 		}
 		return ;
 	}
 	private  boolean isSamePermutation(List<ProductOptionValue> perm1, List<ProductOptionValue> perm2) {
-		if (perm1.size() == perm2.size()) {	            
-			Collection<Long> perm1Ids = CollectionUtils.collect(perm1, new Transformer<ProductOptionValue, Long>() { 
+		if (perm1.size() == perm2.size()) {
+			Collection<Long> perm1Ids = CollectionUtils.collect(perm1, new Transformer<ProductOptionValue, Long>() {
 				@Override
 				public Long transform(ProductOptionValue input) {
 					// TODO Auto-generated method stub
 					return input.getId();
 				}
-			});	            
-			Collection<Long> perm2Ids = CollectionUtils.collect(perm2, new Transformer<ProductOptionValue, Long>() { 
+			});
+			Collection<Long> perm2Ids = CollectionUtils.collect(perm2, new Transformer<ProductOptionValue, Long>() {
 				@Override
 				public Long transform(ProductOptionValue input) {
 					// TODO Auto-generated method stub
 					return input.getId();
 				}
-			});	            
+			});
 			return perm1Ids.containsAll(perm2Ids);
 		}
 		return false;

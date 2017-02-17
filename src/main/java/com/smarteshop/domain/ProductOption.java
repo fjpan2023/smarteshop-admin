@@ -6,9 +6,11 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -30,7 +32,6 @@ import com.smarteshop.domain.common.BusinessObjectInterface;
 public class ProductOption extends BusinessObjectEntity<Long, ProductOption> implements BusinessObjectInterface, Serializable {
 
 
-    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,7 +48,7 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
 
     @Column(name = "label")
     private String label;
-    
+
     @Column(name = "display_order")
     private int displayOrder;
 
@@ -55,6 +56,10 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
     @OrderBy(value = "displayOrder")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<ProductOptionValue> productOptionValues = new HashSet<>();
+
+
+    @ManyToMany(mappedBy = "productOptions",targetEntity=Product.class, fetch=FetchType.LAZY)
+    private Set<Product> product;
 
     @Override
     public Long getId() {
@@ -133,4 +138,13 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
 	public void setDisplayOrder(int displayOrder) {
 		this.displayOrder = displayOrder;
 	}
+
+  public Set<Product> getProduct() {
+    return product;
+  }
+
+  public void setProduct(Set<Product> product) {
+    this.product = product;
+  }
+
 }

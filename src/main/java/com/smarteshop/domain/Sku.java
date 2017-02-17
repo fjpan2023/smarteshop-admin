@@ -234,7 +234,7 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
 		this.activeEndDate = activeEndDate;
 	}
 
-	public Set<ProductOptionValue> getProductOptionValuesCollection() {
+	public Set<ProductOptionValue> productOptionValuesCollection() {
 		if (legacyProductOptionValues.size() == 0) {
 			for (SkuProductOptionValueXref xref : productOptionValueXrefs) {
 				legacyProductOptionValues.add(xref.getProductOptionValue());
@@ -242,8 +242,8 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
 		}
 		return Collections.unmodifiableSet(legacyProductOptionValues);
 	}
-	
-	 public void setProductOptionValuesCollection(Set<ProductOptionValue> productOptionValues) {
+
+	 public void productOptionValuesCollection(Set<ProductOptionValue> productOptionValues) {
 	        this.legacyProductOptionValues.clear();
 	        this.productOptionValueXrefs.clear();
 	        for (ProductOptionValue val : productOptionValues) {
