@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +31,7 @@ public class ProductOptionValue implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     private ProductOption productOption;
 
     @Column(name = "attribute_value")
@@ -71,6 +72,14 @@ public class ProductOptionValue implements Serializable {
 
     public void setDisplayOrder(Integer displayOrder) {
         this.displayOrder = displayOrder;
+    }
+
+    public ProductOption getProductOption() {
+      return productOption;
+    }
+
+    public void setProductOption(ProductOption productOption) {
+      this.productOption = productOption;
     }
 
     @Override

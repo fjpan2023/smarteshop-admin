@@ -55,7 +55,8 @@ public class DatabaseConfiguration {
     public Hibernate5Module hibernate5Module() {
     	Hibernate5Module module = new Hibernate5Module();
     	module.disable(Feature.USE_TRANSIENT_ANNOTATION);
-    	
+
+
     	return module;
     }
 }

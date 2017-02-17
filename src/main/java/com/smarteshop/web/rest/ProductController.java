@@ -2,6 +2,7 @@ package com.smarteshop.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -67,17 +68,20 @@ public class ProductController extends AbstractController<Product> {
     if (product.getId() != null) {
       return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("product", "idexists", "A new product cannot already have an ID")).body(null);
     }
-    if(this.productService.exist(product.getName(), product.getCode())){
+    if(this.productService.exist(product.getName())){
       throw new  BusinessException("{} / {}has been existed", product.getName(), product.getCode());
     }
     Sku defaultSKU = product.getDefaultSku();
     defaultSKU.setDefaultProduct(product);
     defaultSKU.setName(product.getName());
+
+    Product result = productService.save(product);
+
     ProductOption options1 = this.productOptionService.findOne(1L);
     ProductOption options2 = this.productOptionService.findOne(2L);
-    product.getProductOptions().add(options1);
-    product.getProductOptions().add(options2);
-    Product result = productService.save(product);
+    result.addProductOption(options1);
+    result.addProductOption(options2);
+    productService.save(product);
     productService.saveImages(result.getId(),product.getImages());
     return ResponseEntity.created(new URI("/api/products" + result.getId()))
         .headers(HeaderUtil.createEntityCreationAlert("product", result.getId().toString()))
@@ -208,4 +212,21 @@ public class ProductController extends AbstractController<Product> {
     return ResponseEntity.ok().build();
   }
 
+
+  @Timed
+  @PostMapping("{id}/productOptions")
+  public ResponseEntity<Void> createProductOptions(@PathVariable Long id, @Valid @RequestBody Long optionId) throws URISyntaxException {
+    Product p = this.productService.findOne(id);
+    ProductOption po = this.productOptionService.findOne(optionId);
+    p.addProductOption(po);
+    this.productService.save(p);
+    return ResponseEntity.ok().build();
+  }
+
+  @Timed
+  @GetMapping("{id}/productOptions")
+  public ResponseEntity<List<ProductOption>> listProductOptions(@PathVariable Long id) throws URISyntaxException {
+    Product p = this.productService.findOne(id);
+    return ResponseEntity.ok().body(new ArrayList(p.getProductOptions()));
+  }
 }

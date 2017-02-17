@@ -31,120 +31,119 @@ import com.smarteshop.domain.common.BusinessObjectInterface;
 @Document(indexName = "productoption")
 public class ProductOption extends BusinessObjectEntity<Long, ProductOption> implements BusinessObjectInterface, Serializable {
 
+  private static final long serialVersionUID = -7745644142066416162L;
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+  @Column(name = "type")
+  private String type;
 
-    @Column(name = "type")
-    private String type;
+  @Column(name = "name")
+  private String name;
 
-    @Column(name = "name")
-    private String name;
+  @Column(name = "attribute_name")
+  private String attributeName;
 
-    @Column(name = "attribute_name")
-    private String attributeName;
+  @Column(name = "label")
+  private String label;
 
-    @Column(name = "label")
-    private String label;
+  @Column(name = "display_order")
+  private int displayOrder;
 
-    @Column(name = "display_order")
-    private int displayOrder;
+  @OneToMany(mappedBy = "productOption",fetch=FetchType.EAGER)
+  @OrderBy(value = "displayOrder")
+  @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+  private Set<ProductOptionValue> productOptionValues = new HashSet<>();
 
-    @OneToMany(mappedBy = "productOption")
-    @OrderBy(value = "displayOrder")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<ProductOptionValue> productOptionValues = new HashSet<>();
+  @ManyToMany(targetEntity=Product.class)
+  private Set<Product> products;
 
-
-    @ManyToMany(mappedBy = "productOptions",targetEntity=Product.class, fetch=FetchType.LAZY)
-    private Set<Product> product;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public ProductOption type(String type) {
-        this.type = type;
-        return this;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public ProductOption name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAttributeName() {
-        return attributeName;
-    }
-
-    public ProductOption attributeName(String attributeName) {
-        this.attributeName = attributeName;
-        return this;
-    }
-
-    public void setAttributeName(String attributeName) {
-        this.attributeName = attributeName;
-    }
-
-    public String getLabel() {
-        return label;
-    }
-
-    public ProductOption label(String label) {
-        this.label = label;
-        return this;
-    }
-
-    public void setLabel(String label) {
-        this.label = label;
-    }
-
-    public Set<ProductOptionValue> getProductOptionValues() {
-      return productOptionValues;
-    }
-
-    public void setProductOptionValues(Set<ProductOptionValue> productOptionValues) {
-      this.productOptionValues = productOptionValues;
-    }
-
-	public int getDisplayOrder() {
-		return displayOrder;
-	}
-
-	public void setDisplayOrder(int displayOrder) {
-		this.displayOrder = displayOrder;
-	}
-
-  public Set<Product> getProduct() {
-    return product;
+  @Override
+  public Long getId() {
+    return id;
   }
 
-  public void setProduct(Set<Product> product) {
-    this.product = product;
+  @Override
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public ProductOption type(String type) {
+    this.type = type;
+    return this;
+  }
+
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public ProductOption name(String name) {
+    this.name = name;
+    return this;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getAttributeName() {
+    return attributeName;
+  }
+
+  public ProductOption attributeName(String attributeName) {
+    this.attributeName = attributeName;
+    return this;
+  }
+
+  public void setAttributeName(String attributeName) {
+    this.attributeName = attributeName;
+  }
+
+  public String getLabel() {
+    return label;
+  }
+
+  public ProductOption label(String label) {
+    this.label = label;
+    return this;
+  }
+
+  public void setLabel(String label) {
+    this.label = label;
+  }
+
+  public Set<ProductOptionValue> getProductOptionValues() {
+    return productOptionValues;
+  }
+
+  public void setProductOptionValues(Set<ProductOptionValue> productOptionValues) {
+    this.productOptionValues = productOptionValues;
+  }
+
+  public int getDisplayOrder() {
+    return displayOrder;
+  }
+
+  public void setDisplayOrder(int displayOrder) {
+    this.displayOrder = displayOrder;
+  }
+
+  public Set<Product> getProducts() {
+    return products;
+  }
+
+  public void setProducts(Set<Product> products) {
+    this.products = products;
   }
 
 }

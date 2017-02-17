@@ -53,6 +53,7 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
+
   @Column(name="product_url")
   private String url;
 
@@ -110,14 +111,11 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
   private Set<RelatedProduct> relatedProducts = new HashSet<>();
 
-  //  @OneToMany(mappedBy = "product")
-  //  @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-
-  @ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
   @JoinTable(name = "product_option_xref",
-             joinColumns = @JoinColumn(name="product_option_id", referencedColumnName="ID"),
-             inverseJoinColumns = @JoinColumn(name="product_id", referencedColumnName="ID"))
+    joinColumns = @JoinColumn(name="product_id", referencedColumnName="ID"),
+    inverseJoinColumns = @JoinColumn(name="product_option_id", referencedColumnName="ID"))
   private Set<ProductOption> productOptions = new HashSet<>();
 
   @ManyToOne
@@ -386,26 +384,16 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
     this.productOptions = productOptions;
   }
 
+  public Product addProductOption(ProductOption productOption) {
+    productOptions.add(productOption);
+  //  productOption.getProducts().add(this);
+    return this;
+  }
 
-
-//  public Set<ProductOption> getProductOptions() {
-//    List<ProductOption> response = new ArrayList<ProductOption>();
-//    for (ProductOptionXref xref : getProductOptionXrefs()) {
-//      response.add(xref.getProductOption());
-//    }
-//    return new HashSet<ProductOption>(response);
-//  }
-//
-//  private List<ProductOptionXref> getProductOptionXrefs() {
-//    List<ProductOptionXref> sorted = new ArrayList<ProductOptionXref>(null);
-//    Collections.sort(sorted, new Comparator<ProductOptionXref>() {
-//      @Override
-//      public int compare(ProductOptionXref o1, ProductOptionXref o2) {
-//        return ObjectUtils.compare(o1.getProductOption().getDisplayOrder(), o2.getProductOption().getDisplayOrder(), true);
-//      }
-//
-//    });
-//    return sorted;
-//  }
+  public Product removeProductOption(ProductOption productOption) {
+    productOptions.remove(productOption);
+  //  productOption.getProducts().remove(this);
+    return this;
+  }
 
 }

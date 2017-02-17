@@ -114,7 +114,7 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
 	}
 
 	@Override
-	public boolean exist(String name, String code) {
+	public boolean exist(String name) {
 		QProduct qProduct = QProduct.product;
 		Predicate predicate = qProduct.name.eq(name);
 		return this.productRepository.exists(predicate);
