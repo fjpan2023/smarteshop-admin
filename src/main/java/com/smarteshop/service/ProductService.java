@@ -1,6 +1,7 @@
 package com.smarteshop.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -60,4 +61,6 @@ public interface ProductService {
     boolean exist(String name, String code);
 
     Page<Product> findRelatedProduct(Long id, Pageable pageable);
+
+     void createSKUsByBatch(Long productId, List<String> productOptionValues);
 }

@@ -70,12 +70,9 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   @Column(name = "name")
   private String name;
 
-  @Column(name = "description")
-  private String description;
-
   @Enumerated(EnumType.STRING)
   @Column(name = "status")
-  private StatusEnum status;
+  private StatusEnum status =StatusEnum.ACTIVITY;
 
   @Column(name = "standard_price", nullable=false,precision=10, scale=2)
   private BigDecimal standardPrice;
@@ -90,12 +87,13 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   @Column(name = "main_image_id")
   private Long mainImageId;
 
-  @Column(name = "from_date")
-  private ZonedDateTime fromDate;
+  @NotNull
+  @Column(name = "Active_from_date",nullable = false)
+  private ZonedDateTime activeStartDate;
 
   @NotNull
-  @Column(name = "end_date", nullable = false)
-  private ZonedDateTime endDate;
+  @Column(name = "active_end_date", nullable = false)
+  private ZonedDateTime activeEndDate;
 
   @OneToOne(targetEntity = Sku.class, mappedBy="defaultProduct", cascade = {CascadeType.ALL})
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -164,19 +162,6 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
     this.name = name;
   }
 
-  public String getDescription() {
-    return description;
-  }
-
-  public Product description(String description) {
-    this.description = description;
-    return this;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
   public StatusEnum getStatus() {
     return status;
   }
@@ -229,32 +214,22 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
     this.mainImageId = mainImageId;
   }
 
-  public ZonedDateTime getFromDate() {
-    return fromDate;
+
+  public ZonedDateTime getActiveStartDate() {
+    return activeStartDate;
   }
 
-  public Product fromDate(ZonedDateTime fromDate) {
-    this.fromDate = fromDate;
-    return this;
+  public void setActiveStartDate(ZonedDateTime activeStartDate) {
+    this.activeStartDate = activeStartDate;
   }
 
-  public void setFromDate(ZonedDateTime fromDate) {
-    this.fromDate = fromDate;
+  public ZonedDateTime getActiveEndDate() {
+    return activeEndDate;
   }
 
-  public ZonedDateTime getEndDate() {
-    return endDate;
+  public void setActiveEndDate(ZonedDateTime activeEndDate) {
+    this.activeEndDate = activeEndDate;
   }
-
-  public Product endDate(ZonedDateTime endDate) {
-    this.endDate = endDate;
-    return this;
-  }
-
-  public void setEndDate(ZonedDateTime endDate) {
-    this.endDate = endDate;
-  }
-
 
   public Set<ProductOption> getProductOptions() {
     return productOptions;

@@ -10,18 +10,20 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QTemplate is a Querydsl query type for Template
+ * QProductBundle is a Querydsl query type for ProductBundle
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QTemplate extends EntityPathBase<Template> {
+public class QProductBundle extends EntityPathBase<ProductBundle> {
 
-    private static final long serialVersionUID = 523566549L;
+    private static final long serialVersionUID = -1740658218L;
 
-    public static final QTemplate template = new QTemplate("template");
+    public static final QProductBundle productBundle = new QProductBundle("productBundle");
 
     public final com.smarteshop.common.entity.QBusinessObjectEntity _super = new com.smarteshop.common.entity.QBusinessObjectEntity(this);
 
-    public final StringPath content = createString("content");
+    public final BooleanPath autoBundle = createBoolean("autoBundle");
+
+    public final BooleanPath bundlePromotable = createBoolean("bundlePromotable");
 
     //inherited
     public final StringPath createdBy = _super.createdBy;
@@ -37,22 +39,18 @@ public class QTemplate extends EntityPathBase<Template> {
     //inherited
     public final DateTimePath<java.time.ZonedDateTime> lastModifiedDate = _super.lastModifiedDate;
 
-    public final NumberPath<Long> superId = createNumber("superId", Long.class);
+    public final StringPath priceModel = createString("priceModel");
 
-    public final StringPath templateKey = createString("templateKey");
-
-    public final EnumPath<com.smarteshop.domain.enumeration.TemplateTypeEnum> type = createEnum("type", com.smarteshop.domain.enumeration.TemplateTypeEnum.class);
-
-    public QTemplate(String variable) {
-        super(Template.class, forVariable(variable));
+    public QProductBundle(String variable) {
+        super(ProductBundle.class, forVariable(variable));
     }
 
-    public QTemplate(Path<? extends Template> path) {
+    public QProductBundle(Path<? extends ProductBundle> path) {
         super(path.getType(), path.getMetadata());
     }
 
-    public QTemplate(PathMetadata metadata) {
-        super(Template.class, metadata);
+    public QProductBundle(PathMetadata metadata) {
+        super(ProductBundle.class, metadata);
     }
 
 }

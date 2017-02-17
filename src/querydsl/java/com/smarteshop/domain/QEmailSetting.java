@@ -19,7 +19,7 @@ public class QEmailSetting extends EntityPathBase<EmailSetting> {
 
     public static final QEmailSetting emailSetting = new QEmailSetting("emailSetting");
 
-    public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
+    public final com.smarteshop.common.entity.QBusinessObjectEntity _super = new com.smarteshop.common.entity.QBusinessObjectEntity(this);
 
     //inherited
     public final StringPath createdBy = _super.createdBy;

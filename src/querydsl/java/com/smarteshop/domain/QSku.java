@@ -22,7 +22,11 @@ public class QSku extends EntityPathBase<Sku> {
 
     public static final QSku sku = new QSku("sku");
 
-    public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
+    public final com.smarteshop.common.entity.QBusinessObjectEntity _super = new com.smarteshop.common.entity.QBusinessObjectEntity(this);
+
+    public final DateTimePath<java.time.ZonedDateTime> activeEndDate = createDateTime("activeEndDate", java.time.ZonedDateTime.class);
+
+    public final DateTimePath<java.time.ZonedDateTime> activeStartDate = createDateTime("activeStartDate", java.time.ZonedDateTime.class);
 
     public final StringPath code = createString("code");
 
@@ -32,9 +36,11 @@ public class QSku extends EntityPathBase<Sku> {
     //inherited
     public final DateTimePath<java.time.ZonedDateTime> createdDate = _super.createdDate;
 
+    public final QProduct defaultProduct;
+
     public final BooleanPath defaultSKU = createBoolean("defaultSKU");
 
-    public final NumberPath<java.math.BigDecimal> heigh = createNumber("heigh", java.math.BigDecimal.class);
+    public final QDimension dimension;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -44,23 +50,17 @@ public class QSku extends EntityPathBase<Sku> {
     //inherited
     public final DateTimePath<java.time.ZonedDateTime> lastModifiedDate = _super.lastModifiedDate;
 
-    public final NumberPath<java.math.BigDecimal> length = createNumber("length", java.math.BigDecimal.class);
-
     public final StringPath name = createString("name");
 
     public final QProduct product;
 
-    public final NumberPath<java.math.BigDecimal> sellPrice = createNumber("sellPrice", java.math.BigDecimal.class);
+    public final NumberPath<java.math.BigDecimal> retailPrice = createNumber("retailPrice", java.math.BigDecimal.class);
 
-    public final StringPath size = createString("size");
-
-    public final NumberPath<java.math.BigDecimal> standardPrice = createNumber("standardPrice", java.math.BigDecimal.class);
+    public final NumberPath<java.math.BigDecimal> salePrice = createNumber("salePrice", java.math.BigDecimal.class);
 
     public final EnumPath<com.smarteshop.domain.enumeration.StatusEnum> status = createEnum("status", com.smarteshop.domain.enumeration.StatusEnum.class);
 
-    public final NumberPath<java.math.BigDecimal> weight = createNumber("weight", java.math.BigDecimal.class);
-
-    public final NumberPath<java.math.BigDecimal> width = createNumber("width", java.math.BigDecimal.class);
+    public final QWeight weight;
 
     public QSku(String variable) {
         this(Sku.class, forVariable(variable), INITS);
@@ -80,7 +80,10 @@ public class QSku extends EntityPathBase<Sku> {
 
     public QSku(Class<? extends Sku> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.defaultProduct = inits.isInitialized("defaultProduct") ? new QProduct(forProperty("defaultProduct"), inits.get("defaultProduct")) : null;
+        this.dimension = inits.isInitialized("dimension") ? new QDimension(forProperty("dimension")) : null;
         this.product = inits.isInitialized("product") ? new QProduct(forProperty("product"), inits.get("product")) : null;
+        this.weight = inits.isInitialized("weight") ? new QWeight(forProperty("weight")) : null;
     }
 
 }

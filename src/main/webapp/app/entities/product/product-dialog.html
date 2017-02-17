@@ -75,34 +75,34 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.fromDate" for="field_fromDate">From Date</label>
+			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.activieStartDate" for="field_activieStartDate">Activity Start Date</label>
 
 			<div class="col-sm-4  no-padding-left">
 				<div class="input-group">
-					<input id="field_fromDate" type="text" class="form-control" name="fromDate" datetime-picker="{{dateformat}}" ng-model="vm.product.fromDate" is-open="vm.datePickerOpenStatus.fromDate" required /> <span class="input-group-btn">
-						<button type="button" class="btn btn-default" ng-click="vm.openCalendar('fromDate')">
+					<input id="field_activieStartDate" type="text" class="form-control" name="activieStartDate" datetime-picker="{{dateformat}}" ng-model="vm.product.activieStartDate" is-open="vm.datePickerOpenStatus.activieStartDate" required /> <span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="vm.openCalendar('activieStartDate')">
 							<i class="glyphicon glyphicon-calendar"></i>
 						</button>
 					</span>
 				</div>
-				<div ng-show="editForm.fromDate.$invalid">
-					<p class="help-block" ng-show="editForm.fromDate.$error.required" data-translate="entity.validation.required">This field is required.</p>
-					<p class="help-block" ng-show="editForm.fromDate.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">This field should be a date and time.</p>
+				<div ng-show="editForm.activieStartDate.$invalid">
+					<p class="help-block" ng-show="editForm.activieStartDate.$error.required" data-translate="entity.validation.required">This field is required.</p>
+					<p class="help-block" ng-show="editForm.activieStartDate.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">This field should be a date and time.</p>
 				</div>
 			</div>
 
-			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.endDate" for="field_endDate">End Date</label>
+			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.activeEndDate" for="field_activeEndDate">End Date</label>
 			<div class="col-sm-4  no-padding-left">
 				<div class="input-group">
-					<input id="field_endDate" type="text" class="form-control" name="endDate" datetime-picker="{{dateformat}}" ng-model="vm.product.endDate" is-open="vm.datePickerOpenStatus.endDate" required /> <span class="input-group-btn">
-						<button type="button" class="btn btn-default" ng-click="vm.openCalendar('endDate')">
+					<input id="field_activeEndDate" type="text" class="form-control" name="activeEndDate" datetime-picker="{{dateformat}}" ng-model="vm.product.activeEndDate" is-open="vm.datePickerOpenStatus.activeEndDate" required /> <span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="vm.openCalendar('activeEndDate')">
 							<i class="glyphicon glyphicon-calendar"></i>
 						</button>
 					</span>
 				</div>
-				<div ng-show="editForm.endDate.$invalid">
-					<p class="help-block" ng-show="editForm.endDate.$error.required" data-translate="entity.validation.required">This field is required.</p>
-					<p class="help-block" ng-show="editForm.endDate.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">This field should be a date and time.</p>
+				<div ng-show="editForm.activeEndDate.$invalid">
+					<p class="help-block" ng-show="editForm.activeEndDate.$error.required" data-translate="entity.validation.required">This field is required.</p>
+					<p class="help-block" ng-show="editForm.activeEndDate.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">This field should be a date and time.</p>
 				</div>
 			</div>
 

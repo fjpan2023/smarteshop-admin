@@ -53,11 +53,11 @@
 			<div class="form-group">
 				<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.fromDate" for="field_fromDate">From Date</label>
 				<div class="col-sm-4 no-padding-left">
-					<p class="form-control-static">{{vm.product.fromDate | date:'medium'}}</p>
+					<p class="form-control-static">{{vm.product.activeStartDate | date:'medium'}}</p>
 				</div>
-				<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.endDate" for="field_endDate">End Date</label>
+				<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.activeEndDate" for="field_activeEndDate">End Date</label>
 				<div class="col-sm-4 no-padding-left">
-					<p class="form-control-static">{{vm.product.endDate | date:'medium'}}</p>
+					<p class="form-control-static">{{vm.product.activeEndDate | date:'medium'}}</p>
 				</div>
 			</div>
 		</div>

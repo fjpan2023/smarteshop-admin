@@ -58,14 +58,14 @@
 			"fieldType": "Long"
 		},
 		{
-			"fieldName": "fromDate",
+			"fieldName": "activeStartDate",
 			"fieldType": "ZonedDateTime",
 			"fieldValidateRules": [
 				"required"
 			]
 		},
 		{
-			"fieldName": "endDate",
+			"fieldName": "activeEndDate",
 			"fieldType": "ZonedDateTime",
 			"fieldValidateRules": [
 				"required"

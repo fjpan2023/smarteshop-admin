@@ -19,7 +19,7 @@ public class QComments extends EntityPathBase<Comments> {
 
     public static final QComments comments = new QComments("comments");
 
-    public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
+    public final com.smarteshop.common.entity.QBusinessObjectEntity _super = new com.smarteshop.common.entity.QBusinessObjectEntity(this);
 
     public final StringPath content = createString("content");
 

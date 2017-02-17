@@ -11,18 +11,20 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QRelatedProduct is a Querydsl query type for RelatedProduct
+ * QProductOption is a Querydsl query type for ProductOption
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QRelatedProduct extends EntityPathBase<RelatedProduct> {
+public class QProductOption extends EntityPathBase<ProductOption> {
 
-    private static final long serialVersionUID = -692432033L;
+    private static final long serialVersionUID = -1372913207L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QRelatedProduct relatedProduct = new QRelatedProduct("relatedProduct");
+    public static final QProductOption productOption = new QProductOption("productOption");
 
     public final com.smarteshop.common.entity.QBusinessObjectEntity _super = new com.smarteshop.common.entity.QBusinessObjectEntity(this);
+
+    public final StringPath attributeName = createString("attributeName");
 
     //inherited
     public final StringPath createdBy = _super.createdBy;
@@ -32,33 +34,39 @@ public class QRelatedProduct extends EntityPathBase<RelatedProduct> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final StringPath label = createString("label");
+
     //inherited
     public final StringPath lastModifiedBy = _super.lastModifiedBy;
 
     //inherited
     public final DateTimePath<java.time.ZonedDateTime> lastModifiedDate = _super.lastModifiedDate;
 
+    public final StringPath name = createString("name");
+
     public final QProduct product;
 
-    public final NumberPath<Long> relatedProductId = createNumber("relatedProductId", Long.class);
+    public final SetPath<ProductOptionValue, QProductOptionValue> productOptionValues = this.<ProductOptionValue, QProductOptionValue>createSet("productOptionValues", ProductOptionValue.class, QProductOptionValue.class, PathInits.DIRECT2);
 
-    public QRelatedProduct(String variable) {
-        this(RelatedProduct.class, forVariable(variable), INITS);
+    public final StringPath type = createString("type");
+
+    public QProductOption(String variable) {
+        this(ProductOption.class, forVariable(variable), INITS);
     }
 
-    public QRelatedProduct(Path<? extends RelatedProduct> path) {
+    public QProductOption(Path<? extends ProductOption> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QRelatedProduct(PathMetadata metadata) {
+    public QProductOption(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QRelatedProduct(PathMetadata metadata, PathInits inits) {
-        this(RelatedProduct.class, metadata, inits);
+    public QProductOption(PathMetadata metadata, PathInits inits) {
+        this(ProductOption.class, metadata, inits);
     }
 
-    public QRelatedProduct(Class<? extends RelatedProduct> type, PathMetadata metadata, PathInits inits) {
+    public QProductOption(Class<? extends ProductOption> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.product = inits.isInitialized("product") ? new QProduct(forProperty("product"), inits.get("product")) : null;
     }

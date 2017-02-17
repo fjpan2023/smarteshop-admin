@@ -20,7 +20,7 @@ public class QCategory extends EntityPathBase<Category> {
 
     public static final QCategory category = new QCategory("category");
 
-    public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
+    public final com.smarteshop.common.entity.QBusinessObjectEntity _super = new com.smarteshop.common.entity.QBusinessObjectEntity(this);
 
     //inherited
     public final StringPath createdBy = _super.createdBy;

@@ -3,6 +3,7 @@ package com.smarteshop.service.impl;
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -134,5 +135,10 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
     log.debug("Request to get all Products");
     Page<Product> result = productRepository.findAll(predicate, pageable);
     return result;
+  }
+  @Override
+  public void createSKUsByBatch(Long productId, List<String> productOptionValues) {
+    // TODO Auto-generated method stub
+
   }
 }

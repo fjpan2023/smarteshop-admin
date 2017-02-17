@@ -19,7 +19,7 @@ public class QAddress extends EntityPathBase<Address> {
 
     public static final QAddress address = new QAddress("address");
 
-    public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
+    public final com.smarteshop.common.entity.QBusinessObjectEntity _super = new com.smarteshop.common.entity.QBusinessObjectEntity(this);
 
     public final StringPath cityName = createString("cityName");
 

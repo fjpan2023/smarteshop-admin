@@ -22,7 +22,7 @@ public class QVariantValue extends EntityPathBase<VariantValue> {
 
     public static final QVariantValue variantValue = new QVariantValue("variantValue");
 
-    public final com.smarteshop.common.entity.QAbstractBusinessObjectEntity _super = new com.smarteshop.common.entity.QAbstractBusinessObjectEntity(this);
+    public final com.smarteshop.common.entity.QBusinessObjectEntity _super = new com.smarteshop.common.entity.QBusinessObjectEntity(this);
 
     public final StringPath code = createString("code");
 
