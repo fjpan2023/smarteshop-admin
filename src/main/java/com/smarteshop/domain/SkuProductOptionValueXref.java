@@ -30,6 +30,11 @@ public class SkuProductOptionValueXref implements Serializable {
     @ManyToOne(optional=false, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "PRODUCT_OPTION_VALUE_ID")
     protected ProductOptionValue productOptionValue;
+    
+    public SkuProductOptionValueXref(Sku sku, ProductOptionValue val) {
+        this.sku = sku;
+        this.productOptionValue = val;
+    }
 
     public Long getId() {
         return id;
