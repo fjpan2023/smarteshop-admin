@@ -36,8 +36,6 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private Product product;
-
     @Column(name = "type")
     private String type;
 
@@ -124,15 +122,5 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
     public void setProductOptionValues(Set<ProductOptionValue> productOptionValues) {
       this.productOptionValues = productOptionValues;
     }
-
-    public Product getProduct() {
-      return product;
-    }
-
-    public void setProduct(Product product) {
-      this.product = product;
-    }
-
-
 
 }

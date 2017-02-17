@@ -80,7 +80,7 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
   @OneToOne(optional = true, targetEntity = Product.class, cascade = {CascadeType.ALL})
   @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
   @JoinColumn(name = "DEFAULT_PRODUCT_ID")
-  @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "blProducts")
+  @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
   protected Product defaultProduct;
 
   /**

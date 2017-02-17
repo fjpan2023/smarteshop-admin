@@ -16,7 +16,7 @@
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
-                        data.activieStartDate = DateUtils.convertDateTimeFromServer(data.activeStartDate);
+                        data.activeStartDate = DateUtils.convertDateTimeFromServer(data.activeStartDate);
                         data.activeEndDate = DateUtils.convertDateTimeFromServer(data.activeEndDate);
                     }
                     return data;

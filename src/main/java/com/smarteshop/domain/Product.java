@@ -113,9 +113,9 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
   private Set<RelatedProduct> relatedProducts = new HashSet<>();
 
-  @OneToMany(mappedBy = "product")
-  @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-  private Set<ProductOption> productOptions = new HashSet<>();
+//  @OneToMany(mappedBy = "product")
+//  @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+//  private Set<ProductOption> productOptions = new HashSet<>();
 
   @ManyToOne
   private Brand brand;
@@ -231,13 +231,13 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
     this.activeEndDate = activeEndDate;
   }
 
-  public Set<ProductOption> getProductOptions() {
-    return productOptions;
-  }
-
-  public void setProductOptions(Set<ProductOption> productOptions) {
-    this.productOptions = productOptions;
-  }
+//  public Set<ProductOption> getProductOptions() {
+//    return productOptions;
+//  }
+//
+//  public void setProductOptions(Set<ProductOption> productOptions) {
+//    this.productOptions = productOptions;
+//  }
 
   public Product addSkus(Sku sku) {
     skus.add(sku);

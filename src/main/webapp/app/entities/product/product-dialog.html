@@ -75,19 +75,19 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.activieStartDate" for="field_activieStartDate">Activity Start Date</label>
+			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.activeStartDate" for="field_activeStartDate">Activity Start Date</label>
 
 			<div class="col-sm-4  no-padding-left">
 				<div class="input-group">
-					<input id="field_activieStartDate" type="text" class="form-control" name="activieStartDate" datetime-picker="{{dateformat}}" ng-model="vm.product.activieStartDate" is-open="vm.datePickerOpenStatus.activieStartDate" required /> <span class="input-group-btn">
-						<button type="button" class="btn btn-default" ng-click="vm.openCalendar('activieStartDate')">
+					<input id="field_activeStartDate" type="text" class="form-control" name="activeStartDate" datetime-picker="{{dateformat}}" ng-model="vm.product.activeStartDate" is-open="vm.datePickerOpenStatus.activeStartDate" required /> <span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="vm.openCalendar('activeStartDate')">
 							<i class="glyphicon glyphicon-calendar"></i>
 						</button>
 					</span>
 				</div>
-				<div ng-show="editForm.activieStartDate.$invalid">
-					<p class="help-block" ng-show="editForm.activieStartDate.$error.required" data-translate="entity.validation.required">This field is required.</p>
-					<p class="help-block" ng-show="editForm.activieStartDate.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">This field should be a date and time.</p>
+				<div ng-show="editForm.activeStartDate.$invalid">
+					<p class="help-block" ng-show="editForm.activeStartDate.$error.required" data-translate="entity.validation.required">This field is required.</p>
+					<p class="help-block" ng-show="editForm.activeStartDate.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">This field should be a date and time.</p>
 				</div>
 			</div>
 
@@ -116,11 +116,10 @@
 				</div>
 				<button type="button" ngf-change="vm.setImage($file, vm.product)" accept="image/*" data-translate="entity.action.addimage">Add image</button>
 			</div>
-			</uib-tab> 
-			<uib-tab index="2" heading="SKU"> <br/>
+			</uib-tab> <uib-tab index="2" heading="SKU"> <br />
 			<div class="modal-header">
 				<label class="modal-title">Create or edit SKU</label>
-				<div class="btn btn-primary pull-right" ng-click="vm.editSKU()" >
+				<div class="btn btn-primary pull-right" ng-click="vm.editSKU()">
 					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.editSKU">editSKU</span>
 				</div>
 			</div>
@@ -159,8 +158,7 @@
 					</table>
 				</div>
 			</div>
-			</uib-tab> 
-			<uib-tab index="3" heading="Related Product"> <br />
+			</uib-tab> <uib-tab index="3" heading="Related Product"> <br />
 			<div class="modal-header">
 				<label class="modal-title">Create or edit Related Product</label>
 				<div class="btn btn-primary pull-right" ng-click="vm.showNotRelatedProducts()">
