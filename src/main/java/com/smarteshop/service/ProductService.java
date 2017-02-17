@@ -58,9 +58,9 @@ public interface ProductService {
     Page<Product> search(String query, Pageable pageable);
 
     void saveImages(Long productId, Collection<Attachment> images);
+    
     boolean exist(String name, String code);
-
     Page<Product> findRelatedProduct(Long id, Pageable pageable);
-
-     void createSKUsByBatch(Long productId, List<String> productOptionValues);
+    void createSKUsByBatch(Long productId, List<String> productOptionValues);    
+    void generateAdditionalSkusByBatch(Long productId);
 }

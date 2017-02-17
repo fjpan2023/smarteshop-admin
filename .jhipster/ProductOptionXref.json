@@ -1,0 +1,15 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170217073604",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "product_option_xref",
+    "pagination": "no"
+}

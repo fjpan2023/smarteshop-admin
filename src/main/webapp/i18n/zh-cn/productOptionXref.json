@@ -1,0 +1,22 @@
+{
+    "smarteshopApp": {
+        "productOptionXref" : {
+            "home": {
+                "title": "Product Option Xrefs",
+                "createLabel": "Create a new Product Option Xref",
+                "createOrEditLabel": "Create or edit a Product Option Xref",
+                "search": "Search for Product Option Xref"
+            },
+            "created": "A new Product Option Xref is created with identifier {{ param }}",
+            "updated": "A Product Option Xref is updated with identifier {{ param }}",
+            "deleted": "A Product Option Xref is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Product Option Xref {{ id }}?"
+            },
+            "detail": {
+                "title": "Product Option Xref"
+            },
+            "name": "Name"
+        }
+    }
+}

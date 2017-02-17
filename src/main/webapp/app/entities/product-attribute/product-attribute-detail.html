@@ -1,0 +1,31 @@
+
+<div>
+<div class="modal-header">
+    <h2><span data-translate="smarteshopApp.productAttribute.detail.title">Product Attribute</span> {{vm.productAttribute.id}}</h2>
+</div>
+        <div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smarteshopApp.productAttribute.name">Name</span></dt>
+        <dd>
+            <span>{{vm.productAttribute.name}}</span>
+        </dd>
+        <dt><span data-translate="smarteshopApp.productAttribute.product">Product</span></dt>
+        <dd>
+            <a ui-sref="product-detail({id:vm.productAttribute.product.id})">{{vm.productAttribute.product.name}}</a>
+        </dd>
+    </dl>
+    </div>
+<div class="modal-footer">
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="product-attribute-detail.edit({id:vm.productAttribute.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>

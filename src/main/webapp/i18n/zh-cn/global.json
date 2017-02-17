@@ -28,6 +28,9 @@
                 "manufacturer": "Manufacturer",
                 "productOption": "Product Option",
                 "productOptionValue": "Product Option Value",
+                "productAttribute": "Product Attribute",
+                "skuAttribute": "Sku Attribute",
+                "productOptionXref": "Product Option Xref",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

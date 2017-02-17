@@ -1,0 +1,23 @@
+{
+    "smarteshopApp": {
+        "skuAttribute" : {
+            "home": {
+                "title": "Sku Attributes",
+                "createLabel": "Create a new Sku Attribute",
+                "createOrEditLabel": "Create or edit a Sku Attribute",
+                "search": "Search for Sku Attribute"
+            },
+            "created": "A new Sku Attribute is created with identifier {{ param }}",
+            "updated": "A Sku Attribute is updated with identifier {{ param }}",
+            "deleted": "A Sku Attribute is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Sku Attribute {{ id }}?"
+            },
+            "detail": {
+                "title": "Sku Attribute"
+            },
+            "name": "Name",
+            "sku": "Sku"
+        }
+    }
+}

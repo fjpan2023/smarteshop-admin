@@ -47,15 +47,17 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
 
   @Column(name = "name")
   private String name;
-
+  
+  @Column(name = "description")
+  private String description;
 
   @NotNull
   @Column(name = "RETAIL_PRICE", precision = 19, scale = 5,nullable=false)
-  protected BigDecimal retailPrice;
+  protected BigDecimal retailPrice=BigDecimal.ZERO;
 
   @NotNull
   @Column(name = "SALE_PRICE", precision = 19, scale = 5,nullable=false)
-  private BigDecimal salePrice;
+  private BigDecimal salePrice=BigDecimal.ZERO;
 
   @Embedded
   protected Dimension dimension = new Dimension();
@@ -87,7 +89,7 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
    * This relationship will be non-null if and only if this Sku is contained in the list of
    * additional Skus for a Product (for Skus based on ProductOptions)
    */
-  @ManyToOne(optional = true, targetEntity = Product.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+  @ManyToOne(optional = true, targetEntity = Product.class, cascade = {CascadeType.ALL})
   @JoinColumn(name = "ADDL_PRODUCT_ID")
   protected Product product;
 
@@ -190,8 +192,34 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
   public void setProduct(Product product) {
     this.product = product;
   }
+  
+  
 
-  public boolean isOnSale() {
+  public String getDescription() {
+	return description;
+}
+
+public void setDescription(String description) {
+	this.description = description;
+}
+
+public ZonedDateTime getActiveStartDate() {
+	return activeStartDate;
+}
+
+public void setActiveStartDate(ZonedDateTime activeStartDate) {
+	this.activeStartDate = activeStartDate;
+}
+
+public ZonedDateTime getActiveEndDate() {
+	return activeEndDate;
+}
+
+public void setActiveEndDate(ZonedDateTime activeEndDate) {
+	this.activeEndDate = activeEndDate;
+}
+
+public boolean isOnSale() {
     BigDecimal retailPrice = getRetailPrice();
     BigDecimal salePrice = getSalePrice();
    // return (salePrice != null && !salePrice.ZERO && salePrice.lessThan(retailPrice));

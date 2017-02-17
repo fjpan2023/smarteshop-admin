@@ -118,7 +118,7 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
   @Override
   public boolean exist(String name, String code) {
     QProduct qProduct = QProduct.product;
-    Predicate predicate = qProduct.name.eq(name).or( qProduct.code.eq(code));
+    Predicate predicate = qProduct.name.eq(name);
     return this.productRepository.exists(predicate);
   }
 
@@ -141,4 +141,9 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
     // TODO Auto-generated method stub
 
   }
+@Override
+public void generateAdditionalSkusByBatch(Long productId) {
+	// TODO Auto-generated method stub
+	
+}
 }

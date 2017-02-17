@@ -1,0 +1,25 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "sku",
+            "otherEntityName": "sku",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170217052612",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "sku_attribute",
+    "pagination": "pagination"
+}

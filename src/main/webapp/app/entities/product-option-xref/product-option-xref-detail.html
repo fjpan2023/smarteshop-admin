@@ -1,0 +1,27 @@
+
+<div>
+<div class="modal-header">
+    <h2><span data-translate="smarteshopApp.productOptionXref.detail.title">Product Option Xref</span> {{vm.productOptionXref.id}}</h2>
+</div>
+        <div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="smarteshopApp.productOptionXref.name">Name</span></dt>
+        <dd>
+            <span>{{vm.productOptionXref.name}}</span>
+        </dd>
+    </dl>
+    </div>
+<div class="modal-footer">
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="product-option-xref-detail.edit({id:vm.productOptionXref.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>
+</div>
