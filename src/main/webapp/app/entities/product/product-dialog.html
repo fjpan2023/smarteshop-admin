@@ -40,18 +40,18 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.defaultSku.retailPrice" for="field_standardPrice">Standard Price</label>
+			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.retailPrice" for="field_standardPrice">Standard Price</label>
 			<div class="col-sm-4  no-padding-left">
 				<div class="input-group">
 					<div class="input-group-addon">$</div>
-					<input type="number" class="form-control" name="standardPrice" id="field_standardPrice" ng-model="vm.product.defaultSku.retailPrice" required />
+					<input type="number" class="form-control" name="standardPrice" id="field_standardPrice" ng-model="vm.product.retailPrice" required />
 				</div>
 			</div>
-			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.defaultSku.salePrice" for="field_salePrice">Sell Price</label>
+			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.salePrice" for="field_salePrice">Sell Price</label>
 			<div class="col-sm-4  no-padding-left">
 				<div class="input-group">
 					<div class="input-group-addon">$</div>
-					<input type="number" class="form-control" name="sellPrice" id="field_salePrice" ng-model="vm.product.defaultSku.salePrice" required />
+					<input type="number" class="form-control" name="sellPrice" id="field_salePrice" ng-model="vm.product.salePrice" required />
 				</div>
 			</div>
 		</div>
@@ -76,7 +76,7 @@
 
 			<div class="col-sm-4  no-padding-left">
 				<div class="input-group">
-					<input id="field_activeStartDate" type="text" class="form-control" name="activeStartDate" datetime-picker="{{dateformat}}" ng-model="vm.product.defaultSku.activeStartDate" is-open="vm.datePickerOpenStatus.activeStartDate" required /> <span class="input-group-btn">
+					<input id="field_activeStartDate" type="text" class="form-control" name="activeStartDate" datetime-picker="{{dateformat}}" ng-model="vm.product.activeStartDate" is-open="vm.datePickerOpenStatus.activeStartDate" required /> <span class="input-group-btn">
 						<button type="button" class="btn btn-default" ng-click="vm.openCalendar('activeStartDate')">
 							<i class="glyphicon glyphicon-calendar"></i>
 						</button>
@@ -91,7 +91,7 @@
 			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.activeEndDate" for="field_activeEndDate">End Date</label>
 			<div class="col-sm-4  no-padding-left">
 				<div class="input-group">
-					<input id="field_activeEndDate" type="text" class="form-control" name="activeEndDate" datetime-picker="{{dateformat}}" ng-model="vm.product.defaultSku.activeEndDate" is-open="vm.datePickerOpenStatus.activeEndDate" required /> <span class="input-group-btn">
+					<input id="field_activeEndDate" type="text" class="form-control" name="activeEndDate" datetime-picker="{{dateformat}}" ng-model="vm.product.activeEndDate" is-open="vm.datePickerOpenStatus.activeEndDate" required /> <span class="input-group-btn">
 						<button type="button" class="btn btn-default" ng-click="vm.openCalendar('activeEndDate')">
 							<i class="glyphicon glyphicon-calendar"></i>
 						</button>
@@ -106,7 +106,7 @@
 		</div>
 		<div class="tab-div">
 			<uib-tabset active="activeForm" justified=true> <uib-tab index="0" heading="Descripton"> <br />
-			<summernote config="summernoteroptions" ng-model="vm.product.defaultSku.description" name="description" id="field_description">{{vm.product.description}}</summernote> </uib-tab> <uib-tab index="1" heading="Images"> <br />
+			<summernote config="summernoteroptions" ng-model="vm.product.description" name="description" id="field_description">{{vm.product.description}}</summernote> </uib-tab> <uib-tab index="1" heading="Images"> <br />
 			<div class="row">
 				<div ng-if="vm.product.images" ng-repeat="productImage in vm.product.images">
 					<img data-ng-src="{{'data:' + productImage.contentType + ';base64,' + productImage.content}}" class="col-sm-3 col-md-2 rounded" />
@@ -116,7 +116,7 @@
 			</uib-tab> <uib-tab index="2" heading="SKU"> <br />
 			<div class="modal-header">
 				<label class="modal-title">Create or edit SKU</label>
-				<div class="btn btn-primary pull-right" ng-click="vm.editSKU()">
+				<div class="btn btn-primary pull-right" ng-click="vm.generateSkusByBatch(vm.product.id)">
 					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.editSKU">editSKU</span>
 				</div>
 			</div>

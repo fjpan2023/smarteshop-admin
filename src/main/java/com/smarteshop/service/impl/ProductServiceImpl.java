@@ -147,19 +147,18 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
 		}
 		Set<ProductOption> productOptions = product.getProductOptions();
 		if(CollectionUtils.isEmpty(productOptions)){
+		  log.info("product options is empty,product{} ", product.getId());
 			return;
 		}
 		List<List<ProductOptionValue>> allPermutations = generatePermutations(0, new ArrayList<ProductOptionValue>(), new ArrayList(product.getProductOptions()));
-		// return -2 to indicate that one of the Product Options used in Sku generation has no Allowed Values
 		if (allPermutations == null) {
 			return ;
 		}
-		//determine the permutations that I already have Skus for
 		List<List<ProductOptionValue>> previouslyGeneratedPermutations = new ArrayList<List<ProductOptionValue>>();
 		if (CollectionUtils.isNotEmpty(product.getAdditionalSkus())) {
 			for (Sku additionalSku : product.getAdditionalSkus()) {
-				if (CollectionUtils.isNotEmpty(additionalSku.productOptionValuesCollection())) {
-					previouslyGeneratedPermutations.add(new ArrayList(additionalSku.productOptionValuesCollection()));
+				if (CollectionUtils.isNotEmpty(additionalSku.getProductOptionValues())) {
+					previouslyGeneratedPermutations.add(new ArrayList(additionalSku.getProductOptionValues()));
 				}
 			}
 		}
@@ -179,12 +178,19 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
 			}
 		}
 
+		Sku defaultSku = product.getDefaultSku();
 		for (List<ProductOptionValue> permutation : permutationsToGenerate) {
 			if (permutation.isEmpty())
 				continue;
 			Sku permutatedSku = new Sku();
+			permutatedSku.setName(defaultSku.getName());
+			permutatedSku.setRetailPrice(defaultSku.getRetailPrice());
+			permutatedSku.setSalePrice(defaultSku.getSalePrice());
+			permutatedSku.setDescription(defaultSku.getDescription());
+			permutatedSku.setActiveEndDate(defaultSku.getActiveEndDate());
+			permutatedSku.setActiveStartDate(defaultSku.getActiveStartDate());
 			permutatedSku.setProduct(product);
-			permutatedSku.productOptionValuesCollection(new HashSet<ProductOptionValue>(permutation));
+			permutatedSku.setProductOptionValues(new HashSet<ProductOptionValue>(permutation));
 			permutatedSku = this.skuRepository.save(permutatedSku);
 			product.getAdditionalSkus().add(permutatedSku);
 		}
@@ -220,10 +226,9 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
 
 		ProductOption currentOption = options.get(currentTypeIndex);
 		Set<ProductOptionValue> allowedValues = currentOption.getProductOptionValues();
-
 		// Check to make sure there is at least 1 Allowed Value, else prevent generation
 		if (CollectionUtils.isEmpty(allowedValues)) {
-			return null;
+          result.addAll(generatePermutations(currentTypeIndex + 1, currentPermutation, options));
 		}
 		for (ProductOptionValue option : allowedValues) {
 			List<ProductOptionValue> permutation = new ArrayList<ProductOptionValue>();
@@ -231,11 +236,6 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
 			permutation.add(option);
 			result.addAll(generatePermutations(currentTypeIndex + 1, permutation, options));
 		}
-		if (allowedValues.size() == 0) {
-			// There are still product options left in our array to compute permutations, even though this ProductOption does not have any values associated.
-			result.addAll(generatePermutations(currentTypeIndex + 1, currentPermutation, options));
-		}
-
 		return result;
 	}
 

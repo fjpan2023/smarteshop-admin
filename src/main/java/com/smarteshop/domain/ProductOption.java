@@ -146,4 +146,14 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
     this.products = products;
   }
 
+  public ProductOption addProductOptionValue(ProductOptionValue productOptionValue) {
+    productOptionValues.add(productOptionValue);
+    return this;
+  }
+
+  public ProductOption removeProductOptionValue(ProductOptionValue productOptionValue) {
+    productOptionValues.remove(productOptionValue);
+    return this;
+  }
+
 }

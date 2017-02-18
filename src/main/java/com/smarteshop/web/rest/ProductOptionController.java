@@ -5,10 +5,9 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
-import javax.inject.Inject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -25,7 +24,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.smarteshop.domain.ProductOption;
+import com.smarteshop.domain.ProductOptionValue;
 import com.smarteshop.service.ProductOptionService;
+import com.smarteshop.service.ProductOptionValueService;
 import com.smarteshop.web.rest.util.HeaderUtil;
 import com.smarteshop.web.rest.util.PaginationUtil;
 
@@ -38,8 +39,10 @@ public class ProductOptionController {
 
     private final Logger log = LoggerFactory.getLogger(ProductOptionController.class);
 
-    @Inject
+    @Autowired
     private ProductOptionService productOptionService;
+    @Autowired
+    private ProductOptionValueService productOptionValueService;
 
     /**
      * POST  /product-options : Create a new productOption.
@@ -55,7 +58,21 @@ public class ProductOptionController {
         if (productOption.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("productOption", "idexists", "A new productOption cannot already have an ID")).body(null);
         }
+
+
         ProductOption result = productOptionService.save(productOption);
+        ProductOptionValue v1= new ProductOptionValue();
+        v1.setProductOption(result);
+        v1.setDisplayOrder(1);
+        v1.setAttributeValue("X");
+        this.productOptionValueService.save(v1);
+
+        ProductOptionValue v2= new ProductOptionValue();
+        v2.setProductOption(result);
+        v2.setDisplayOrder(1);
+        v2.setAttributeValue("X");
+        this.productOptionValueService.save(v2);
+
         return ResponseEntity.created(new URI("/api/product-options/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("productOption", result.getId().toString()))
             .body(result);

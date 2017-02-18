@@ -5,10 +5,10 @@
 	.module('smarteshopApp')
 	.controller('ProductDialogController', ProductDialogController);
 
-	ProductDialogController.$inject = ['$timeout', '$scope','$state', '$stateParams',  '$uibModal','DataUtils','previousState','entity', 'Product', 'Sku', 
+	ProductDialogController.$inject = ['$timeout', '$scope', '$http','$state', '$stateParams',  '$uibModal','DataUtils','previousState','entity', 'Product', 'Sku', 
 	                                   'RelatedProduct', 'Brand', 'Category','Attachment'];
 
-	function ProductDialogController ($timeout, $scope, $state,$stateParams, $uibModal, DataUtils,previousState, entity, Product, Sku, 
+	function ProductDialogController ($timeout, $scope, $http, $state,$stateParams, $uibModal, DataUtils,previousState, entity, Product, Sku, 
 			RelatedProduct, Brand, Category, Attachment) {
 		var vm = this;
 		vm.product = entity;
@@ -112,9 +112,10 @@
 
 		};
 		
-		function generateSkusByBatch(productId){
-				Product.generateSkusByBatch();
-
+		vm.generateSkusByBatch = function generateSkusByBatch(productId){
+			var url = "api/products/"+productId+"/generateSkusByBatch";
+			$http.post(url);
+			
 		};
 
 	}

@@ -2,6 +2,7 @@ package com.smarteshop.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -39,6 +41,9 @@ public class ProductOptionValue implements Serializable {
 
     @Column(name = "display_order")
     private Integer displayOrder;
+
+    @ManyToMany(targetEntity=Sku.class,fetch=FetchType.LAZY)
+    private Set<Sku> skus;
 
     public Long getId() {
         return id;
@@ -80,6 +85,14 @@ public class ProductOptionValue implements Serializable {
 
     public void setProductOption(ProductOption productOption) {
       this.productOption = productOption;
+    }
+
+    public Set<Sku> getSkus() {
+      return skus;
+    }
+
+    public void setSkus(Set<Sku> skus) {
+      this.skus = skus;
     }
 
     @Override

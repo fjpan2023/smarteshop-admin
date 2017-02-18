@@ -74,6 +74,10 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   @Column(name = "status")
   private StatusEnum status =StatusEnum.ACTIVITY;
 
+
+  @Transient
+  private String description;
+
   @Transient
   private BigDecimal retailPrice;
 
@@ -97,7 +101,7 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
   @Cascade(value = {org.hibernate.annotations.CascadeType.ALL})
   @JoinColumn(name = "DEFAULT_SKU_ID")
-  private Sku defaultSku;
+  private Sku defaultSku = new Sku();
 
   @OneToMany(fetch = FetchType.LAZY, targetEntity = Sku.class, mappedBy = "product", cascade = CascadeType.ALL)
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -167,6 +171,7 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   }
 
   public void setName(String name) {
+    this.defaultSku.setName(name);
     this.name = name;
   }
 
@@ -216,6 +221,7 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
 
   public void setActiveStartDate(ZonedDateTime activeStartDate) {
     this.activeStartDate = activeStartDate;
+    this.defaultSku.setActiveStartDate(activeStartDate);
   }
 
   public ZonedDateTime getActiveEndDate() {
@@ -224,6 +230,7 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
 
   public void setActiveEndDate(ZonedDateTime activeEndDate) {
     this.activeEndDate = activeEndDate;
+    this.defaultSku.setActiveEndDate(activeEndDate);
   }
 
   //  public Set<ProductOption> getProductOptions() {
@@ -369,11 +376,22 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   }
 
   public void setRetailPrice(BigDecimal retailPrice) {
+    this.defaultSku.setRetailPrice(retailPrice);
     this.retailPrice = retailPrice;
   }
 
   public void setSalePrice(BigDecimal salePrice) {
+    this.defaultSku.setSalePrice(salePrice);
     this.salePrice = salePrice;
+  }
+
+  public String getDescription() {
+    return this.defaultSku.getDescription();
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+    this.defaultSku.setDescription(description);
   }
 
   public Set<ProductOption> getProductOptions() {
@@ -386,13 +404,11 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
 
   public Product addProductOption(ProductOption productOption) {
     productOptions.add(productOption);
-  //  productOption.getProducts().add(this);
     return this;
   }
 
   public Product removeProductOption(ProductOption productOption) {
     productOptions.remove(productOption);
-  //  productOption.getProducts().remove(this);
     return this;
   }
 
