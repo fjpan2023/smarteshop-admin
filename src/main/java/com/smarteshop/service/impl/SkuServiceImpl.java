@@ -1,22 +1,25 @@
 package com.smarteshop.service.impl;
 
-import com.smarteshop.service.SkuService;
-import com.smarteshop.domain.Sku;
-import com.smarteshop.repository.SkuRepository;
-import com.smarteshop.repository.search.SkuSearchRepository;
+import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
+import com.querydsl.core.types.Predicate;
+import com.smarteshop.domain.Product;
+import com.smarteshop.domain.QSku;
+import com.smarteshop.domain.Sku;
+import com.smarteshop.repository.SkuRepository;
+import com.smarteshop.repository.search.SkuSearchRepository;
+import com.smarteshop.service.SkuService;
 
 /**
  * Service Implementation for managing Sku.
@@ -26,7 +29,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class SkuServiceImpl implements SkuService{
 
     private final Logger log = LoggerFactory.getLogger(SkuServiceImpl.class);
-    
+
     @Inject
     private SkuRepository skuRepository;
 
@@ -39,6 +42,7 @@ public class SkuServiceImpl implements SkuService{
      * @param sku the entity to save
      * @return the persisted entity
      */
+    @Override
     public Sku save(Sku sku) {
         log.debug("Request to save Sku : {}", sku);
         Sku result = skuRepository.save(sku);
@@ -48,11 +52,12 @@ public class SkuServiceImpl implements SkuService{
 
     /**
      *  Get all the skus.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Override
+    @Transactional(readOnly = true)
     public Page<Sku> findAll(Pageable pageable) {
         log.debug("Request to get all Skus");
         Page<Sku> result = skuRepository.findAll(pageable);
@@ -65,7 +70,8 @@ public class SkuServiceImpl implements SkuService{
      *  @param id the id of the entity
      *  @return the entity
      */
-    @Transactional(readOnly = true) 
+    @Override
+    @Transactional(readOnly = true)
     public Sku findOne(Long id) {
         log.debug("Request to get Sku : {}", id);
         Sku sku = skuRepository.findOne(id);
@@ -77,6 +83,7 @@ public class SkuServiceImpl implements SkuService{
      *
      *  @param id the id of the entity
      */
+    @Override
     public void delete(Long id) {
         log.debug("Request to delete Sku : {}", id);
         skuRepository.delete(id);
@@ -89,10 +96,18 @@ public class SkuServiceImpl implements SkuService{
      *  @param query the query of the search
      *  @return the list of entities
      */
+    @Override
     @Transactional(readOnly = true)
     public Page<Sku> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of Skus for query {}", query);
         Page<Sku> result = skuSearchRepository.search(queryStringQuery(query), pageable);
         return result;
+    }
+
+    public List<Sku> findSkusByProduct(Product product){
+      QSku qSku = QSku.sku;
+      Predicate predicate = qSku.product.eq(product);
+      return (List<Sku>) this.skuRepository.findAll(predicate);
+
     }
 }

@@ -22,7 +22,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
@@ -95,16 +94,15 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
    * This relationship will be non-null if and only if this Sku is contained in the list of
    * additional Skus for a Product (for Skus based on ProductOptions)
    */
-  @ManyToOne(optional = true, targetEntity = Product.class, cascade = {CascadeType.ALL})
+  @ManyToOne(optional = true, targetEntity = Product.class, fetch=FetchType.LAZY,cascade = {CascadeType.ALL})
   @JoinColumn(name = "ADDL_PRODUCT_ID")
   protected Product product;
 
-  @ManyToMany(fetch = FetchType.EAGER)
+  @ManyToMany(fetch = FetchType.EAGER,cascade =CascadeType.ALL)
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
   @JoinTable(name = "sku_product_option_value_xref",
-  joinColumns = @JoinColumn(name="sku_id", referencedColumnName="ID"),
-  inverseJoinColumns = @JoinColumn(name="product_option_value_id", referencedColumnName="ID"))
-  private Set<ProductOption> productOptions = new HashSet<>();@Transient
+    joinColumns = @JoinColumn(name="sku_id", referencedColumnName="ID"),
+    inverseJoinColumns = @JoinColumn(name="product_option_value_id", referencedColumnName="ID"))
   protected Set<ProductOptionValue> productOptionValues = new HashSet<ProductOptionValue>();
 
   @Override

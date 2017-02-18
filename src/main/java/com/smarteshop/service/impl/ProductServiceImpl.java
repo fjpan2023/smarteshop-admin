@@ -190,8 +190,12 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
 			permutatedSku.setActiveEndDate(defaultSku.getActiveEndDate());
 			permutatedSku.setActiveStartDate(defaultSku.getActiveStartDate());
 			permutatedSku.setProduct(product);
-			permutatedSku.setProductOptionValues(new HashSet<ProductOptionValue>(permutation));
+			log.info("permutation list : ",permutation);
 			permutatedSku = this.skuRepository.save(permutatedSku);
+
+
+			permutatedSku.setProductOptionValues(new HashSet<ProductOptionValue>(permutation));
+			this.skuRepository.save(permutatedSku);
 			product.getAdditionalSkus().add(permutatedSku);
 		}
 		return ;

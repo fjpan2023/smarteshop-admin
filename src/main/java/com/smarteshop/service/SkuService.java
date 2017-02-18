@@ -1,10 +1,12 @@
 package com.smarteshop.service;
 
-import com.smarteshop.domain.Sku;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+import com.smarteshop.domain.Product;
+import com.smarteshop.domain.Sku;
 
 /**
  * Service Interface for managing Sku.
@@ -21,7 +23,7 @@ public interface SkuService {
 
     /**
      *  Get all the skus.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -46,9 +48,10 @@ public interface SkuService {
      * Search for the sku corresponding to the query.
      *
      *  @param query the query of the search
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
     Page<Sku> search(String query, Pageable pageable);
+    List<Sku> findSkusByProduct(Product product);
 }

@@ -1,15 +1,13 @@
 package com.smarteshop.repository;
 
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
+
 import com.smarteshop.domain.Sku;
-
-import org.springframework.data.jpa.repository.*;
-
-import java.util.List;
 
 /**
  * Spring Data JPA repository for the Sku entity.
  */
-@SuppressWarnings("unused")
-public interface SkuRepository extends JpaRepository<Sku,Long> {
+public interface SkuRepository extends BusinessObjectRepository<Sku,Long>,
+  QueryDslPredicateExecutor<Sku> {
 
 }

@@ -3,7 +3,6 @@ package com.smarteshop.web.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +35,7 @@ import com.smarteshop.domain.Sku;
 import com.smarteshop.exception.BusinessException;
 import com.smarteshop.service.ProductOptionService;
 import com.smarteshop.service.ProductService;
+import com.smarteshop.service.SkuService;
 import com.smarteshop.web.common.AbstractController;
 import com.smarteshop.web.rest.util.HeaderUtil;
 import com.smarteshop.web.rest.util.PaginationUtil;
@@ -51,6 +51,10 @@ public class ProductController extends AbstractController<Product> {
 
   @Autowired
   private ProductService productService;
+
+  @Autowired
+  private SkuService skuService;
+
   @Autowired
   private ProductOptionService productOptionService;
 
@@ -74,7 +78,7 @@ public class ProductController extends AbstractController<Product> {
     Sku defaultSKU = product.getDefaultSku();
     defaultSKU.setDefaultProduct(product);
     Product result = productService.save(product);
-    ProductOption options1 = this.productOptionService.findOne(1L);
+    ProductOption options1 = this.productOptionService.findOne(4L);
     ProductOption options2 = this.productOptionService.findOne(3L);
     result.addProductOption(options1);
     result.addProductOption(options2);
@@ -160,15 +164,6 @@ public class ProductController extends AbstractController<Product> {
     return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
   }
 
-
-  @Timed
-  @PostMapping("{id}/additionalSkus/batch")
-  public ResponseEntity<Long> generateAdditionalSkusByBatch(@PathVariable Long id) throws URISyntaxException {
-
-    return ResponseEntity.ok().body(1L);
-  }
-
-
   @Timed
   @PostMapping("{id}/generateSkusByBatch")
   public ResponseEntity<Void> createAdditionalSkus(@PathVariable Long id) throws URISyntaxException {
@@ -187,9 +182,10 @@ public class ProductController extends AbstractController<Product> {
 
   @Timed
   @GetMapping("{id}/additionalSkus")
-  public ResponseEntity<List<Sku>> listAdditionalSkus(@PathVariable Long id, @Valid @RequestBody Sku sku) throws URISyntaxException {
-
-    return ResponseEntity.ok().body(new LinkedList<Sku>());
+  public ResponseEntity<List<Sku>> listAdditionalSkus(@PathVariable Long id) throws URISyntaxException {
+    Product product = this.productService.findOne(id);
+    List<Sku> result =this.skuService.findSkusByProduct(product);
+    return ResponseEntity.ok().body(result);
   }
 
   @Timed
