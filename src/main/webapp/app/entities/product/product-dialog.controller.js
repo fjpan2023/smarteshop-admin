@@ -111,6 +111,11 @@
 			});
 
 		};
+		
+		function generateSkusByBatch(productId){
+				Product.generateSkusByBatch();
+
+		};
 
 	}
 })();

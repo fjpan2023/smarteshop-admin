@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
@@ -133,24 +132,6 @@ public class ProductOptionController {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("productOption", id.toString())).build();
     }
 
-    /**
-     * SEARCH  /_search/product-options?query=:query : search for the productOption corresponding
-     * to the query.
-     *
-     * @param query the query of the productOption search
-     * @param pageable the pagination information
-     * @return the result of the search
-     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
-     */
-    @GetMapping("/_search")
-    @Timed
-    public ResponseEntity<List<ProductOption>> searchProductOptions(@RequestParam String query, Pageable pageable)
-        throws URISyntaxException {
-        log.debug("REST request to search for a page of ProductOptions for query {}", query);
-        Page<ProductOption> page = productOptionService.search(query, pageable);
-        HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/product-options");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
 
 
 }
