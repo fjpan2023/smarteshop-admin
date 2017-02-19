@@ -412,4 +412,6 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
     return this;
   }
 
+
+
 }

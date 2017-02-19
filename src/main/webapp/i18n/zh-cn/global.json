@@ -34,6 +34,7 @@
                 "skuProductOptionValueXref": "Sku Product Option Value Xref",
                 "t": "T",
                 "test": "Test",
+                "media": "Media",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

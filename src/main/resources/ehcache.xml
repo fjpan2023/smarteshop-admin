@@ -85,5 +85,7 @@
     <cache alias="com.smarteshop.domain.T.products" uses-template="simple"/>
 
 
+    <cache alias="com.smarteshop.domain.Media" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>
