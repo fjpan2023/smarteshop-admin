@@ -18,8 +18,6 @@ public class QProductOption extends EntityPathBase<ProductOption> {
 
     private static final long serialVersionUID = -1372913207L;
 
-    private static final PathInits INITS = PathInits.DIRECT2;
-
     public static final QProductOption productOption = new QProductOption("productOption");
 
     public final com.smarteshop.common.entity.QBusinessObjectEntity _super = new com.smarteshop.common.entity.QBusinessObjectEntity(this);
@@ -31,6 +29,8 @@ public class QProductOption extends EntityPathBase<ProductOption> {
 
     //inherited
     public final DateTimePath<java.time.ZonedDateTime> createdDate = _super.createdDate;
+
+    public final NumberPath<Integer> displayOrder = createNumber("displayOrder", Integer.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -44,31 +44,22 @@ public class QProductOption extends EntityPathBase<ProductOption> {
 
     public final StringPath name = createString("name");
 
-    public final QProduct product;
-
     public final SetPath<ProductOptionValue, QProductOptionValue> productOptionValues = this.<ProductOptionValue, QProductOptionValue>createSet("productOptionValues", ProductOptionValue.class, QProductOptionValue.class, PathInits.DIRECT2);
+
+    public final SetPath<Product, QProduct> products = this.<Product, QProduct>createSet("products", Product.class, QProduct.class, PathInits.DIRECT2);
 
     public final StringPath type = createString("type");
 
     public QProductOption(String variable) {
-        this(ProductOption.class, forVariable(variable), INITS);
+        super(ProductOption.class, forVariable(variable));
     }
 
     public QProductOption(Path<? extends ProductOption> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QProductOption(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QProductOption(PathMetadata metadata, PathInits inits) {
-        this(ProductOption.class, metadata, inits);
-    }
-
-    public QProductOption(Class<? extends ProductOption> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.product = inits.isInitialized("product") ? new QProduct(forProperty("product"), inits.get("product")) : null;
+        super(ProductOption.class, metadata);
     }
 
 }

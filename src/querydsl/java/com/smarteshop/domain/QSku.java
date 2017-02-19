@@ -40,6 +40,8 @@ public class QSku extends EntityPathBase<Sku> {
 
     public final BooleanPath defaultSKU = createBoolean("defaultSKU");
 
+    public final StringPath description = createString("description");
+
     public final QDimension dimension;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
@@ -53,6 +55,8 @@ public class QSku extends EntityPathBase<Sku> {
     public final StringPath name = createString("name");
 
     public final QProduct product;
+
+    public final SetPath<ProductOptionValue, QProductOptionValue> productOptionValues = this.<ProductOptionValue, QProductOptionValue>createSet("productOptionValues", ProductOptionValue.class, QProductOptionValue.class, PathInits.DIRECT2);
 
     public final NumberPath<java.math.BigDecimal> retailPrice = createNumber("retailPrice", java.math.BigDecimal.class);
 

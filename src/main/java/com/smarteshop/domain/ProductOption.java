@@ -53,7 +53,7 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
   private String label;
 
   @Column(name = "display_order")
-  private int displayOrder;
+  private Long displayOrder;
 
   @OneToMany(mappedBy = "productOption",fetch=FetchType.EAGER)
   @OrderBy(value = "displayOrder")
@@ -133,11 +133,11 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
     this.productOptionValues = productOptionValues;
   }
 
-  public int getDisplayOrder() {
+  public Long getDisplayOrder() {
     return displayOrder;
   }
 
-  public void setDisplayOrder(int displayOrder) {
+  public void setDisplayOrder(Long displayOrder) {
     this.displayOrder = displayOrder;
   }
 

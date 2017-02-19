@@ -30,6 +30,8 @@ public class QProductOptionValue extends EntityPathBase<ProductOptionValue> {
 
     public final QProductOption productOption;
 
+    public final SetPath<Sku, QSku> skus = this.<Sku, QSku>createSet("skus", Sku.class, QSku.class, PathInits.DIRECT2);
+
     public QProductOptionValue(String variable) {
         this(ProductOptionValue.class, forVariable(variable), INITS);
     }
@@ -48,7 +50,7 @@ public class QProductOptionValue extends EntityPathBase<ProductOptionValue> {
 
     public QProductOptionValue(Class<? extends ProductOptionValue> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.productOption = inits.isInitialized("productOption") ? new QProductOption(forProperty("productOption"), inits.get("productOption")) : null;
+        this.productOption = inits.isInitialized("productOption") ? new QProductOption(forProperty("productOption")) : null;
     }
 
 }

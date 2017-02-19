@@ -1,6 +1,8 @@
 package com.smarteshop.test.temp;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +11,7 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import com.smarteshop.domain.ProductOption;
 import com.smarteshop.domain.ProductOptionValue;
+
 
 public class TempTest {
 
@@ -26,17 +29,23 @@ public class TempTest {
 
   }
 
-  private static  ProductOption buildProductOption(){
+  public static  ProductOption buildProductOption(){
     // TODO Auto-generated method stub
     ProductOption op= new ProductOption();
     op.setId(1L);
     op.setAttributeName("Size");
     ProductOptionValue opv1 = new ProductOptionValue();
     opv1.setAttributeValue("X");
+    opv1.setDisplayOrder(2L);
     ProductOptionValue opv2 = new ProductOptionValue();
     opv2.setAttributeValue("XL");
+    opv2.setDisplayOrder(1L);
+    ProductOptionValue opv3 = new ProductOptionValue();
+    opv3.setAttributeValue("XLL");
+    opv3.setDisplayOrder(3L);
     op.addProductOptionValue(opv1);
     op.addProductOptionValue(opv2);
+    op.addProductOptionValue(opv3);
     return op;
   }
 
@@ -63,12 +72,21 @@ public class TempTest {
   }
 
   public static void main(String[] args) {
-    List<ProductOption> context = TempTest.buildContext();
-    List<List<ProductOptionValue>> allPermutations = TempTest.generatePermutations(new ArrayList(context),0, new ArrayList<ProductOptionValue>() );
-
-    System.out.println(allPermutations.size());
-
-
+    ProductOption op = TempTest.buildProductOption();
+    List<ProductOptionValue> vv = new ArrayList( op.getProductOptionValues());;
+    Collections.sort(vv,new Comparator<ProductOptionValue>(){
+      @Override
+      public int compare(ProductOptionValue po1, ProductOptionValue po2) {
+        return po1.getDisplayOrder().compareTo(po2.getDisplayOrder());
+      }
+    });
+    for(int j=0; j<10000;j++){
+      StringBuilder result =new StringBuilder("");
+      for(int i=0; i<vv.size(); i++){
+        result.append(" ; ").append(vv.get(i).getAttributeValue());
+      }
+      System.out.println(  result.substring(3));
+    }
   }
 
 }

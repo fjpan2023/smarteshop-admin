@@ -63,13 +63,13 @@ public class ProductOptionController {
         ProductOption result = productOptionService.save(productOption);
         ProductOptionValue v1= new ProductOptionValue();
         v1.setProductOption(result);
-        v1.setDisplayOrder(1);
+        v1.setDisplayOrder(1L);
         v1.setAttributeValue("X");
         this.productOptionValueService.save(v1);
 
         ProductOptionValue v2= new ProductOptionValue();
         v2.setProductOption(result);
-        v2.setDisplayOrder(1);
+        v2.setDisplayOrder(2L);
         v2.setAttributeValue("X");
         this.productOptionValueService.save(v2);
 

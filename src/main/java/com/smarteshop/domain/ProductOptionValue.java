@@ -44,7 +44,7 @@ public class ProductOptionValue implements LiteBusinessObject {
 
   @NotNull
   @Column(name = "display_order", nullable=false)
-  private Integer displayOrder;
+  private Long displayOrder;
 
   @ManyToMany(targetEntity=Sku.class,fetch=FetchType.LAZY)
   private Set<Sku> skus;
@@ -70,16 +70,16 @@ public class ProductOptionValue implements LiteBusinessObject {
     this.attributeValue = attributeValue;
   }
 
-  public Integer getDisplayOrder() {
+  public Long getDisplayOrder() {
     return displayOrder;
   }
 
-  public ProductOptionValue displayOrder(Integer displayOrder) {
+  public ProductOptionValue displayOrder(Long displayOrder) {
     this.displayOrder = displayOrder;
     return this;
   }
 
-  public void setDisplayOrder(Integer displayOrder) {
+  public void setDisplayOrder(Long displayOrder) {
     this.displayOrder = displayOrder;
   }
 

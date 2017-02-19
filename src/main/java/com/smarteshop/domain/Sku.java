@@ -3,7 +3,11 @@ package com.smarteshop.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -28,6 +32,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Cascade;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.util.CollectionUtils;
 
 import com.smarteshop.common.entity.BusinessObjectEntity;
 import com.smarteshop.domain.enumeration.StatusEnum;
@@ -101,8 +106,8 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
   @ManyToMany(fetch = FetchType.EAGER,cascade =CascadeType.ALL)
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
   @JoinTable(name = "sku_product_option_value_xref",
-    joinColumns = @JoinColumn(name="sku_id", referencedColumnName="ID"),
-    inverseJoinColumns = @JoinColumn(name="product_option_value_id", referencedColumnName="ID"))
+  joinColumns = @JoinColumn(name="sku_id", referencedColumnName="ID"),
+  inverseJoinColumns = @JoinColumn(name="product_option_value_id", referencedColumnName="ID"))
   protected Set<ProductOptionValue> productOptionValues = new HashSet<ProductOptionValue>();
 
   @Override
@@ -269,4 +274,23 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
     }
   }
 
+  public String getProductOptionValuesString(){
+    List<ProductOptionValue> list = new ArrayList<ProductOptionValue>(this.productOptionValues);
+    if(CollectionUtils.isEmpty(list)){
+      return "";
+    }
+    Collections.sort(list,new Comparator<ProductOptionValue>(){
+      @Override
+      public int compare(ProductOptionValue po1, ProductOptionValue po2) {
+       // return po1.getProductOption().getDisplayOrder().compareTo(po2.getProductOption().getDisplayOrder());
+       return po1.getDisplayOrder().compareTo(po2.getDisplayOrder());
+      }
+    });
+
+    StringBuilder result =new StringBuilder("");
+    for(int i=0; i<list.size(); i++){
+      result.append(";").append(list.get(i).getAttributeValue());
+    }
+    return  result.substring(1).toString();
+  }
 }
