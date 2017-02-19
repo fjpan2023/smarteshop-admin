@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -37,10 +38,12 @@ public class ProductOption extends BusinessObjectEntity<Long, ProductOption> imp
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column(name = "type")
+  @NotNull
+  @Column(name = "type", nullable=false)
   private String type;
 
-  @Column(name = "name")
+  @NotNull
+  @Column(name = "name", nullable=false)
   private String name;
 
   @Column(name = "attribute_name")
