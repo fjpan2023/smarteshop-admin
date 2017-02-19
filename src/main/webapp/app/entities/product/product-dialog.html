@@ -1,6 +1,5 @@
 <form name="editForm" role="form" class="form-horizontal" novalidate ng-submit="vm.save()" show-validation>
 	<div class="modal-header">
-
 		<h4 class="modal-title" id="myProductLabel" data-translate="smarteshopApp.product.home.createOrEditLabel">Create or edit a Product</h4>
 		<img data-ng-src="{{'data:' + vm.product.imageContentType + ';base64,' + vm.product.image}}" class="img-thumbnail" ng-if="vm.product.portrait" />
 	</div>
@@ -105,15 +104,53 @@
 
 		</div>
 		<div class="tab-div">
-			<uib-tabset active="activeForm" justified=true> <uib-tab index="0" heading="Descripton"> <br />
-			<summernote config="summernoteroptions" ng-model="vm.product.description" name="description" id="field_description">{{vm.product.description}}</summernote> </uib-tab> <uib-tab index="1" heading="Images"> <br />
+			<uib-tabset active="activeForm" justified=true> 
+			<!-- Description  -->
+			<uib-tab index="0" heading="Descripton"> <br />
+			<summernote config="summernoteroptions" ng-model="vm.product.description" name="description" id="field_description">{{vm.product.description}}</summernote> </uib-tab> 
+			<!-- images -->
+			<uib-tab index="1" heading="Images"> <br />
 			<div class="row">
 				<div ng-if="vm.product.images" ng-repeat="productImage in vm.product.images">
 					<img data-ng-src="{{'data:' + productImage.contentType + ';base64,' + productImage.content}}" class="col-sm-3 col-md-2 rounded" />
 				</div>
 				<button type="button" ngf-change="vm.setImage($file, vm.product)" accept="image/*" data-translate="entity.action.addimage">Add image</button>
 			</div>
-			</uib-tab> <uib-tab index="2" heading="SKU"> <br />
+			</uib-tab> 
+			<!-- product options -->
+			<uib-tab index="2" heading="Product Options"> <br />
+			<div class="modal-header">
+				<div class="btn btn-primary pull-right" ng-click="">
+					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.editOption">Edit Options</span>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="table-responsive">
+					<table class="jh-table table table-striped">
+						<thead>
+							<tr ascending="vm.reverse" callback="vm.transition()">
+								<th><span data-translate="global.field.id">ID</span></th>
+								<th><span data-translate="smarteshopApp.product.productOption.name">Name</span></th>
+								<th><span data-translate="smarteshopApp.product.productOption.attributeName">Attribute Name</span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="productOption in vm.product.productOptions track by productOption.id">
+								<td><a ui-sref="product-Option-detail({id:productOption.id})">{{productOption.id}}</a></td>
+								<td>{{productOption.name}}</td>
+								<td>{{productOption.attributeName}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			</uib-tab> 
+			
+			
+			
+			<!-- additional  skus -->
+			
+			<uib-tab index="3" heading="SKU"> <br />
 			<div class="modal-header">
 				<label class="modal-title">Create or edit SKU</label>
 				<div class="btn btn-primary pull-right" ng-click="vm.generateSkusByBatch(vm.product.id)">
@@ -155,7 +192,11 @@
 					</table>
 				</div>
 			</div>
-			</uib-tab> <uib-tab index="3" heading="Related Product"> <br />
+			</uib-tab> 
+			
+			
+			
+			<uib-tab index="4" heading="Related Product"> <br />
 			<div class="modal-header">
 				<label class="modal-title">Create or edit Related Product</label>
 				<div class="btn btn-primary pull-right" ng-click="vm.showNotRelatedProducts()">
@@ -197,7 +238,9 @@
 					</table>
 				</div>
 			</div>
-			</uib-tab> </uib-tabset>
+			</uib-tab> 
+			
+			</uib-tabset>
 		</div>
 
 	</div>

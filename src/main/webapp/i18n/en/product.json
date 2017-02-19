@@ -20,8 +20,8 @@
             "name": "Name",
             "defaultSku.description": "Description",
             "status": "Status",
-            "defaultSku.retailPrice": "Retail Price",
-            "defaultSku.salePrice": "Sale Price",
+            "retailPrice": "Retail Price",
+            "salePrice": "Sale Price",
             "label": "Label",
             "mainImageId": "Image",
             "activeStartDate": "Active Start Date",
@@ -29,9 +29,15 @@
             "skus": "Skus",
             "relatedProducts": "Related Products",
             "editSKU": "Edit SKU",
+            "editOption": "Edit Product Options",
             "brand": "Brand",
             "category": "Category",
-            "addRelative": "Add Relative"
+            "addRelative": "Add Relative",
+            "productOption": {
+            	"name": "Name",
+            	"code": "Code",
+            	"attributeName": "Attribute Name"
+            }
         }
     }
 }
