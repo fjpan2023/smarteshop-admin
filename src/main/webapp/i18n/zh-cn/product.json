@@ -34,6 +34,7 @@
             "category": "Category",
             "addRelative": "Add Relative",
             "editMedia" : "Edit Media",
+            "editProductOption": "Edit Product Option",
             "productOption" : {
             	"name": "Name",
             	"code": "Code",

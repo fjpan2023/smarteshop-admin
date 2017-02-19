@@ -78,10 +78,10 @@ public class ProductController extends AbstractController<Product> {
     Sku defaultSKU = product.getDefaultSku();
     defaultSKU.setDefaultProduct(product);
     Product result = productService.save(product);
-    ProductOption options1 = this.productOptionService.findOne(4L);
-    ProductOption options2 = this.productOptionService.findOne(3L);
-    result.addProductOption(options1);
-    result.addProductOption(options2);
+//    ProductOption options1 = this.productOptionService.findOne(4L);
+//    ProductOption options2 = this.productOptionService.findOne(3L);
+//    result.addProductOption(options1);
+//    result.addProductOption(options2);
     productService.save(product);
     productService.saveImages(result.getId(),product.getImages());
     return ResponseEntity.created(new URI("/api/products" + result.getId()))
@@ -166,7 +166,7 @@ public class ProductController extends AbstractController<Product> {
 
   @Timed
   @PostMapping("{id}/generateSkusByBatch")
-  public ResponseEntity<Void> createAdditionalSkus(@PathVariable Long id) throws URISyntaxException {
+  public ResponseEntity<Void> generateSkusByBatch(@PathVariable Long id) throws URISyntaxException {
     LOGGER.debug("create generateSkusByBatch----------------{}", id);
     this.productService.generateAdditionalSkusByBatch(id);
     return ResponseEntity.ok().build();

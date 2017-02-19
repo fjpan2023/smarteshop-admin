@@ -111,7 +111,26 @@
 			});
 
 		};
-		
+		vm.showProductOptions = function showProductOptions(productId){
+			$uibModal.open({
+				templateUrl: 'app/entities/product/product-option-list.html',
+				controller: 'ProductOptionsController',
+				controllerAs: 'vm',
+				backdrop: 'static',
+				size: 'lg',
+				resolve: {
+					entity: ['Product', function(Product) {
+						return Product.get({id : $stateParams.id}).$promise;
+					}]
+				}
+			}).result.then(function($state) {
+				$state.go($state.name, {}, { reload: false });
+			}, function($state) {
+				$state.go($state.name);
+			});
+			
+			
+		};
 		vm.generateSkusByBatch = function generateSkusByBatch(productId){
 			var url = "api/products/"+productId+"/generateSkusByBatch";
 			$http.post(url);
