@@ -119,14 +119,12 @@
 				backdrop: 'static',
 				size: 'lg',
 				resolve: {
-					entity: ['Product', function(Product) {
-						return Product.get({id : $stateParams.id}).$promise;
-					}]
+					productId: productId
 				}
 			}).result.then(function($state) {
 				$state.go($state.name, {}, { reload: false });
 			}, function($state) {
-				$state.go($state.name);
+				$state.go($state.name, {}, { reload: false });
 			});
 			
 			

@@ -5,11 +5,11 @@
 	.module('smarteshopApp')
 	.controller('ProductOptionsController', ProductOptionsController);
 
-	ProductOptionsController.$inject = ['$timeout', '$scope', '$state', '$stateParams', '$uibModal','$uibModalInstance', 'entity', 'ProductOption'];
+	ProductOptionsController.$inject = ['$timeout', '$scope', '$state', '$stateParams', '$uibModal','$uibModalInstance', 'productId', 'ProductOption'];
 
-	function ProductOptionsController ($timeout, $scope, $state, $stateParams, $uibModal, $uibModalInstance, entity, ProductOption) {
+	function ProductOptionsController ($timeout, $scope, $state, $stateParams, $uibModal, $uibModalInstance, productId, ProductOption) {
 		var vm = this;
-		vm.product = entity;
+		vm.productId = productId;
 		vm.clear = clear;
 		vm.save = save;
 		vm.options = [];
