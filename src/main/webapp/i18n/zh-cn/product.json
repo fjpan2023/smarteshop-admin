@@ -33,6 +33,7 @@
             "brand": "Brand",
             "category": "Category",
             "addRelative": "Add Relative",
+            "editMedia" : "Edit Media",
             "productOption" : {
             	"name": "Name",
             	"code": "Code",

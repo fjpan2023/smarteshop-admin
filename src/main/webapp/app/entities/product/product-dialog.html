@@ -117,12 +117,17 @@
 		</div>
 		</uib-tab> <uib-tab index="1" heading="Descripton"> <br />
 		<summernote config="summernoteroptions" ng-model="vm.product.description" name="description" id="field_description">{{vm.product.description}}</summernote> </uib-tab> <!-- images --> <uib-tab index="2" heading="Images"> <br />
-		<div class="row">
-			<div ng-if="vm.product.images" ng-repeat="productImage in vm.product.images">
-				<img data-ng-src="{{'data:' + productImage.contentType + ';base64,' + productImage.content}}" class="col-sm-3 col-md-2 rounded" />
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<label>Add media </label>
+				<div class="btn btn-primary pull-right" style="flaot: right">
+					<span data-translate="smarteshopApp.product.editMedia">Edit Media</span>
+				</div>
 			</div>
-			<button type="button" ngf-change="vm.setImage($file, vm.product)" accept="image/*" data-translate="entity.action.addimage">Add image</button>
+			<div class="panel-body">body ....</div>
 		</div>
+
 		</uib-tab> <!-- product options --> <uib-tab index="3" heading="Options">
 
 		<div class="modal-header">
@@ -153,16 +158,56 @@
 		</uib-tab> <!-- additional  skus --> <uib-tab index="4" heading="SKUs"> <br />
 		<div class="panel panel-default">
 			<div class="panel-heading">
-			<label>
-				Create or edit SKUs
-				</label>
-				<div class="btn btn-primary pull-right" style="flaot:right" ng-click="vm.generateSkusByBatch(vm.product.id)">
+				<label> Create or edit SKUs </label>
+				<div class="btn btn-primary pull-right" style="flaot: right" ng-click="vm.generateSkusByBatch(vm.product.id)">
 					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.editSKU">editSKU</span>
 				</div>
 			</div>
 			<div class="panel-body">
-			<br/>
+				<br />
 				<div class="table-responsive">
+					<table class="jh-table table table-striped">
+						<thead>
+							<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+								<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th><span data-translate="smarteshopApp.product.mainImageId">Main Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="code"><span data-translate="smarteshopApp.product.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="name"><span data-translate="smarteshopApp.product.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="status"><span data-translate="smarteshopApp.product.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="product in vm.products track by product.id">
+								<td><a ui-sref="product-detail({id:product.id})">{{product.id}}</a></td>
+								<td>{{product.mainImageId}}</td>
+								<td>{{product.code}}</td>
+								<td>{{product.name}}</td>
+								<td class="text-right">
+									<div class="btn-group flex-btn-group-container">
+										<button type="submit" ui-sref="product.edit({id:product.id})" class="btn btn-primary btn-sm">
+											<span class="glyphicon glyphicon-pencil"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+										</button>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		</uib-tab> <!--  Related Products --> <uib-tab index="5" heading="Related Products"> <br />
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<label>Edit Related Products </label>
+				<div class="btn btn-primary pull-right" ng-click="vm.showNotRelatedProducts()">
+					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.addRelative">Add Related</span>
+				</div>
+			</div>
+			<div class="panel-body">
+				<br />
+				<div class="table-bordered">
 					<table class="jh-table table table-striped">
 						<thead>
 							<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
@@ -184,13 +229,7 @@
 								<td>{{product.name}}</td>
 								<td><a ui-sref="brand-detail({id:product.brand.id})">{{product.brand.name}}</a></td>
 								<td><a ui-sref="category-detail({id:product.category.id})">{{product.category.name}}</a></td>
-								<td class="text-right">
-									<div class="btn-group flex-btn-group-container">
-										<button type="submit" ui-sref="product.edit({id:product.id})" class="btn btn-primary btn-sm">
-											<span class="glyphicon glyphicon-pencil"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
-										</button>
-									</div>
-								</td>
+								<td>{{product.status}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -198,43 +237,7 @@
 			</div>
 		</div>
 
-		</uib-tab> <!--  Related Products --> <uib-tab index="5" heading="Related Products">
-		<div class="modal-header">
-			<label class="modal-title">Create or edit Related Product</label>
-			<div class="btn btn-primary pull-right" ng-click="vm.showNotRelatedProducts()">
-				<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.addRelative">Add Related</span>
-			</div>
-		</div>
-		<div class="modal-body">
-			<div class="table-responsive">
-				<table class="jh-table table table-striped">
-					<thead>
-						<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-							<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-							<th><span data-translate="smarteshopApp.product.mainImageId">Main Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
-							<th jh-sort-by="code"><span data-translate="smarteshopApp.product.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
-							<th jh-sort-by="name"><span data-translate="smarteshopApp.product.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-							<th jh-sort-by="brand.id"><span data-translate="smarteshopApp.product.brand">Brand</span> <span class="glyphicon glyphicon-sort"></span></th>
-							<th jh-sort-by="category.id"><span data-translate="smarteshopApp.product.category">Category</span> <span class="glyphicon glyphicon-sort"></span></th>
-							<th jh-sort-by="status"><span data-translate="smarteshopApp.product.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="product in vm.products track by product.id">
-							<td><a ui-sref="product-detail({id:product.id})">{{product.id}}</a></td>
-							<td>{{product.mainImageId}}</td>
-							<td>{{product.code}}</td>
-							<td>{{product.name}}</td>
-							<td><a ui-sref="brand-detail({id:product.brand.id})">{{product.brand.name}}</a></td>
-							<td><a ui-sref="category-detail({id:product.category.id})">{{product.category.name}}</a></td>
-							<td>{{product.status}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		</uib-tab> <uib-tab index="6" heading="Shipping">
+		</uib-tab> <!-- shipping ... --> <uib-tab index="6" heading="Shipping">
 		<p>.....</p>
 		</uib-tab> <!-- <uib-tab index="7" heading="Advanced">
 		<p> .....</p>
