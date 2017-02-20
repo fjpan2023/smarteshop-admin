@@ -36,6 +36,7 @@ public class RelatedProduct extends BusinessObjectEntity<Long, RelatedProduct> i
     @Column(name = "related_product_id", nullable = false)
     private Long relatedProductId;
 
+    @NotNull
     @ManyToOne
     private Product product;
 

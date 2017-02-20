@@ -3,6 +3,7 @@ package com.smarteshop.web.rest;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -33,11 +34,14 @@ import com.codahale.metrics.annotation.Timed;
 import com.querydsl.core.types.Predicate;
 import com.smarteshop.domain.Product;
 import com.smarteshop.domain.ProductOption;
+import com.smarteshop.domain.RelatedProduct;
 import com.smarteshop.domain.Sku;
 import com.smarteshop.dto.ProductOptionDTO;
+import com.smarteshop.dto.RelatedProductDTO;
 import com.smarteshop.exception.BusinessException;
 import com.smarteshop.service.ProductOptionService;
 import com.smarteshop.service.ProductService;
+import com.smarteshop.service.RelatedProductService;
 import com.smarteshop.service.SkuService;
 import com.smarteshop.web.common.AbstractController;
 import com.smarteshop.web.rest.util.HeaderUtil;
@@ -61,6 +65,10 @@ public class ProductController extends AbstractController<Product> {
   @Autowired
   private ProductOptionService productOptionService;
 
+  @Autowired
+  private RelatedProductService relatedProductService;
+
+
   /**
    * POST   : Create a new product.
    *
@@ -81,10 +89,10 @@ public class ProductController extends AbstractController<Product> {
     Sku defaultSKU = product.getDefaultSku();
     defaultSKU.setDefaultProduct(product);
     Product result = productService.save(product);
-//    ProductOption options1 = this.productOptionService.findOne(4L);
-//    ProductOption options2 = this.productOptionService.findOne(3L);
-//    result.addProductOption(options1);
-//    result.addProductOption(options2);
+    //    ProductOption options1 = this.productOptionService.findOne(4L);
+    //    ProductOption options2 = this.productOptionService.findOne(3L);
+    //    result.addProductOption(options1);
+    //    result.addProductOption(options2);
     productService.save(product);
     productService.saveImages(result.getId(),product.getImages());
     return ResponseEntity.created(new URI("/api/products" + result.getId()))
@@ -198,16 +206,29 @@ public class ProductController extends AbstractController<Product> {
     return ResponseEntity.ok().build();
   }
 
-
   @Timed
   @GetMapping("/{id}/relatedProducts")
-  public ResponseEntity<List<Product>> relatedProducts(@PathVariable Long id, Pageable pageable)
+  public ResponseEntity<List<RelatedProduct>> getAllRelatedProducts(@PathVariable Long id,Pageable pageable)
       throws URISyntaxException {
-    LOGGER.debug("REST request to get a page of Products");
-    Page<Product> page = productService.findAll(pageable);
-    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/{}");
-    return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    Product product = this.productService.findOne(id);
+    List<RelatedProduct> result = relatedProductService.findRelatedProductsByProduct(product);
+    return ResponseEntity.ok().body(result);
   }
+  @Timed
+  @PostMapping("/{id}/relatedProducts")
+  public ResponseEntity<List<RelatedProduct>> createRelatedProducts(@PathVariable Long id,@RequestBody RelatedProductDTO relatedProductInfo)
+      throws URISyntaxException {
+
+    Set<Long> productIds = relatedProductInfo.getProductIds();
+    if(CollectionUtils.isEmpty(productIds)){
+      return ResponseEntity.ok().body(Collections.emptyList());
+
+    }
+    Product product = this.productService.findOne(id);
+    List<RelatedProduct> result = relatedProductService.findRelatedProductsByProduct(product);
+    return ResponseEntity.ok().body(result);
+  }
+
 
   @Timed
   @PutMapping("/{id}/skus")

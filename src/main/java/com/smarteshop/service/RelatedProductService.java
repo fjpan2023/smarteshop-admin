@@ -1,10 +1,12 @@
 package com.smarteshop.service;
 
-import com.smarteshop.domain.RelatedProduct;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+import com.smarteshop.domain.Product;
+import com.smarteshop.domain.RelatedProduct;
 
 /**
  * Service Interface for managing RelatedProduct.
@@ -21,7 +23,7 @@ public interface RelatedProductService {
 
     /**
      *  Get all the relatedProducts.
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
@@ -46,9 +48,11 @@ public interface RelatedProductService {
      * Search for the relatedProduct corresponding to the query.
      *
      *  @param query the query of the search
-     *  
+     *
      *  @param pageable the pagination information
      *  @return the list of entities
      */
     Page<RelatedProduct> search(String query, Pageable pageable);
+
+    List<RelatedProduct> findRelatedProductsByProduct(Product product);
 }

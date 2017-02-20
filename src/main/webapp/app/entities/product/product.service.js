@@ -8,7 +8,6 @@
 
     function Product ($resource, DateUtils) {
         var resourceUrl =  'api/products/:id';
-
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
             'get': {
