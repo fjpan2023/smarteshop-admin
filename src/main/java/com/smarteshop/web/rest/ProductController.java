@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -17,6 +18,7 @@ import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +34,7 @@ import com.querydsl.core.types.Predicate;
 import com.smarteshop.domain.Product;
 import com.smarteshop.domain.ProductOption;
 import com.smarteshop.domain.Sku;
+import com.smarteshop.dto.ProductOptionDTO;
 import com.smarteshop.exception.BusinessException;
 import com.smarteshop.service.ProductOptionService;
 import com.smarteshop.service.ProductService;
@@ -217,10 +220,16 @@ public class ProductController extends AbstractController<Product> {
 
   @Timed
   @PostMapping("{id}/productOptions")
-  public ResponseEntity<Void> createProductOptions(@PathVariable Long id, @Valid @RequestBody Long optionId) throws URISyntaxException {
+  public ResponseEntity<Void> createProductOptions(@PathVariable Long id, @Valid @RequestBody ProductOptionDTO productOption) throws URISyntaxException {
+    Set<Long> optionIds = productOption.getOptionIds();
+    if(CollectionUtils.isEmpty(optionIds)){
+      return ResponseEntity.ok().build();
+    }
     Product p = this.productService.findOne(id);
-    ProductOption po = this.productOptionService.findOne(optionId);
-    p.addProductOption(po);
+    for(Long optionId :optionIds){
+      ProductOption po = this.productOptionService.findOne(optionId);
+      p.addProductOption(po);
+    }
     this.productService.save(p);
     return ResponseEntity.ok().build();
   }

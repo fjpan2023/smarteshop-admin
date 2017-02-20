@@ -5,14 +5,15 @@
 	.module('smarteshopApp')
 	.controller('ProductOptionsController', ProductOptionsController);
 
-	ProductOptionsController.$inject = ['$timeout', '$scope', '$state', '$stateParams', '$uibModal','$uibModalInstance', 'productId', 'ProductOption'];
+	ProductOptionsController.$inject = ['$timeout','$http', '$scope', '$state', '$uibModal','$uibModalInstance', 'productId', 'ProductOption'];
 
-	function ProductOptionsController ($timeout, $scope, $state, $stateParams, $uibModal, $uibModalInstance, productId, ProductOption) {
+	function ProductOptionsController ($timeout, $http, $scope, $state,  $uibModal, $uibModalInstance, productId, ProductOption) {
 		var vm = this;
 		vm.productId = productId;
 		vm.clear = clear;
 		vm.save = save;
 		vm.options = [];
+		vm.selectedOptions = [];
 		ProductOption.query( function(options){
 			if(options){
 				vm.options = options;
@@ -29,20 +30,28 @@
 		}
 		function save () {
 			vm.isSaving = true;
-			if (vm.variant.id !== null) {
-				ProductOption.update(vm.variant, onSaveSuccess, onSaveError);
-			} else {
-				ProductOption.save(vm.variant, onSaveSuccess, onSaveError);
-			}
+			var url = "api/products/"+productId+"/productOptions";
+			$http.post(url,{optionIds:vm.selectedOptions})
+			     .success(function onSaveSuccess (result) {
+			    	 	$scope.$emit('smarteshopApp:variantUpdate', result);
+			    	 	$uibModalInstance.close(result);
+			    	 	vm.isSaving = false;
+			     	});
 		}
-		function onSaveSuccess (result) {
-			$scope.$emit('smarteshopApp:variantUpdate', result);
-			$uibModalInstance.close(result);
-			vm.isSaving = false;
-		}
+		
 
 		function onSaveError () {
 			vm.isSaving = false;
 		}
+		
+	vm.toggle = function toggle (item) {
+			var idx = vm.selectedOptions.indexOf(item);
+			if (idx > -1) {
+				vm.selectedOptions.splice(idx, 1);
+			}else {
+				vm.selectedOptions.push(item);
+			}
+		};
+
 	}
 })();

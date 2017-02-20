@@ -3,9 +3,9 @@ package com.smarteshop.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -103,10 +103,10 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   @JoinColumn(name = "DEFAULT_SKU_ID")
   private Sku defaultSku = new Sku();
 
-  @OneToMany(fetch = FetchType.LAZY, targetEntity = Sku.class, mappedBy = "product", cascade = CascadeType.ALL)
+  @OneToMany(fetch = FetchType.LAZY, targetEntity = Sku.class, mappedBy = "product")
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
   @BatchSize(size = 50)
-  protected List<Sku> additionalSkus = new ArrayList<Sku>();
+  protected List<Sku> additionalSkus;
 
   @Transient
   private Set<Sku> skus = new HashSet<>();
@@ -130,6 +130,10 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
 
   @Transient
   private Set<Attachment> images = new HashSet<Attachment>();
+
+
+  @Transient
+  private List<Long> tet = new LinkedList();
 
 
 
@@ -410,6 +414,16 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   public Product removeProductOption(ProductOption productOption) {
     productOptions.remove(productOption);
     return this;
+  }
+
+  public List<Long> getTet() {
+    tet.add(5L);
+    tet.add(4L);
+    return tet;
+  }
+
+  public void setTet(List<Long> tet) {
+    this.tet = tet;
   }
 
 

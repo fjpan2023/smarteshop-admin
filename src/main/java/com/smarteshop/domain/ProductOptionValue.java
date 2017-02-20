@@ -36,7 +36,7 @@ public class ProductOptionValue implements LiteBusinessObject {
   private Long id;
 
   @ManyToOne(fetch=FetchType.LAZY)
-  private ProductOption productOption;
+  private ProductOption productOption = new ProductOption();
 
   @NotNull
   @Column(name = "attribute_value", nullable=false)

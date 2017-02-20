@@ -66,7 +66,7 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
 	public Product save(Product product) {
 		log.debug("Request to save Product : {}", product);
 		Product result = productRepository.save(product);
-		productSearchRepository.save(result);
+//		productSearchRepository.save(result);
 		return result;
 	}
 
