@@ -1,13 +1,19 @@
 package com.smarteshop.domain;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A Media.
@@ -24,6 +30,13 @@ public class Media implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+
+    @Column(name = "entity_name")
+    private String entityName;
+
+    @Column(name = "entity_id")
+    private Long entityId;
+
     @Column(name = "url")
     private String url;
 
@@ -35,8 +48,11 @@ public class Media implements Serializable {
     @Column(name = "content")
     private byte[] content;
 
-    @Column(name = "content_content_type")
-    private String contentContentType;
+    @Column(name = "content_type")
+    private String contentType;
+
+    @Column(name = "content_size")
+    private Long contentSize;
 
     public Long getId() {
         return id;
@@ -85,47 +101,36 @@ public class Media implements Serializable {
         this.content = content;
     }
 
-    public String getContentContentType() {
-        return contentContentType;
+    public String getEntityName() {
+      return entityName;
     }
 
-    public Media contentContentType(String contentContentType) {
-        this.contentContentType = contentContentType;
-        return this;
+    public void setEntityName(String entityName) {
+      this.entityName = entityName;
     }
 
-    public void setContentContentType(String contentContentType) {
-        this.contentContentType = contentContentType;
+    public Long getEntityId() {
+      return entityId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Media media = (Media) o;
-        if (media.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, media.id);
+    public void setEntityId(Long entityId) {
+      this.entityId = entityId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
+    public String getContentType() {
+      return contentType;
     }
 
-    @Override
-    public String toString() {
-        return "Media{" +
-            "id=" + id +
-            ", url='" + url + "'" +
-            ", title='" + title + "'" +
-            ", content='" + content + "'" +
-            ", contentContentType='" + contentContentType + "'" +
-            '}';
+    public void setContentType(String contentType) {
+      this.contentType = contentType;
     }
+
+    public Long getContentSize() {
+      return contentSize;
+    }
+
+    public void setContentSize(Long contentSize) {
+      this.contentSize = contentSize;
+    }
+
 }

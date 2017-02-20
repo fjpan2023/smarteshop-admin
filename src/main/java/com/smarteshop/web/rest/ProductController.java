@@ -220,10 +220,10 @@ public class ProductController extends AbstractController<Product> {
 
   @Timed
   @PostMapping("{id}/productOptions")
-  public ResponseEntity<Void> createProductOptions(@PathVariable Long id, @Valid @RequestBody ProductOptionDTO productOption) throws URISyntaxException {
+  public ResponseEntity<Set<ProductOption>> createProductOptions(@PathVariable Long id, @Valid @RequestBody ProductOptionDTO productOption) throws URISyntaxException {
     Set<Long> optionIds = productOption.getOptionIds();
     if(CollectionUtils.isEmpty(optionIds)){
-      return ResponseEntity.ok().build();
+      return ResponseEntity.ok().body(null);
     }
     Product p = this.productService.findOne(id);
     for(Long optionId :optionIds){
@@ -231,7 +231,7 @@ public class ProductController extends AbstractController<Product> {
       p.addProductOption(po);
     }
     this.productService.save(p);
-    return ResponseEntity.ok().build();
+    return ResponseEntity.ok().body(p.getProductOptions());
   }
 
   @Timed

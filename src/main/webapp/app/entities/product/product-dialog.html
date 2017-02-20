@@ -155,7 +155,9 @@
 				</table>
 			</div>
 		</div>
-		</uib-tab> <!-- additional  skus --> <uib-tab index="4" heading="SKUs"> <br />
+		</uib-tab> <!-- additional  skus --> 
+		
+		<uib-tab index="4" heading="SKUs"> <br />
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<label> Create or edit SKUs </label>
@@ -171,21 +173,20 @@
 							<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
 								<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
 								<th><span data-translate="smarteshopApp.product.mainImageId">Main Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="code"><span data-translate="smarteshopApp.product.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
 								<th jh-sort-by="name"><span data-translate="smarteshopApp.product.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="status"><span data-translate="smarteshopApp.product.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th>Options</th>
 								<th></th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="product in vm.products track by product.id">
-								<td><a ui-sref="product-detail({id:product.id})">{{product.id}}</a></td>
-								<td>{{product.mainImageId}}</td>
-								<td>{{product.code}}</td>
-								<td>{{product.name}}</td>
+							<tr ng-repeat="additionalSku in vm.product.additionalSkus">
+								<td><a ui-sref="sku-detail({id:additionalSku.id})">{{additionalSku.id}}</a></td>
+								<td>{{additionalSku.id}}</td>
+								<td>{{additionalSku.name}}</td>
+								<td>{{additionalSku.productOptionValuesString}}</td>
 								<td class="text-right">
 									<div class="btn-group flex-btn-group-container">
-										<button type="submit" ui-sref="product.edit({id:product.id})" class="btn btn-primary btn-sm">
+										<button type="submit" ui-sref="sku.edit({id:additionalSku.id})" class="btn btn-primary btn-sm">
 											<span class="glyphicon glyphicon-pencil"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
 										</button>
 									</div>
@@ -197,7 +198,9 @@
 			</div>
 		</div>
 
-		</uib-tab> <!--  Related Products --> <uib-tab index="5" heading="Related Products"> <br />
+		</uib-tab> 
+		
+		<!--  Related Products --> <uib-tab index="5" heading="Related Products"> <br />
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<label>Edit Related Products </label>

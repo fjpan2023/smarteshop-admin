@@ -106,8 +106,8 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
   @ManyToMany(fetch = FetchType.EAGER,cascade =CascadeType.ALL)
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
   @JoinTable(name = "sku_product_option_value_xref",
-  joinColumns = @JoinColumn(name="sku_id", referencedColumnName="ID"),
-  inverseJoinColumns = @JoinColumn(name="product_option_value_id", referencedColumnName="ID"))
+    joinColumns = @JoinColumn(name="sku_id", referencedColumnName="ID"),
+    inverseJoinColumns = @JoinColumn(name="product_option_value_id", referencedColumnName="ID"))
   protected Set<ProductOptionValue> productOptionValues = new HashSet<ProductOptionValue>();
 
   @Override

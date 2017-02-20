@@ -27,7 +27,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Cascade;
@@ -103,9 +102,8 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   @JoinColumn(name = "DEFAULT_SKU_ID")
   private Sku defaultSku = new Sku();
 
-  @OneToMany(fetch = FetchType.LAZY, targetEntity = Sku.class, mappedBy = "product")
+  @OneToMany(fetch = FetchType.LAZY, targetEntity = Sku.class, mappedBy = "product",cascade=CascadeType.ALL)
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-  @BatchSize(size = 50)
   protected List<Sku> additionalSkus;
 
   @Transient

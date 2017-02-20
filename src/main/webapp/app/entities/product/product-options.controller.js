@@ -33,12 +33,11 @@
 			var url = "api/products/"+productId+"/productOptions";
 			$http.post(url,{optionIds:vm.selectedOptions})
 			     .success(function onSaveSuccess (result) {
-			    	 	$scope.$emit('smarteshopApp:variantUpdate', result);
+			    	 	$scope.$emit('smarteshopApp:productOptionUpdate', result);
 			    	 	$uibModalInstance.close(result);
 			    	 	vm.isSaving = false;
 			     	});
 		}
-		
 
 		function onSaveError () {
 			vm.isSaving = false;

@@ -1,14 +1,15 @@
 (function() {
 	'use strict';
+
 	angular
 	.module('smarteshopApp')
-	.controller('ProductDialogController', ProductDialogController);
+	.controller('AdditionalSkuController', AdditionalSkuController);
 
-	ProductDialogController.$inject = ['$timeout', '$scope', '$rootScope','$http','$state', '$stateParams',  '$uibModal','DataUtils','previousState','entity', 'Product', 'Sku', 
-	                                   'RelatedProduct', 'Brand', 'Category','ProductAdditionalSku'];
+	AdditionalSkuController.$inject = ['$timeout', '$scope', '$rootScope','$http','$state', '$stateParams',  '$uibModal','DataUtils','previousState','entity', 'Product', 'Sku', 
+	                                   'RelatedProduct', 'Brand', 'Category','Attachment'];
 
-	function ProductDialogController ($timeout, $scope, $rootScope, $http, $state,$stateParams, $uibModal, DataUtils,previousState, entity, Product, Sku, 
-			RelatedProduct, Brand, Category, ProductAdditionalSku) {
+	function AdditionalSkuController ($timeout, $scope, $rootScope, $http, $state,$stateParams, $uibModal, DataUtils,previousState, entity, Product, Sku, 
+			RelatedProduct, Brand, Category, Attachment) {
 		var vm = this;
 		vm.product = entity;
 		vm.datePickerOpenStatus = {};
@@ -21,17 +22,14 @@
 		vm.relatedproducts = RelatedProduct.query();
 		vm.brands = Brand.query();
 		vm.categories = Category.query();
-		
+		vm.product.images= [];
 		if(vm.product.id){
-			ProductAdditionalSku.query({productId:entity.id, entityName:'AdditionalSku'}, function(additionalSkus){
-				if(additionalSkus){
-					vm.product.additionalSkus = additionalSkus;
+			Attachment.query({entityId:entity.id, entityName:'Product'}, function(attachments){
+				if(attachments){
+					vm.product.images = attachments;
 				}        	
 			});
 		}
-		
-		
-		
 		$scope.summernoteroptions = {
 				height: 300,
 		};
