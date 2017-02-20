@@ -39,6 +39,10 @@
             	"name": "Name",
             	"code": "Code",
             	"attributeName": "Attribute Name"
+            },
+            "productOption": {
+            	"name": "Name",
+            	"code": "Code"
             }
         }
     }

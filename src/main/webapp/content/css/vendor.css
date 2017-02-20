@@ -5125,7 +5125,7 @@ button.close {
     filter: alpha(opacity=50); }
 
 .modal-header {
-  padding: 15px;
+  padding: 10px;
   border-bottom: 1px solid #e5e5e5; }
   .modal-header:before, .modal-header:after {
     content: " ";

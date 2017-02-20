@@ -39,6 +39,10 @@
             	"name": "Name",
             	"code": "Code",
             	"attributeName": "Attribute Name"
+            },
+            "relatedProduct": {
+            	"name": "Name",
+            	"code": "Code"
             }
         }
     }

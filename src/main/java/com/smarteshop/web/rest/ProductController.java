@@ -218,7 +218,6 @@ public class ProductController extends AbstractController<Product> {
   @PostMapping("/{id}/relatedProducts")
   public ResponseEntity<List<RelatedProduct>> createRelatedProducts(@PathVariable Long id,@RequestBody RelatedProductDTO relatedProductInfo)
       throws URISyntaxException {
-
     Set<Long> productIds = relatedProductInfo.getProductIds();
     if(CollectionUtils.isEmpty(productIds)){
       return ResponseEntity.ok().body(Collections.emptyList());

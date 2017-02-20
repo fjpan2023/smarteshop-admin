@@ -15,7 +15,7 @@
 		vm.openCalendar = openCalendar;
 		vm.previousState = previousState.name;
 		vm.save = save;
-		vm.showNotRelatedProducts = showNotRelatedProducts;
+		vm.showRelatedProducts = showRelatedProducts;
 		vm.editSKU = editSKU;
 		vm.skus = Sku.query();
 		vm.relatedproducts = RelatedProduct.query();
@@ -89,10 +89,29 @@
 			}
 		};
 
-		function showNotRelatedProducts(){
-			alert("show relatedProduct");
-
+		function showRelatedProducts(productId){
+			$uibModal.open({
+				templateUrl: 'app/entities/product/edit-relatedProducts.html',
+				controller: 'EditRelatedProductsController',
+				controllerAs: 'vm',
+				backdrop: 'static',
+				size: 'lg',
+				resolve: {
+					productId: productId
+				}
+			}).result.then(function($state) {
+				//$state.go($state.name, {}, { reload: false });
+			}, function($state) {
+				
+				//$state.go($state.name, {}, { reload: false });
+			});
 		};
+		var unsubscribeProductOption = $rootScope.$on('smarteshopApp:relatedProductUpdate', function(event, result) {
+            if(result){
+            	vm.product.relatedProducts = result;
+            }
+       });
+		$scope.$on('$destroy', unsubscribeProductOption);
 
 		function editSKU(){
 			$uibModal.open({
@@ -130,16 +149,16 @@
 				//$state.go($state.name, {}, { reload: false });
 			});
 		};
-		var unsubscribe = $rootScope.$on('smarteshopApp:productOptionUpdate', function(event, result) {
+		var unsubscribeProductOption = $rootScope.$on('smarteshopApp:productOptionUpdate', function(event, result) {
 	            if(result){
 	            	vm.product.productOptions = result;
 	            }
 	       });
-	    $scope.$on('$destroy', unsubscribe);
+	    $scope.$on('$destroy', unsubscribeProductOption);
+	    
 		vm.generateSkusByBatch = function generateSkusByBatch(productId){
 			var url = "api/products/"+productId+"/generateSkusByBatch";
 			$http.post(url);
-			
 		};
 
 	}
