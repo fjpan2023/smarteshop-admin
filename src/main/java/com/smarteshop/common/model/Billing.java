@@ -10,14 +10,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Billing {
 
   @NotEmpty
-  @Column (name ="BILLING_LAST_NAME", length=64, nullable=false)
+  @Column (name ="BILLING_LAST_NAME", length=64)
   private String lastName="";
 
-  @NotEmpty
-  @Column (name ="BILLING_FIRST_NAME", length=64, nullable=false)
+  @Column (name ="BILLING_FIRST_NAME", length=64)
   private String firstName="";
-
-
 
   @Column (name ="BILLING_COMPANY", length=100)
   private String company="";

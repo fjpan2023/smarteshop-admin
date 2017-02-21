@@ -24,7 +24,7 @@ public class QProductOptionValue extends EntityPathBase<ProductOptionValue> {
 
     public final StringPath attributeValue = createString("attributeValue");
 
-    public final NumberPath<Integer> displayOrder = createNumber("displayOrder", Integer.class);
+    public final NumberPath<Long> displayOrder = createNumber("displayOrder", Long.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 

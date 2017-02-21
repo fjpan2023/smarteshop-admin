@@ -18,7 +18,8 @@
             },
             "url": "Url",
             "title": "Title",
-            "content": "Content"
+            "content": "Content",
+            "contentType": "Conent Type"
         }
     }
 }

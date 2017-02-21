@@ -15,6 +15,9 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.smarteshop.common.entity.BusinessObjectEntity;
+import com.smarteshop.domain.common.BusinessObjectInterface;
+
 /**
  * A Media.
  */
@@ -22,9 +25,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 @Table(name = "media")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Document(indexName = "media")
-public class Media implements Serializable {
+public class Media extends BusinessObjectEntity<Long, Media> implements BusinessObjectInterface, Serializable {
+  private static final long serialVersionUID = -4379789284931906671L;
 
-    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -54,10 +57,12 @@ public class Media implements Serializable {
     @Column(name = "content_size")
     private Long contentSize;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }

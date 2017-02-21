@@ -63,6 +63,8 @@ public class Customer  extends BusinessObjectEntity<Long, Customer> implements S
   @Transient
   private List<Address> addresses;
 
+  @Transient
+  private String displayName;
 
   @Override
   public Long getId() {
@@ -174,6 +176,10 @@ public class Customer  extends BusinessObjectEntity<Long, Customer> implements S
 
   public void setAddresses(List<Address> addresses) {
     this.addresses = addresses;
+  }
+
+  public String getDisplayName() {
+    return this.lastName+", "+this.firstName;
   }
 
 }

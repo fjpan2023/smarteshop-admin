@@ -49,7 +49,9 @@
                 DataUtils.toBase64($file, function(base64Data) {
                     $scope.$apply(function() {
                         media.content = base64Data;
-                        media.contentContentType = $file.type;
+                        media.contentType = $file.type;
+                        media.contentSize = $file.size;
+                        media.title = $file.name;
                     });
                 });
             }

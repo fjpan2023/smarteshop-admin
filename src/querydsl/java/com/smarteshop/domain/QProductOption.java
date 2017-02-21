@@ -30,7 +30,7 @@ public class QProductOption extends EntityPathBase<ProductOption> {
     //inherited
     public final DateTimePath<java.time.ZonedDateTime> createdDate = _super.createdDate;
 
-    public final NumberPath<Integer> displayOrder = createNumber("displayOrder", Integer.class);
+    public final NumberPath<Long> displayOrder = createNumber("displayOrder", Long.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 

@@ -36,6 +36,7 @@
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="name"><span data-translate="smarteshopApp.template.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="type"><span data-translate="smarteshopApp.template.type">Type</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="superId"><span data-translate="smarteshopApp.template.superId">Super Id</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="templateKey"><span data-translate="smarteshopApp.template.templateKey">Template Key</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -45,6 +46,7 @@
             <tbody>
                 <tr ng-repeat="template in vm.templates track by template.id">
                     <td><a ui-sref="template-detail({id:template.id})">{{template.id}}</a></td>
+                    <td>{{template.name}}</td>
                     <td data-translate="{{'smarteshopApp.TemplateTypeEnum.' + template.type}}">{{template.type}}</td>
                     <td>{{template.superId}}</td>
                     <td>{{template.templateKey}}</td>

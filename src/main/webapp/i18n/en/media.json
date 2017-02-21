@@ -11,14 +11,15 @@
             "updated": "A Media is updated with identifier {{ param }}",
             "deleted": "A Media is deleted with identifier {{ param }}",
             "delete": {
-                "question": "Are you sure you want to delete Media {{ id }}?"
+                "question": "Are you sure you want to delete Media {{ title }}?"
             },
             "detail": {
                 "title": "Media"
             },
             "url": "Url",
             "title": "Title",
-            "content": "Content"
+            "content": "Content",
+            "contentType": "Conent Type"
         }
     }
 }

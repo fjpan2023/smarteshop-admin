@@ -18,6 +18,7 @@
             },
             "firstName": "First Name",
             "lastName": "Last Name",
+            "displayName": "Display Name",
             "email": "Email",
             "phone": "Phone",
             "fax": "Fax",

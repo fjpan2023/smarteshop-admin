@@ -49,7 +49,7 @@
                 DataUtils.toBase64($file, function(base64Data) {
                     $scope.$apply(function() {
                         attachment.content = base64Data;
-                        attachment.contentContentType = $file.type;
+                        attachment.contentType = $file.type;
                     });
                 });
             }

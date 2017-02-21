@@ -21,7 +21,13 @@ public class QMedia extends EntityPathBase<Media> {
 
     public final ArrayPath<byte[], Byte> content = createArray("content", byte[].class);
 
-    public final StringPath contentContentType = createString("contentContentType");
+    public final NumberPath<Long> contentSize = createNumber("contentSize", Long.class);
+
+    public final StringPath contentType = createString("contentType");
+
+    public final NumberPath<Long> entityId = createNumber("entityId", Long.class);
+
+    public final StringPath entityName = createString("entityName");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 

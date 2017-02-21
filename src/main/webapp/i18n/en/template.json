@@ -16,6 +16,7 @@
             "detail": {
                 "title": "Template"
             },
+            "name": "Name",
             "type": "Type",
             "superId": "Super Id",
             "templateKey": "Template Key",

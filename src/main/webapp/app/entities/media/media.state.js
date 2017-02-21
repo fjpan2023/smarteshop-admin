@@ -107,7 +107,7 @@
                                 url: null,
                                 title: null,
                                 content: null,
-                                contentContentType: null,
+                                contentType: null,
                                 id: null
                             };
                         }
