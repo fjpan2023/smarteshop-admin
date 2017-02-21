@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.smarteshop.domain.Brand;
+import com.smarteshop.domain.Product;
 import com.smarteshop.service.BrandService;
+import com.smarteshop.service.ProductService;
 import com.smarteshop.web.common.AbstractController;
 import com.smarteshop.web.rest.util.HeaderUtil;
 import com.smarteshop.web.rest.util.PaginationUtil;
@@ -34,13 +36,16 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  * REST controller for managing Brand.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/brands")
 public class BrandController extends AbstractController<Brand>{
 
     private final Logger log = LoggerFactory.getLogger(BrandController.class);
 
     @Autowired
     private BrandService brandService;
+
+    @Autowired
+    private ProductService productService;
 
     /**
      * POST  /brands : Create a new brand.
@@ -49,7 +54,7 @@ public class BrandController extends AbstractController<Brand>{
      * @return the ResponseEntity with status 201 (Created) and with body the new brand, or with status 400 (Bad Request) if the brand has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/brands")
+    @PostMapping()
     @Timed
     public ResponseEntity<Brand> createBrand(@RequestBody Brand brand) throws URISyntaxException {
         log.debug("REST request to save Brand : {}", brand);
@@ -71,8 +76,8 @@ public class BrandController extends AbstractController<Brand>{
      * or with status 500 (Internal Server Error) if the brand couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/brands")
     @Timed
+    @PutMapping()
     public ResponseEntity<Brand> updateBrand(@RequestBody Brand brand) throws URISyntaxException {
         log.debug("REST request to update Brand : {}", brand);
         if (brand.getId() == null) {
@@ -91,8 +96,8 @@ public class BrandController extends AbstractController<Brand>{
      * @return the ResponseEntity with status 200 (OK) and the list of brands in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/brands")
     @Timed
+    @GetMapping()
     public ResponseEntity<List<Brand>> getAllBrands(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Brands");
@@ -107,8 +112,8 @@ public class BrandController extends AbstractController<Brand>{
      * @param id the id of the brand to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the brand, or with status 404 (Not Found)
      */
-    @GetMapping("/brands/{id}")
     @Timed
+    @GetMapping("/{id}")
     public ResponseEntity<Brand> getBrand(@PathVariable Long id) {
         log.debug("REST request to get Brand : {}", id);
         Brand brand = brandService.findOne(id);
@@ -125,17 +130,16 @@ public class BrandController extends AbstractController<Brand>{
      * @param id the id of the brand to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/brands/{id}")
     @Timed
+    @DeleteMapping("/brands/{id}")
     public ResponseEntity<Void> deleteBrand(@PathVariable Long id) {
         log.debug("REST request to delete Brand : {}", id);
         brandService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("brand", id.toString())).build();
     }
 
-
-    @GetMapping("/_search/brands")
     @Timed
+    @GetMapping("/_search")
     public ResponseEntity<List<Brand>> searchBrands(@RequestParam String query, Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to search for a page of Brands for query {}", query);
@@ -144,5 +148,15 @@ public class BrandController extends AbstractController<Brand>{
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+
+    @Timed
+    @GetMapping("/{id}/products")
+    public ResponseEntity<List<Product>> getAllProductsByBrands(@PathVariable Long id, Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Brands");
+        Page<Product> page = productService.findAllProductsByBrand(id, pageable);
+       // HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/brands/{}");
+        return ResponseEntity.ok().body(page.getContent());//new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
 
 }

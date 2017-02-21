@@ -64,4 +64,5 @@ public interface ProductService {
     void createSKUsByBatch(Long productId, List<String> productOptionValues);
     void generateAdditionalSkusByBatch(Long productId);
     Page<Product> findAllProductsByCategory(Long id, Pageable pageable);
+    Page<Product> findAllProductsByBrand(Long brandId, Pageable pageable);
 }
