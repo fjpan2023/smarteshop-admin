@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -26,7 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.smarteshop.domain.Category;
+import com.smarteshop.domain.Product;
 import com.smarteshop.service.CategoryService;
+import com.smarteshop.service.ProductService;
 import com.smarteshop.service.dto.CategoryCountInfo;
 import com.smarteshop.web.common.AbstractController;
 import com.smarteshop.web.rest.util.HeaderUtil;
@@ -36,13 +39,16 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  * REST controller for managing Category.
  */
 @RestController
-@RequestMapping("/api")
-public class CategoryController extends AbstractController{
+@RequestMapping("/api/categories")
+public class CategoryController extends AbstractController<Category>{
 
     private final Logger log = LoggerFactory.getLogger(CategoryController.class);
 
     @Inject
     private CategoryService categoryService;
+
+    @Autowired
+    private ProductService productService;
 
     /**
      * POST  /categories : Create a new category.
@@ -73,8 +79,8 @@ public class CategoryController extends AbstractController{
      * or with status 500 (Internal Server Error) if the category couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/categories")
     @Timed
+    @PutMapping()
     public ResponseEntity<Category> updateCategory(@RequestBody Category category) throws URISyntaxException {
         log.debug("REST request to update Category : {}", category);
         if (category.getId() == null) {
@@ -93,8 +99,8 @@ public class CategoryController extends AbstractController{
      * @return the ResponseEntity with status 200 (OK) and the list of categories in body
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/categories")
     @Timed
+    @GetMapping()
     public ResponseEntity<List<Category>> getAllCategories(Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Categories");
@@ -109,8 +115,8 @@ public class CategoryController extends AbstractController{
      * @param id the id of the category to retrieve
      * @return the ResponseEntity with status 200 (OK) and with body the category, or with status 404 (Not Found)
      */
-    @GetMapping("/categories/{id}")
     @Timed
+    @GetMapping("/{id}")
     public ResponseEntity<Category> getCategory(@PathVariable Long id) {
         log.debug("REST request to get Category : {}", id);
         Category category = categoryService.findOne(id);
@@ -127,8 +133,8 @@ public class CategoryController extends AbstractController{
      * @param id the id of the category to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/categories/{id}")
     @Timed
+    @DeleteMapping("/categories/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         log.debug("REST request to delete Category : {}", id);
         categoryService.delete(id);
@@ -144,8 +150,8 @@ public class CategoryController extends AbstractController{
      * @return the result of the search
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
-    @GetMapping("/_search/categories")
     @Timed
+    @GetMapping("/_search/categories")
     public ResponseEntity<List<Category>> searchCategories(@RequestParam String query, Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to search for a page of Categories for query {}", query);
@@ -154,50 +160,21 @@ public class CategoryController extends AbstractController{
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
-
-//    @GetMapping("/tree")
-//    public List<CategoryInfo> tree(){
-//      Map<Long, CategoryInfo> result = new HashMap<Long,CategoryInfo>();
-//      List<Category> list = this.categoryService.findAll();
-//      if(CollectionUtils.isEmpty(list)){
-//        return null;
-//      }
-//      for(Category each: list){
-//        if(each.isLeaf()){
-//          continue;
-//        }
-//        List<CategoryInfo> subList = new LinkedList<CategoryInfo>();
-//        CategoryInfo info = new CategoryInfo();
-//        info.setId(each.getId());
-//        info.setName(each.getName());
-//        info.setSub(subList);
-//        result.put(each.getId(), info);
-//      }
-//      for(Category each:list){
-//        if(!each.isLeaf()){
-//          continue;
-//        }
-//        CategoryInfo sub = new CategoryInfo();
-//        sub.setId(each.getId());
-//        sub.setName(each.getName());
-//        LOGGER.info("CategoryInfo: ", sub);
-//
-//        result.get(each.getParentId()).getSub().add(sub);
-//      }
-//      List<CategoryInfo> resultList= new LinkedList<CategoryInfo>();
-//      for(CategoryInfo value : result.values()){
-//        resultList.add(value);
-//      }
-//      result = null;
-//      return resultList;
-//    }
-
-
+    @Timed
     @GetMapping("/countInfo")
     public List<CategoryCountInfo>  queryCountInfo(){
       return this.categoryService.categoryCountInfo();
     }
 
 
+    @Timed
+    @GetMapping("/{id}/products")
+    public ResponseEntity<List<Product>> getAllProductsByCategory(@PathVariable Long id, Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Categories");
+        Page<Product> page = this.productService.findAllProductsByCategory(id, pageable);
+       // HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/categories");
+        return ResponseEntity.ok().body(page.getContent());
+    }
 
 }

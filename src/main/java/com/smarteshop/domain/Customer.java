@@ -55,11 +55,11 @@ public class Customer  extends BusinessObjectEntity<Long, Customer> implements S
   private String remark;
 
   @Embedded
-  private Delivery delivery = null;
+  private Delivery delivery;
 
   @Valid
   @Embedded
-  private Billing billing = null;
+  private Billing billing ;
   @Transient
   private List<Address> addresses;
 

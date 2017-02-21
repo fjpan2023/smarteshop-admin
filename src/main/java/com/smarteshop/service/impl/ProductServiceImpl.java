@@ -242,6 +242,12 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
 		}
 		return result;
 	}
+  @Override
+  public Page<Product> findAllProductsByCategory(Long id, Pageable pageable) {
+    QProduct qProduct = QProduct.product;
+    Predicate  predicate = qProduct.category.id.eq(id);
+    return this.productRepository.findAll(predicate, pageable);
+  }
 
 
 }

@@ -11,16 +11,16 @@ public class Billing {
 
   @NotEmpty
   @Column (name ="BILLING_LAST_NAME", length=64, nullable=false)
-  private String lastName;
+  private String lastName="";
 
   @NotEmpty
   @Column (name ="BILLING_FIRST_NAME", length=64, nullable=false)
-  private String firstName;
+  private String firstName="";
 
 
 
   @Column (name ="BILLING_COMPANY", length=100)
-  private String company;
+  private String company="";
 
   @Column (name ="BILLING_STREET_ADDRESS", length=256)
   private String address;
@@ -37,7 +37,6 @@ public class Billing {
 
   @Column (name ="BILLING_STATE", length=100)
   private String state;
-
 
   @JoinColumn(name="BILLING_COUNTRY", nullable=false)
   private String country;
