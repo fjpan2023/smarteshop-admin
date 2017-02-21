@@ -1,11 +1,19 @@
 package com.smarteshop.web.rest;
 
-import com.smarteshop.SmarteshopApplication;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.smarteshop.domain.Category;
-import com.smarteshop.repository.CategoryRepository;
-import com.smarteshop.service.CategoryService;
-import com.smarteshop.repository.search.CategorySearchRepository;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,16 +29,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+import com.smarteshop.SmarteshopApplication;
+import com.smarteshop.domain.Category;
 import com.smarteshop.domain.enumeration.StatusEnum;
+import com.smarteshop.repository.CategoryRepository;
+import com.smarteshop.repository.search.CategorySearchRepository;
+import com.smarteshop.service.CategoryService;
 /**
  * Test class for the CategoryResource REST controller.
  *
@@ -97,7 +101,6 @@ public class CategoryResourceIntTest {
         Category category = new Category()
                 .name(DEFAULT_NAME)
                 .parentId(DEFAULT_PARENT_ID)
-                .leaf(DEFAULT_LEAF)
                 .includeMenu(DEFAULT_INCLUDE_MENU)
                 .status(DEFAULT_STATUS);
         return category;
@@ -127,7 +130,6 @@ public class CategoryResourceIntTest {
         Category testCategory = categories.get(categories.size() - 1);
         assertThat(testCategory.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCategory.getParentId()).isEqualTo(DEFAULT_PARENT_ID);
-        assertThat(testCategory.isLeaf()).isEqualTo(DEFAULT_LEAF);
         assertThat(testCategory.isIncludeMenu()).isEqualTo(DEFAULT_INCLUDE_MENU);
         assertThat(testCategory.getStatus()).isEqualTo(DEFAULT_STATUS);
 
@@ -193,7 +195,6 @@ public class CategoryResourceIntTest {
         updatedCategory
                 .name(UPDATED_NAME)
                 .parentId(UPDATED_PARENT_ID)
-                .leaf(UPDATED_LEAF)
                 .includeMenu(UPDATED_INCLUDE_MENU)
                 .status(UPDATED_STATUS);
 
@@ -208,7 +209,6 @@ public class CategoryResourceIntTest {
         Category testCategory = categories.get(categories.size() - 1);
         assertThat(testCategory.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCategory.getParentId()).isEqualTo(UPDATED_PARENT_ID);
-        assertThat(testCategory.isLeaf()).isEqualTo(UPDATED_LEAF);
         assertThat(testCategory.isIncludeMenu()).isEqualTo(UPDATED_INCLUDE_MENU);
         assertThat(testCategory.getStatus()).isEqualTo(UPDATED_STATUS);
 

@@ -55,4 +55,5 @@ public interface CategoryService {
   Page<Category> search(String query, Pageable pageable);
 
   List<CategoryCountInfo> categoryCountInfo();
+  List<Category> findAllSubCategories(Long id);
 }

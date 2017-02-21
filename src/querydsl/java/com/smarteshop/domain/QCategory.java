@@ -38,8 +38,6 @@ public class QCategory extends EntityPathBase<Category> {
     //inherited
     public final DateTimePath<java.time.ZonedDateTime> lastModifiedDate = _super.lastModifiedDate;
 
-    public final BooleanPath leaf = createBoolean("leaf");
-
     public final StringPath name = createString("name");
 
     public final NumberPath<Long> parentId = createNumber("parentId", Long.class);

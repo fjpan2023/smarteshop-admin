@@ -37,7 +37,6 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="name"><span data-translate="smarteshopApp.category.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="leaf"><span data-translate="smarteshopApp.category.leaf">Leaf</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="parentId"><span data-translate="smarteshopApp.category.parentId">Parent Id</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="includeMenu"><span data-translate="smarteshopApp.category.includeMenu">Include Menu</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="status"><span data-translate="smarteshopApp.category.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -48,7 +47,6 @@
                 <tr ng-repeat="category in vm.categories track by category.id">
                     <td><a ui-sref="category-detail({id:category.id})">{{category.id}}</a></td>
                     <td>{{category.name}}</td>
-                    <td>{{category.leaf}}</td>
                     <td>{{category.parentId}}</td>
                     <td>{{category.includeMenu}}</td>
                     <td data-translate="{{'smarteshopApp.StatusEnum.' + category.status}}">{{category.status}}</td>

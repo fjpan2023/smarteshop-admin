@@ -37,6 +37,8 @@ public class QTemplate extends EntityPathBase<Template> {
     //inherited
     public final DateTimePath<java.time.ZonedDateTime> lastModifiedDate = _super.lastModifiedDate;
 
+    public final StringPath name = createString("name");
+
     public final NumberPath<Long> superId = createNumber("superId", Long.class);
 
     public final StringPath templateKey = createString("templateKey");

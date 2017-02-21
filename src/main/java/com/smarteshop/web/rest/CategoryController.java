@@ -174,13 +174,12 @@ public class CategoryController extends AbstractController<Category>{
 
     @Timed
     @GetMapping("/{id}/subcategories")
-    public ResponseEntity<List<Product>> getAllSubCategoriesByCategory(@PathVariable Long id, Pageable pageable)
+    public ResponseEntity<List<Category>> getAllSubCategoriesByCategory(@PathVariable Long id, Pageable pageable)
         throws URISyntaxException {
-        log.debug("REST request to get a page of Categories");
-
-        Page<Product> page = this.productService.findAllProductsByCategory(id, pageable);
+        log.debug("REST request to get sub-Categories");
+        List<Category> result = this.categoryService.findAllSubCategories(id);
        // HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/categories");
-        return ResponseEntity.ok().body(page.getContent());
+        return ResponseEntity.ok().body(result);
     }
 
 }

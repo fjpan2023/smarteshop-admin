@@ -43,15 +43,12 @@ public class Category extends BusinessObjectEntity<Long, Category> implements Se
     @Column(name = "parent_id")
     private Long parentId;
 
-    @Column(name = "leaf")
-    private Boolean leaf;
-
     @Column(name = "include_menu")
     private Boolean includeMenu;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private StatusEnum status;
+    private StatusEnum status = StatusEnum.ACTIVITY;
 
     @OneToMany(mappedBy = "category",fetch=FetchType.LAZY)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -91,19 +88,6 @@ public class Category extends BusinessObjectEntity<Long, Category> implements Se
 
     public void setParentId(Long parentId) {
         this.parentId = parentId;
-    }
-
-    public Boolean isLeaf() {
-        return leaf;
-    }
-
-    public Category leaf(Boolean leaf) {
-        this.leaf = leaf;
-        return this;
-    }
-
-    public void setLeaf(Boolean leaf) {
-        this.leaf = leaf;
     }
 
     public Boolean isIncludeMenu() {

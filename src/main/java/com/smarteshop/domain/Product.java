@@ -115,8 +115,8 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   @ManyToMany(fetch = FetchType.EAGER)
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
   @JoinTable(name = "product_option_xref",
-  joinColumns = @JoinColumn(name="product_id", referencedColumnName="ID"),
-  inverseJoinColumns = @JoinColumn(name="product_option_id", referencedColumnName="ID"))
+    joinColumns = @JoinColumn(name="product_id", referencedColumnName="ID"),
+    inverseJoinColumns = @JoinColumn(name="product_option_id", referencedColumnName="ID"))
   private Set<ProductOption> productOptions = new HashSet<>();
 
   @ManyToOne

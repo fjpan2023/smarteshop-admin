@@ -15,7 +15,7 @@ import com.smarteshop.service.dto.CategoryCountInfo;
 @SuppressWarnings("unused")
 public interface CategoryRepository extends JpaRepository<Category,Long>,QueryDslPredicateExecutor<Category> {
 
-  @Query("select u.parentId, count(*) from Category u where u.leaf= false group by u.parentId")
+  @Query("select u.parentId, count(*) from Category u group by u.parentId")
   public List<CategoryCountInfo> categoryCountInfo();
 
 }
