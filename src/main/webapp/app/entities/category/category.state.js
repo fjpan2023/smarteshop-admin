@@ -69,6 +69,7 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('category');
+                    $translatePartialLoader.addPart('product');
                     $translatePartialLoader.addPart('statusEnum');
                     return $translate.refresh();
                 }],
@@ -102,6 +103,7 @@
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('category');
                     $translatePartialLoader.addPart('statusEnum');
+                    $translatePartialLoader.addPart('product');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Category', function($stateParams, Category) {
@@ -170,6 +172,7 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('category');
+                    $translatePartialLoader.addPart('product');
                     $translatePartialLoader.addPart('statusEnum');
                     return $translate.refresh();
                 }],

@@ -5,14 +5,14 @@
         .module('smarteshopApp')
         .controller('CategoryDialogController', CategoryDialogController);
 
-    CategoryDialogController.$inject = ['$timeout', '$scope', '$state','$stateParams','previousState', 'entity', 'Category', 'Product'];
+    CategoryDialogController.$inject = ['$timeout', '$scope', '$state','$stateParams','previousState', 'entity', 'Category', 'CategoryProduct'];
 
-    function CategoryDialogController ($timeout, $scope, $state, $stateParams, previousState, entity, Category, Product) {
+    function CategoryDialogController ($timeout, $scope, $state, $stateParams, previousState, entity, Category, CategoryProduct) {
         var vm = this;
 
         vm.category = entity;
         vm.save = save;
-        vm.products = Product.query();
+        vm.products = CategoryProduct.query({id:entity.id});
         vm.previousState = previousState.name;
 
         $timeout(function (){

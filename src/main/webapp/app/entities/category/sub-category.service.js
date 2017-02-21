@@ -2,12 +2,12 @@
     'use strict';
     angular
         .module('smarteshopApp')
-        .factory('Category', Category);
+        .factory('SubCategory', SubCategory);
 
-    Category.$inject = ['$resource'];
+    SubCategory.$inject = ['$resource'];
 
-    function Category ($resource) {
-        var resourceUrl =  'api/categories/:id';
+    function SubCategory ($resource) {
+        var resourceUrl =  'api/categories/:id/subcategories';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},

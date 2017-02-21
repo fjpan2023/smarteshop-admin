@@ -57,8 +57,8 @@ public class CategoryController extends AbstractController<Category>{
      * @return the ResponseEntity with status 201 (Created) and with body the new category, or with status 400 (Bad Request) if the category has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/categories")
     @Timed
+    @PostMapping()
     public ResponseEntity<Category> createCategory(@RequestBody Category category) throws URISyntaxException {
         log.debug("REST request to save Category : {}", category);
         if (category.getId() != null) {
@@ -127,14 +127,8 @@ public class CategoryController extends AbstractController<Category>{
             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    /**
-     * DELETE  /categories/:id : delete the "id" category.
-     *
-     * @param id the id of the category to delete
-     * @return the ResponseEntity with status 200 (OK)
-     */
     @Timed
-    @DeleteMapping("/categories/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         log.debug("REST request to delete Category : {}", id);
         categoryService.delete(id);
@@ -151,7 +145,7 @@ public class CategoryController extends AbstractController<Category>{
      * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
      */
     @Timed
-    @GetMapping("/_search/categories")
+    @GetMapping("/_search")
     public ResponseEntity<List<Category>> searchCategories(@RequestParam String query, Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to search for a page of Categories for query {}", query);
@@ -172,6 +166,18 @@ public class CategoryController extends AbstractController<Category>{
     public ResponseEntity<List<Product>> getAllProductsByCategory(@PathVariable Long id, Pageable pageable)
         throws URISyntaxException {
         log.debug("REST request to get a page of Categories");
+        Page<Product> page = this.productService.findAllProductsByCategory(id, pageable);
+       // HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/categories");
+        return ResponseEntity.ok().body(page.getContent());
+    }
+
+
+    @Timed
+    @GetMapping("/{id}/subcategories")
+    public ResponseEntity<List<Product>> getAllSubCategoriesByCategory(@PathVariable Long id, Pageable pageable)
+        throws URISyntaxException {
+        log.debug("REST request to get a page of Categories");
+
         Page<Product> page = this.productService.findAllProductsByCategory(id, pageable);
        // HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/categories");
         return ResponseEntity.ok().body(page.getContent());

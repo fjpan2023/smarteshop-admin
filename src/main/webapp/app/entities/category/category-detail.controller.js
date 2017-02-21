@@ -5,13 +5,14 @@
         .module('smarteshopApp')
         .controller('CategoryDetailController', CategoryDetailController);
 
-    CategoryDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Category', 'Product'];
+    CategoryDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Category', 'CategoryProduct'];
 
-    function CategoryDetailController($scope, $rootScope, $stateParams, previousState, entity, Category, Product) {
+    function CategoryDetailController($scope, $rootScope, $stateParams, previousState, entity, Category, CategoryProduct) {
         var vm = this;
 
         vm.category = entity;
         vm.previousState = previousState.name;
+        vm.products = CategoryProduct.query({id:entity.id});
 
         var unsubscribe = $rootScope.$on('smarteshopApp:categoryUpdate', function(event, result) {
             vm.category = result;
