@@ -34,7 +34,7 @@ import com.smarteshop.web.rest.util.PaginationUtil;
  * REST controller for managing ProductOption.
  */
 @RestController
-@RequestMapping("/api/product-options")
+@RequestMapping("/api/productOptions")
 public class ProductOptionController {
 
     private final Logger log = LoggerFactory.getLogger(ProductOptionController.class);

@@ -46,6 +46,7 @@
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('productOption');
+                    $translatePartialLoader.addPart('productOptionValue');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
@@ -68,6 +69,7 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('productOption');
+                    $translatePartialLoader.addPart('productOptionValue');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'ProductOption', function($stateParams, ProductOption) {

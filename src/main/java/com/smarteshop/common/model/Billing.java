@@ -32,17 +32,17 @@ public class Billing {
   @Column (name ="BILLING_POSTCODE", length=20)
   private String postalCode;
 
-  @Column(name="BILLING_TELEPHONE", length=32)
+  @Column(name="BILLING_TELEPHONE")
   private String telephone;
 
-  @Column (name ="BILLING_STATE", length=100)
+  @Column (name ="BILLING_STATE")
   private String state;
 
-  @JoinColumn(name="BILLING_COUNTRY", nullable=false)
-  private String country;
+  @JoinColumn(name="BILLING_COUNTRY")
+  private String country ="";
 
-  @JoinColumn(name="BILLING_ZONE", nullable=true)
-  private String zone;
+  @JoinColumn(name="BILLING_ZONE")
+  private String zone = "";
 
   public String getCompany() {
     return company;

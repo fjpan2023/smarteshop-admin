@@ -1,35 +1,57 @@
-
 <div>
-    <h2><span data-translate="smarteshopApp.productOption.detail.title">Product Option</span> {{vm.productOption.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details">
-        <dt><span data-translate="smarteshopApp.productOption.type">Type</span></dt>
-        <dd>
-            <span>{{vm.productOption.type}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.productOption.name">Name</span></dt>
-        <dd>
-            <span>{{vm.productOption.name}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.productOption.attributeName">Attribute Name</span></dt>
-        <dd>
-            <span>{{vm.productOption.attributeName}}</span>
-        </dd>
-        <dt><span data-translate="smarteshopApp.productOption.label">Label</span></dt>
-        <dd>
-            <span>{{vm.productOption.label}}</span>
-        </dd>
-    </dl>
+	<h2>
+		<span data-translate="smarteshopApp.productOption.detail.title">Product Option</span> {{vm.productOption.id}}
+	</h2>
+	<hr>
+	<jhi-alert-error></jhi-alert-error>
+	<dl class="dl-horizontal jh-entity-details">
+		<dt>
+			<span data-translate="smarteshopApp.productOption.name">Name</span>
+		</dt>
+		<dd>
+			<span>{{vm.productOption.name}}</span>
+		</dd>
+	</dl>
+	<!-- product-option-values -->
 
-    <button type="submit"
-            ui-sref="{{ vm.previousState }}"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<label>Option Values Info</label>
+			<div class="btn btn-primary pull-right">
+				<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.productOptionValue.home.createOrEditLabel">Edit Option Value</span>
+			</div>
+		</div>
+		<div class="panel-body">
+			<br />
+			<div class="table-bordered">
+				<table class="jh-table table table-striped">
+					<thead>
+						<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+							<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+							<th jh-sort-by="attributeValue"><span data-translate="smarteshopApp.productOptionValue.attributeValue">Attribute Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+							<th jh-sort-by="displayOrder"><span data-translate="smarteshopApp.productOptionValue.displayOrder">Display Order</span> <span class="glyphicon glyphicon-sort"></span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="productOptionValue in vm.productOption.productOptionValues track by productOptionValue.id">
+							<td>{{productOptionValue.id}}</td>
+							<td>{{productOptionValue.attributeValue}}</td>
+							<td>{{productOptionValue.displayOrder}}</td>
+						</tr>
+					</tbody>
+				</table>
 
-    <button type="button" ui-sref="product-option-detail.edit({id:vm.productOption.id})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
-    </button>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- product-option-values end  -->
+	<button type="submit" ui-sref="{{ vm.previousState }}" class="btn btn-info">
+		<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+	</button>
+
+	<button type="button" ui-sref="product-option-detail.edit({id:vm.productOption.id})" class="btn btn-primary">
+		<span class="glyphicon glyphicon-pencil"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+	</button>
 </div>

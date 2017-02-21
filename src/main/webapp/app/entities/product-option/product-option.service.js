@@ -7,7 +7,7 @@
     ProductOption.$inject = ['$resource'];
 
     function ProductOption ($resource) {
-        var resourceUrl =  'api/product-options/:id';
+        var resourceUrl =  'api/productOptions/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
