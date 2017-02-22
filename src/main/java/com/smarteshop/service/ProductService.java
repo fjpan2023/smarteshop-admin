@@ -2,6 +2,7 @@ package com.smarteshop.service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import com.querydsl.core.types.Predicate;
 import com.smarteshop.domain.Attachment;
 import com.smarteshop.domain.Product;
+import com.smarteshop.domain.RelatedProduct;
 
 /**
  * Service Interface for managing Product.
@@ -65,4 +67,5 @@ public interface ProductService {
     void generateAdditionalSkusByBatch(Long productId);
     Page<Product> findAllProductsByCategory(Long id, Pageable pageable);
     Page<Product> findAllProductsByBrand(Long brandId, Pageable pageable);
+    List<RelatedProduct> createRelatedProducts(Long productId, Set<Long> relatedIds);
 }

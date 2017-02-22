@@ -30,7 +30,7 @@
 		function save () {
 			vm.isSaving = true;
 			var url = "api/products/"+productId+"/relatedProducts";
-			$http.post(url,{optionIds:vm.selectedProducts})
+			$http.post(url,{productIds:vm.selectedProducts})
 			     .success(function onSaveSuccess (result) {
 			    	 	$scope.$emit('smarteshopApp:relatedProductUpdate', result);
 			    	 	$uibModalInstance.close(result);

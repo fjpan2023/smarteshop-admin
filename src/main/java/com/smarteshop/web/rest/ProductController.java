@@ -221,10 +221,8 @@ public class ProductController extends AbstractController<Product> {
     Set<Long> productIds = relatedProductInfo.getProductIds();
     if(CollectionUtils.isEmpty(productIds)){
       return ResponseEntity.ok().body(Collections.emptyList());
-
     }
-    Product product = this.productService.findOne(id);
-    List<RelatedProduct> result = relatedProductService.findRelatedProductsByProduct(product);
+    List<RelatedProduct> result = this.productService.createRelatedProducts(id, productIds);
     return ResponseEntity.ok().body(result);
   }
 

@@ -90,6 +90,7 @@ public class MediaController {
     @Timed
     public List<Media> getAllMedia() {
         log.debug("REST request to get all Media");
+
         return mediaService.findAll();
     }
 

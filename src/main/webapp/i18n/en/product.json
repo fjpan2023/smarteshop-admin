@@ -35,6 +35,7 @@
             "addRelative": "Add Relative",
             "editMedia" : "Edit Media",
             "editProductOption": "Edit Product Option",
+            "editRelated": "Edit Related Products",
             "productOption": {
             	"name": "Name",
             	"code": "Code",

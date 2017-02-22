@@ -204,8 +204,8 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<label>Edit Related Products </label>
-				<div class="btn btn-primary pull-right" ng-click="vm.showRelatedProducts(vm.product.id)">
-					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.addRelative">Add Related</span>
+				<div class="btn btn-primary pull-right" ui-sref="related-product-detail.edit({id:vm.product.id})">
+					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.editRelated">Edit Related</span>
 				</div>
 			</div>
 			<div class="panel-body">

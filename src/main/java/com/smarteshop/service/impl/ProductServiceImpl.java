@@ -5,6 +5,7 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -25,8 +26,10 @@ import com.smarteshop.domain.Product;
 import com.smarteshop.domain.ProductOption;
 import com.smarteshop.domain.ProductOptionValue;
 import com.smarteshop.domain.QProduct;
+import com.smarteshop.domain.RelatedProduct;
 import com.smarteshop.domain.Sku;
 import com.smarteshop.repository.ProductRepository;
+import com.smarteshop.repository.RelatedProductRepository;
 import com.smarteshop.repository.SkuRepository;
 import com.smarteshop.repository.search.ProductSearchRepository;
 import com.smarteshop.service.AttachmentService;
@@ -45,8 +48,12 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
 
 	@Autowired
 	private ProductSearchRepository productSearchRepository;
+
 	@Autowired
 	private SkuRepository skuRepository;
+
+	@Autowired
+    private RelatedProductRepository relatedProductRepository;
 
 	@Autowired
 	private AttachmentService attachmentService;
@@ -253,6 +260,19 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
     QProduct qProduct = QProduct.product;
     Predicate  predicate = qProduct.brand.id.eq(brandId);
     return this.productRepository.findAll(predicate, pageable);
+  }
+  @Override
+  public List<RelatedProduct> createRelatedProducts(Long productId, Set<Long> relatedIds) {
+    Product product = this.findOne(productId);
+    for(Long id : relatedIds){
+      RelatedProduct related = new RelatedProduct();
+      related.setRelatedProductId(id);
+      related.setProduct(product);
+      this.relatedProductRepository.save(related);
+      product.addRelatedProducts(related);
+    }
+    this.productRepository.save(product);
+    return new LinkedList<>(product.getRelatedProducts());
   }
 
 

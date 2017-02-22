@@ -7,7 +7,7 @@
     RelatedProduct.$inject = ['$resource'];
 
     function RelatedProduct ($resource) {
-        var resourceUrl =  'api/related-products/:id';
+        var resourceUrl =  'api/products/:id/relatedProducts/';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
