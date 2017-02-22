@@ -1,55 +1,43 @@
-<form name="editForm" class="form-horizontal" role="form" novalidate
-		ng-submit="vm.save()">
-<div class="modal-header">
-	<h4 class="modal-title" id="myTemplateLabel"
-		data-translate="smarteshopApp.template.home.createOrEditLabel">Create
-		or edit a Template</h4>
-</div>
-<div class="modal-body">
-	<jhi-alert-error></jhi-alert-error>
-	
+<form name="editForm" class="form-horizontal" role="form" novalidate ng-submit="vm.save()">
+	<div class="modal-header">
+		<h4 class="modal-title" id="myTemplateLabel" data-translate="smarteshopApp.template.home.createOrEditLabel">Create or edit a Template</h4>
+	</div>
+	<div class="modal-body">
+		<jhi-alert-error></jhi-alert-error>
 		<div class="form-group">
-			<label class="col-sm-1 control-label"
-				data-translate="smarteshopApp.template.type" for="field_type">Type</label>
+			<label class="col-sm-1 control-label" data-translate="smarteshopApp.template.name" for="field_name">Type</label>
 			<div class="col-sm-4 no-padding-left">
-				<select class="form-control" name="type" ng-model="vm.template.type"
-					id="field_type">
-					<option value="EMAIL"
-						data-translate="smarteshopApp.TemplateTypeEnum.EMAIL">EMAIL</option>
-					<option value="LAYOUT"
-						data-translate="smarteshopApp.TemplateTypeEnum.LAYOUT">LAYOUT</option>
+				<input type="text" class="form-control" name="name" id="field_name" ng-model="vm.template.name" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 control-label" data-translate="smarteshopApp.template.type" for="field_type">Type</label>
+			<div class="col-sm-4 no-padding-left">
+				<select class="form-control" name="type" ng-model="vm.template.type" id="field_type">
+					<option value="EMAIL" data-translate="smarteshopApp.TemplateTypeEnum.EMAIL">EMAIL</option>
+					<option value="LAYOUT" data-translate="smarteshopApp.TemplateTypeEnum.LAYOUT">LAYOUT</option>
 				</select>
 			</div>
-			<label class="col-sm-2 control-label"
-				data-translate="smarteshopApp.template.templateKey"
-				for="field_templateKey">Template Key</label>
+			<label class="col-sm-2 control-label" data-translate="smarteshopApp.template.templateKey" for="field_templateKey">Template Key</label>
 			<div class="col-sm-4 no-padding-left">
-				<input type="text" class="form-control" name="templateKey"
-					id="field_templateKey" ng-model="vm.template.templateKey" />
+				<input type="text" class="form-control" name="templateKey" id="field_templateKey" ng-model="vm.template.templateKey" />
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-sm-1 control-label"
-				data-translate="smarteshopApp.template.content" for="field_content">Content</label>
-				<div class="col-sm-11 no-padding-left" style="margin-top: 15px;">
-				<summernote config="vm.summernoteroptions"
-			ng-model="vm.template.content" name="description"
-			id="field_description">{{vm.template.content}}</summernote>
+			<label class="col-sm-1 control-label" data-translate="smarteshopApp.template.content" for="field_content">Content</label>
+			<div class="col-sm-11 no-padding-left" style="margin-top: 15px;">
+				<summernote config="vm.summernoteroptions" ng-model="vm.template.content" name="description" id="field_description">{{vm.template.content}}</summernote>
 			</div>
 		</div>
-	
-</div>
-<div class="modal-footer">
-	<button type="button" class="btn btn-default" data-dismiss="modal"
-		ui-sref="{{vm.previousState}}">
-		<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
-			data-translate="entity.action.cancel">Cancel</span>
-	</button>
-	<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving"
-		class="btn btn-primary">
-		<span class="glyphicon glyphicon-save"></span>&nbsp;<span
-			data-translate="entity.action.save">Save</span>
-	</button>
-</div>
+
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal" ui-sref="{{vm.previousState}}">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+		</button>
+		<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+		</button>
+	</div>
 </form>
 

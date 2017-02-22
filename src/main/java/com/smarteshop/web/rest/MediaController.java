@@ -1,26 +1,31 @@
 package com.smarteshop.web.rest;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.codahale.metrics.annotation.Timed;
 import com.smarteshop.domain.Media;
 import com.smarteshop.service.MediaService;
 import com.smarteshop.web.rest.util.HeaderUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.inject.Inject;
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Media.
@@ -30,7 +35,7 @@ import static org.elasticsearch.index.query.QueryBuilders.*;
 public class MediaController {
 
     private final Logger log = LoggerFactory.getLogger(MediaController.class);
-        
+
     @Inject
     private MediaService mediaService;
 
@@ -96,14 +101,13 @@ public class MediaController {
      */
     @Timed
     @GetMapping("/{id}")
-    public ResponseEntity<Media> getMedia(@PathVariable Long id) {
+    public ResponseEntity<byte[]> getMedia(@PathVariable Long id) {
         log.debug("REST request to get Media : {}", id);
         Media media = mediaService.findOne(id);
-        return Optional.ofNullable(media)
-            .map(result -> new ResponseEntity<>(
-                result,
-                HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.valueOf(media.getContentType()));
+     //   headers.setContentDispositionFormData("attachment", media.getTitle());
+        return ResponseEntity.ok().headers(headers).body(media.getContent());
     }
 
     /**
@@ -124,7 +128,7 @@ public class MediaController {
      * SEARCH  /_search/media?query=:query : search for the media corresponding
      * to the query.
      *
-     * @param query the query of the media search 
+     * @param query the query of the media search
      * @return the result of the search
      */
     @GetMapping("/_search")

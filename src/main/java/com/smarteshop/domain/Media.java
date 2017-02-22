@@ -2,8 +2,10 @@ package com.smarteshop.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,13 +35,6 @@ public class Media extends BusinessObjectEntity<Long, Media> implements Business
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
-    @Column(name = "entity_name")
-    private String entityName;
-
-    @Column(name = "entity_id")
-    private Long entityId;
-
     @Column(name = "url")
     private String url;
 
@@ -48,7 +43,8 @@ public class Media extends BusinessObjectEntity<Long, Media> implements Business
     private String title;
 
     @Lob
-    @Column(name = "content")
+    @Basic(fetch=FetchType.LAZY)
+    @Column(name = "content", updatable=false)
     private byte[] content;
 
     @Column(name = "content_type")
@@ -104,22 +100,6 @@ public class Media extends BusinessObjectEntity<Long, Media> implements Business
 
     public void setContent(byte[] content) {
         this.content = content;
-    }
-
-    public String getEntityName() {
-      return entityName;
-    }
-
-    public void setEntityName(String entityName) {
-      this.entityName = entityName;
-    }
-
-    public Long getEntityId() {
-      return entityId;
-    }
-
-    public void setEntityId(Long entityId) {
-      this.entityId = entityId;
     }
 
     public String getContentType() {

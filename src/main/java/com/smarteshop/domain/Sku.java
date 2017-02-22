@@ -211,8 +211,6 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
     this.product = product;
   }
 
-
-
   public String getDescription() {
     return description;
   }
@@ -293,4 +291,17 @@ public class Sku extends BusinessObjectEntity<Long, Sku>  implements Serializabl
     }
     return  result.substring(1).toString();
   }
+
+  @Override
+  public String toString() {
+    return "Sku [id=" + id + ", code=" + code + ", name=" + name + ", description=" + description
+        + ", retailPrice=" + retailPrice + ", salePrice=" + salePrice + ", dimension=" + dimension
+        + ", weight=" + weight + ", defaultSKU=" + defaultSKU + ", status=" + status
+        + ", activeStartDate=" + activeStartDate + ", activeEndDate=" + activeEndDate
+        + ", defaultProduct=" + defaultProduct + ", product=" + product + ", productOptionValues="
+        + productOptionValues + "]";
+  }
+
+
+
 }
