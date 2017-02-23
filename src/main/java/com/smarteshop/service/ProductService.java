@@ -67,5 +67,9 @@ public interface ProductService {
     void generateAdditionalSkusByBatch(Long productId);
     Page<Product> findAllProductsByCategory(Long id, Pageable pageable);
     Page<Product> findAllProductsByBrand(Long brandId, Pageable pageable);
-    List<RelatedProduct> createRelatedProducts(Long productId, Set<Long> relatedIds);
+    List<Product> createRelatedProducts(Long productId, Set<Long> relatedIds);
+
+    Page<RelatedProduct> findRelatedProductsByProduct(Product product, Pageable pageable);
+
+    List<Product> findRelatedProductsByProduct(Product product);
 }

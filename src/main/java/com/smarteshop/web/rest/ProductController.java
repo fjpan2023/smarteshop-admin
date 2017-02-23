@@ -34,7 +34,6 @@ import com.codahale.metrics.annotation.Timed;
 import com.querydsl.core.types.Predicate;
 import com.smarteshop.domain.Product;
 import com.smarteshop.domain.ProductOption;
-import com.smarteshop.domain.RelatedProduct;
 import com.smarteshop.domain.Sku;
 import com.smarteshop.dto.ProductOptionDTO;
 import com.smarteshop.dto.RelatedProductDTO;
@@ -89,10 +88,6 @@ public class ProductController extends AbstractController<Product> {
     Sku defaultSKU = product.getDefaultSku();
     defaultSKU.setDefaultProduct(product);
     Product result = productService.save(product);
-    //    ProductOption options1 = this.productOptionService.findOne(4L);
-    //    ProductOption options2 = this.productOptionService.findOne(3L);
-    //    result.addProductOption(options1);
-    //    result.addProductOption(options2);
     productService.save(product);
     productService.saveImages(result.getId(),product.getImages());
     return ResponseEntity.created(new URI("/api/products" + result.getId()))
@@ -208,23 +203,23 @@ public class ProductController extends AbstractController<Product> {
 
   @Timed
   @GetMapping("/{id}/relatedProducts")
-  public ResponseEntity<List<RelatedProduct>> getAllRelatedProducts(@PathVariable Long id,Pageable pageable)
+  public ResponseEntity<List<Product>> getAllRelatedProducts(@PathVariable Long id,Pageable pageable)
       throws URISyntaxException {
     Product product = this.productService.findOne(id);
-    Page<RelatedProduct> page = relatedProductService.findRelatedProductsByProduct(product, pageable);
-    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products/"+
-                  Long.toString(id)+"relatedProducts");
-    return ResponseEntity.ok().headers(headers).body(page.getContent());
+    List<Product> page = this.relatedProductService.findRelatedProductsByProduct(product, null);
+//    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products/"+
+//                  Long.toString(id)+"relatedProducts");
+    return ResponseEntity.ok().body(page);
   }
   @Timed
   @PostMapping("/{id}/relatedProducts")
-  public ResponseEntity<List<RelatedProduct>> createRelatedProducts(@PathVariable Long id,@RequestBody RelatedProductDTO relatedProductInfo)
+  public ResponseEntity<List<Product>> createRelatedProducts(@PathVariable Long id,@RequestBody RelatedProductDTO relatedProductInfo)
       throws URISyntaxException {
     Set<Long> productIds = relatedProductInfo.getProductIds();
     if(CollectionUtils.isEmpty(productIds)){
       return ResponseEntity.ok().body(Collections.emptyList());
     }
-    List<RelatedProduct> result = this.productService.createRelatedProducts(id, productIds);
+    List<Product> result = this.productService.createRelatedProducts(id, productIds);
     return ResponseEntity.ok().body(result);
   }
 

@@ -2,6 +2,10 @@ package com.smarteshop.service.impl;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.function.Consumer;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -13,8 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.types.Predicate;
 import com.smarteshop.domain.Product;
+import com.smarteshop.domain.QProduct;
 import com.smarteshop.domain.QRelatedProduct;
 import com.smarteshop.domain.RelatedProduct;
+import com.smarteshop.repository.ProductRepository;
 import com.smarteshop.repository.RelatedProductRepository;
 import com.smarteshop.repository.search.RelatedProductSearchRepository;
 import com.smarteshop.service.RelatedProductService;
@@ -30,6 +36,8 @@ public class RelatedProductServiceImpl implements RelatedProductService{
 
   @Inject
   private RelatedProductRepository relatedProductRepository;
+  @Inject
+  private ProductRepository productRepository;
 
   @Inject
   private RelatedProductSearchRepository relatedProductSearchRepository;
@@ -103,9 +111,20 @@ public class RelatedProductServiceImpl implements RelatedProductService{
   }
 
   @Override
-  public Page<RelatedProduct> findRelatedProductsByProduct(Product product, Pageable pageable) {
+  public List<Product> findRelatedProductsByProduct(Product product, Pageable pageable) {
     QRelatedProduct qRelatedProduct = QRelatedProduct.relatedProduct;
     Predicate predicate= qRelatedProduct.product.eq(product);
-    return this.relatedProductRepository.findAll(predicate, pageable);
+    List<RelatedProduct> list = (List<RelatedProduct>) this.relatedProductRepository.findAll(predicate);
+    List<Long> ids = new LinkedList <Long>();
+    list.forEach(new Consumer<RelatedProduct>(){
+      @Override
+      public void accept(RelatedProduct t) {
+        ids.add(t.getRelatedProductId());
+      }
+    });
+    QProduct qProduct = QProduct.product;
+    Predicate predicate2= qProduct.id.in(ids);
+    List<Product> result = (List<Product>) this.productRepository.findAll(predicate2);
+    return result;
   }
 }

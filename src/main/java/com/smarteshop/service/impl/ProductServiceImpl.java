@@ -5,9 +5,9 @@ import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.Transformer;
@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.smarteshop.common.service.BusinessObjectEntityServiceImpl;
 import com.smarteshop.domain.Attachment;
 import com.smarteshop.domain.Product;
@@ -262,7 +263,7 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
     return this.productRepository.findAll(predicate, pageable);
   }
   @Override
-  public List<RelatedProduct> createRelatedProducts(Long productId, Set<Long> relatedIds) {
+  public List<Product> createRelatedProducts(Long productId, Set<Long> relatedIds) {
     Product product = this.findOne(productId);
     for(Long id : relatedIds){
       RelatedProduct related = new RelatedProduct();
@@ -272,7 +273,24 @@ public class ProductServiceImpl extends BusinessObjectEntityServiceImpl<Long, Pr
       product.addRelatedProducts(related);
     }
     this.productRepository.save(product);
-    return new LinkedList<>(product.getRelatedProducts());
+    Set<Long> result = new HashSet<Long>();
+    product.getRelatedProducts().forEach(new Consumer<RelatedProduct>(){
+      @Override
+      public void accept(RelatedProduct t) {
+        result.add(t.getRelatedProductId());
+      }
+    });
+    BooleanExpression expression = QProduct.product.id.in(result);
+    return  (List<Product>) this.productRepository.findAll(expression);
+  }
+  @Override
+  public Page<RelatedProduct> findRelatedProductsByProduct(Product product, Pageable pageable) {
+    return null;
+  }
+  @Override
+  public List<Product> findRelatedProductsByProduct(Product product) {
+
+    return null;
   }
 
 

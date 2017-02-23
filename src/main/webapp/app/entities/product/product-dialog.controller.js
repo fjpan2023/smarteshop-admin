@@ -17,8 +17,7 @@
 		vm.save = save;
 		vm.showRelatedProducts = showRelatedProducts;
 		vm.editSKU = editSKU;
-		vm.skus = Sku.query();
-		vm.relatedproducts = RelatedProduct.query();
+		vm.relatedProducts = RelatedProduct.query({id:entity.id});
 		vm.brands = Brand.query();
 		vm.categories = Category.query();
 		
@@ -106,12 +105,12 @@
 				//$state.go($state.name, {}, { reload: false });
 			});
 		};
-		var unsubscribeProductOption = $rootScope.$on('smarteshopApp:relatedProductUpdate', function(event, result) {
+		var unsubscribeRelatedProduct = $rootScope.$on('smarteshopApp:relatedProductUpdate', function(event, result) {
             if(result){
-            	vm.product.relatedProducts = result;
+            	vm.relatedProducts = result;
             }
        });
-		$scope.$on('$destroy', unsubscribeProductOption);
+		$scope.$on('$destroy', unsubscribeRelatedProduct);
 
 		function editSKU(){
 			$uibModal.open({

@@ -29,7 +29,7 @@
 		}
 		function save () {
 			vm.isSaving = true;
-			var url = "api/products/"+productId+"/relatedProducts";
+			var url = "api/products/"+vm.productId.id+"/relatedProducts";
 			$http.post(url,{productIds:vm.selectedProducts})
 			     .success(function onSaveSuccess (result) {
 			    	 	$scope.$emit('smarteshopApp:relatedProductUpdate', result);
