@@ -135,7 +135,7 @@ public class ProductController extends AbstractController<Product> {
       throws URISyntaxException {
     LOGGER.debug("REST request to get a page of Products");
     Page<Product> page = productService.findAll( pageable);
-    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api");
+    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products");
     return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
   }
 
@@ -211,8 +211,10 @@ public class ProductController extends AbstractController<Product> {
   public ResponseEntity<List<RelatedProduct>> getAllRelatedProducts(@PathVariable Long id,Pageable pageable)
       throws URISyntaxException {
     Product product = this.productService.findOne(id);
-    List<RelatedProduct> result = relatedProductService.findRelatedProductsByProduct(product);
-    return ResponseEntity.ok().body(result);
+    Page<RelatedProduct> page = relatedProductService.findRelatedProductsByProduct(product, pageable);
+    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products/"+
+                  Long.toString(id)+"relatedProducts");
+    return ResponseEntity.ok().headers(headers).body(page.getContent());
   }
   @Timed
   @PostMapping("/{id}/relatedProducts")

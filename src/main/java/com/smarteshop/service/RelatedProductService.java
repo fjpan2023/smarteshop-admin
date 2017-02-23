@@ -1,7 +1,5 @@
 package com.smarteshop.service;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -54,5 +52,5 @@ public interface RelatedProductService {
      */
     Page<RelatedProduct> search(String query, Pageable pageable);
 
-    List<RelatedProduct> findRelatedProductsByProduct(Product product);
+    Page<RelatedProduct> findRelatedProductsByProduct(Product product, Pageable pageable);
 }

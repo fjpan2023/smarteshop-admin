@@ -2,8 +2,6 @@ package com.smarteshop.service.impl;
 
 import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -105,9 +103,9 @@ public class RelatedProductServiceImpl implements RelatedProductService{
   }
 
   @Override
-  public List<RelatedProduct> findRelatedProductsByProduct(Product product) {
+  public Page<RelatedProduct> findRelatedProductsByProduct(Product product, Pageable pageable) {
     QRelatedProduct qRelatedProduct = QRelatedProduct.relatedProduct;
     Predicate predicate= qRelatedProduct.product.eq(product);
-    return (List<RelatedProduct>) this.relatedProductRepository.findAll(predicate);
+    return this.relatedProductRepository.findAll(predicate, pageable);
   }
 }
