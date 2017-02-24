@@ -37,117 +37,115 @@ import com.smarteshop.web.rest.util.PaginationUtil;
 @RequestMapping("/api/productOptions")
 public class ProductOptionController {
 
-    private final Logger log = LoggerFactory.getLogger(ProductOptionController.class);
+  private final Logger log = LoggerFactory.getLogger(ProductOptionController.class);
 
-    @Autowired
-    private ProductOptionService productOptionService;
-    @Autowired
-    private ProductOptionValueService productOptionValueService;
+  @Autowired
+  private ProductOptionService productOptionService;
+  @Autowired
+  private ProductOptionValueService productOptionValueService;
 
-    /**
-     * POST  /product-options : Create a new productOption.
-     *
-     * @param productOption the productOption to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new productOption, or with status 400 (Bad Request) if the productOption has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
-    @Timed
-    @PostMapping()
-    public ResponseEntity<ProductOption> createProductOption(@RequestBody ProductOption productOption) throws URISyntaxException {
-        log.debug("REST request to save ProductOption : {}", productOption);
-        if (productOption.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("productOption", "idexists", "A new productOption cannot already have an ID")).body(null);
-        }
-
-
-        ProductOption result = productOptionService.save(productOption);
-        ProductOptionValue v1= new ProductOptionValue();
-        v1.setProductOption(result);
-        v1.setDisplayOrder(1L);
-        v1.setAttributeValue("X");
-        this.productOptionValueService.save(v1);
-
-        ProductOptionValue v2= new ProductOptionValue();
-        v2.setProductOption(result);
-        v2.setDisplayOrder(2L);
-        v2.setAttributeValue("X");
-        this.productOptionValueService.save(v2);
-
-        return ResponseEntity.created(new URI("/api/product-options/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert("productOption", result.getId().toString()))
-            .body(result);
+  /**
+   * POST  /product-options : Create a new productOption.
+   *
+   * @param productOption the productOption to create
+   * @return the ResponseEntity with status 201 (Created) and with body the new productOption, or with status 400 (Bad Request) if the productOption has already an ID
+   * @throws URISyntaxException if the Location URI syntax is incorrect
+   */
+  @Timed
+  @PostMapping()
+  public ResponseEntity<ProductOption> createProductOption(@RequestBody ProductOption productOption) throws URISyntaxException {
+    log.debug("REST request to save ProductOption : {}", productOption);
+    if (productOption.getId() != null) {
+      return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("productOption", "idexists", "A new productOption cannot already have an ID")).body(null);
     }
+    ProductOption result = productOptionService.save(productOption);
+    return ResponseEntity.created(new URI("/api/product-options/" + result.getId()))
+        .headers(HeaderUtil.createEntityCreationAlert("productOption", result.getId().toString()))
+        .body(result);
+  }
 
-    /**
-     * PUT  /product-options : Updates an existing productOption.
-     *
-     * @param productOption the productOption to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated productOption,
-     * or with status 400 (Bad Request) if the productOption is not valid,
-     * or with status 500 (Internal Server Error) if the productOption couldnt be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
-     */
-    @Timed
-    @PutMapping()
-    public ResponseEntity<ProductOption> updateProductOption(@RequestBody ProductOption productOption) throws URISyntaxException {
-        log.debug("REST request to update ProductOption : {}", productOption);
-        if (productOption.getId() == null) {
-            return createProductOption(productOption);
-        }
-        ProductOption result = productOptionService.save(productOption);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("productOption", productOption.getId().toString()))
-            .body(result);
+  /**
+   * PUT  /product-options : Updates an existing productOption.
+   *
+   * @param productOption the productOption to update
+   * @return the ResponseEntity with status 200 (OK) and with body the updated productOption,
+   * or with status 400 (Bad Request) if the productOption is not valid,
+   * or with status 500 (Internal Server Error) if the productOption couldnt be updated
+   * @throws URISyntaxException if the Location URI syntax is incorrect
+   */
+  @Timed
+  @PutMapping()
+  public ResponseEntity<ProductOption> updateProductOption(@RequestBody ProductOption productOption) throws URISyntaxException {
+    log.debug("REST request to update ProductOption : {}", productOption);
+    if (productOption.getId() == null) {
+      return createProductOption(productOption);
     }
+    ProductOption result = productOptionService.save(productOption);
+    return ResponseEntity.ok()
+        .headers(HeaderUtil.createEntityUpdateAlert("productOption", productOption.getId().toString()))
+        .body(result);
+  }
 
-    /**
-     * GET  /product-options : get all the productOptions.
-     *
-     * @param pageable the pagination information
-     * @return the ResponseEntity with status 200 (OK) and the list of productOptions in body
-     * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
-     */
-    @GetMapping()
-    @Timed
-    public ResponseEntity<List<ProductOption>> getAllProductOptions(Pageable pageable)
-        throws URISyntaxException {
-        log.debug("REST request to get a page of ProductOptions");
-        Page<ProductOption> page = productOptionService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/product-options");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-    }
+  /**
+   * GET  /product-options : get all the productOptions.
+   *
+   * @param pageable the pagination information
+   * @return the ResponseEntity with status 200 (OK) and the list of productOptions in body
+   * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+   */
+  @GetMapping()
+  @Timed
+  public ResponseEntity<List<ProductOption>> getAllProductOptions(Pageable pageable)
+      throws URISyntaxException {
+    log.debug("REST request to get a page of ProductOptions");
+    Page<ProductOption> page = productOptionService.findAll(pageable);
+    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/product-options");
+    return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+  }
 
-    /**
-     * GET  /product-options/:id : get the "id" productOption.
-     *
-     * @param id the id of the productOption to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the productOption, or with status 404 (Not Found)
-     */
-    @Timed
-    @GetMapping("/{id}")
-    public ResponseEntity<ProductOption> getProductOption(@PathVariable Long id) {
-        log.debug("REST request to get ProductOption : {}", id);
-        ProductOption productOption = productOptionService.findOne(id);
-        return Optional.ofNullable(productOption)
-            .map(result -> new ResponseEntity<>(
-                result,
-                HttpStatus.OK))
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+  /**
+   * GET  /product-options/:id : get the "id" productOption.
+   *
+   * @param id the id of the productOption to retrieve
+   * @return the ResponseEntity with status 200 (OK) and with body the productOption, or with status 404 (Not Found)
+   */
+  @Timed
+  @GetMapping("/{id}")
+  public ResponseEntity<ProductOption> getProductOption(@PathVariable Long id) {
+    log.debug("REST request to get ProductOption : {}", id);
+    ProductOption productOption = productOptionService.findOne(id);
+    return Optional.ofNullable(productOption)
+        .map(result -> new ResponseEntity<>(
+            result,
+            HttpStatus.OK))
+        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+  }
 
-    /**
-     * DELETE  /product-options/:id : delete the "id" productOption.
-     *
-     * @param id the id of the productOption to delete
-     * @return the ResponseEntity with status 200 (OK)
-     */
-    @Timed
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProductOption(@PathVariable Long id) {
-        log.debug("REST request to delete ProductOption : {}", id);
-        productOptionService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("productOption", id.toString())).build();
-    }
+  /**
+   * DELETE  /product-options/:id : delete the "id" productOption.
+   *
+   * @param id the id of the productOption to delete
+   * @return the ResponseEntity with status 200 (OK)
+   */
+  @Timed
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Void> deleteProductOption(@PathVariable Long id) {
+    log.debug("REST request to delete ProductOption : {}", id);
+    productOptionService.delete(id);
+    return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("productOption", id.toString())).build();
+  }
+
+
+  @Timed
+  @PostMapping("/{optionId}/productOptionValues")
+  public ResponseEntity<ProductOption> createProductOptionValue(@PathVariable Long optionId,@RequestBody ProductOptionValue value) throws URISyntaxException {
+    ProductOption productOption = this.productOptionService.findOne(optionId);
+    value.setProductOption(productOption);
+    this.productOptionValueService.save(value);
+    productOption.addProductOptionValue(value);
+    this.productOptionService.save(productOption);
+    return ResponseEntity.ok().body(productOption);
+  }
 
 
 

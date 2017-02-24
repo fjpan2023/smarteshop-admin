@@ -1,57 +1,60 @@
-<div>
-	<h2>
-		<span data-translate="smarteshopApp.productOption.detail.title">Product Option</span> {{vm.productOption.id}}
-	</h2>
-	<hr>
-	<jhi-alert-error></jhi-alert-error>
-	<dl class="dl-horizontal jh-entity-details">
-		<dt>
-			<span data-translate="smarteshopApp.productOption.name">Name</span>
-		</dt>
-		<dd>
-			<span>{{vm.productOption.name}}</span>
-		</dd>
-	</dl>
-	<!-- product-option-values -->
-
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<label>Option Values Info</label>
-			<div class="btn btn-primary pull-right">
-				<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.productOptionValue.home.createOrEditLabel">Edit Option Value</span>
-			</div>
-		</div>
-		<div class="panel-body">
-			<br />
-			<div class="table-bordered">
-				<table class="jh-table table table-striped">
-					<thead>
-						<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-							<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-							<th jh-sort-by="attributeValue"><span data-translate="smarteshopApp.productOptionValue.attributeValue">Attribute Value</span> <span class="glyphicon glyphicon-sort"></span></th>
-							<th jh-sort-by="displayOrder"><span data-translate="smarteshopApp.productOptionValue.displayOrder">Display Order</span> <span class="glyphicon glyphicon-sort"></span></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="productOptionValue in vm.productOption.productOptionValues track by productOptionValue.id">
-							<td>{{productOptionValue.id}}</td>
-							<td>{{productOptionValue.attributeValue}}</td>
-							<td>{{productOptionValue.displayOrder}}</td>
-						</tr>
-					</tbody>
-				</table>
-
-			</div>
-		</div>
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+	<div class="modal-header">
+		<h4 class="modal-title" id="myProductOptionLabel" data-translate="smarteshopApp.productOption.home.createOrEditLabel">Create or edit a Product Option</h4>
 	</div>
+	<div class="modal-body">
+		<jhi-alert-error></jhi-alert-error>
+		<div class="row">
+			<div class="form-group">
+				<div class="col-sm-2 no-padding-left">
+				<label class="control-label" data-translate="smarteshopApp.productOption.name" for="field_name">Name</label>
+				</div>
+				<div class="col-sm-4  no-padding-left">
+					<input type="text" class="form-control" name="name" id="field_name" ng-model="vm.productOption.name" />
+				</div>
+			</div>
+		</div>
+		<p />
+		<br />
+		<!-- product-option-values -->
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<label>Option Values Info</label>
+				<div class="btn-sm btn-primary pull-right" ui-sref="product-option-value-new()">
+					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.productOptionValue.home.createOrEditLabel">Edit Option Value</span>
+				</div>
+			</div>
+			<div class="panel-body">
+				<br />
+				<div class="table-bordered">
+					<table class="jh-table table table-striped">
+						<thead>
+							<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+								<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="attributeValue"><span data-translate="smarteshopApp.productOptionValue.attributeValue">Attribute Value</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="displayOrder"><span data-translate="smarteshopApp.productOptionValue.displayOrder">Display Order</span> <span class="glyphicon glyphicon-sort"></span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="productOptionValue in vm.productOption.productOptionValues track by productOptionValue.id">
+								<td>{{productOptionValue.id}}</td>
+								<td>{{productOptionValue.attributeValue}}</td>
+								<td>{{productOptionValue.displayOrder}}</td>
+							</tr>
+						</tbody>
+					</table>
 
+				</div>
+			</div>
+		</div>
 
-	<!-- product-option-values end  -->
-	<button type="submit" ui-sref="{{ vm.previousState }}" class="btn btn-info">
-		<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-	</button>
-
-	<button type="button" ui-sref="product-option-detail.edit({id:vm.productOption.id})" class="btn btn-primary">
-		<span class="glyphicon glyphicon-pencil"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
-	</button>
-</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+		</button>
+		<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+		</button>
+	</div>
+</form>

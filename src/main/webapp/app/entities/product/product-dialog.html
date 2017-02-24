@@ -17,6 +17,61 @@
 	<div class="modal-body">
 		<jhi-alert-error></jhi-alert-error>
 		<uib-tabset active="activeForm" justified=true> <!-- General --> <uib-tab index="0" heading="General"> <br />
+		<div class="row">
+			<div class="col-sm-7 no-padding-left">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<label>Add media </label>
+						<div class="btn-sm btn-success pull-right" style="flaot: right">
+							<span data-translate="smarteshopApp.product.editMedia">Edit Media</span>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="form-group">
+							<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.code" for="field_code">Code</label>
+							<div class="col-sm-4  no-padding-left">
+								<input type="text" class="form-control" name="code" id="field_code" ng-model="vm.product.code" />
+							</div>
+							<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.name" for="field_name">Name</label>
+							<div class="col-sm-4  no-padding-left">
+								<input type="text" class="form-control" name="name" id="field_name" ng-model="vm.product.name" required />
+								<div ng-show="editForm.name.$invalid">
+									<p class="help-block" ng-show="editForm.name.$error.required" data-translate="entity.validation.required">This field is required.</p>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<label>Add media </label>
+						<div class="btn-sm btn-primary pull-right" style="flaot: right">
+							<span data-translate="smarteshopApp.product.editMedia">Edit Media</span>
+						</div>
+					</div>
+					<div class="panel-body">
+						<p>body ....</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-4 no-padding-left">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<label>Add media </label>
+						<div class="btn-sm btn-primary pull-right" style="flaot: right">
+							<span data-translate="smarteshopApp.product.editMedia">Edit Media</span>
+						</div>
+					</div>
+					<div class="panel-body">
+						body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />
+					</div>
+				</div>
+			</div>
+
+		</div>
 		<div class="form-group">
 			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.code" for="field_code">Code</label>
 			<div class="col-sm-4  no-padding-left">
@@ -121,16 +176,14 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<label>Add media </label>
-				<div class="btn btn-primary pull-right" style="flaot: right">
+				<div class="btn-sm btn-primary pull-right" style="flaot: right">
 					<span data-translate="smarteshopApp.product.editMedia">Edit Media</span>
 				</div>
 			</div>
 			<div class="panel-body">body ....</div>
 		</div>
 
-		</uib-tab> <!-- product options --> 
-		<uib-tab index="3" heading="Options">
-		<br/>
+		</uib-tab> <!-- product options --> <uib-tab index="3" heading="Options"> <br />
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<label>Products Info</label>
@@ -163,7 +216,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<label> Create or edit SKUs </label>
-				<div class="btn btn-primary pull-right" style="flaot: right" ng-click="vm.generateSkusByBatch(vm.product.id)">
+				<div class="btn-sm btn-primary pull-right" style="flaot: right" ng-click="vm.generateSkusByBatch(vm.product.id)">
 					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.editSKU">editSKU</span>
 				</div>
 			</div>

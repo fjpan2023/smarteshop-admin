@@ -1,6 +1,5 @@
 (function() {
     'use strict';
-
     angular
         .module('smarteshopApp')
         .config(stateConfig);
@@ -83,34 +82,9 @@
                 }]
             }
         })
-        .state('product-option-value-detail.edit', {
-            parent: 'product-option-value-detail',
-            url: '/detail/edit',
-            data: {
-                authorities: ['ROLE_USER']
-            },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
-                    templateUrl: 'app/entities/product-option-value/product-option-value-dialog.html',
-                    controller: 'ProductOptionValueDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['ProductOptionValue', function(ProductOptionValue) {
-                            return ProductOptionValue.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('^', {}, { reload: false });
-                }, function() {
-                    $state.go('^');
-                });
-            }]
-        })
-        .state('product-option-value.new', {
-            parent: 'product-option-value',
-            url: '/new',
+        .state('product-option-value-new', {
+            parent: 'product-option-detail',
+            url: '/product-option-value/new',
             data: {
                 authorities: ['ROLE_USER']
             },
@@ -128,37 +102,12 @@
                                 displayOrder: null,
                                 id: null
                             };
-                        }
+                        },
                     }
                 }).result.then(function() {
-                    $state.go('product-option-value', null, { reload: 'product-option-value' });
+                    $state.go('product-option-detail', null, { reload: 'product-option-detail' });
                 }, function() {
-                    $state.go('product-option-value');
-                });
-            }]
-        })
-        .state('product-option-value.edit', {
-            parent: 'product-option-value',
-            url: '/{id}/edit',
-            data: {
-                authorities: ['ROLE_USER']
-            },
-            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                $uibModal.open({
-                    templateUrl: 'app/entities/product-option-value/product-option-value-dialog.html',
-                    controller: 'ProductOptionValueDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: 'lg',
-                    resolve: {
-                        entity: ['ProductOptionValue', function(ProductOptionValue) {
-                            return ProductOptionValue.get({id : $stateParams.id}).$promise;
-                        }]
-                    }
-                }).result.then(function() {
-                    $state.go('product-option-value', null, { reload: 'product-option-value' });
-                }, function() {
-                    $state.go('^');
+                    $state.go('product-option-detail');
                 });
             }]
         })
@@ -177,7 +126,8 @@
                     resolve: {
                         entity: ['ProductOptionValue', function(ProductOptionValue) {
                             return ProductOptionValue.get({id : $stateParams.id}).$promise;
-                        }]
+                        }],
+                        
                     }
                 }).result.then(function() {
                     $state.go('product-option-value', null, { reload: 'product-option-value' });

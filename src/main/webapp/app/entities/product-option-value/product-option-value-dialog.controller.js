@@ -5,7 +5,7 @@
         .module('smarteshopApp')
         .controller('ProductOptionValueDialogController', ProductOptionValueDialogController);
 
-    ProductOptionValueDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'ProductOptionValue'];
+    ProductOptionValueDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity','ProductOptionValue'];
 
     function ProductOptionValueDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, ProductOptionValue) {
         var vm = this;
@@ -27,7 +27,7 @@
             if (vm.productOptionValue.id !== null) {
                 ProductOptionValue.update(vm.productOptionValue, onSaveSuccess, onSaveError);
             } else {
-                ProductOptionValue.save(vm.productOptionValue, onSaveSuccess, onSaveError);
+                ProductOptionValue.save({optionId:$stateParams.id},vm.productOptionValue, onSaveSuccess, onSaveError);
             }
         }
 
