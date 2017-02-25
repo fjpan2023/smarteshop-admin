@@ -18,16 +18,16 @@
 		<jhi-alert-error></jhi-alert-error>
 		<uib-tabset active="activeForm" justified=true> <!-- General --> <uib-tab index="0" heading="General"> <br />
 		<div class="row">
-			<div class="col-sm-7 no-padding-left">
+			<div class="col-sm-9">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<label>Add media </label>
+						<label>Basic Info </label>
 						<div class="btn-sm btn-success pull-right" style="flaot: right">
-							<span data-translate="smarteshopApp.product.editMedia">Edit Media</span>
+							<span>Edit Basic Info</span>
 						</div>
 					</div>
 					<div class="panel-body">
-						<div class="form-group">
+						<div class="form-group" style="width: 750px;">
 							<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.code" for="field_code">Code</label>
 							<div class="col-sm-4  no-padding-left">
 								<input type="text" class="form-control" name="code" id="field_code" ng-model="vm.product.code" />
@@ -41,53 +41,7 @@
 							</div>
 						</div>
 
-					</div>
-				</div>
-
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<label>Add media </label>
-						<div class="btn-sm btn-primary pull-right" style="flaot: right">
-							<span data-translate="smarteshopApp.product.editMedia">Edit Media</span>
-						</div>
-					</div>
-					<div class="panel-body">
-						<p>body ....</p>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-sm-4 no-padding-left">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<label>Add media </label>
-						<div class="btn-sm btn-primary pull-right" style="flaot: right">
-							<span data-translate="smarteshopApp.product.editMedia">Edit Media</span>
-						</div>
-					</div>
-					<div class="panel-body">
-						body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />body ....<br />
-					</div>
-				</div>
-			</div>
-
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.code" for="field_code">Code</label>
-			<div class="col-sm-4  no-padding-left">
-				<input type="text" class="form-control" name="code" id="field_code" ng-model="vm.product.code" />
-			</div>
-
-			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.name" for="field_name">Name</label>
-			<div class="col-sm-4  no-padding-left">
-				<input type="text" class="form-control" name="name" id="field_name" ng-model="vm.product.name" required />
-				<div ng-show="editForm.name.$invalid">
-					<p class="help-block" ng-show="editForm.name.$error.required" data-translate="entity.validation.required">This field is required.</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="form-group">
+<div class="form-group" style="width: 750px;">
 			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.status" for="field_status">Status</label>
 			<div class="col-sm-4  no-padding-left">
 				<select class="form-control" name="status" ng-model="vm.product.status" id="field_status">
@@ -104,25 +58,23 @@
 				</select>
 			</div>
 		</div>
-
-		<div class="form-group">
-			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.retailPrice" for="field_standardPrice">Standard Price</label>
-			<div class="col-sm-4  no-padding-left">
-				<div class="input-group">
-					<div class="input-group-addon">$</div>
-					<input type="number" class="form-control" name="standardPrice" id="field_standardPrice" ng-model="vm.product.retailPrice" required />
-				</div>
-			</div>
-			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.salePrice" for="field_salePrice">Sell Price</label>
-			<div class="col-sm-4  no-padding-left">
-				<div class="input-group">
-					<div class="input-group-addon">$</div>
-					<input type="number" class="form-control" name="sellPrice" id="field_salePrice" ng-model="vm.product.salePrice" required />
-				</div>
-			</div>
-		</div>
-
-		<div class="form-group">
+						<div class="form-group" style="width: 750px;">
+							<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.retailPrice" for="field_standardPrice">Standard Price</label>
+							<div class="col-sm-4  no-padding-left">
+								<div class="input-group">
+									<div class="input-group-addon">$</div>
+									<input type="number" class="form-control" name="standardPrice" id="field_standardPrice" ng-model="vm.product.retailPrice" required />
+								</div>
+							</div>
+							<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.salePrice" for="field_salePrice">Sell Price</label>
+							<div class="col-sm-4  no-padding-left">
+								<div class="input-group">
+									<div class="input-group-addon">$</div>
+									<input type="number" class="form-control" name="sellPrice" id="field_salePrice" ng-model="vm.product.salePrice" required />
+								</div>
+							</div>
+						</div>
+						<div class="form-group" style="width: 750px;">
 			<label class="col-sm-2 control-label" data-translate="smarteshopApp.product.brand" for="field_brand">Brand</label>
 			<div class="col-sm-4  no-padding-left">
 				<select class="form-control" id="field_brand" name="brand" ng-model="vm.product.brand" ng-options="brand as brand.name for brand in vm.brands track by brand.id">
@@ -137,7 +89,8 @@
 				</select>
 			</div>
 		</div>
-		<div class="form-group">
+		
+		<div class="form-group" style="width: 750px;">
 			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.activeStartDate" for="field_activeStartDate">Activity Start Date</label>
 
 			<div class="col-sm-4  no-padding-left">
@@ -170,8 +123,81 @@
 			</div>
 
 		</div>
-		</uib-tab> <uib-tab index="1" heading="Descripton"> <br />
-		<summernote config="summernoteroptions" ng-model="vm.product.description" name="description" id="field_description">{{vm.product.description}}</summernote> </uib-tab> <!-- images --> <uib-tab index="2" heading="Images"> <br />
+
+
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<label>Edit Description </label>
+						<div class="btn-sm btn-primary pull-right" style="flaot: right">
+							<span data-translate="smarteshopApp.product.editMedia">Edit Description</span>
+						</div>
+					</div>
+					<div class="panel-body">
+						<summernote config="summernoteroptions" ng-model="vm.product.description" name="description" id="field_description">{{vm.product.description}}</summernote>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-sm-3 no-padding-left">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<label>Primary Image </label>
+						<div class="btn-sm btn-primary pull-right" style="flaot: right">
+							<span data-translate="smarteshopApp.product.editMedia">Change Image</span>
+						</div>
+					</div>
+					<div class="panel-body">
+						<img ng-src="api/media/1" />
+
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<!--
+		<div class="form-group">
+			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.code" for="field_code">Code</label>
+			<div class="col-sm-4  no-padding-left">
+				<input type="text" class="form-control" name="code" id="field_code" ng-model="vm.product.code" />
+			</div>
+
+			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.name" for="field_name">Name</label>
+			<div class="col-sm-4  no-padding-left">
+				<input type="text" class="form-control" name="name" id="field_name" ng-model="vm.product.name" required />
+				<div ng-show="editForm.name.$invalid">
+					<p class="help-block" ng-show="editForm.name.$error.required" data-translate="entity.validation.required">This field is required.</p>
+				</div>
+			</div>
+		</div>
+
+		
+
+		 <div class="form-group">
+			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.retailPrice" for="field_standardPrice">Standard Price</label>
+			<div class="col-sm-4  no-padding-left">
+				<div class="input-group">
+					<div class="input-group-addon">$</div>
+					<input type="number" class="form-control" name="standardPrice" id="field_standardPrice" ng-model="vm.product.retailPrice" required />
+				</div>
+			</div>
+			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.salePrice" for="field_salePrice">Sell Price</label>
+			<div class="col-sm-4  no-padding-left">
+				<div class="input-group">
+					<div class="input-group-addon">$</div>
+					<input type="number" class="form-control" name="sellPrice" id="field_salePrice" ng-model="vm.product.salePrice" required />
+				</div>
+			</div>
+		</div>
+ -->
+		
+		
+		</uib-tab> <!-- <uib-tab index="1" heading="Descripton"> <br />
+		<summernote config="summernoteroptions" ng-model="vm.product.description" name="description" id="field_description">{{vm.product.description}}</summernote>
+		 </uib-tab> --> <!-- images --> <uib-tab index="2" heading="Images"> <br />
 
 		<div class="panel panel-default">
 			<div class="panel-heading">

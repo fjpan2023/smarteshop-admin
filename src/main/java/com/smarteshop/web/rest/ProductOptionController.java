@@ -127,13 +127,13 @@ public class ProductOptionController {
    * @param id the id of the productOption to delete
    * @return the ResponseEntity with status 200 (OK)
    */
-  @Timed
+  /*@Timed
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deleteProductOption(@PathVariable Long id) {
     log.debug("REST request to delete ProductOption : {}", id);
     productOptionService.delete(id);
     return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("productOption", id.toString())).build();
-  }
+  }*/
 
 
   @Timed
@@ -147,6 +147,17 @@ public class ProductOptionController {
     return ResponseEntity.ok().body(productOption);
   }
 
-
-
+  @Timed
+  @DeleteMapping("/{optionId}/productOptionValues/{id}")
+  public ResponseEntity<ProductOption> deleteProductOptionValue(@PathVariable Long optionId, @PathVariable Long id) throws URISyntaxException {
+    ProductOption productOption = this.productOptionService.findOne(optionId);
+    for(ProductOptionValue each: productOption.getProductOptionValues()){
+      if(each.getId()==id){
+        productOption.removeProductOptionValue(each);
+        break;
+      }
+    }
+    this.productOptionService.save(productOption);
+    return ResponseEntity.ok().body(productOption);
+  }
 }
