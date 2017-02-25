@@ -148,9 +148,9 @@
                 });
             }]
         })
-        .state('sku.edit', {
-            parent: 'sku',
-            url: '/{id}/edit',
+        .state('product-sku-edit', {
+            parent: 'product.edit',
+            url: '/{skuId}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },

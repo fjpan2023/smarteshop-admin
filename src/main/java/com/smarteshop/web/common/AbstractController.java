@@ -1,7 +1,6 @@
 package com.smarteshop.web.common;
 
 public abstract class AbstractController<E> {
-
   protected void onLoad(Long id){};
   protected void onCreate(E entity){};
   protected void onUpdate(E entity){};

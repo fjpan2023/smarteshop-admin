@@ -172,6 +172,7 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('product');
+                    $translatePartialLoader.addPart('sku');
                     $translatePartialLoader.addPart('statusEnum');
                     $translatePartialLoader.addPart('productLabelEnum');
                     return $translate.refresh();

@@ -243,7 +243,7 @@
 			<div class="panel-heading">
 				<label> Create or edit SKUs </label>
 				<div class="btn-sm btn-primary pull-right" style="flaot: right" ng-click="vm.generateSkusByBatch(vm.product.id)">
-					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.editSKU">editSKU</span>
+					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.generateSKUsByBatch">Generate SKUs By Batch</span>
 				</div>
 			</div>
 			<div class="panel-body">
@@ -267,7 +267,7 @@
 								<td>{{additionalSku.productOptionValuesString}}</td>
 								<td class="text-right">
 									<div class="btn-group flex-btn-group-container">
-										<button type="submit" ui-sref="sku.edit({id:additionalSku.id})" class="btn btn-primary btn-sm">
+										<button type="submit" ui-sref="product-sku-edit({skuId:additionalSku.id})" class="btn btn-primary btn-sm">
 											<span class="glyphicon glyphicon-pencil"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
 										</button>
 									</div>

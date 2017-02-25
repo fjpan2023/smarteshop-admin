@@ -36,6 +36,7 @@
             "editMedia" : "Edit Media",
             "editProductOption": "Edit Product Option",
             "editRelatedProduct": "Edit Related Products",
+            "generateSKUsByBatch": "Generate SKUs By Batch",
             "productOption" : {
             	"name": "Name",
             	"code": "Code",

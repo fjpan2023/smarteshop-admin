@@ -2,6 +2,8 @@ package com.smarteshop.web.rest.errors;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.http.HttpStatus;
@@ -12,13 +14,22 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import com.smarteshop.exception.BusinessException;
+import com.smarteshop.web.common.AbstractController;
 
 /**
  * Controller advice to translate the server side exceptions to client-friendly json structures.
  */
 @ControllerAdvice
 public class ExceptionTranslator {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractController.class);
+
 
     @ExceptionHandler(ConcurrencyFailureException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
@@ -66,6 +77,17 @@ public class ExceptionTranslator {
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public ErrorVM processMethodNotSupportedException(HttpRequestMethodNotSupportedException exception) {
         return new ErrorVM(ErrorConstants.ERR_METHOD_NOT_SUPPORTED, exception.getMessage());
+    }
+
+
+
+    @ResponseBody
+    @ExceptionHandler(BusinessException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ErrorVM> handleException(BusinessException ex) {
+      LOGGER.error(ex.getMessage());
+      ErrorVM errorVM= new ErrorVM(ErrorConstants.ERR_BUSINESS_ERROR, ex.getMessage());
+      return ResponseEntity.badRequest().body(errorVM);
     }
 
     @ExceptionHandler(Exception.class)

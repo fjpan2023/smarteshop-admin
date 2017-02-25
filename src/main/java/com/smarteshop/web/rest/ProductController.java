@@ -83,7 +83,7 @@ public class ProductController extends AbstractController<Product> {
       return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("product", "idexists", "A new product cannot already have an ID")).body(null);
     }
     if(this.productService.exist(product.getName())){
-      throw new  BusinessException("{} / {}has been existed", product.getName(), product.getCode());
+      throw new  BusinessException("{0}has been existed", product.getName());
     }
     Sku defaultSKU = product.getDefaultSku();
     defaultSKU.setDefaultProduct(product);
