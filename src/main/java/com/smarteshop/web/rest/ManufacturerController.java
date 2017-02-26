@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.smarteshop.domain.Manufacturer;
-import com.smarteshop.domain.Sku;
+import com.smarteshop.domain.catalog.Sku;
 import com.smarteshop.service.ManufacturerService;
 import com.smarteshop.web.common.AbstractController;
 import com.smarteshop.web.rest.util.HeaderUtil;

@@ -1,4 +1,4 @@
-package com.smarteshop.domain;
+package com.smarteshop.domain.catalog;
 
 import java.io.Serializable;
 

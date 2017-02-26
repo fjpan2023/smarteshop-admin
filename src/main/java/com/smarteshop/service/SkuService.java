@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.smarteshop.domain.Product;
-import com.smarteshop.domain.Sku;
+import com.smarteshop.domain.catalog.Product;
+import com.smarteshop.domain.catalog.Sku;
 
 /**
  * Service Interface for managing Sku.

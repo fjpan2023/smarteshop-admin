@@ -33,10 +33,6 @@ public class QMedia extends EntityPathBase<Media> {
     //inherited
     public final DateTimePath<java.time.ZonedDateTime> createdDate = _super.createdDate;
 
-    public final NumberPath<Long> entityId = createNumber("entityId", Long.class);
-
-    public final StringPath entityName = createString("entityName");
-
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     //inherited

@@ -1,8 +1,7 @@
 package com.smarteshop.web.rest;
 
 import com.smarteshop.SmarteshopApplication;
-
-import com.smarteshop.domain.RelatedProduct;
+import com.smarteshop.domain.catalog.RelatedProduct;
 import com.smarteshop.repository.RelatedProductRepository;
 import com.smarteshop.service.RelatedProductService;
 import com.smarteshop.repository.search.RelatedProductSearchRepository;

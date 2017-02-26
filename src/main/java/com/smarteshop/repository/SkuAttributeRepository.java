@@ -1,8 +1,8 @@
 package com.smarteshop.repository;
 
-import com.smarteshop.domain.SkuAttribute;
-
 import org.springframework.data.jpa.repository.*;
+
+import com.smarteshop.domain.catalog.SkuAttribute;
 
 import java.util.List;
 

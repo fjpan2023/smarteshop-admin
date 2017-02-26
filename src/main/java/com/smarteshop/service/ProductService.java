@@ -9,8 +9,8 @@ import org.springframework.data.domain.Pageable;
 
 import com.querydsl.core.types.Predicate;
 import com.smarteshop.domain.Attachment;
-import com.smarteshop.domain.Product;
-import com.smarteshop.domain.RelatedProduct;
+import com.smarteshop.domain.catalog.Product;
+import com.smarteshop.domain.catalog.RelatedProduct;
 
 /**
  * Service Interface for managing Product.

@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.types.Predicate;
-import com.smarteshop.domain.Category;
 import com.smarteshop.domain.QCategory;
+import com.smarteshop.domain.catalog.Category;
 import com.smarteshop.repository.CategoryRepository;
 import com.smarteshop.repository.search.CategorySearchRepository;
 import com.smarteshop.service.CategoryService;

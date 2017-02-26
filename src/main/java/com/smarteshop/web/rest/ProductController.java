@@ -32,9 +32,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.querydsl.core.types.Predicate;
-import com.smarteshop.domain.Product;
-import com.smarteshop.domain.ProductOption;
-import com.smarteshop.domain.Sku;
+import com.smarteshop.domain.catalog.Product;
+import com.smarteshop.domain.catalog.ProductOption;
+import com.smarteshop.domain.catalog.Sku;
 import com.smarteshop.dto.ProductOptionDTO;
 import com.smarteshop.dto.RelatedProductDTO;
 import com.smarteshop.exception.BusinessException;

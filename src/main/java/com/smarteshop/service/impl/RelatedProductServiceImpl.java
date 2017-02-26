@@ -16,10 +16,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.types.Predicate;
-import com.smarteshop.domain.Product;
 import com.smarteshop.domain.QProduct;
 import com.smarteshop.domain.QRelatedProduct;
-import com.smarteshop.domain.RelatedProduct;
+import com.smarteshop.domain.catalog.Product;
+import com.smarteshop.domain.catalog.RelatedProduct;
 import com.smarteshop.repository.ProductRepository;
 import com.smarteshop.repository.RelatedProductRepository;
 import com.smarteshop.repository.search.RelatedProductSearchRepository;

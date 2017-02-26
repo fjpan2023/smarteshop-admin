@@ -1,8 +1,8 @@
 package com.smarteshop.repository;
 
-import com.smarteshop.domain.ProductOption;
-
 import org.springframework.data.jpa.repository.*;
+
+import com.smarteshop.domain.catalog.ProductOption;
 
 import java.util.List;
 

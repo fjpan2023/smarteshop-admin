@@ -1,4 +1,4 @@
-package com.smarteshop.domain;
+package com.smarteshop.domain.catalog;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -32,6 +32,8 @@ import org.hibernate.annotations.Cascade;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smarteshop.common.entity.BusinessObjectEntity;
+import com.smarteshop.domain.Attachment;
+import com.smarteshop.domain.MerchantStore;
 import com.smarteshop.domain.common.BusinessObjectInterface;
 import com.smarteshop.domain.enumeration.ProductLabelEnum;
 import com.smarteshop.domain.enumeration.StatusEnum;

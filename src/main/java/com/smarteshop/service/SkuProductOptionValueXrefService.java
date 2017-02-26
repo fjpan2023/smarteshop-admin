@@ -1,8 +1,9 @@
 package com.smarteshop.service;
 
-import com.smarteshop.domain.SkuProductOptionValueXref;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import com.smarteshop.domain.catalog.SkuProductOptionValueXref;
 
 import java.util.List;
 

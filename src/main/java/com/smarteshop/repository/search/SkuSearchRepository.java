@@ -1,7 +1,8 @@
 package com.smarteshop.repository.search;
 
-import com.smarteshop.domain.Sku;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+
+import com.smarteshop.domain.catalog.Sku;
 
 /**
  * Spring Data ElasticSearch repository for the Sku entity.

@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
-import com.smarteshop.domain.ProductOptionValue;
+import com.smarteshop.domain.catalog.ProductOptionValue;
 import com.smarteshop.service.ProductOptionValueService;
 import com.smarteshop.web.rest.util.HeaderUtil;
 import com.smarteshop.web.rest.util.PaginationUtil;

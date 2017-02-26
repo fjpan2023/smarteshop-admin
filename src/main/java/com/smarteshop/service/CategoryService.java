@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.smarteshop.domain.Category;
+import com.smarteshop.domain.catalog.Category;
 import com.smarteshop.service.dto.CategoryCountInfo;
 
 /**

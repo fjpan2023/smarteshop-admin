@@ -1,7 +1,8 @@
 package com.smarteshop.repository.search;
 
-import com.smarteshop.domain.RelatedProduct;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+
+import com.smarteshop.domain.catalog.RelatedProduct;
 
 /**
  * Spring Data ElasticSearch repository for the RelatedProduct entity.

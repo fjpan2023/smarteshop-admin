@@ -3,12 +3,12 @@ package com.smarteshop.core.service;
 import java.util.Date;
 import java.util.List;
 
-import com.smarteshop.domain.Category;
-import com.smarteshop.domain.Product;
 import com.smarteshop.domain.ProductBundle;
-import com.smarteshop.domain.ProductOption;
-import com.smarteshop.domain.ProductOptionValue;
-import com.smarteshop.domain.Sku;
+import com.smarteshop.domain.catalog.Category;
+import com.smarteshop.domain.catalog.Product;
+import com.smarteshop.domain.catalog.ProductOption;
+import com.smarteshop.domain.catalog.ProductOptionValue;
+import com.smarteshop.domain.catalog.Sku;
 
 public interface CatalogService {
 

@@ -10,8 +10,8 @@ import org.apache.commons.collections4.Transformer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.smarteshop.domain.ProductOption;
-import com.smarteshop.domain.ProductOptionValue;
+import com.smarteshop.domain.catalog.ProductOption;
+import com.smarteshop.domain.catalog.ProductOptionValue;
 
 public class CatalogServiceImpl implements CatalogService {
   private static final Log LOGGER= LogFactory.getLog(CatalogServiceImpl.class);

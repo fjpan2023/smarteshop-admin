@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.smarteshop.SmarteshopApplication;
-import com.smarteshop.domain.Category;
+import com.smarteshop.domain.catalog.Category;
 import com.smarteshop.domain.enumeration.StatusEnum;
 import com.smarteshop.repository.CategoryRepository;
 import com.smarteshop.repository.search.CategorySearchRepository;

@@ -1,7 +1,7 @@
 package com.smarteshop.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.smarteshop.domain.ProductAttribute;
+import com.smarteshop.domain.catalog.ProductAttribute;
 import com.smarteshop.service.ProductAttributeService;
 import com.smarteshop.web.rest.util.HeaderUtil;
 import com.smarteshop.web.rest.util.PaginationUtil;

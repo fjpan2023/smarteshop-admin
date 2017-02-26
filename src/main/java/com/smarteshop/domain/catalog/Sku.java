@@ -1,4 +1,4 @@
-package com.smarteshop.domain;
+package com.smarteshop.domain.catalog;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -35,6 +35,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.util.CollectionUtils;
 
 import com.smarteshop.common.entity.BusinessObjectEntity;
+import com.smarteshop.domain.Dimension;
+import com.smarteshop.domain.Weight;
 import com.smarteshop.domain.enumeration.StatusEnum;
 
 /**

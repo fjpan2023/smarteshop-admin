@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.smarteshop.domain.SkuAttribute;
+import com.smarteshop.domain.catalog.SkuAttribute;
 import com.smarteshop.repository.SkuAttributeRepository;
 import com.smarteshop.service.SkuAttributeService;
 

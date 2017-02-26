@@ -2,7 +2,7 @@ package com.smarteshop.repository;
 
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
-import com.smarteshop.domain.RelatedProduct;
+import com.smarteshop.domain.catalog.RelatedProduct;
 
 /**
  * Spring Data JPA repository for the RelatedProduct entity.

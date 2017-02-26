@@ -1,7 +1,7 @@
 package com.smarteshop.service.impl;
 
 import com.smarteshop.service.BrandService;
-import com.smarteshop.domain.Brand;
+import com.smarteshop.domain.catalog.Brand;
 import com.smarteshop.repository.BrandRepository;
 import com.smarteshop.repository.search.BrandSearchRepository;
 import org.slf4j.Logger;

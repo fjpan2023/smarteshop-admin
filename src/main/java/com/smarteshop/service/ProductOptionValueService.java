@@ -1,8 +1,9 @@
 package com.smarteshop.service;
 
-import com.smarteshop.domain.ProductOptionValue;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import com.smarteshop.domain.catalog.ProductOptionValue;
 
 import java.util.List;
 

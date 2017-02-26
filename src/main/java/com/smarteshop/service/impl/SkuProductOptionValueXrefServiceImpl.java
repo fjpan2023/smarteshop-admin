@@ -1,7 +1,7 @@
 package com.smarteshop.service.impl;
 
 import com.smarteshop.service.SkuProductOptionValueXrefService;
-import com.smarteshop.domain.SkuProductOptionValueXref;
+import com.smarteshop.domain.catalog.SkuProductOptionValueXref;
 import com.smarteshop.repository.SkuProductOptionValueXrefRepository;
 import com.smarteshop.repository.search.SkuProductOptionValueXrefSearchRepository;
 import org.slf4j.Logger;

@@ -9,7 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.smarteshop.domain.ProductOption;
+import com.smarteshop.domain.catalog.ProductOption;
 import com.smarteshop.repository.ProductOptionRepository;
 import com.smarteshop.service.ProductOptionService;
 

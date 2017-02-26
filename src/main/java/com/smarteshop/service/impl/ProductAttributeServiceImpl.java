@@ -1,7 +1,7 @@
 package com.smarteshop.service.impl;
 
 import com.smarteshop.service.ProductAttributeService;
-import com.smarteshop.domain.ProductAttribute;
+import com.smarteshop.domain.catalog.ProductAttribute;
 import com.smarteshop.repository.ProductAttributeRepository;
 import com.smarteshop.repository.search.ProductAttributeSearchRepository;
 import org.slf4j.Logger;

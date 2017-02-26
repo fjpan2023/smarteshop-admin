@@ -1,6 +1,6 @@
 package com.smarteshop.service.dto;
 
-import com.smarteshop.domain.Category;
+import com.smarteshop.domain.catalog.Category;
 
 public class CategoryCountInfo {
 	private String name;

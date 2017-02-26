@@ -9,8 +9,8 @@ import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
 
-import com.smarteshop.domain.ProductOption;
-import com.smarteshop.domain.ProductOptionValue;
+import com.smarteshop.domain.catalog.ProductOption;
+import com.smarteshop.domain.catalog.ProductOptionValue;
 
 
 public class TempTest {

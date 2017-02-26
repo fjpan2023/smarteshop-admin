@@ -26,8 +26,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
-import com.smarteshop.domain.Category;
-import com.smarteshop.domain.Product;
+import com.smarteshop.domain.catalog.Category;
+import com.smarteshop.domain.catalog.Product;
 import com.smarteshop.service.CategoryService;
 import com.smarteshop.service.ProductService;
 import com.smarteshop.service.dto.CategoryCountInfo;

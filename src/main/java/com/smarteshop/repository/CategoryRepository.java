@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
-import com.smarteshop.domain.Category;
+import com.smarteshop.domain.catalog.Category;
 import com.smarteshop.service.dto.CategoryCountInfo;
 
 /**

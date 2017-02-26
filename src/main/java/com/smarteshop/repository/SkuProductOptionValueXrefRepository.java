@@ -1,8 +1,8 @@
 package com.smarteshop.repository;
 
-import com.smarteshop.domain.SkuProductOptionValueXref;
-
 import org.springframework.data.jpa.repository.*;
+
+import com.smarteshop.domain.catalog.SkuProductOptionValueXref;
 
 import java.util.List;
 

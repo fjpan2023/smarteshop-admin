@@ -15,6 +15,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smarteshop.common.entity.BusinessObjectEntity;
+import com.smarteshop.domain.catalog.Product;
 import com.smarteshop.domain.common.BusinessObjectInterface;
 
 /**

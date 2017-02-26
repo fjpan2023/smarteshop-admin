@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.types.Predicate;
-import com.smarteshop.domain.Product;
 import com.smarteshop.domain.QSku;
-import com.smarteshop.domain.Sku;
+import com.smarteshop.domain.catalog.Product;
+import com.smarteshop.domain.catalog.Sku;
 import com.smarteshop.repository.SkuRepository;
 import com.smarteshop.repository.search.SkuSearchRepository;
 import com.smarteshop.service.SkuService;
