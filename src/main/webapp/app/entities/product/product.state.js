@@ -213,6 +213,37 @@
                     $state.go('^');
                 });
             }]
+        })
+        .state('product-media', {
+            parent: 'product.edit',
+            url: '/{id}/productMedia',
+            data: {
+                authorities: ['ROLE_USER']
+            },
+            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                $uibModal.open({
+                    templateUrl: 'app/entities/media/media.html',
+                    controller: 'MediaController',
+                    controllerAs: 'vm',
+                    size: 'lg',
+                    resolve: {
+                    	translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    		$translatePartialLoader.addPart('product');
+                    		$translatePartialLoader.addPart('sku');
+                    		$translatePartialLoader.addPart('statusEnum');
+                    		$translatePartialLoader.addPart('productLabelEnum');
+                    		$translatePartialLoader.addPart('media');
+                    		return $translate.refresh();
+                    		}]
+                    }
+                    
+                    
+                }).result.then(function() {
+                    $state.go('product.edit', null, { reload: 'product.edit' });
+                }, function() {
+                    $state.go('^');
+                });
+            }]
         });
     }
 
