@@ -3,7 +3,6 @@ package com.smarteshop.domain.catalog;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,7 +31,7 @@ import org.hibernate.annotations.Cascade;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import com.smarteshop.common.entity.BusinessObjectEntity;
-import com.smarteshop.domain.Attachment;
+import com.smarteshop.domain.Media;
 import com.smarteshop.domain.MerchantStore;
 import com.smarteshop.domain.common.BusinessObjectInterface;
 import com.smarteshop.domain.enumeration.ProductLabelEnum;
@@ -121,14 +120,20 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
     inverseJoinColumns = @JoinColumn(name="product_option_id", referencedColumnName="ID"))
   private Set<ProductOption> productOptions = new HashSet<>();
 
+
+  @ManyToMany(fetch = FetchType.LAZY)
+  @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+  @JoinTable(name = "product_media_xref",
+    joinColumns = @JoinColumn(name="product_id", referencedColumnName="ID"),
+    inverseJoinColumns = @JoinColumn(name="media_id", referencedColumnName="ID"))
+  private Set<Media> productMedia = new HashSet<>();
+
   @ManyToOne
   private Brand brand;
 
   @ManyToOne
   private Category category;
 
-  @Transient
-  private Set<Attachment> images = new HashSet<Attachment>();
 
   @Override
   public Long getId() {
@@ -344,13 +349,6 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
     return this.defaultSku.getSalePrice();
   }
 
-  public Collection<Attachment> getImages() {
-    return images;
-  }
-  public void setImages(Set<Attachment> images) {
-    this.images = images;
-  }
-
   public Sku getDefaultSku() {
     return defaultSku;
   }
@@ -401,6 +399,24 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
 
   public Product removeProductOption(ProductOption productOption) {
     productOptions.remove(productOption);
+    return this;
+  }
+
+  public Set<Media> getProductMedia() {
+    return productMedia;
+  }
+
+  public void setProductMedia(Set<Media> productMedia) {
+    this.productMedia = productMedia;
+  }
+
+  public Product addProductMedia(Media media) {
+    productMedia.add(media);
+    return this;
+  }
+
+  public Product removeMedia(Media media) {
+    productMedia.remove(media);
     return this;
   }
 

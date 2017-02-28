@@ -42,11 +42,10 @@
 					<tr ng-repeat="media in vm.media track by media.id">
 						<td><img ng-src="data:{{media.contentType}};base64,{{media.content}}" style="max-width: 60px; max-height: 60px; margin: 0 auto; display: block;" /></td>
 						<td style="text-align: center;">{{media.title}}</td>
-						<td class="text-right">
-							<div class="btn-group flex-btn-group-container">
-								<button type="submit" ui-sref="media.edit({id:media.id})" class="btn btn-primary btn-sm">
-									<span class="glyphicon glyphicon-pencil"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
-								</button>
+						<td class="text-center">
+							<div class="checkbox">
+								<label> <input type="checkbox" ng-click="vm.toggle(media.id)" value='{{meida.id}}' />
+								</label>
 							</div>
 						</td>
 

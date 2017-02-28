@@ -32,12 +32,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.querydsl.core.types.Predicate;
+import com.smarteshop.domain.Media;
 import com.smarteshop.domain.catalog.Product;
 import com.smarteshop.domain.catalog.ProductOption;
 import com.smarteshop.domain.catalog.Sku;
+import com.smarteshop.dto.ProductMediaDTO;
 import com.smarteshop.dto.ProductOptionDTO;
 import com.smarteshop.dto.RelatedProductDTO;
 import com.smarteshop.exception.BusinessException;
+import com.smarteshop.service.MediaService;
 import com.smarteshop.service.ProductOptionService;
 import com.smarteshop.service.ProductService;
 import com.smarteshop.service.RelatedProductService;
@@ -68,6 +71,11 @@ public class ProductController extends AbstractController<Product> {
   private RelatedProductService relatedProductService;
 
 
+  @Autowired
+  private MediaService mediaService;
+
+
+
   /**
    * POST   : Create a new product.
    *
@@ -89,7 +97,7 @@ public class ProductController extends AbstractController<Product> {
     defaultSKU.setDefaultProduct(product);
     Product result = productService.save(product);
     productService.save(product);
-    productService.saveImages(result.getId(),product.getImages());
+    //  productService.saveImages(result.getId(), product.getImages());
     return ResponseEntity.created(new URI("/api/products" + result.getId()))
         .headers(HeaderUtil.createEntityCreationAlert("product", result.getId().toString()))
         .body(result);
@@ -207,8 +215,8 @@ public class ProductController extends AbstractController<Product> {
       throws URISyntaxException {
     Product product = this.productService.findOne(id);
     List<Product> page = this.relatedProductService.findRelatedProductsByProduct(product, null);
-//    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products/"+
-//                  Long.toString(id)+"relatedProducts");
+    //    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products/"+
+    //                  Long.toString(id)+"relatedProducts");
     return ResponseEntity.ok().body(page);
   }
   @Timed
@@ -255,4 +263,34 @@ public class ProductController extends AbstractController<Product> {
     Product p = this.productService.findOne(id);
     return ResponseEntity.ok().body(new ArrayList(p.getProductOptions()));
   }
+
+
+  @Timed
+  @PostMapping("{id}/media")
+  public ResponseEntity<Set<Media>> createMedia(@PathVariable Long id, @Valid @RequestBody ProductMediaDTO productMedia) throws URISyntaxException {
+    LOGGER.debug("create product media----------------");
+
+    Set<Long> mediaIds = productMedia.getMediaIds();
+    if(CollectionUtils.isEmpty(mediaIds)){
+      return ResponseEntity.ok().body(null);
+    }
+    Product p = this.productService.findOne(id);
+    for(Long mediaId : mediaIds){
+      Media po = this.mediaService.findOne(mediaId);
+      p.addProductMedia(po);
+    }
+    this.productService.save(p);
+    return ResponseEntity.ok().body(p.getProductMedia());
+  }
+
+
+//  @Timed
+//  @DeleteMapping("{id}/media/{mediaId}")
+//  public ResponseEntity<List<Sku>> deleteMedia(@PathVariable Long id, @PathVariable Long mediaId) throws URISyntaxException {
+//    Product product = this.productService.findOne(id);
+//    List<Sku> result =this.skuService.findSkusByProduct(product);
+//    return ResponseEntity.ok().body(result);
+//  }
+
+
 }

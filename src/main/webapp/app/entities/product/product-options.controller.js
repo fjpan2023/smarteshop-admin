@@ -43,7 +43,7 @@
 			vm.isSaving = false;
 		}
 		
-	vm.toggle = function toggle (item) {
+		vm.toggle = function toggle (item) {
 			var idx = vm.selectedOptions.indexOf(item);
 			if (idx > -1) {
 				vm.selectedOptions.splice(idx, 1);

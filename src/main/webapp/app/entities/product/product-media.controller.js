@@ -19,6 +19,7 @@
         vm.save = save;
 
         loadAll();
+    	vm.selectedMedia = [];
 
         function loadAll() {
             Media.query(function(result) {
@@ -39,7 +40,7 @@
         
         function save () {
             vm.isSaving = true;
-            alert("save ...");
+            alert(vm.selectedMedia);
 //            if (vm.media.id !== null) {
 //                Media.update(vm.media, onSaveSuccess, onSaveError);
 //            } else {
@@ -59,6 +60,14 @@
 
         function clear() {
         	 $uibModalInstance.dismiss('cancel');
-        }    
-        }
+        } 
+        vm.toggle = function toggle (item) {
+			var idx = vm.selectedMedia.indexOf(item);
+			if (idx > -1) {
+				vm.selectedMedia.splice(idx, 1);
+			}else {
+				vm.selectedMedia.push(item);
+			}
+		};
+      }
 })();
