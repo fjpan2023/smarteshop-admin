@@ -222,8 +222,8 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/media/media.html',
-                    controller: 'MediaController',
+                    templateUrl: 'app/entities/product/product-media.html',
+                    controller: 'ProductMediaController',
                     controllerAs: 'vm',
                     size: 'lg',
                     resolve: {
