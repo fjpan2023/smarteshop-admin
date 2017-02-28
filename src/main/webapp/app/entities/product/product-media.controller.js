@@ -5,9 +5,9 @@
         .module('smarteshopApp')
         .controller('ProductMediaController', ProductMediaController);
 
-    ProductMediaController.$inject = ['$scope', '$state', 'DataUtils', 'Media', 'MediaSearch'];
+    ProductMediaController.$inject = ['$scope', '$state', '$uibModalInstance','DataUtils', 'Media', 'MediaSearch'];
 
-    function ProductMediaController ($scope, $state, DataUtils, Media, MediaSearch) {
+    function ProductMediaController ($scope, $state, $uibModalInstance, DataUtils, Media, MediaSearch) {
         var vm = this;
 
         vm.media = [];
@@ -16,6 +16,7 @@
         vm.clear = clear;
         vm.search = search;
         vm.loadAll = loadAll;
+        vm.save = save;
 
         loadAll();
 
@@ -35,9 +36,29 @@
                 vm.currentSearch = vm.searchQuery;
             });
         }
+        
+        function save () {
+            vm.isSaving = true;
+            alert("save ...");
+//            if (vm.media.id !== null) {
+//                Media.update(vm.media, onSaveSuccess, onSaveError);
+//            } else {
+//                Media.save(vm.media, onSaveSuccess, onSaveError);
+//            }
+        }
+
+        function onSaveSuccess (result) {
+            $scope.$emit('smarteshopApp:productMediaUpdate', result);
+            $uibModalInstance.close(result);
+            vm.isSaving = false;
+        }
+
+        function onSaveError () {
+            vm.isSaving = false;
+        }
 
         function clear() {
-            vm.searchQuery = null;
-            loadAll();
-        }    }
+        	 $uibModalInstance.dismiss('cancel');
+        }    
+        }
 })();

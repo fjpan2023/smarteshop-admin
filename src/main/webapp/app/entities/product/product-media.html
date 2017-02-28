@@ -33,15 +33,15 @@
 			<table class="jh-table table table-striped">
 				<thead>
 					<tr>
-						<th style="width: 66px;">Thumbnail</th>
-						<th><span data-translate="smarteshopApp.media.title">Title</span></th>
-						<th>Operation</th>
+						<th style="width: 30%; text-align: center;">Thumbnail</th>
+						<th style="width: 30%; text-align: center;"><span data-translate="smarteshopApp.media.title">Title</span></th>
+						<th style="width: 30%; text-align: center;">Operation</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="media in vm.media track by media.id">
 						<td><img ng-src="data:{{media.contentType}};base64,{{media.content}}" style="max-width: 60px; max-height: 60px; margin: 0 auto; display: block;" /></td>
-						<td>{{media.title}}</td>
+						<td style="text-align: center;">{{media.title}}</td>
 						<td class="text-right">
 							<div class="btn-group flex-btn-group-container">
 								<button type="submit" ui-sref="media.edit({id:media.id})" class="btn btn-primary btn-sm">
@@ -54,5 +54,13 @@
 				</tbody>
 			</table>
 		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+		</button>
+		<button type="button" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary" ng-click="vm.save()">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+		</button>
 	</div>
 </div>
