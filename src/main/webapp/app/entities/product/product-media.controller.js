@@ -5,11 +5,10 @@
         .module('smarteshopApp')
         .controller('ProductMediaController', ProductMediaController);
 
-    ProductMediaController.$inject = ['$scope', '$state', '$uibModalInstance','DataUtils', 'Media', 'MediaSearch'];
+    ProductMediaController.$inject = ['$scope', '$state', '$stateParams', '$uibModalInstance','DataUtils', 'Media', 'MediaSearch','ProductMedia','productInfo'];
 
-    function ProductMediaController ($scope, $state, $uibModalInstance, DataUtils, Media, MediaSearch) {
+    function ProductMediaController ($scope, $state, $stateParams, $uibModalInstance, DataUtils, Media, MediaSearch,ProductMedia, productInfo) {
         var vm = this;
-
         vm.media = [];
         vm.openFile = DataUtils.openFile;
         vm.byteSize = DataUtils.byteSize;
@@ -41,11 +40,7 @@
         function save () {
             vm.isSaving = true;
             alert(vm.selectedMedia);
-//            if (vm.media.id !== null) {
-//                Media.update(vm.media, onSaveSuccess, onSaveError);
-//            } else {
-//                Media.save(vm.media, onSaveSuccess, onSaveError);
-//            }
+            ProductMedia.save(vm.selectedMedia, onSaveSuccess, onSaveError);
         }
 
         function onSaveSuccess (result) {
@@ -53,14 +48,13 @@
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }
-
         function onSaveError () {
             vm.isSaving = false;
         }
-
         function clear() {
         	 $uibModalInstance.dismiss('cancel');
         } 
+        
         vm.toggle = function toggle (item) {
 			var idx = vm.selectedMedia.indexOf(item);
 			if (idx > -1) {

@@ -216,7 +216,7 @@
         })
         .state('product-media', {
             parent: 'product.edit',
-            url: '/{id}/productMedia',
+            url: '/productMedia',
             data: {
                 authorities: ['ROLE_USER']
             },
@@ -234,10 +234,11 @@
                     		$translatePartialLoader.addPart('productLabelEnum');
                     		$translatePartialLoader.addPart('media');
                     		return $translate.refresh();
-                    		}]
+                    		}],
+                    	productInfo: ['$stateParams', function ($stateParams) {
+                            return  $stateParams.id;
+                        }]
                     }
-                    
-                    
                 }).result.then(function() {
                     $state.go('product.edit', null, { reload: 'product.edit' });
                 }, function() {
