@@ -40,7 +40,7 @@
         function save () {
             vm.isSaving = true;
             alert(vm.selectedMedia);
-            ProductMedia.save(vm.selectedMedia, onSaveSuccess, onSaveError);
+            ProductMedia.addMedia({id:productInfo},{mediaIds:vm.selectedMedia}, onSaveSuccess, onSaveError);
         }
 
         function onSaveSuccess (result) {

@@ -48,7 +48,8 @@
                     }
                     return data;
                 }
-            }
+            },
+            'addMedia':{method:'POST', isArray: true}
         });
     }
 })();
