@@ -2,60 +2,77 @@
 <div>
 	<div class="modal-header">
 		<h2>
-			<span data-translate="smarteshopApp.category.detail.title">Category</span> #{{vm.category.id}}
+			<span data-translate="smarteshopApp.category.detail.title">Category</span>
+			#{{vm.category.id}}
 		</h2>
 	</div>
 	<div class="modal-body">
 		<jhi-alert-error></jhi-alert-error>
 		<div class="form-horizontal">
 			<div class="form-group">
-				<label class="col-sm-2 control-label" data-translate="smarteshopApp.category.name">Name</label>
+				<label class="col-sm-2 control-label"
+					data-translate="smarteshopApp.category.name">Name</label>
 				<div class="col-sm-4 no-padding-left">
 					<p class="form-control-static">{{vm.category.name}}</p>
 				</div>
-				<label class="col-sm-2 control-label" data-translate="smarteshopApp.category.leaf">leaf</label>
+				<!-- <label class="col-sm-2 control-label"
+					data-translate="smarteshopApp.category.leaf">leaf</label>
 				<div class="col-sm-4 no-padding-left">
 					<p class="form-control-static">{{vm.category.leaf}}</p>
-				</div>
+				</div> 
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label" data-translate="smarteshopApp.category.includeMenu">includeMenu</label>
+				<label class="col-sm-2 control-label"
+					data-translate="smarteshopApp.category.includeMenu">includeMenu</label>
 				<div class="col-sm-4 no-padding-left">
 					<p class="form-control-static">{{vm.category.includeMenu}}</p>
 				</div>
-				<label class="col-sm-2 control-label" data-translate="smarteshopApp.category.status">Status</label>
+				-->
+				<label class="col-sm-2 control-label"
+					data-translate="smarteshopApp.category.status">Status</label>
 				<div class="col-sm-4 no-padding-left">
-					<p class="form-control-static" data-translate="{{'smarteshopApp.StatusEnum.' + vm.category.status}}">{{vm.category.status}}</p>
+					<p class="form-control-static"
+						data-translate="{{'smarteshopApp.StatusEnum.' + vm.category.status}}">{{vm.category.status}}</p>
 				</div>
 			</div>
 			<div class="form-group" ng-if="! vm.category.leaf">
-				<label class="col-sm-2 control-label" data-translate="smarteshopApp.category.parentId">parentId</label>
+				<label class="col-sm-2 control-label"
+					data-translate="smarteshopApp.category.parentId">parentId</label>
 				<div class="col-sm-4 no-padding-left">
 					<p class="form-control-static">{{vm.category.parentId}}</p>
 				</div>
-				
+
 			</div>
 		</div>
 		<!-- products -->
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<label>Products Info</label>
-				<div class="btn btn-primary pull-right" ng-click="vm.showRelatedProducts(vm.product.id)">
-					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.addRelative">Add Related</span>
-				</div>
 			</div>
 			<div class="panel-body">
 				<br />
 				<div class="table-bordered">
 					<table class="jh-table table table-striped">
 						<thead>
-							<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-								<th><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th><span data-translate="smarteshopApp.product.mainImageId">Main Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="code"><span data-translate="smarteshopApp.product.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="name"><span data-translate="smarteshopApp.product.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="brand.name"><span data-translate="smarteshopApp.product.brand">Brand</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="status"><span data-translate="smarteshopApp.product.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+							<tr jh-sort="vm.predicate" ascending="vm.reverse"
+								callback="vm.transition()">
+								<th><span data-translate="global.field.id">ID</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th><span
+									data-translate="smarteshopApp.product.mainImageId">Main
+										Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="code"><span
+									data-translate="smarteshopApp.product.code">Code</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="name"><span
+									data-translate="smarteshopApp.product.name">Name</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="brand.name"><span
+									data-translate="smarteshopApp.product.brand">Brand</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="status"><span
+									data-translate="smarteshopApp.product.status">Status</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
 								<th></th>
 							</tr>
 						</thead>
@@ -76,12 +93,18 @@
 	</div>
 	<div class="modal-footer">
 
-		<button type="submit" ui-sref="{{ vm.previousState }}" class="btn btn-info">
-			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+		<button type="submit" ui-sref="{{ vm.previousState }}"
+			class="btn btn-info">
+			<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+				data-translate="entity.action.back"> Back</span>
 		</button>
 
-		<button type="button" ui-sref="category-detail.edit({id:vm.category.id})" class="btn btn-primary">
-			<span class="glyphicon glyphicon-pencil"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"> Edit</span>
+		<button type="button"
+			ui-sref="category-detail.edit({id:vm.category.id})"
+			class="btn btn-primary">
+			<span class="glyphicon glyphicon-pencil"></span> <span
+				class="hidden-xs hidden-sm" data-translate="entity.action.edit">
+				Edit</span>
 		</button>
 	</div>
 </div>

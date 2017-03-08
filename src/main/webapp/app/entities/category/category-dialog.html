@@ -1,63 +1,96 @@
 
-<form name="editForm" role="form" class="form-horizontal" novalidate ng-submit="vm.save()">
-
+<form name="editForm" role="form" class="form-horizontal" novalidate
+	ng-submit="vm.save()">
 	<div class="modal-header">
-		<h4 class="modal-title" id="myCategoryLabel" data-translate="smarteshopApp.category.home.createOrEditLabel">Create or edit a Category</h4>
+		<h4 class="modal-title" id="myCategoryLabel"
+			data-translate="smarteshopApp.category.home.createOrEditLabel">Create
+			or edit a Category</h4>
 	</div>
 	<div class="modal-body">
 		<jhi-alert-error></jhi-alert-error>
-		<div class="form-group">
-			<label class="col-sm-2 control-label" data-translate="smarteshopApp.category.name" for="field_name">Name</label>
-			<div class="col-sm-4 no-padding-left">
-				<input type="text" class="form-control" name="name" id="field_name" ng-model="vm.category.name" required/>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<label>Basic Info</label>
 			</div>
-			<label class="col-sm-2 control-label" data-translate="smarteshopApp.category.status" for="field_status">Status</label>
-			<div class="col-sm-4 no-padding-left">
-				<select class="form-control" name="status" ng-model="vm.category.status" id="field_status">
-					<option value="ACTIVITY" data-translate="smarteshopApp.StatusEnum.ACTIVITY">ACTIVITY</option>
-					<option value="UNACTIVITY" data-translate="smarteshopApp.StatusEnum.UNACTIVITY">UNACTIVITY</option>
-				</select>
-			</div>
-		</div>
-		<div class="form-group">
-			<label class="col-sm-2 control-label" data-translate="smarteshopApp.category.leaf" for="field_leaf">Leaf</label>
-			<div class="col-sm-4 no-padding-left">
-				<input type="checkbox" class="form-control" name="leaf" id="field_leaf" ng-model="vm.category.leaf" />
-			</div>
-			<label class="col-sm-2 control-label" data-translate="smarteshopApp.category.includeMenu" for="field_includeMenu">Include Menu</label>
-			<div class="col-sm-4 no-padding-left">
-				<input type="checkbox" class="form-control" name="includeMenu" id="field_includeMenu" ng-model="vm.category.includeMenu" />
-			</div>
-		</div>
-		<div class="form-group">
-			<div ng-if="! vm.category.leaf">
-				<label class="col-sm-2 control-label" data-translate="smarteshopApp.category.parentId" for="field_parentId">Parent Id</label>
-				<div class="col-sm-4 no-padding-left">
-					<input type="number" class="form-control" name="parentId" id="field_parentId" ng-model="vm.category.parentId" required />
+			<div class="panel-body">
+				<div class="form-group">
+					<label class="col-sm-2 control-label"
+						data-translate="smarteshopApp.category.name" for="field_name">Name</label>
+					<div class="col-sm-4 no-padding-left">
+						<input type="text" class="form-control" name="name"
+							id="field_name" ng-model="vm.category.name" required />
+					</div>
+					<label class="col-sm-2 control-label"
+						data-translate="smarteshopApp.category.status" for="field_status">Status</label>
+					<div class="col-sm-4 no-padding-left">
+						<select class="form-control" name="status"
+							ng-model="vm.category.status" id="field_status">
+							<option value="ACTIVITY"
+								data-translate="smarteshopApp.StatusEnum.ACTIVITY">ACTIVITY</option>
+							<option value="UNACTIVITY"
+								data-translate="smarteshopApp.StatusEnum.UNACTIVITY">UNACTIVITY</option>
+						</select>
+					</div>
+				</div>
+				<!-- <div class="form-group">
+					<label class="col-sm-2 control-label"
+						data-translate="smarteshopApp.category.leaf" for="field_leaf">Leaf</label>
+					<div class="col-sm-4 no-padding-left">
+						<input type="checkbox" class="form-control" name="leaf"
+							id="field_leaf" ng-model="vm.category.leaf" />
+					</div>
+					<label class="col-sm-2 control-label"
+						data-translate="smarteshopApp.category.includeMenu"
+						for="field_includeMenu">Include Menu</label>
+					<div class="col-sm-4 no-padding-left">
+						<input type="checkbox" class="form-control" name="includeMenu"
+							id="field_includeMenu" ng-model="vm.category.includeMenu" />
+					</div>
+				</div> -->
+				<div class="form-group">
+					<div ng-if="! vm.category.leaf">
+						<label class="col-sm-2 control-label"
+							data-translate="smarteshopApp.category.parentId"
+							for="field_parentId">Parent Id</label>
+						<div class="col-sm-4 no-padding-left">
+							<input type="number" class="form-control" name="parentId"
+								id="field_parentId" ng-model="vm.category.parentId" required />
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<label>Products Info</label>
-				<div class="btn btn-primary pull-right" ng-click="vm.showRelatedProducts(vm.product.id)">
-					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.addRelative">Add Related</span>
-				</div>
 			</div>
 			<div class="panel-body">
 				<br />
 				<div class="table-bordered">
 					<table class="jh-table table table-striped">
 						<thead>
-							<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-								<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th><span data-translate="smarteshopApp.product.mainImageId">Main Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="code"><span data-translate="smarteshopApp.product.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="name"><span data-translate="smarteshopApp.product.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="brand.id"><span data-translate="smarteshopApp.product.brand">Brand</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="category.id"><span data-translate="smarteshopApp.product.category">Category</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="status"><span data-translate="smarteshopApp.product.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+							<tr jh-sort="vm.predicate" ascending="vm.reverse"
+								callback="vm.transition()">
+								<th jh-sort-by="id"><span data-translate="global.field.id">ID</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th><span
+									data-translate="smarteshopApp.product.mainImageId">Main
+										Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="code"><span
+									data-translate="smarteshopApp.product.code">Code</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="name"><span
+									data-translate="smarteshopApp.product.name">Name</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="brand.id"><span
+									data-translate="smarteshopApp.product.brand">Brand</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="category.id"><span
+									data-translate="smarteshopApp.product.category">Category</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="status"><span
+									data-translate="smarteshopApp.product.status">Status</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
 								<th></th>
 							</tr>
 						</thead>
@@ -76,14 +109,18 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal" ui-sref="{{vm.previousState}}">
-			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+		<button type="button" class="btn btn-default" data-dismiss="modal"
+			ui-sref="{{vm.previousState}}">
+			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span
+				data-translate="entity.action.cancel">Cancel</span>
 		</button>
-		<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
-			<span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+		<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving"
+			class="btn btn-primary">
+			<span class="glyphicon glyphicon-save"></span>&nbsp;<span
+				data-translate="entity.action.save">Save</span>
 		</button>
 	</div>
 </form>
