@@ -56,248 +56,250 @@ import com.smarteshop.web.rest.util.PaginationUtil;
 @RequestMapping("/api/products")
 public class ProductController extends AbstractController<Product> {
 
-  private final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+	private final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
 
-  @Autowired
-  private ProductService productService;
+	@Autowired
+	private ProductService productService;
 
-  @Autowired
-  private SkuService skuService;
+	@Autowired
+	private SkuService skuService;
 
-  @Autowired
-  private ProductOptionService productOptionService;
+	@Autowired
+	private ProductOptionService productOptionService;
 
-  @Autowired
-  private RelatedProductService relatedProductService;
-
-
-  @Autowired
-  private MediaService mediaService;
+	@Autowired
+	private RelatedProductService relatedProductService;
 
 
-
-  /**
-   * POST   : Create a new product.
-   *
-   * @param product the product to create
-   * @return the ResponseEntity with status 201 (Created) and with body the new product, or with status 400 (Bad Request) if the product has already an ID
-   * @throws URISyntaxException if the Location URI syntax is incorrect
-   */
-  @Timed
-  @PostMapping("")
-  public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) throws URISyntaxException {
-    LOGGER.debug("REST request to save Product : {}", product);
-    if (product.getId() != null) {
-      return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("product", "idexists", "A new product cannot already have an ID")).body(null);
-    }
-    if(this.productService.exist(product.getName())){
-      throw new  BusinessException("{0}has been existed", product.getName());
-    }
-    Sku defaultSKU = product.getDefaultSku();
-    defaultSKU.setDefaultProduct(product);
-    Product result = productService.save(product);
-    productService.save(product);
-    //  productService.saveImages(result.getId(), product.getImages());
-    return ResponseEntity.created(new URI("/api/products" + result.getId()))
-        .headers(HeaderUtil.createEntityCreationAlert("product", result.getId().toString()))
-        .body(result);
-  }
-
-  /**
-   * PUT   : Updates an existing product.
-   *
-   * @param product the product to update
-   * @return the ResponseEntity with status 200 (OK) and with body the updated product,
-   * or with status 400 (Bad Request) if the product is not valid,
-   * or with status 500 (Internal Server Error) if the product couldnt be updated
-   * @throws URISyntaxException if the Location URI syntax is incorrect
-   */
-  @Timed
-  @PutMapping( )
-  public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product) throws URISyntaxException {
-    LOGGER.debug("REST request to update Product : {}", product);
-    if (product.getId() == null) {
-      return createProduct(product);
-    }
-    Product result = productService.save(product);
-    return ResponseEntity.ok()
-        .headers(HeaderUtil.createEntityUpdateAlert("product", product.getId().toString()))
-        .body(result);
-  }
-
-  /**
-   * GET   : get all the products.
-   *
-   * @param pageable the pagination information
-   * @return the ResponseEntity with status 200 (OK) and the list of products in body
-   * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
-   */
-  @Timed
-  @GetMapping( )
-  public ResponseEntity<List<Product>> getAllProducts(@QuerydslPredicate(root=Product.class) Predicate predicate,Pageable pageable)
-      throws URISyntaxException {
-    LOGGER.debug("REST request to get a page of Products");
-    Page<Product> page = productService.findAll( pageable);
-    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products");
-    return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-  }
-
-  /**
-   * GET  /:id : get the "id" product.
-   *
-   * @param id the id of the product to retrieve
-   * @return the ResponseEntity with status 200 (OK) and with body the product, or with status 404 (Not Found)
-   */
-  @GetMapping("/{id}")
-  @Timed
-  public ResponseEntity<Product> getProduct(@PathVariable Long id) {
-    LOGGER.debug("REST request to get Product : {}", id);
-    Product product = productService.findOne(id);
-    return Optional.ofNullable(product)
-        .map(result -> new ResponseEntity<>(
-            result,
-            HttpStatus.OK))
-        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-  }
-
-  @DeleteMapping("/{id}")
-  @Timed
-  public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
-    LOGGER.debug("REST request to delete Product : {}", id);
-    productService.delete(id);
-    return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("product", id.toString())).build();
-  }
-
-  @GetMapping("/_search")
-  @Timed
-  public ResponseEntity<List<Product>> searchProducts(@RequestParam String query, Pageable pageable)
-      throws URISyntaxException {
-    LOGGER.debug("REST request to search for a page of Products for query {}", query);
-    Page<Product> page = productService.search(query, pageable);
-    HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search");
-    return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
-  }
-
-  @Timed
-  @PostMapping("{id}/generateSkusByBatch")
-  public ResponseEntity<Void> generateSkusByBatch(@PathVariable Long id) throws URISyntaxException {
-    LOGGER.debug("create generateSkusByBatch----------------{}", id);
-    this.productService.generateAdditionalSkusByBatch(id);
-    return ResponseEntity.ok().build();
-  }
+	@Autowired
+	private MediaService mediaService;
 
 
-  @Timed
-  @PostMapping("{id}/additionalSkus")
-  public ResponseEntity<Long> createAdditionalSkus(@PathVariable Long id, @Valid @RequestBody Sku sku) throws URISyntaxException {
-    LOGGER.debug("create AdditionalSkus----------------");
-    return ResponseEntity.ok().body(1L);
-  }
 
-  @Timed
-  @GetMapping("{id}/additionalSkus")
-  public ResponseEntity<List<Sku>> listAdditionalSkus(@PathVariable Long id) throws URISyntaxException {
-    Product product = this.productService.findOne(id);
-    List<Sku> result =this.skuService.findSkusByProduct(product);
-    return ResponseEntity.ok().body(result);
-  }
+	/**
+	 * POST   : Create a new product.
+	 *
+	 * @param product the product to create
+	 * @return the ResponseEntity with status 201 (Created) and with body the new product, or with status 400 (Bad Request) if the product has already an ID
+	 * @throws URISyntaxException if the Location URI syntax is incorrect
+	 */
+	@Timed
+	@PostMapping("")
+	public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) throws URISyntaxException {
+		LOGGER.debug("REST request to save Product : {}", product);
+		if (product.getId() != null) {
+			return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("product", "idexists", "A new product cannot already have an ID")).body(null);
+		}
+		if(this.productService.exist(product.getName())){
+			throw new  BusinessException("{0}has been existed", product.getName());
+		}
+		Sku defaultSKU = product.getDefaultSku();
+		defaultSKU.setDefaultProduct(product);
+		Product result = productService.save(product);
+		productService.save(product);
+		//  productService.saveImages(result.getId(), product.getImages());
+		return ResponseEntity.created(new URI("/api/products" + result.getId()))
+				.headers(HeaderUtil.createEntityCreationAlert("product", result.getId().toString()))
+				.body(result);
+	}
 
-  @Timed
-  @GetMapping("{id}/additionalSkus/{skuId}")
-  public ResponseEntity<Void> listAdditionalSkus(@PathVariable Long id,@PathVariable Long skuId, @Valid @RequestBody Sku sku) throws URISyntaxException {
+	/**
+	 * PUT   : Updates an existing product.
+	 *
+	 * @param product the product to update
+	 * @return the ResponseEntity with status 200 (OK) and with body the updated product,
+	 * or with status 400 (Bad Request) if the product is not valid,
+	 * or with status 500 (Internal Server Error) if the product couldnt be updated
+	 * @throws URISyntaxException if the Location URI syntax is incorrect
+	 */
+	@Timed
+	@PutMapping( )
+	public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product) throws URISyntaxException {
+		LOGGER.debug("REST request to update Product : {}", product);
+		if (product.getId() == null) {
+			return createProduct(product);
+		}
+		Product result = productService.save(product);
+		return ResponseEntity.ok()
+				.headers(HeaderUtil.createEntityUpdateAlert("product", product.getId().toString()))
+				.body(result);
+	}
 
-    return ResponseEntity.ok().build();
-  }
+	/**
+	 * GET   : get all the products.
+	 *
+	 * @param pageable the pagination information
+	 * @return the ResponseEntity with status 200 (OK) and the list of products in body
+	 * @throws URISyntaxException if there is an error to generate the pagination HTTP headers
+	 */
+	@Timed
+	@GetMapping( )
+	public ResponseEntity<List<Product>> getAllProducts(@QuerydslPredicate(root=Product.class) Predicate predicate,Pageable pageable)
+			throws URISyntaxException {
+		LOGGER.debug("REST request to get a page of Products");
+		Page<Product> page = productService.findAll( pageable);
+		HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products");
+		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+	}
 
-  @Timed
-  @GetMapping("/{id}/relatedProducts")
-  public ResponseEntity<List<Product>> getAllRelatedProducts(@PathVariable Long id,Pageable pageable)
-      throws URISyntaxException {
-    Product product = this.productService.findOne(id);
-    List<Product> page = this.relatedProductService.findRelatedProductsByProduct(product, null);
-    //    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products/"+
-    //                  Long.toString(id)+"relatedProducts");
-    return ResponseEntity.ok().body(page);
-  }
-  @Timed
-  @PostMapping("/{id}/relatedProducts")
-  public ResponseEntity<List<Product>> createRelatedProducts(@PathVariable Long id,@RequestBody RelatedProductDTO relatedProductInfo)
-      throws URISyntaxException {
-    Set<Long> productIds = relatedProductInfo.getProductIds();
-    if(CollectionUtils.isEmpty(productIds)){
-      return ResponseEntity.ok().body(Collections.emptyList());
-    }
-    List<Product> result = this.productService.createRelatedProducts(id, productIds);
-    return ResponseEntity.ok().body(result);
-  }
+	/**
+	 * GET  /:id : get the "id" product.
+	 *
+	 * @param id the id of the product to retrieve
+	 * @return the ResponseEntity with status 200 (OK) and with body the product, or with status 404 (Not Found)
+	 */
+	@GetMapping("/{id}")
+	@Timed
+	public ResponseEntity<Product> getProduct(@PathVariable Long id) {
+		LOGGER.debug("REST request to get Product : {}", id);
+		Product product = productService.findOne(id);
+		return Optional.ofNullable(product)
+				.map(result -> new ResponseEntity<>(
+						result,
+						HttpStatus.OK))
+				.orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+	}
 
+	@DeleteMapping("/{id}")
+	@Timed
+	public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
+		LOGGER.debug("REST request to delete Product : {}", id);
+		productService.delete(id);
+		return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("product", id.toString())).build();
+	}
 
-  @Timed
-  @PutMapping("/{id}/skus")
-  public ResponseEntity<Void> createSKUs(@PathVariable Long id, @Valid @RequestBody Product product)
-      throws URISyntaxException {
-    LOGGER.debug("create skus for this product{}",product.getId());
-    return ResponseEntity.ok().build();
-  }
+	@GetMapping("/_search")
+	@Timed
+	public ResponseEntity<List<Product>> searchProducts(@RequestParam String query, Pageable pageable)
+			throws URISyntaxException {
+		LOGGER.debug("REST request to search for a page of Products for query {}", query);
+		Page<Product> page = productService.search(query, pageable);
+		HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search");
+		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+	}
 
-
-  @Timed
-  @PostMapping("{id}/productOptions")
-  public ResponseEntity<Set<ProductOption>> createProductOptions(@PathVariable Long id, @Valid @RequestBody ProductOptionDTO productOption) throws URISyntaxException {
-    Set<Long> optionIds = productOption.getOptionIds();
-    if(CollectionUtils.isEmpty(optionIds)){
-      return ResponseEntity.ok().body(null);
-    }
-    Product p = this.productService.findOne(id);
-    for(Long optionId :optionIds){
-      ProductOption po = this.productOptionService.findOne(optionId);
-      p.addProductOption(po);
-    }
-    this.productService.save(p);
-    return ResponseEntity.ok().body(p.getProductOptions());
-  }
-
-  @Timed
-  @GetMapping("{id}/productOptions")
-  public ResponseEntity<List<ProductOption>> listProductOptions(@PathVariable Long id) throws URISyntaxException {
-    Product p = this.productService.findOne(id);
-    return ResponseEntity.ok().body(new ArrayList(p.getProductOptions()));
-  }
-
-  @Timed
-  @GetMapping("{id}/media")
-  public ResponseEntity<Set<Media>> getMedia(@PathVariable Long id) throws URISyntaxException {
-    LOGGER.debug("create product media----------------");
-    Product p = this.productService.findOne(id);
-    return ResponseEntity.ok().body(p.getProductMedia());
-  }
-
-  @Timed
-  @PostMapping("{id}/media")
-  public ResponseEntity<Set<Media>> createMedia(@PathVariable Long id, @Valid @RequestBody ProductMediaDTO productMedia) throws URISyntaxException {
-    LOGGER.debug("create product media----------------");
-
-    Set<Long> mediaIds = productMedia.getMediaIds();
-    if(CollectionUtils.isEmpty(mediaIds)){
-      return ResponseEntity.ok().body(null);
-    }
-    Product p = this.productService.findOne(id);
-    for(Long mediaId : mediaIds){
-      Media po = this.mediaService.findOne(mediaId);
-      p.addProductMedia(po);
-    }
-    this.productService.save(p);
-    return ResponseEntity.ok().body(p.getProductMedia());
-  }
+	@Timed
+	@PostMapping("{id}/generateSkusByBatch")
+	public ResponseEntity<Void> generateSkusByBatch(@PathVariable Long id) throws URISyntaxException {
+		LOGGER.debug("create generateSkusByBatch----------------{}", id);
+		this.productService.generateAdditionalSkusByBatch(id);
+		return ResponseEntity.ok().build();
+	}
 
 
-//  @Timed
-//  @DeleteMapping("{id}/media/{mediaId}")
-//  public ResponseEntity<List<Sku>> deleteMedia(@PathVariable Long id, @PathVariable Long mediaId) throws URISyntaxException {
-//    Product product = this.productService.findOne(id);
-//    List<Sku> result =this.skuService.findSkusByProduct(product);
-//    return ResponseEntity.ok().body(result);
-//  }
+	@Timed
+	@PostMapping("{id}/additionalSkus")
+	public ResponseEntity<Long> createAdditionalSkus(@PathVariable Long id, @Valid @RequestBody Sku sku) throws URISyntaxException {
+		LOGGER.debug("create AdditionalSkus----------------");
+		return ResponseEntity.ok().body(1L);
+	}
+
+	@Timed
+	@GetMapping("{id}/additionalSkus")
+	public ResponseEntity<List<Sku>> listAdditionalSkus(@PathVariable Long id) throws URISyntaxException {
+		Product product = this.productService.findOne(id);
+		List<Sku> result =this.skuService.findSkusByProduct(product);
+		return ResponseEntity.ok().body(result);
+	}
+
+	@Timed
+	@GetMapping("{id}/additionalSkus/{skuId}")
+	public ResponseEntity<Void> listAdditionalSkus(@PathVariable Long id,@PathVariable Long skuId, @Valid @RequestBody Sku sku) throws URISyntaxException {
+
+		return ResponseEntity.ok().build();
+	}
+
+	@Timed
+	@GetMapping("/{id}/relatedProducts")
+	public ResponseEntity<List<Product>> getAllRelatedProducts(@PathVariable Long id,Pageable pageable)
+			throws URISyntaxException {
+		Product product = this.productService.findOne(id);
+		List<Product> page = this.relatedProductService.findRelatedProductsByProduct(product, null);
+		//    HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/products/"+
+		//                  Long.toString(id)+"relatedProducts");
+		return ResponseEntity.ok().body(page);
+	}
+	@Timed
+	@PostMapping("/{id}/relatedProducts")
+	public ResponseEntity<List<Product>> createRelatedProducts(@PathVariable Long id,@RequestBody RelatedProductDTO relatedProductInfo)
+			throws URISyntaxException {
+		Set<Long> productIds = relatedProductInfo.getProductIds();
+		if(CollectionUtils.isEmpty(productIds)){
+			return ResponseEntity.ok().body(Collections.emptyList());
+		}
+		List<Product> result = this.productService.createRelatedProducts(id, productIds);
+		return ResponseEntity.ok().body(result);
+	}
+
+
+	@Timed
+	@PutMapping("/{id}/skus")
+	public ResponseEntity<Void> createSKUs(@PathVariable Long id, @Valid @RequestBody Product product)
+			throws URISyntaxException {
+		LOGGER.debug("create skus for this product{}",product.getId());
+		return ResponseEntity.ok().build();
+	}
+
+
+	@Timed
+	@PostMapping("{id}/productOptions")
+	public ResponseEntity<Set<ProductOption>> createProductOptions(@PathVariable Long id, @Valid @RequestBody ProductOptionDTO productOption) throws URISyntaxException {
+		Set<Long> optionIds = productOption.getOptionIds();
+		if(CollectionUtils.isEmpty(optionIds)){
+			return ResponseEntity.ok().body(null);
+		}
+		Product p = this.productService.findOne(id);
+		for(Long optionId :optionIds){
+			ProductOption po = this.productOptionService.findOne(optionId);
+			p.addProductOption(po);
+		}
+		this.productService.save(p);
+		return ResponseEntity.ok().body(p.getProductOptions());
+	}
+
+	@Timed
+	@GetMapping("{id}/productOptions")
+	public ResponseEntity<List<ProductOption>> listProductOptions(@PathVariable Long id) throws URISyntaxException {
+		Product p = this.productService.findOne(id);
+		return ResponseEntity.ok().body(new ArrayList(p.getProductOptions()));
+	}
+
+	@Timed
+	@GetMapping("{id}/media")
+	public ResponseEntity<Set<Media>> getMedia(@PathVariable Long id) throws URISyntaxException {
+		LOGGER.debug("create product media----------------");
+		Product p = this.productService.findOne(id);
+		return ResponseEntity.ok().body(p.getProductMedia());
+	}
+
+	@Timed
+	@PostMapping("{id}/media")
+	public ResponseEntity<Set<Media>> createMedia(@PathVariable Long id, @Valid @RequestBody ProductMediaDTO productMedia) throws URISyntaxException {
+		LOGGER.debug("create product media----------------");
+
+		Set<Long> mediaIds = productMedia.getMediaIds();
+		if(CollectionUtils.isEmpty(mediaIds)){
+			return ResponseEntity.ok().body(null);
+		}
+		Product p = this.productService.findOne(id);
+		for(Long mediaId : mediaIds){
+			Media po = this.mediaService.findOne(mediaId);
+			p.addProductMedia(po);
+		}
+		this.productService.save(p);
+		return ResponseEntity.ok().body(p.getProductMedia());
+	}
+
+
+	@Timed
+	@DeleteMapping("{id}/media/{mediaId}")
+	public ResponseEntity<Void> deleteMedia(@PathVariable Long id, @PathVariable Long mediaId) throws URISyntaxException {
+		Product product = this.productService.findOne(id);
+		Media media = this.mediaService.findOne(mediaId);
+		product.removeMedia(media);
+		this.productService.save(product);
+		return ResponseEntity.ok().build();
+	}
 
 
 }

@@ -5,10 +5,10 @@
 	.controller('ProductDialogController', ProductDialogController);
 
 	ProductDialogController.$inject = ['$timeout', '$scope', '$rootScope','$http','$state', '$stateParams',  '$uibModal','DataUtils','previousState','entity', 'Product', 'Sku', 
-	                                   'RelatedProduct', 'Brand', 'Category','ProductAdditionalSku'];
+	                                   'RelatedProduct', 'Brand', 'Category','ProductAdditionalSku','ProductMedia'];
 
 	function ProductDialogController ($timeout, $scope, $rootScope, $http, $state,$stateParams, $uibModal, DataUtils,previousState, entity, Product, Sku, 
-			RelatedProduct, Brand, Category, ProductAdditionalSku) {
+			RelatedProduct, Brand, Category, ProductAdditionalSku,ProductMedia) {
 		var vm = this;
 		vm.product = entity;
 		vm.datePickerOpenStatus = {};
@@ -25,6 +25,11 @@
 			ProductAdditionalSku.query({productId:entity.id, entityName:'AdditionalSku'}, function(additionalSkus){
 				if(additionalSkus){
 					vm.product.additionalSkus = additionalSkus;
+				}        	
+			});
+			ProductMedia.query({id:entity.id}, function(media){
+				if(media){
+					vm.media = media;
 				}        	
 			});
 		}
@@ -160,5 +165,12 @@
 			$http.post(url);
 		};
 
+		
+		var unsubscribeProductMedia = $rootScope.$on('smarteshopApp:productMediaUpdate', function(event, result) {
+            if(result){
+            	vm.media = result;
+            }
+       });
+		$scope.$on('$destroy', unsubscribeProductMedia);
 	}
 })();

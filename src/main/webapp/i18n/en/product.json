@@ -42,6 +42,11 @@
             	"code": "Code",
             	"attributeName": "Attribute Name"
             },
+            "media": {
+            	"name": "Name",
+            	"title": "Title",
+            	"content": "Content"
+            },
             "relatedProduct": {
             	"name": "Name",
             	"code": "Code"

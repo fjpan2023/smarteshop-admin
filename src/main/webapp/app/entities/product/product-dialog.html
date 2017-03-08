@@ -1,14 +1,18 @@
-<form name="editForm" role="form" class="form-horizontal" novalidate ng-submit="vm.save()" show-validation>
+<form name="editForm" role="form" class="form-horizontal" novalidate
+	ng-submit="vm.save()" show-validation>
 	<div class="modal-header">
 		<div class="row">
 			<div class="col-xs-4 col-sm-4 col-md-4">
-				<h4 class="modal-title" id="myProductLabel" data-translate="smarteshopApp.product.home.createOrEditLabel">Create or edit a Product</h4>
+				<h4 class="modal-title" id="myProductLabel"
+					data-translate="smarteshopApp.product.home.createOrEditLabel">Create
+					or edit a Product</h4>
 			</div>
 			<div class="col-xs-4 col-md-4 pull-right">
 				<!-- <button type="button" class="btn btn-default" ui-sref="{{vm.previousState}}">
 					<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
 				</button> -->
-				<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary pull-right">
+				<button type="submit" ng-disabled="editForm.$invalid || vm.isSaving"
+					class="btn btn-primary pull-right">
 					<span data-translate="entity.action.save">Save</span> Product
 				</button>
 			</div>
@@ -16,7 +20,8 @@
 	</div>
 	<div class="modal-body">
 		<jhi-alert-error></jhi-alert-error>
-		<uib-tabset active="activeForm" justified=true> <!-- General --> <uib-tab index="0" heading="General"> <br />
+		<uib-tabset active="activeForm" justified=true> <!-- General -->
+		<uib-tab index="0" heading="General"> <br />
 		<div class="row">
 			<div class="col-sm-9">
 				<div class="panel panel-default">
@@ -28,101 +33,158 @@
 					</div>
 					<div class="panel-body">
 						<div class="form-group" style="width: 750px;">
-							<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.code" for="field_code">Code</label>
+							<label class="col-sm-2  control-label"
+								data-translate="smarteshopApp.product.code" for="field_code">Code</label>
 							<div class="col-sm-4  no-padding-left">
-								<input type="text" class="form-control" name="code" id="field_code" ng-model="vm.product.code" />
+								<input type="text" class="form-control" name="code"
+									id="field_code" ng-model="vm.product.code" />
 							</div>
-							<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.name" for="field_name">Name</label>
+							<label class="col-sm-2  control-label"
+								data-translate="smarteshopApp.product.name" for="field_name">Name</label>
 							<div class="col-sm-4  no-padding-left">
-								<input type="text" class="form-control" name="name" id="field_name" ng-model="vm.product.name" required />
+								<input type="text" class="form-control" name="name"
+									id="field_name" ng-model="vm.product.name" required />
 								<div ng-show="editForm.name.$invalid">
-									<p class="help-block" ng-show="editForm.name.$error.required" data-translate="entity.validation.required">This field is required.</p>
+									<p class="help-block" ng-show="editForm.name.$error.required"
+										data-translate="entity.validation.required">This field is
+										required.</p>
 								</div>
 							</div>
 						</div>
 
-<div class="form-group" style="width: 750px;">
-			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.status" for="field_status">Status</label>
-			<div class="col-sm-4  no-padding-left">
-				<select class="form-control" name="status" ng-model="vm.product.status" id="field_status">
-					<option value="ACTIVITY" data-translate="smarteshopApp.StatusEnum.ACTIVITY">ACTIVITY</option>
-					<option value="UNACTIVITY" data-translate="smarteshopApp.StatusEnum.UNACTIVITY">UNACTIVITY</option>
-				</select>
-			</div>
-			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.label" for="field_label">Label</label>
-			<div class="col-sm-4  no-padding-left">
-				<select class="form-control" name="label" ng-model="vm.product.label" id="field_label">
-					<option value="CAMPAIGN" data-translate="smarteshopApp.ProductLabelEnum.CAMPAIGN">CAMPAIGN</option>
-					<option value="DISCOUNT" data-translate="smarteshopApp.ProductLabelEnum.DISCOUNT">DISCOUNT</option>
-					<option value="RECOMMEND" data-translate="smarteshopApp.ProductLabelEnum.RECOMMEND">RECOMMEND</option>
-				</select>
-			</div>
-		</div>
 						<div class="form-group" style="width: 750px;">
-							<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.retailPrice" for="field_standardPrice">Standard Price</label>
+							<label class="col-sm-2  control-label"
+								data-translate="smarteshopApp.product.status" for="field_status">Status</label>
+							<div class="col-sm-4  no-padding-left">
+								<select class="form-control" name="status"
+									ng-model="vm.product.status" id="field_status">
+									<option value="ACTIVITY"
+										data-translate="smarteshopApp.StatusEnum.ACTIVITY">ACTIVITY</option>
+									<option value="UNACTIVITY"
+										data-translate="smarteshopApp.StatusEnum.UNACTIVITY">UNACTIVITY</option>
+								</select>
+							</div>
+							<label class="col-sm-2  control-label"
+								data-translate="smarteshopApp.product.label" for="field_label">Label</label>
+							<div class="col-sm-4  no-padding-left">
+								<select class="form-control" name="label"
+									ng-model="vm.product.label" id="field_label">
+									<option value="CAMPAIGN"
+										data-translate="smarteshopApp.ProductLabelEnum.CAMPAIGN">CAMPAIGN</option>
+									<option value="DISCOUNT"
+										data-translate="smarteshopApp.ProductLabelEnum.DISCOUNT">DISCOUNT</option>
+									<option value="RECOMMEND"
+										data-translate="smarteshopApp.ProductLabelEnum.RECOMMEND">RECOMMEND</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group" style="width: 750px;">
+							<label class="col-sm-2  control-label"
+								data-translate="smarteshopApp.product.retailPrice"
+								for="field_standardPrice">Standard Price</label>
 							<div class="col-sm-4  no-padding-left">
 								<div class="input-group">
 									<div class="input-group-addon">$</div>
-									<input type="number" class="form-control" name="standardPrice" id="field_standardPrice" ng-model="vm.product.retailPrice" required />
+									<input type="number" class="form-control" name="standardPrice"
+										id="field_standardPrice" ng-model="vm.product.retailPrice"
+										required />
 								</div>
 							</div>
-							<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.salePrice" for="field_salePrice">Sell Price</label>
+							<label class="col-sm-2  control-label"
+								data-translate="smarteshopApp.product.salePrice"
+								for="field_salePrice">Sell Price</label>
 							<div class="col-sm-4  no-padding-left">
 								<div class="input-group">
 									<div class="input-group-addon">$</div>
-									<input type="number" class="form-control" name="sellPrice" id="field_salePrice" ng-model="vm.product.salePrice" required />
+									<input type="number" class="form-control" name="sellPrice"
+										id="field_salePrice" ng-model="vm.product.salePrice" required />
 								</div>
 							</div>
 						</div>
 						<div class="form-group" style="width: 750px;">
-			<label class="col-sm-2 control-label" data-translate="smarteshopApp.product.brand" for="field_brand">Brand</label>
-			<div class="col-sm-4  no-padding-left">
-				<select class="form-control" id="field_brand" name="brand" ng-model="vm.product.brand" ng-options="brand as brand.name for brand in vm.brands track by brand.id">
-					<option value=""></option>
-				</select>
-			</div>
+							<label class="col-sm-2 control-label"
+								data-translate="smarteshopApp.product.brand" for="field_brand">Brand</label>
+							<div class="col-sm-4  no-padding-left">
+								<select class="form-control" id="field_brand" name="brand"
+									ng-model="vm.product.brand"
+									ng-options="brand as brand.name for brand in vm.brands track by brand.id">
+									<option value=""></option>
+								</select>
+							</div>
 
-			<label class="col-sm-2 control-label" data-translate="smarteshopApp.product.category" for="field_category">Category</label>
-			<div class="col-sm-4  no-padding-left">
-				<select class="form-control" id="field_category" name="category" ng-model="vm.product.category" ng-options="category as category.name for category in vm.categories track by category.id">
-					<option value=""></option>
-				</select>
-			</div>
-		</div>
-		
-		<div class="form-group" style="width: 750px;">
-			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.activeStartDate" for="field_activeStartDate">Activity Start Date</label>
+							<label class="col-sm-2 control-label"
+								data-translate="smarteshopApp.product.category"
+								for="field_category">Category</label>
+							<div class="col-sm-4  no-padding-left">
+								<select class="form-control" id="field_category" name="category"
+									ng-model="vm.product.category"
+									ng-options="category as category.name for category in vm.categories track by category.id">
+									<option value=""></option>
+								</select>
+							</div>
+						</div>
 
-			<div class="col-sm-4  no-padding-left">
-				<div class="input-group">
-					<input id="field_activeStartDate" type="text" class="form-control" name="activeStartDate" datetime-picker="{{dateformat}}" ng-model="vm.product.activeStartDate" is-open="vm.datePickerOpenStatus.activeStartDate" required /> <span class="input-group-btn">
-						<button type="button" class="btn btn-default" ng-click="vm.openCalendar('activeStartDate')">
-							<i class="glyphicon glyphicon-calendar"></i>
-						</button>
-					</span>
-				</div>
-				<div ng-show="editForm.activeStartDate.$invalid">
-					<p class="help-block" ng-show="editForm.activeStartDate.$error.required" data-translate="entity.validation.required">This field is required.</p>
-					<p class="help-block" ng-show="editForm.activeStartDate.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">This field should be a date and time.</p>
-				</div>
-			</div>
+						<div class="form-group" style="width: 750px;">
+							<label class="col-sm-2  control-label"
+								data-translate="smarteshopApp.product.activeStartDate"
+								for="field_activeStartDate">Activity Start Date</label>
 
-			<label class="col-sm-2  control-label" data-translate="smarteshopApp.product.activeEndDate" for="field_activeEndDate">End Date</label>
-			<div class="col-sm-4  no-padding-left">
-				<div class="input-group">
-					<input id="field_activeEndDate" type="text" class="form-control" name="activeEndDate" datetime-picker="{{dateformat}}" ng-model="vm.product.activeEndDate" is-open="vm.datePickerOpenStatus.activeEndDate" required /> <span class="input-group-btn">
-						<button type="button" class="btn btn-default" ng-click="vm.openCalendar('activeEndDate')">
-							<i class="glyphicon glyphicon-calendar"></i>
-						</button>
-					</span>
-				</div>
-				<div ng-show="editForm.activeEndDate.$invalid">
-					<p class="help-block" ng-show="editForm.activeEndDate.$error.required" data-translate="entity.validation.required">This field is required.</p>
-					<p class="help-block" ng-show="editForm.activeEndDate.$error.ZonedDateTimelocal" data-translate="entity.validation.ZonedDateTimelocal">This field should be a date and time.</p>
-				</div>
-			</div>
+							<div class="col-sm-4  no-padding-left">
+								<div class="input-group">
+									<input id="field_activeStartDate" type="text"
+										class="form-control" name="activeStartDate"
+										datetime-picker="{{dateformat}}"
+										ng-model="vm.product.activeStartDate"
+										is-open="vm.datePickerOpenStatus.activeStartDate" required />
+									<span class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="vm.openCalendar('activeStartDate')">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+								<div ng-show="editForm.activeStartDate.$invalid">
+									<p class="help-block"
+										ng-show="editForm.activeStartDate.$error.required"
+										data-translate="entity.validation.required">This field is
+										required.</p>
+									<p class="help-block"
+										ng-show="editForm.activeStartDate.$error.ZonedDateTimelocal"
+										data-translate="entity.validation.ZonedDateTimelocal">This
+										field should be a date and time.</p>
+								</div>
+							</div>
 
-		</div>
+							<label class="col-sm-2  control-label"
+								data-translate="smarteshopApp.product.activeEndDate"
+								for="field_activeEndDate">End Date</label>
+							<div class="col-sm-4  no-padding-left">
+								<div class="input-group">
+									<input id="field_activeEndDate" type="text"
+										class="form-control" name="activeEndDate"
+										datetime-picker="{{dateformat}}"
+										ng-model="vm.product.activeEndDate"
+										is-open="vm.datePickerOpenStatus.activeEndDate" required /> <span
+										class="input-group-btn">
+										<button type="button" class="btn btn-default"
+											ng-click="vm.openCalendar('activeEndDate')">
+											<i class="glyphicon glyphicon-calendar"></i>
+										</button>
+									</span>
+								</div>
+								<div ng-show="editForm.activeEndDate.$invalid">
+									<p class="help-block"
+										ng-show="editForm.activeEndDate.$error.required"
+										data-translate="entity.validation.required">This field is
+										required.</p>
+									<p class="help-block"
+										ng-show="editForm.activeEndDate.$error.ZonedDateTimelocal"
+										data-translate="entity.validation.ZonedDateTimelocal">This
+										field should be a date and time.</p>
+								</div>
+							</div>
+
+						</div>
 
 
 					</div>
@@ -132,11 +194,14 @@
 					<div class="panel-heading">
 						<label>Edit Description </label>
 						<div class="btn-sm btn-primary pull-right" style="flaot: right">
-							<span data-translate="smarteshopApp.product.editDescription">Edit Description</span>
+							<span data-translate="smarteshopApp.product.editDescription">Edit
+								Description</span>
 						</div>
 					</div>
 					<div class="panel-body">
-						<summernote config="summernoteroptions" ng-model="vm.product.description" name="description" id="field_description">{{vm.product.description}}</summernote>
+						<summernote config="summernoteroptions"
+							ng-model="vm.product.description" name="description"
+							id="field_description">{{vm.product.description}}</summernote>
 					</div>
 				</div>
 			</div>
@@ -146,7 +211,8 @@
 					<div class="panel-heading">
 						<label>Primary Image </label>
 						<div class="btn-sm btn-primary pull-right" style="flaot: right">
-							<span data-translate="smarteshopApp.product.editMedia">Change Image</span>
+							<span data-translate="smarteshopApp.product.editMedia">Change
+								Image</span>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -192,29 +258,53 @@
 				</div>
 			</div>
 		</div>
- -->
-		
-		
-		</uib-tab> <!-- <uib-tab index="1" heading="Descripton"> <br />
+ --> </uib-tab> <!-- <uib-tab index="1" heading="Descripton"> <br />
 		<summernote config="summernoteroptions" ng-model="vm.product.description" name="description" id="field_description">{{vm.product.description}}</summernote>
-		 </uib-tab> --> <!-- images --> <uib-tab index="2" heading="Gallery"> <br />
+		 </uib-tab> --> <!-- images --> <uib-tab index="2" heading="Gallery">
+		<br />
 
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<label>Add media </label>
-				<div class="btn-sm btn-primary pull-right" style="flaot: right" ui-sref="product-media({id:vm.product.id})">
-					<span data-translate="smarteshopApp.product.editMedia">Edit Media</span>
+				<div class="btn-sm btn-primary pull-right" style="flaot: right"
+					ui-sref="product-media({id:vm.product.id})">
+					<span data-translate="smarteshopApp.product.editMedia">Edit
+						Media</span>
 				</div>
 			</div>
-			<div class="panel-body">body ....</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="jh-table table table-striped">
+						<thead>
+							<tr ascending="vm.reverse" callback="vm.transition()">
+								<th>Content</th>
+								<th><span data-translate="smarteshopApp.product.media.title">Title</span></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="image in vm.media">
+								<td><img ng-src="api/media/{{image.id}}" style="width: 80px;" /></td>
+								<td>{{image.title}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+
+
+			</div>
 		</div>
 
-		</uib-tab> <!-- product options --> <uib-tab index="3" heading="Options"> <br />
+		</uib-tab> <!-- product options --> <uib-tab index="3" heading="Options">
+		<br />
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<label>Products Info</label>
-				<div class="btn btn-primary pull-right" ng-click="vm.showProductOptions(vm.product.id)">
-					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.editOption">Edit Options</span>
+				<div class="btn btn-primary pull-right"
+					ng-click="vm.showProductOptions(vm.product.id)">
+					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span
+						data-translate="smarteshopApp.product.editOption">Edit
+						Options</span>
 				</div>
 			</div>
 			<div class="panel-body">
@@ -223,13 +313,17 @@
 						<thead>
 							<tr ascending="vm.reverse" callback="vm.transition()">
 								<th><span data-translate="global.field.id">ID</span></th>
-								<th><span data-translate="smarteshopApp.product.productOption.name">Name</span></th>
-								<th><span data-translate="smarteshopApp.product.productOption.attributeName">Attribute Name</span></th>
+								<th><span
+									data-translate="smarteshopApp.product.productOption.name">Name</span></th>
+								<th><span
+									data-translate="smarteshopApp.product.productOption.attributeName">Attribute
+										Name</span></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="productOption in vm.product.productOptions">
-								<td><a ui-sref="product-Option-detail({id:productOption.id})">{{productOption.id}}</a></td>
+								<td><a
+									ui-sref="product-Option-detail({id:productOption.id})">{{productOption.id}}</a></td>
 								<td>{{productOption.name}}</td>
 								<td>{{productOption.attributeName}}</td>
 							</tr>
@@ -238,12 +332,16 @@
 				</div>
 			</div>
 		</div>
-		</uib-tab> <!-- additional  skus --> <uib-tab index="4" heading="SKUs"> <br />
+		</uib-tab> <!-- additional  skus --> <uib-tab index="4" heading="SKUs">
+		<br />
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<label> Create or edit SKUs </label>
-				<div class="btn-sm btn-primary pull-right" style="flaot: right" ng-click="vm.generateSkusByBatch(vm.product.id)">
-					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.generateSKUsByBatch">Generate SKUs By Batch</span>
+				<div class="btn-sm btn-primary pull-right" style="flaot: right"
+					ng-click="vm.generateSkusByBatch(vm.product.id)">
+					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span
+						data-translate="smarteshopApp.product.generateSKUsByBatch">Generate
+						SKUs By Batch</span>
 				</div>
 			</div>
 			<div class="panel-body">
@@ -251,10 +349,16 @@
 				<div class="table-responsive">
 					<table class="jh-table table table-striped">
 						<thead>
-							<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-								<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th><span data-translate="smarteshopApp.product.mainImageId">Main Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="name"><span data-translate="smarteshopApp.product.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
+							<tr jh-sort="vm.predicate" ascending="vm.reverse"
+								callback="vm.transition()">
+								<th jh-sort-by="id"><span data-translate="global.field.id">ID</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th><span
+									data-translate="smarteshopApp.product.mainImageId">Main
+										Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="name"><span
+									data-translate="smarteshopApp.product.name">Name</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
 								<th>Options</th>
 								<th></th>
 							</tr>
@@ -267,8 +371,12 @@
 								<td>{{additionalSku.productOptionValuesString}}</td>
 								<td class="text-right">
 									<div class="btn-group flex-btn-group-container">
-										<button type="submit" ui-sref="product-sku-edit({skuId:additionalSku.id})" class="btn btn-primary btn-sm">
-											<span class="glyphicon glyphicon-pencil"></span> <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+										<button type="submit"
+											ui-sref="product-sku-edit({skuId:additionalSku.id})"
+											class="btn btn-primary btn-sm">
+											<span class="glyphicon glyphicon-pencil"></span> <span
+												class="hidden-xs hidden-sm"
+												data-translate="entity.action.edit"></span>
 										</button>
 									</div>
 								</td>
@@ -279,12 +387,16 @@
 			</div>
 		</div>
 
-		</uib-tab> <!--  Related Products --> <uib-tab index="5" heading="Related Products"> <br />
+		</uib-tab> <!--  Related Products --> <uib-tab index="5"
+			heading="Related Products"> <br />
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<label>Edit Related Products </label>
-				<div class="btn btn-primary pull-right" ng-click="vm.showRelatedProducts({id:vm.product.id})">
-					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span data-translate="smarteshopApp.product.editRelatedProduct">Edit Related Product</span>
+				<div class="btn btn-primary pull-right"
+					ng-click="vm.showRelatedProducts({id:vm.product.id})">
+					<span class="glyphicon glyphicon-plus"></span>&nbsp;<span
+						data-translate="smarteshopApp.product.editRelatedProduct">Edit
+						Related Product</span>
 				</div>
 			</div>
 			<div class="panel-body">
@@ -292,14 +404,28 @@
 				<div class="table-bordered">
 					<table class="jh-table table table-striped">
 						<thead>
-							<tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-								<th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th><span data-translate="smarteshopApp.product.mainImageId">Main Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="code"><span data-translate="smarteshopApp.product.code">Code</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="name"><span data-translate="smarteshopApp.product.name">Name</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="brand.id"><span data-translate="smarteshopApp.product.brand">Brand</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="category.id"><span data-translate="smarteshopApp.product.category">Category</span> <span class="glyphicon glyphicon-sort"></span></th>
-								<th jh-sort-by="status"><span data-translate="smarteshopApp.product.status">Status</span> <span class="glyphicon glyphicon-sort"></span></th>
+							<tr jh-sort="vm.predicate" ascending="vm.reverse"
+								callback="vm.transition()">
+								<th jh-sort-by="id"><span data-translate="global.field.id">ID</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th><span
+									data-translate="smarteshopApp.product.mainImageId">Main
+										Image Id</span> <span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="code"><span
+									data-translate="smarteshopApp.product.code">Code</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="name"><span
+									data-translate="smarteshopApp.product.name">Name</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="brand.id"><span
+									data-translate="smarteshopApp.product.brand">Brand</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="category.id"><span
+									data-translate="smarteshopApp.product.category">Category</span>
+									<span class="glyphicon glyphicon-sort"></span></th>
+								<th jh-sort-by="status"><span
+									data-translate="smarteshopApp.product.status">Status</span> <span
+									class="glyphicon glyphicon-sort"></span></th>
 								<th></th>
 							</tr>
 						</thead>

@@ -5,9 +5,9 @@
         .module('smarteshopApp')
         .controller('ProductMediaController', ProductMediaController);
 
-    ProductMediaController.$inject = ['$scope', '$state', '$stateParams', '$uibModalInstance','DataUtils', 'Media', 'MediaSearch','ProductMedia','productInfo'];
+    ProductMediaController.$inject = ['$scope', '$state', '$stateParams', '$uibModalInstance','DataUtils', 'Media', 'MediaSearch','ProductMedia','productId'];
 
-    function ProductMediaController ($scope, $state, $stateParams, $uibModalInstance, DataUtils, Media, MediaSearch,ProductMedia, productInfo) {
+    function ProductMediaController ($scope, $state, $stateParams, $uibModalInstance, DataUtils, Media, MediaSearch,ProductMedia, productId) {
         var vm = this;
         vm.media = [];
         vm.openFile = DataUtils.openFile;
@@ -39,8 +39,7 @@
         
         function save () {
             vm.isSaving = true;
-            alert(vm.selectedMedia);
-            ProductMedia.addMedia({id:productInfo},{mediaIds:vm.selectedMedia}, onSaveSuccess, onSaveError);
+            ProductMedia.addMedia({id:productId},{mediaIds:vm.selectedMedia}, onSaveSuccess, onSaveError);
         }
 
         function onSaveSuccess (result) {

@@ -235,12 +235,12 @@
                     		$translatePartialLoader.addPart('media');
                     		return $translate.refresh();
                     		}],
-                    	productInfo: ['$stateParams', function ($stateParams) {
+                    	productId: ['$stateParams', function ($stateParams) {
                             return  $stateParams.id;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('product.edit', null, { reload: 'product.edit' });
+                    $state.go('^');
                 }, function() {
                     $state.go('^');
                 });
