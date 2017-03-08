@@ -264,6 +264,13 @@ public class ProductController extends AbstractController<Product> {
     return ResponseEntity.ok().body(new ArrayList(p.getProductOptions()));
   }
 
+  @Timed
+  @GetMapping("{id}/media")
+  public ResponseEntity<Set<Media>> getMedia(@PathVariable Long id) throws URISyntaxException {
+    LOGGER.debug("create product media----------------");
+    Product p = this.productService.findOne(id);
+    return ResponseEntity.ok().body(p.getProductMedia());
+  }
 
   @Timed
   @PostMapping("{id}/media")
