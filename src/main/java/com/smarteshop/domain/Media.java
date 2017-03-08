@@ -17,6 +17,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.smarteshop.common.entity.BusinessObjectEntity;
 import com.smarteshop.domain.common.BusinessObjectInterface;
 
@@ -44,7 +45,8 @@ public class Media extends BusinessObjectEntity<Long, Media> implements Business
 
     @Lob
     @Basic(fetch=FetchType.LAZY)
-    @Column(name = "content", updatable=false)
+    @Column(name = "content", updatable=false,columnDefinition = "BLOB")
+    @JsonIgnore
     private byte[] content;
 
     @Column(name = "content_type")

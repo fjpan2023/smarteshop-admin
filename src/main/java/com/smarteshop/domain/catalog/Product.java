@@ -121,7 +121,7 @@ public class Product extends BusinessObjectEntity<Long, Product> implements Busi
   private Set<ProductOption> productOptions = new HashSet<>();
 
 
-  @ManyToMany(fetch = FetchType.EAGER)
+  @ManyToMany(fetch = FetchType.LAZY)
   @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
   @JoinTable(name = "product_media_xref",
     joinColumns = @JoinColumn(name="product_id", referencedColumnName="ID"),
