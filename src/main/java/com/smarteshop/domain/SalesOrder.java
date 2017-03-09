@@ -8,6 +8,7 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,8 +42,8 @@ public class SalesOrder implements Serializable {
     @Column(name = "NAME")
     protected String name;
 
-    @ManyToOne(targetEntity = Customer.class, optional=false)
-    @JoinColumn(name = "CUSTOMER_ID", nullable = false)
+    @ManyToOne(targetEntity = Customer.class, fetch=FetchType.LAZY, optional=false)
+    @JoinColumn(name = "CUSTOMER_ID")
     protected Customer customer;
 
     @Column(name = "ORDER_STATUS")
