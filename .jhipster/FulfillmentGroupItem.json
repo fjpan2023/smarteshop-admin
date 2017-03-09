@@ -1,0 +1,10 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [],
+    "changelogDate": "20170309124036",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "fulfillment_group_item",
+    "pagination": "pagination"
+}

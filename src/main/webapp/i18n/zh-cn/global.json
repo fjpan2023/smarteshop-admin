@@ -35,6 +35,13 @@
                 "t": "T",
                 "test": "Test",
                 "media": "Media",
+                "salesOrder": "Sales Order",
+                "locale": "Locale",
+                "itemOrder": "Item Order",
+                "personalMessage": "Personal Message",
+                "orderItemPrice": "Order Item Price",
+                "fulfillmentGroupItem": "Fulfillment Group Item",
+                "orderPayment": "Order Payment",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

@@ -1,0 +1,10 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [],
+    "changelogDate": "20170309123612",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "order_item_price",
+    "pagination": "pagination"
+}

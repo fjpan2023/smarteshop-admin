@@ -1,0 +1,21 @@
+{
+    "smarteshopApp": {
+        "fulfillmentGroupItem" : {
+            "home": {
+                "title": "Fulfillment Group Items",
+                "createLabel": "Create a new Fulfillment Group Item",
+                "createOrEditLabel": "Create or edit a Fulfillment Group Item",
+                "search": "Search for Fulfillment Group Item"
+            },
+            "created": "A new Fulfillment Group Item is created with identifier {{ param }}",
+            "updated": "A Fulfillment Group Item is updated with identifier {{ param }}",
+            "deleted": "A Fulfillment Group Item is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Fulfillment Group Item {{ id }}?"
+            },
+            "detail": {
+                "title": "Fulfillment Group Item"
+            }
+        }
+    }
+}

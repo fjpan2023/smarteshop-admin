@@ -87,5 +87,19 @@
 
     <cache alias="com.smarteshop.domain.Media" uses-template="simple"/>
 
+    <cache alias="com.smarteshop.domain.SalesOrder" uses-template="simple"/>
+
+    <cache alias="com.smarteshop.domain.Locale" uses-template="simple"/>
+
+    <cache alias="com.smarteshop.domain.ItemOrder" uses-template="simple"/>
+
+    <cache alias="com.smarteshop.domain.PersonalMessage" uses-template="simple"/>
+
+    <cache alias="com.smarteshop.domain.OrderItemPrice" uses-template="simple"/>
+
+    <cache alias="com.smarteshop.domain.FulfillmentGroupItem" uses-template="simple"/>
+
+    <cache alias="com.smarteshop.domain.OrderPayment" uses-template="simple"/>
+
     <!-- jhipster-needle-ehcache-add-entry -->
 </config>

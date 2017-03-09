@@ -1,0 +1,22 @@
+{
+    "smarteshopApp": {
+        "itemOrder" : {
+            "home": {
+                "title": "Item Orders",
+                "createLabel": "Create a new Item Order",
+                "createOrEditLabel": "Create or edit a Item Order",
+                "search": "Search for Item Order"
+            },
+            "created": "A new Item Order is created with identifier {{ param }}",
+            "updated": "A Item Order is updated with identifier {{ param }}",
+            "deleted": "A Item Order is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Item Order {{ id }}?"
+            },
+            "detail": {
+                "title": "Item Order"
+            },
+            "name": "Name"
+        }
+    }
+}

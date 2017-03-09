@@ -1,0 +1,21 @@
+{
+    "smarteshopApp": {
+        "personalMessage" : {
+            "home": {
+                "title": "Personal Messages",
+                "createLabel": "Create a new Personal Message",
+                "createOrEditLabel": "Create or edit a Personal Message",
+                "search": "Search for Personal Message"
+            },
+            "created": "A new Personal Message is created with identifier {{ param }}",
+            "updated": "A Personal Message is updated with identifier {{ param }}",
+            "deleted": "A Personal Message is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Personal Message {{ id }}?"
+            },
+            "detail": {
+                "title": "Personal Message"
+            }
+        }
+    }
+}

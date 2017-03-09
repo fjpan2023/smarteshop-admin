@@ -1,0 +1,21 @@
+{
+    "smarteshopApp": {
+        "orderItemPrice" : {
+            "home": {
+                "title": "Order Item Prices",
+                "createLabel": "Create a new Order Item Price",
+                "createOrEditLabel": "Create or edit a Order Item Price",
+                "search": "Search for Order Item Price"
+            },
+            "created": "A new Order Item Price is created with identifier {{ param }}",
+            "updated": "A Order Item Price is updated with identifier {{ param }}",
+            "deleted": "A Order Item Price is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Order Item Price {{ id }}?"
+            },
+            "detail": {
+                "title": "Order Item Price"
+            }
+        }
+    }
+}
